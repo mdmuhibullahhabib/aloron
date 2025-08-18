@@ -16,16 +16,15 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
-        {/* <AuthProvider> */}
-        <QueryClientProvider client={queryClient}>
-          <div className="max--screen-xl mx-auto">
-            <RouterProvider router={Router}></RouterProvider>
-          </div>
-        </QueryClientProvider>
-        {/* </AuthProvider> */}
-      </LanguageProvider>
+        <ThemeProvider>
+                <LanguageProvider>
+    {/* <AuthProvider> */}
+      <QueryClientProvider client={queryClient}>
+        <div className="max--screen-xl mx-auto">
+          <RouterProvider router={Router}></RouterProvider>
+        </div>
+      </QueryClientProvider>
+    {/* </AuthProvider> */}
     </ThemeProvider>
   </StrictMode >,
 )

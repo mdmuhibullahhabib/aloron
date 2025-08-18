@@ -1,38 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { translations } from '../i18n';
-import { useLanguage } from '../../provider/LanguageProvider';
-import { useTheme } from '../../provider/ThemeProvider';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const { language, toggleLanguage } = useLanguage();
-  const t = translations[language];
-
-  const navLinks = [
-    { name: t.courses, path: '/courses' },
-    { name: t.library, path: '/library' },
-    { name: t.questionBank, path: '/qb' },
-    { name: t.journal, path: '/journal' },
-    { name: t.admission, path: '/admission' },
-  ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const navLinks = [
+    { name: 'Courses', path: '/courses' },
+    { name: 'Library', path: '/library' },
+    { name: 'Question Bank', path: '/qb' },
+    { name: 'Journal', path: '/journal' },
+    { name: 'Admission', path: '/admission' },
+  ];
+
   return (
-    <nav className="bg-base-100 shadow-md sticky top-0 z-50">
+    <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-indigo-600">
-            Aloron
+            EduJournal
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex space-x-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -42,26 +35,11 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-
-            {/* Language & Theme Buttons */}
-            <button
-              onClick={toggleLanguage}
-              className="btn btn-sm ml-2"
-            >
-              {language === 'en' ? 'বাংলা' : 'English'}
-            </button>
-            <button
-              onClick={toggleTheme}
-              className="btn btn-sm ml-2"
-            >
-              {theme === 'light' ? 'Dark' : 'Light'}
-            </button>
-
             <Link
               to="/login"
               className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition"
             >
-              {t.login}
+              Login
             </Link>
           </div>
 
@@ -76,7 +54,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-base-100 shadow-lg">
+        <div className="md:hidden bg-white shadow-lg">
           <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => (
               <Link
@@ -88,27 +66,12 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-
-            {/* Language & Theme Buttons */}
-            <button
-              onClick={() => { toggleLanguage(); setIsOpen(false); }}
-              className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center"
-            >
-              {language === 'en' ? 'বাংলা' : 'English'}
-            </button>
-            <button
-              onClick={() => { toggleTheme(); setIsOpen(false); }}
-              className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center mt-1"
-            >
-              {theme === 'light' ? 'Dark' : 'Light'}
-            </button>
-
             <Link
               to="/login"
               onClick={() => setIsOpen(false)}
               className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
             >
-              {t.login}
+              Login
             </Link>
           </div>
         </div>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
+// import { useTheme } from '../context/ThemeContext';
+// import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../i18n';
 import { useLanguage } from '../../provider/LanguageProvider';
 import { useTheme } from '../../provider/ThemeProvider';

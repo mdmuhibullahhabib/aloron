@@ -9,23 +9,20 @@ import {
 } from '@tanstack/react-query'
 import Router from "./Routes/Router";
 import { ThemeProvider } from "./provider/ThemeProvider";
-import { LanguageProvider } from "./provider/LanguageProvider";
 // import AuthProvider from "./provider/AuthProvider.jsx";
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
-      <LanguageProvider>
-        {/* <AuthProvider> */}
-        <QueryClientProvider client={queryClient}>
-          <div className="max--screen-xl mx-auto">
-            <RouterProvider router={Router}></RouterProvider>
-          </div>
-        </QueryClientProvider>
-        {/* </AuthProvider> */}
-      </LanguageProvider>
+        <ThemeProvider>
+    {/* <AuthProvider> */}
+      <QueryClientProvider client={queryClient}>
+        <div className="max--screen-xl mx-auto">
+          <RouterProvider router={Router}></RouterProvider>
+        </div>
+      </QueryClientProvider>
+    {/* </AuthProvider> */}
     </ThemeProvider>
   </StrictMode >,
 )
