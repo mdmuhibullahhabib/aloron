@@ -31,9 +31,13 @@ const Router = createBrowserRouter([
                         element: <Archive></Archive>
                     },
                     {
-                        path: "/question-bank/community",
+                        path: "/community",
                         element: <Community></Community>
                     },
+                    // {
+                    //     path: "community",
+                    //     element: <Community></Community>
+                    // },
                 ]
             },
             {

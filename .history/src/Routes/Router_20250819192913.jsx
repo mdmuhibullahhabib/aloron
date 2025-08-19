@@ -9,8 +9,7 @@ import Journal from '../pages/Journal/Journal';
 import AddJournal from '../pages/Journal/AddJournal';
 import Info from '../pages/Info/Info';
 import Courses from '../pages/Courses/Courses';
-import Community from '../pages/QuestionBank/Community/Community';
-import Archive from '../pages/QuestionBank/Archive/Archive';
+import Community from '../pages/Community/Community';
 
 
 const Router = createBrowserRouter([
@@ -27,13 +26,17 @@ const Router = createBrowserRouter([
                 element: <QuestionBank></QuestionBank>,
                 children:[
                     {
-                        path: "/question-bank/archive",
-                        element: <Archive></Archive>
-                    },
-                    {
-                        path: "/question-bank/community",
+                        path: "/archive",
                         element: <Community></Community>
                     },
+                    {
+                        path: "/community",
+                        element: <Community></Community>
+                    },
+                    // {
+                    //     path: "community",
+                    //     element: <Community></Community>
+                    // },
                 ]
             },
             {

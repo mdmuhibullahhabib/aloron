@@ -27,13 +27,17 @@ const Router = createBrowserRouter([
                 element: <QuestionBank></QuestionBank>,
                 children:[
                     {
-                        path: "/question-bank/archive",
+                        path: "/archive",
                         element: <Archive></Archive>
                     },
                     {
-                        path: "/question-bank/community",
+                        path: "/community",
                         element: <Community></Community>
                     },
+                    // {
+                    //     path: "community",
+                    //     element: <Community></Community>
+                    // },
                 ]
             },
             {

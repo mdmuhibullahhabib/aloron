@@ -13,6 +13,7 @@ const QuestionBank = () => {
     { name: 'হ্মক পরীক্ষা', icon: <MdOutlineQuestionAnswer className="w-6 h-6" />, path: 'mock-test' },
     { name: 'কমিউনিটি', icon: <FaUsers className="w-6 h-6" />, path: 'community' },
     { name: 'আর্কাইভ', icon: <MdOutlineDescription className="w-6 h-6" />, path: 'archive' },
+    { name: 'ল্যাবরেটরি', icon: <MdOutlineScience className="w-6 h-6" />, path: 'laboratory' },
     { name: 'নতুন আইকন', icon: <FaStar className="w-6 h-6" />, path: 'new-icon' },
   ];
 
