@@ -1,145 +1,144 @@
 import React, { useState } from 'react';
+import {
+  MdOutlineDashboard,
+  MdOutlineLibraryBooks,
+  MdOutlineDescription,
+  MdOutlineScience,
+  MdOutlineQuestionAnswer,
+  MdOutlineSearch
+} from 'react-icons/md';
+import { FaStar } from 'react-icons/fa'; // Added FaStar from react-icons/fa
 
-// Main App component to render the full page
-    const Que = () => {
-  const [activeTab, setActiveTab] = useState('আর্কাইভ'); // State for the active main tab
-  const [searchQuery, setSearchQuery] = useState(''); // State for search input
+// Define the data for the cards to make the component dynamic
+const cardData = [
+  { id: 1, title: 'বিবরণী ২৫', subtitle: 'প্রাইভেট এডমিশন', color: '#8b5cf6' }, // violet-500
+  { id: 2, title: 'বিবরণী ২৫', subtitle: 'ফিজিক্যাল এডমিশন', color: '#10b981' }, // emerald-500
+  { id: 3, title: 'এইচএসসি ২৫', subtitle: 'কুইজ এন্ড এডমিশন', color: '#ef4444' }, // red-500
+  { id: 4, title: 'ঢাকা কেন্দ্রীয়', subtitle: 'বিশ্ববিদ্যালয়', color: '#3b82f6' }, // blue-500
+  { id: 5, title: 'এডমিশন', subtitle: 'মডেল টেস্ট', color: '#f97316' }, // orange-500
+  { id: 6, title: 'এডমিশন', subtitle: 'মডেল টেস্ট', color: '#ca8a04' }, // yellow-500
+  { id: 7, title: 'জাতীয় বিশ্ববিদ্যালয়', subtitle: 'এডমিশন', color: '#a855f7' }, // purple-500
+  { id: 8, title: 'মেডিকেল ও ডেন্টাল', subtitle: 'প্রাইভেট', color: '#4d7c0f' }, // lime-700
+];
 
-  // Sample data for the content cards
-  const cardData = [
-    { title: 'মডেল টেস্ট ২৫', subtitle: 'ভর্তি পরীক্ষার অনলাইন মডেল টেস্ট', live: true, color: 'bg-green-500' },
-    { title: 'এইচএসসি ২৪', subtitle: 'এইচএসসি অনলাইন মডেল টেস্ট', live: true, color: 'bg-blue-500' },
-    { title: 'ভর্তি প্রস্তুতি', subtitle: 'অনলাইন ক্লাস ও পরীক্ষা', live: false, color: 'bg-purple-500' },
-    { title: 'মডেল টেস্ট ২৪', subtitle: 'ভর্তি পরীক্ষার অনলাইন মডেল টেস্ট', live: true, color: 'bg-red-500' },
-    { title: 'মডেল টেস্ট ২৪', subtitle: 'ভর্তি পরীক্ষার অনলাইন মডেল টেস্ট', live: true, color: 'bg-yellow-500' },
-    { title: 'প্রশ্ন ব্যাংক', subtitle: 'ভর্তি পরীক্ষার প্রশ্ন ব্যাংক', live: true, color: 'bg-indigo-500' }
+// The main component
+const Que = () => {
+  const [activeTab, setActiveTab] = useState('model-test');
+
+  // Sidebar navigation items
+  // Added a new item to demonstrate the FaStar icon.
+  const navItems = [
+    { name: 'হ্মক পরীক্ষা', icon: <MdOutlineQuestionAnswer className="w-6 h-6" />, link: '#' },
+    { name: 'সকল কোর্স', icon: <MdOutlineLibraryBooks className="w-6 h-6" />, link: '#' },
+    { name: 'আর্কাইভ', icon: <MdOutlineDescription className="w-6 h-6" />, link: '#' },
+    { name: 'ল্যাবরেটরি', icon: <MdOutlineScience className="w-6 h-6" />, link: '#' },
+    { name: 'নতুন আইকন', icon: <FaStar className="w-6 h-6" />, link: '#' }, // Example using the new FaStar icon
   ];
 
   return (
-    <div className="flex bg-gray-900 text-white min-h-screen font-sans antialiased">
-      
-      {/* Sidebar - Left Section */}
-      <aside className="w-64 bg-gray-800 p-4 flex flex-col items-center">
-        {/* Logo and App Name */}
-        <div className="flex items-center mb-12">
-          <span className="text-3xl font-bold">ছ</span>
+    <div className="flex flex-col lg:flex-row h-screen font-sans bg-gray-100 text-gray-800">
+
+      {/* --- Sidebar --- */}
+      {/* On small screens, hide the sidebar and use a toggle, not implemented here for brevity */}
+      <aside className="hidden lg:flex flex-col w-64 bg-white p-6 shadow-md rounded-r-lg">
+        {/* Logo or App Name */}
+        <div className="flex items-center mb-10">
+          <span className="text-xl font-bold">QuestionBank</span>
         </div>
 
         {/* Navigation Links */}
-        <nav className="space-y-4 w-full">
-          <a href="#" className="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span className="text-sm font-medium">ড্যাশবোর্ড</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-            </svg>
-            <span className="text-sm font-medium">প্রশ্ন ব্যাংক</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 px-4 py-2 bg-gray-700 rounded-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            <span className="text-sm font-medium">আর্কাইভ</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            <span className="text-sm font-medium">কুইজ</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <span className="text-sm font-medium">প্রোফাইল</span>
-          </a>
+        <nav className="flex-grow">
+          <ul className="space-y-4">
+            {navItems.map((item, index) => (
+              <li key={index}>
+                <a
+                  href={item.link}
+                  className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
+                    item.name === 'আর্কাইভ'
+                      ? 'bg-emerald-50 text-emerald-600'
+                      : 'hover:bg-gray-100'
+                  }`}
+                >
+                  {item.icon}
+                  <span className="text-lg">{item.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
-        
-        {/* Sign Up Button at the bottom of the sidebar */}
-        <div className="mt-auto w-full">
-          <button className="w-full px-4 py-2 text-sm font-semibold rounded-lg text-white bg-green-600 hover:bg-green-700 transition-colors duration-200">
+
+        {/* Sign Up Button */}
+        <div className="mt-auto">
+          <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-lg">
             Sign Up
           </button>
         </div>
       </aside>
 
-      {/* Main Content Area - Right Section */}
-      <main className="flex-1 p-8 overflow-y-auto">
-        {/* Header and Search */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-0">আর্কাইভ</h1>
-          <div className="relative w-full sm:w-1/3">
+      {/* --- Main Content Area --- */}
+      <main className="flex-1 p-8 lg:p-12 overflow-y-auto">
+        {/* Header with search bar and user info (simplified) */}
+        <header className="flex flex-col md:flex-row justify-between items-center mb-8 space-y-4 md:space-y-0">
+          <h1 className="text-3xl font-bold">আর্কাইভ</h1>
+          <div className="relative w-full md:w-auto">
             <input
               type="text"
-              placeholder="প্রশ্ন ব্যাংক খুঁজুন"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 pl-10 text-gray-800 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="অনায়াসে খুঁজে ফেলুন"
+              className="pl-4 pr-10 py-2 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+            <MdOutlineSearch className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500" />
           </div>
-        </div>
+        </header>
 
-        {/* Tab Navigation */}
-        <div className="flex space-x-4 mb-8">
+        {/* Tabs for content filtering */}
+        <div className="tabs tabs-boxed bg-white mb-8 p-1 rounded-full shadow-sm">
           <button
-            onClick={() => setActiveTab('মডেল টেস্ট')}
-            className={`px-4 py-2 text-sm font-medium rounded-full ${activeTab === 'মডেল টেস্ট' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
+            onClick={() => setActiveTab('model-test')}
+            className={`tab flex-1 rounded-full ${activeTab === 'model-test' ? 'tab-active bg-emerald-500 text-white' : ''}`}
           >
             মডেল টেস্ট
           </button>
           <button
-            onClick={() => setActiveTab('শিক্ষার নিবন্ধ')}
-            className={`px-4 py-2 text-sm font-medium rounded-full ${activeTab === 'শিক্ষার নিবন্ধ' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
+            onClick={() => setActiveTab('subject-based')}
+            className={`tab flex-1 rounded-full ${activeTab === 'subject-based' ? 'tab-active bg-emerald-500 text-white' : ''}`}
           >
-            শিক্ষার নিবন্ধ
+            বিষয় ভিত্তিক
           </button>
           <button
-            onClick={() => setActiveTab('ভিডিও টিউটোরিয়াল')}
-            className={`px-4 py-2 text-sm font-medium rounded-full ${activeTab === 'ভিডিও টিউটোরিয়াল' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}`}
+            onClick={() => setActiveTab('institution-based')}
+            className={`tab flex-1 rounded-full ${activeTab === 'institution-based' ? 'tab-active bg-emerald-500 text-white' : ''}`}
           >
-            ভিডিও টিউটোরিয়াল
+            প্রতিষ্ঠান ভিত্তিক
           </button>
         </div>
 
-        {/* Card Grid based on active tab */}
-        {activeTab === 'মডেল টেস্ট' && (
-          <div>
-            <h2 className="text-xl font-bold mb-4">মডেল টেস্ট</h2>
-            <p className="text-gray-400 mb-6">ভর্তি পরীক্ষার অনুরূপ অনলাইন মডেল টেস্ট</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {cardData.map((card, index) => (
-                <div key={index} className={`relative rounded-xl p-6 h-48 flex flex-col justify-end overflow-hidden ${card.color} shadow-lg`}>
-                  {card.live && (
-                    <div className="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      Live
-                    </div>
-                  )}
-                  <h3 className="text-lg font-semibold text-white mb-1">{card.title}</h3>
-                  <p className="text-xs text-gray-100">{card.subtitle}</p>
-                </div>
-              ))}
+        {/* Content Section Title */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">মডেল টেস্ট</h2>
+          <p className="text-gray-500">বিষয়ভিত্তিক অনুযায়ী মডেল টেস্ট</p>
+        </div>
+
+        {/* Grid of Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {cardData.map((card) => (
+            <div
+              key={card.id}
+              className="relative p-6 rounded-3xl shadow-lg transform transition duration-300 hover:scale-105"
+              style={{ backgroundColor: card.color }}
+            >
+              <div className="absolute top-4 right-4 bg-white text-gray-800 text-xs font-bold px-2 py-1 rounded-full">
+                Live
+              </div>
+              <h3 className="text-white text-lg font-semibold mb-1">
+                {card.title}
+              </h3>
+              <p className="text-white text-sm opacity-90">{card.subtitle}</p>
             </div>
-          </div>
-        )}
-        
-        {/* Placeholder for other tabs */}
-        {activeTab !== 'মডেল টেস্ট' && (
-          <div className="text-center text-gray-500 p-8">
-            <p>Content for the selected tab will be displayed here.</p>
-          </div>
-        )}
+          ))}
+        </div>
       </main>
     </div>
   );
-}
+};
 
-
-export default Que
+export default Que;
