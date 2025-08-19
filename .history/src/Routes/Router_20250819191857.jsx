@@ -24,6 +24,7 @@ const Router = createBrowserRouter([
             {
                 path: "/question-bank",
                 element: <QuestionBank></QuestionBank>,
+                // element: <QuestionBank></QuestionBank>
                 children:[
                     {
                         path: "community",

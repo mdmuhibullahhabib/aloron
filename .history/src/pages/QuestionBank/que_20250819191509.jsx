@@ -7,7 +7,7 @@ import {
   MdOutlineQuestionAnswer,
   MdOutlineSearch
 } from 'react-icons/md';
-import { FaStar } from 'react-icons/fa'; 
+import { FaStar } from 'react-icons/fa'; // Added FaStar from react-icons/fa
 
 // Define the data for the cards to make the component dynamic
 const cardData = [

@@ -7,7 +7,7 @@ import {
   MdOutlineQuestionAnswer,
   MdOutlineSearch
 } from 'react-icons/md';
-import { FaStar } from 'react-icons/fa'; 
+import { FaStar } from 'react-icons/fa'; // Added FaStar from react-icons/fa
 
 // Define the data for the cards to make the component dynamic
 const cardData = [
@@ -22,14 +22,14 @@ const cardData = [
 ];
 
 // The main component
-const QuestionBank = () => {
+const Que = () => {
   const [activeTab, setActiveTab] = useState('model-test');
 
   // Sidebar navigation items
   // Added a new item to demonstrate the FaStar icon.
   const navItems = [
     { name: 'হ্মক পরীক্ষা', icon: <MdOutlineQuestionAnswer className="w-6 h-6" />, link: '#' },
-    { name: 'কমিউনিটি', icon: <MdOutlineLibraryBooks className="w-6 h-6" />, link: '#' },
+    { name: 'কমিউনিটি', icon: <MdOutlineLibraryBooks className="w-6 h-6" />, link: 'community' },
     { name: 'আর্কাইভ', icon: <MdOutlineDescription className="w-6 h-6" />, link: '#' },
     { name: 'ল্যাবরেটরি', icon: <MdOutlineScience className="w-6 h-6" />, link: '#' },
     { name: 'নতুন আইকন', icon: <FaStar className="w-6 h-6" />, link: '#' }, // Example using the new FaStar icon
@@ -141,4 +141,4 @@ const QuestionBank = () => {
   );
 };
 
-export default QuestionBank;
+export default Que;

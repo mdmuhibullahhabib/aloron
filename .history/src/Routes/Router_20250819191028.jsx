@@ -2,7 +2,8 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Main from '../Layouts/Main';
 import Home from '../pages/Home/Home';
-import QuestionBank from '../pages/QuestionBank/QuestionBank';
+import Que from '../pages/QuestionBank/Que';
+// import QuestionBank from '../pages/QuestionBank/QuestionBank';
 import Exampage from '../pages/Exam/Exampage';
 import Blog from '../pages/Blog/Blog';
 import Journal from '../pages/Journal/Journal';
@@ -23,10 +24,15 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/question-bank",
-                element: <QuestionBank></QuestionBank>,
+                element: <Que></Que>,
+                // element: <QuestionBank></QuestionBank>
                 children:[
                     {
-                        path: "community",
+                        path: "/question-bank/archive",
+                        element: <Community></Community>
+                    },
+                    {
+                        path: "/question-bankcommunity",
                         element: <Community></Community>
                     }
                 ]
