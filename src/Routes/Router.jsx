@@ -2,10 +2,14 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import Main from '../Layouts/Main';
 import Home from '../pages/Home/Home';
-import QuestionBank from '../pages/QuestionBank/QuestionBank';
+import Que from '../pages/QuestionBank/Que';
+// import QuestionBank from '../pages/QuestionBank/QuestionBank';
 import Exampage from '../pages/Exam/Exampage';
 import Blog from '../pages/Blog/Blog';
 import Journal from '../pages/Journal/Journal';
+import AddJournal from '../pages/Journal/AddJournal';
+import Info from '../pages/Info/Info';
+import Courses from '../pages/Courses/Courses';
 
 
 const Router = createBrowserRouter([
@@ -19,7 +23,8 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/question-bank",
-                element: <QuestionBank></QuestionBank>
+                element: <Que></Que>
+                // element: <QuestionBank></QuestionBank>
             },
             {
                 path: "/exams",
@@ -32,6 +37,18 @@ const Router = createBrowserRouter([
             {
                 path: "/journal",
                 element: <Journal></Journal>
+            },
+            {
+                path: "/published-your-innovative-project",
+                element: <AddJournal></AddJournal>
+            },
+            {
+                path: "/information",
+                element: <Info></Info>
+            },
+            {
+                path: "/courses",
+                element: <Courses></Courses>
             },
 
         ],
