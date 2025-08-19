@@ -35,8 +35,6 @@ const cardData = {
 
 const getTabDetails = (tabName) => {
   switch (tabName) {
-    case 'all':
-      return { title: 'সকল প্রশ্ন', subtitle: 'সকল ধরনের প্রশ্ন এখানে রয়েছে' };
     case 'model-test':
       return { title: 'মডেল টেস্ট', subtitle: 'বিষয়ভিত্তিক অনুযায়ী মডেল টেস্ট' };
     case 'subject-based':
@@ -48,22 +46,9 @@ const getTabDetails = (tabName) => {
   }
 };
 
-const getSectionTitle = (tabName) => {
-  switch (tabName) {
-    case 'model-test':
-      return 'মডেল টেস্ট';
-    case 'subject-based':
-      return 'বিষয় ভিত্তিক';
-    case 'institution-based':
-      return 'প্রতিষ্ঠান ভিত্তিক';
-    default:
-      return '';
-  }
-};
-
 const Archive = () => {
-  const [activeTab, setActiveTab] = useState('all');
-  const [tabDetails, setTabDetails] = useState(getTabDetails('all'));
+  const [activeTab, setActiveTab] = useState('model-test');
+  const [tabDetails, setTabDetails] = useState(getTabDetails('model-test'));
 
   // Update the title and subtitle based on the active tab
   const handleTabClick = (tabName) => {
@@ -88,12 +73,6 @@ const Archive = () => {
 
       {/* Tabs for content filtering */}
       <div className="tabs tabs-boxed bg-white mb-8 p-1 rounded-full shadow-sm">
-        <button
-          onClick={() => handleTabClick('all')}
-          className={`tab flex-1 rounded-full ${activeTab === 'all' ? 'tab-active bg-emerald-500 text-white' : ''}`}
-        >
-          সকল প্রশ্ন
-        </button>
         <button
           onClick={() => handleTabClick('model-test')}
           className={`tab flex-1 rounded-full ${activeTab === 'model-test' ? 'tab-active bg-emerald-500 text-white' : ''}`}
@@ -120,51 +99,24 @@ const Archive = () => {
         <p className="text-gray-500">{tabDetails.subtitle}</p>
       </div>
 
-      {/* Conditional Rendering for All or Specific Tab */}
-      {activeTab === 'all' ? (
-        // Render all sections
-        Object.keys(cardData).map(category => (
-          <div key={category} className="mb-12">
-            <h3 className="text-xl font-semibold mb-4">{getSectionTitle(category)}</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {cardData[category].map(card => (
-                <div
-                  key={card.id}
-                  className="relative p-6 rounded-3xl shadow-lg transform transition duration-300 hover:scale-105"
-                  style={{ backgroundColor: card.color }}
-                >
-                  <div className="absolute top-4 right-4 bg-white text-gray-800 text-xs font-bold px-2 py-1 rounded-full">
-                    Live
-                  </div>
-                  <h3 className="text-white text-lg font-semibold mb-1">
-                    {card.title}
-                  </h3>
-                  <p className="text-white text-sm opacity-90">{card.subtitle}</p>
-                </div>
-              ))}
+      {/* Grid of Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {cardData[activeTab].map((card) => (
+          <div
+            key={card.id}
+            className="relative p-6 rounded-3xl shadow-lg transform transition duration-300 hover:scale-105"
+            style={{ backgroundColor: card.color }}
+          >
+            <div className="absolute top-4 right-4 bg-white text-gray-800 text-xs font-bold px-2 py-1 rounded-full">
+              Live
             </div>
+            <h3 className="text-white text-lg font-semibold mb-1">
+              {card.title}
+            </h3>
+            <p className="text-white text-sm opacity-90">{card.subtitle}</p>
           </div>
-        ))
-      ) : (
-        // Render a single section
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {cardData[activeTab].map(card => (
-            <div
-              key={card.id}
-              className="relative p-6 rounded-3xl shadow-lg transform transition duration-300 hover:scale-105"
-              style={{ backgroundColor: card.color }}
-            >
-              <div className="absolute top-4 right-4 bg-white text-gray-800 text-xs font-bold px-2 py-1 rounded-full">
-                Live
-              </div>
-              <h3 className="text-white text-lg font-semibold mb-1">
-                {card.title}
-              </h3>
-              <p className="text-white text-sm opacity-90">{card.subtitle}</p>
-            </div>
-          ))}
-        </div>
-      )}
+        ))}
+      </div>
     </>
   );
 };
