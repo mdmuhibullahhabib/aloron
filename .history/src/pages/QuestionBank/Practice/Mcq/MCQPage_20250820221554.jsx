@@ -4,8 +4,37 @@ import TimerBar from "./TimerBar";
 import AnswerStatus from "./AnswerStatus";
 import NavigationButtons from "./NavigationButtons";
 
-import { fakeQuestions } from "./fakeQuestions";
-
+import { subjectsData } from "../data/subjectsData";
+const fakeQuestions = [
+  {
+    id: 1,
+    question: "ভর সংরক্ষণ সূত্র কে প্রবর্তন করেন?",
+    options: ["ল্যাভয়সিয়ার", "নিউটন", "ডাল্টন", "আইনস্টাইন"],
+    correct: "ল্যাভয়সিয়ার",
+    userAnswer: null,
+  },
+  {
+    id: 2,
+    question:
+      "$(P+\\frac{a}{V^2})(V-b) = RT$ সমীকরণে a এর মাত্রা কত?",
+    options: [
+      "$ML^2T^{-2}$",
+      "$ML^{-1}T^{-2}$",
+      "$ML^{-1}T^{-1}$",
+      "$ML^5T^{-2}$",
+    ],
+    correct: "$ML^5T^{-2}$",
+    userAnswer: null,
+  },
+  {
+    id: 3,
+    question:
+      "যখন প্রধান কোয়ান্টাম সংখ্যা n এর মান 3 হয় তখন সহকারী কোয়ান্টাম সংখ্যা l এর মান কত হবে?",
+    options: ["3", "3s, 3p, 3d", "0, 1, 2", "None"],
+    correct: "0, 1, 2",
+    userAnswer: null,
+  },
+];
 
 const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
   const [questions, setQuestions] = useState(fakeQuestions);

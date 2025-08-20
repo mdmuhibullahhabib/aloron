@@ -6,7 +6,6 @@ import NavigationButtons from "./NavigationButtons";
 
 import { fakeQuestions } from "./fakeQuestions";
 
-
 const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
   const [questions, setQuestions] = useState(fakeQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

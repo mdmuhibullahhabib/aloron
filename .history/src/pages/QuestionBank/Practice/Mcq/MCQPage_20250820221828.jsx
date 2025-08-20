@@ -5,7 +5,7 @@ import AnswerStatus from "./AnswerStatus";
 import NavigationButtons from "./NavigationButtons";
 
 import { fakeQuestions } from "./fakeQuestions";
-
+console.log(fakeQuestions)
 
 const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
   const [questions, setQuestions] = useState(fakeQuestions);
