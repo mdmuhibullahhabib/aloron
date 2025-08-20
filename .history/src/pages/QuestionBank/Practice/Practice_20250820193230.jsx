@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-import PracticeDashboard from "./PracticeDashboard";
-import PapersPage from "./PapersPage";
-import ChaptersPage from "./ChaptersPage";
-import MCQPage from "./MCQPage";
-// import PracticeDashboard from "./components/PracticeDashboard";
-// import PapersPage from "./components/PapersPage";
-// import ChaptersPage from "./components/ChaptersPage";
-// import MCQPage from "./components/MCQPage";
+import PracticeDashboard from "./components/PracticeDashboard";
+import PapersPage from "./components/PapersPage";
+import ChaptersPage from "./components/ChaptersPage";
+import MCQPage from "./components/MCQPage";
 
 const Practice = () => {
   const [currentPage, setCurrentPage] = useState("dashboard");
