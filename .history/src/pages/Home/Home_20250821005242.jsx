@@ -133,7 +133,7 @@ const Home = () => {
         </button>
       </section>
       <section>
-        <Testimonial></Testimonial>
+        <Testimonial
       </section>
     </div>
   );

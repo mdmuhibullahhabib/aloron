@@ -18,7 +18,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBookOpen, FaChalkboardTeacher, FaUsers, FaStar } from "react-icons/fa";
-import Testimonial from "./Testimonial";
 
 const Home = () => {
   const features = [
@@ -133,7 +132,7 @@ const Home = () => {
         </button>
       </section>
       <section>
-        <Testimonial></Testimonial>
+        <Testimonial
       </section>
     </div>
   );

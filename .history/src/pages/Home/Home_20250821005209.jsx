@@ -18,7 +18,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBookOpen, FaChalkboardTeacher, FaUsers, FaStar } from "react-icons/fa";
-import Testimonial from "./Testimonial";
 
 const Home = () => {
   const features = [
@@ -131,9 +130,6 @@ const Home = () => {
         <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transition">
           এখনই যোগ দিন
         </button>
-      </section>
-      <section>
-        <Testimonial></Testimonial>
       </section>
     </div>
   );
