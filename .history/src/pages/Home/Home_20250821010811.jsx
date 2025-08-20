@@ -19,7 +19,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaBookOpen, FaChalkboardTeacher, FaUsers, FaStar } from "react-icons/fa";
 import Testimonial from "./Testimonial";
-import UpcomingCourses from "./UpcomingCourses";
 
 const Home = () => {
   const features = [
@@ -104,9 +103,25 @@ const Home = () => {
       </section>
 
       {/* Upcoming Courses Section */}
-      <section>
-        <UpcomingCourses></UpcomingCourses>
-      </section>
+      {/* <section className="py-16 px-6 md:px-20 lg:px-40">
+        <h2 className="text-3xl font-bold text-center mb-10">আসন্ন কোর্সসমূহ</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {upcomingCourses.map((course) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className={`${course.color} rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition`}
+            >
+              <h3 className="text-2xl font-bold mb-2">{course.title}</h3>
+              <p className="text-white/90">{course.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section> */}
+      <
 
       {/* Call to Action */}
       <section className="py-16 bg-gray-900 text-white text-center">

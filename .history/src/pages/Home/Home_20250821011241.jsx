@@ -104,6 +104,7 @@ const Home = () => {
       </section>
 
       {/* Upcoming Courses Section */}
+
       <section>
         <UpcomingCourses></UpcomingCourses>
       </section>

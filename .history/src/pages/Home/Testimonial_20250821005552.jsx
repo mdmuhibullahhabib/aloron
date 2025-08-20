@@ -9,7 +9,7 @@ const stats = [
   { label: "কমিউনিটি সদস্য", value: 3000, color: "text-orange-500" },
 ];
 
-const Testimonial = () => {
+const TestimonialStats = () => {
   return (
     <section className="bg-white py-12">
       <div className="max-w-6xl mx-auto text-center">
