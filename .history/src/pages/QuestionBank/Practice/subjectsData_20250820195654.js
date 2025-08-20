@@ -131,7 +131,7 @@ export const subjectsData = {
 
   gk: {
     title: "সাধারণ জ্ঞান",
-    papers: {
+    // papers: {
       "papers": [
         "বাংলাদেশ",
         "আন্তর্জাতিক",
@@ -140,6 +140,6 @@ export const subjectsData = {
         "ভূগোল",
         "সমসাময়িক বিশ্ব",
       ],
-    },
+    // },
   },
 };
