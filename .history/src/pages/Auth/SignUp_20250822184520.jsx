@@ -10,7 +10,7 @@ const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [error, setError] = useState();
-  const { user, signUp, setUser, updateUserProfile } = useAuth();
+  const { user, signUp, setUser, updateUserProfile } = useAuth
 
 
   const handleSignup = (e) => {
