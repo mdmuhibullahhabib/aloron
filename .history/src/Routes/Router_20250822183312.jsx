@@ -15,8 +15,6 @@ import Faculty from '../pages/QuestionBank/Archive/Faculty/Faculty';
 import Exam from '../pages/QuestionBank/Archive/Exam/Exam';
 import FacultyExam from '../pages/QuestionBank/Archive/FacultyExam/FacultyExam';
 import Practice from '../pages/QuestionBank/Practice/Practice';
-import SignIn from '../pages/Auth/SignIn';
-import SignUp from '../pages/Auth/SignUp';
 
 
 const Router = createBrowserRouter([
@@ -35,11 +33,7 @@ const Router = createBrowserRouter([
                     // Auth
                     {
                         path: "/auth/signup",
-                        element: <SignUp></SignUp>,
-                    },
-                    {
-                        path: "/auth/login",
-                        element: <SignIn></SignIn>
+                        element: <Sign,
                     },
 
 

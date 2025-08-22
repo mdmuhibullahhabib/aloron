@@ -15,8 +15,6 @@ import Faculty from '../pages/QuestionBank/Archive/Faculty/Faculty';
 import Exam from '../pages/QuestionBank/Archive/Exam/Exam';
 import FacultyExam from '../pages/QuestionBank/Archive/FacultyExam/FacultyExam';
 import Practice from '../pages/QuestionBank/Practice/Practice';
-import SignIn from '../pages/Auth/SignIn';
-import SignUp from '../pages/Auth/SignUp';
 
 
 const Router = createBrowserRouter([
@@ -32,17 +30,11 @@ const Router = createBrowserRouter([
                 path: "/question-bank",
                 element: <QuestionBank></QuestionBank>,
                 children:[
-                    // Auth
+                    Auth
                     {
-                        path: "/auth/signup",
-                        element: <SignUp></SignUp>,
+                        path: "/question-bank/archive",
+                        element: <Archive></Archive>,
                     },
-                    {
-                        path: "/auth/login",
-                        element: <SignIn></SignIn>
-                    },
-
-
                     {
                         path: "/question-bank/archive",
                         element: <Archive></Archive>,
