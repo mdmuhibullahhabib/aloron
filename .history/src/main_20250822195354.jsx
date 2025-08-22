@@ -25,7 +25,7 @@ createRoot(document.getElementById('root')).render(
             <RouterProvider router={Router}></RouterProvider>
           </div>
         </QueryClientProvider>
-        </Authprovider>
+        </AuthProvid>
       </LanguageProvider>
     </ThemeProvider>
   </StrictMode >,

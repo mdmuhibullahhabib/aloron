@@ -10,7 +10,6 @@ import {
 import Router from "./Routes/Router";
 import { ThemeProvider } from "./provider/ThemeProvider";
 import { LanguageProvider } from "./provider/LanguageProvider";
-import Authprovider from "./provider/AuthProvider";
 // import AuthProvider from "./provider/AuthProvider.jsx";
 
 const queryClient = new QueryClient()
@@ -19,13 +18,13 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
       <LanguageProvider>
-        <Authprovider>
+        {/* <AuthProvider> */}
         <QueryClientProvider client={queryClient}>
           <div className="max--screen-xl mx-auto">
             <RouterProvider router={Router}></RouterProvider>
           </div>
         </QueryClientProvider>
-        </Authprovider>
+        {/* </AuthProvider> */}
       </LanguageProvider>
     </ThemeProvider>
   </StrictMode >,

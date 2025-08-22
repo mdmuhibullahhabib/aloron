@@ -31,7 +31,7 @@ const Router = createBrowserRouter([
             {
                 path: "/question-bank",
                 element: <QuestionBank></QuestionBank>,
-                children: [
+                children:[
 
                     {
                         path: "/question-bank/archive",
@@ -58,15 +58,6 @@ const Router = createBrowserRouter([
                         element: <Community></Community>
                     },
                 ]
-            },
-            // Auth
-            {
-                path: "/auth/signup",
-                element: <SignUp></SignUp>,
-            },
-            {
-                path: "/auth/login",
-                element: <SignIn></SignIn>
             },
             {
                 path: "/exams",

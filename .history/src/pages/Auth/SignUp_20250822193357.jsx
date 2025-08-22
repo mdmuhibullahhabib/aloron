@@ -3,14 +3,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
-import { AuthContext } from '../../provider/AuthProvider';
 
 const SignUp = () => {
 
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const [error, setError] = useState();
-  const { user, signUp, setUser, updateUserProfile } = useContext(AuthContext);
+  const { user, signUp, setUser, updateUserProfile } = useContext(AU)
 
 
   const handleSignup = (e) => {

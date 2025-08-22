@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { AuthContext } from '../Provider/Authprovider';
+// import useAxiosPublic from '../hooks/useAxiosPublic';
 import Swal from 'sweetalert2'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
