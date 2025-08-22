@@ -5,7 +5,6 @@ import { FaBookOpen, FaChalkboardTeacher, FaUsers, FaStar } from "react-icons/fa
 import Testimonial from "./Testimonial";
 import UpcomingCourses from "./UpcomingCourses";
 import UpdateMessage from "./UpdateMessage";
-import Overview from "./Overview";
 
 const Home = () => {
   const features = [
@@ -111,7 +110,7 @@ const Home = () => {
       </section>
 
       <section>
-        <Overview></Overview>
+        <Overview
       </section>
 
       <section>

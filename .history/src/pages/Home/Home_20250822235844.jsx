@@ -111,7 +111,7 @@ const Home = () => {
       </section>
 
       <section>
-        <Overview></Overview>
+        <Overview
       </section>
 
       <section>
