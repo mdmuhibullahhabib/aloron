@@ -55,14 +55,13 @@ const SignUp = () => {
   };
 
   return (
-<div className="min-h-screen flex items-center justify-center bg-[#013c36] px-4 py-10">
-  <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-8 space-y-6">
-    
+<div className="min-h-screen flex items-center justify-center bg-[#0a0a0a] px-4 py-10">
+  <div className="bg-[#1e1e1e] text-white rounded-xl shadow-lg w-full max-w-md p-8 space-y-6">
     {/* Header */}
     <div className="text-center">
-      <h2 className="text-xl font-bold text-gray-800">আলোড়নে রেজিস্ট্রেশন করুন </h2>
-      <p className="text-gray-500 text-sm mt-2">
-        Create an account to access all features.
+      <h2 className="text-3xl font-bold">Create Your Account</h2>
+      <p className="text-gray-400 mt-2 text-sm">
+        Join HASHI and start your journey today.
       </p>
     </div>
 
@@ -72,47 +71,48 @@ const SignUp = () => {
         type="text"
         name="name"
         placeholder="Enter your name"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder-gray-500"
+        className="w-full p-3 rounded-lg bg-[#2a2a2a] border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-orange-500 outline-none"
         required
       />
       <input
         type="email"
         name="email"
         placeholder="Enter your email"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder-gray-500"
+        className="w-full p-3 rounded-lg bg-[#2a2a2a] border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-orange-500 outline-none"
         required
       />
       <input
         type="password"
         name="password"
         placeholder="Enter your password"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 placeholder-gray-500"
+        className="w-full p-3 rounded-lg bg-[#2a2a2a] border border-gray-700 text-white placeholder-gray-500 focus:ring-2 focus:ring-orange-500 outline-none"
         required
       />
 
       <button
         type="submit"
-        className="w-full bg-orange-400 hover:bg-orange-500 text-white font-semibold py-3 rounded-lg transition duration-300"
+        className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition duration-300"
       >
         Create Account
       </button>
     </form>
 
-    {/* Error Message */}
-    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+    {/* Error */}
+    {error && <p className="text-red-400 text-sm text-center">{error}</p>}
 
     {/* Footer */}
-    <p className="text-center text-gray-600 text-sm">
+    <p className="text-center text-gray-400 text-sm">
       Already registered?{" "}
       <Link
         to="/auth/signin"
-        className="text-orange-500 font-semibold hover:underline"
+        className="text-orange-400 font-semibold hover:underline"
       >
         SIGN IN
       </Link>
     </p>
   </div>
 </div>
+
 
   );
 };

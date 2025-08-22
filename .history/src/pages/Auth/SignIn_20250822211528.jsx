@@ -46,7 +46,7 @@ const SignIn = () => {
     
     {/* Header */}
     <div className="text-center">
-      <h2 className="text-3xl font-bold text-gray-800">লগ ইন করুন</h2>
+      <h2 className="text-3xl font-bold text-gray-800">লগ ইন করুন </h2>
       <p className="text-gray-500 text-sm mt-2">
         Welcome back! Please sign in to continue.
       </p>

@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-indigo-600">
-            আলোড়নে
+            Aloron
           </Link>
 
           {/* Desktop Links */}
@@ -55,7 +55,7 @@ const Navbar = () => {
             </button>
 
             <Link
-              to="/auth/signin"
+              to="/login"
               className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition"
             >
               {t.login}
@@ -104,7 +104,7 @@ const Navbar = () => {
             </button>
 
             <Link
-              to="/auth/signin"
+              to="/auth/"
               onClick={() => setIsOpen(false)}
               className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
             >

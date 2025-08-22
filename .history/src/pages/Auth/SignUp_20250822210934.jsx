@@ -60,7 +60,7 @@ const SignUp = () => {
     
     {/* Header */}
     <div className="text-center">
-      <h2 className="text-xl font-bold text-gray-800">আলোড়নে রেজিস্ট্রেশন করুন </h2>
+      <h2 className="text-3xl font-bold text-gray-800">Sign Up to HASHI</h2>
       <p className="text-gray-500 text-sm mt-2">
         Create an account to access all features.
       </p>

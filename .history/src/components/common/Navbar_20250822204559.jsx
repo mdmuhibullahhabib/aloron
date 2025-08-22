@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-indigo-600">
-            আলোড়নে
+            Aloron
           </Link>
 
           {/* Desktop Links */}
