@@ -76,15 +76,4 @@ const UpdateMessage = () => {
           <div
             key={index}
             className={`flicking-panel w-72 h-48 ${msg.color} text-white flex flex-col justify-center items-center p-4 rounded-xl shadow-lg mx-3`}
-          >
-            <h3 className="font-bold text-lg mb-2">{msg.title}</h3>
-            <p className="text-sm leading-relaxed">{msg.text}</p>
-            <p className="mt-2 text-xs">- পাঠশালা বার্তা</p>
-          </div>
-        ))}
-      </Flicking>
-    </div>
-  );
-};
-
-export default UpdateMessage;
+    
