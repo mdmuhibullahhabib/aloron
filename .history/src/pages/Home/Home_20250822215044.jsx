@@ -1,3 +1,19 @@
+// import React from 'react'
+// import HeroSection from './HeroSection'
+// import CourseHighlights from './CourseHighlights'
+// import AdmissionAlerts from './AdmissionAlerts'
+
+// const Home = () => {
+//     return (
+//         <div>
+//             <HeroSection />
+//             <CourseHighlights />
+//             <AdmissionAlerts />
+//         </div>
+//     )
+// }
+
+// export default Home
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -68,11 +84,6 @@ const Home = () => {
         </p>
       </section>
 
-      {/* New message */}
-      <section>
-        <UpdateMessage></UpdateMessage>
-      </section>
-
       {/* Features Section */}
       <section className="py-16 px-6 md:px-20 lg:px-40 bg-gray-50">
         <h2 className="text-3xl font-bold text-center mb-10">আমাদের বৈশিষ্ট্য</h2>
@@ -96,6 +107,10 @@ const Home = () => {
       {/* Upcoming Courses Section */}
       <section>
         <UpcomingCourses></UpcomingCourses>
+      </section>
+
+      <section>
+        <UpdateMessage>
       </section>
 
       {/* Call to Action */}

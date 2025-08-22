@@ -1,3 +1,19 @@
+// import React from 'react'
+// import HeroSection from './HeroSection'
+// import CourseHighlights from './CourseHighlights'
+// import AdmissionAlerts from './AdmissionAlerts'
+
+// const Home = () => {
+//     return (
+//         <div>
+//             <HeroSection />
+//             <CourseHighlights />
+//             <AdmissionAlerts />
+//         </div>
+//     )
+// }
+
+// export default Home
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -66,11 +82,6 @@ const Home = () => {
         <p className="max-w-2xl mx-auto text-lg md:text-xl opacity-90">
           আপনার একাডেমিক ও অ্যাডমিশন প্রস্তুতিকে আরও কার্যকর ও সহজ করে তুলুন।
         </p>
-      </section>
-
-      {/* New message */}
-      <section>
-        <UpdateMessage></UpdateMessage>
       </section>
 
       {/* Features Section */}
