@@ -13,26 +13,16 @@ const Hero = () => {
   ];
 
   return (
-    <section className="flex flex-col lg:flex-row justify-between items-start p-6 md:p-12 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen">
+    <section className="flex flex-col lg:flex-row justify-between items-start p-6 md:p-12 bg-gray-900 text-gray-100 min-h-screen">
       {/* Left Content */}
-      <div className="flex flex-col items-center lg:items-start p-4 w-full lg:w-2/3 space-y-6">
+      <div className="flex flex-col items-center lg:items-start p-4 w-full lg:w-2/3">
         {/* Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 text-center lg:text-left leading-snug"
-        >
+        <h1 className="text-3xl md:text-5xl font-extrabold text-pink-500 text-center lg:text-left leading-snug mb-4">
           শিক্ষায়, চর্চায় ও সহযোগিতায়
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-lg md:text-xl text-gray-300 text-center lg:text-left"
-        >
+        </h1>
+        <p className="text-lg md:text-xl text-gray-300 text-center lg:text-left mb-6">
           শিক্ষার সবকিছু পাঠশালায়
-        </motion.p>
+        </p>
 
         {/* Navigation Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-lg">
@@ -40,9 +30,9 @@ const Hero = () => {
             <motion.a
               key={idx}
               href={link.path}
-              whileHover={{ scale: 1.1, rotate: 3 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="flex flex-col items-center justify-center bg-gradient-to-tr from-pink-600 to-purple-500 text-white p-4 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 text-center text-sm sm:text-base hover:-translate-y-1"
+              className="flex flex-col items-center justify-center bg-gradient-to-tr from-pink-600 to-pink-400 text-white p-4 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 text-center text-sm sm:text-base"
             >
               <div className="text-3xl mb-2">{link.icon}</div>
               {link.name}
@@ -52,24 +42,17 @@ const Hero = () => {
       </div>
 
       {/* Right Side Notice */}
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="lg:w-1/3 mt-8 lg:mt-0 bg-gray-800 border border-gray-700 p-6 rounded-3xl shadow-2xl"
-      >
-        <h2 className="text-2xl font-bold text-pink-500 mb-4 flex items-center gap-2">
-          📌 বিশেষ নোটিশ
-        </h2>
+      <div className="lg:w-1/3 mt-8 lg:mt-0 bg-gray-800 border border-gray-700 p-6 rounded-2xl shadow-2xl">
+        <h2 className="text-2xl font-bold text-pink-500 mb-4">📌 বিশেষ নোটিশ</h2>
         <ul className="space-y-3 text-gray-300">
           <li>📢 নতুন ব্যাচ ভর্তি চলছে!</li>
           <li>🎓 লাইভ ক্লাস ও রেকর্ডেড ভিডিও উপলব্ধ।</li>
           <li>💡 পরীক্ষার জন্য বিশেষ প্রস্তুতি কোর্স।</li>
         </ul>
-        <button className="mt-6 w-full bg-pink-500 text-white py-3 rounded-2xl hover:bg-purple-500 transition duration-300 font-semibold shadow-lg">
+        <button className="mt-6 w-full bg-pink-500 text-white py-3 rounded-xl hover:bg-pink-600 transition duration-300 font-semibold shadow-lg">
           বিস্তারিত দেখুন
         </button>
-      </motion.div>
+      </div>
     </section>
   );
 };
