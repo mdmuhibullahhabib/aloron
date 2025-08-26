@@ -6,7 +6,6 @@ import Testimonial from "./Testimonial";
 import UpcomingCourses from "./UpcomingCourses";
 import UpdateMessage from "./UpdateMessage";
 import Overview from "./Overview";
-import Hero from "./Hero";
 
 const Home = () => {
   const features = [

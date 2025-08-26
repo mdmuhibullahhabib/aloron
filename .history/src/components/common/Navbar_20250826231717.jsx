@@ -14,7 +14,6 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'প্রশ্নব্যাংক', path: '/question-bank/archive' },
-    { name: 'স্টুডেন্ট শপ', path: '/shop' },
     { name: 'পরীক্ষা', path: '/exams' },
     { name: 'কোর্স', path: '/courses' },
     { name: 'জার্নাল', path: '/journal' },

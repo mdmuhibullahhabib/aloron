@@ -18,8 +18,9 @@ const QuestionBank = () => {
 
   return (
     <div className="flex flex-col lg:flex-row h-screen font-sans bg-gray-100 text-gray-800">
+
       {/* --- Sidebar --- */}
-      <aside className="hidden lg:flex flex-col lg:w-64 bg-white p-6 shadow-md rounded-r-lg">
+      <aside className="hidden lg:flex flex-col lgw-64 bg-white p-6 shadow-md rounded-r-lg">
         {/* Logo or App Name */}
         <div className="flex items-center mb-10">
           <span className="text-xl font-bold">QuestionBank</span>

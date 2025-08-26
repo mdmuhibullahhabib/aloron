@@ -6,7 +6,6 @@ import Testimonial from "./Testimonial";
 import UpcomingCourses from "./UpcomingCourses";
 import UpdateMessage from "./UpdateMessage";
 import Overview from "./Overview";
-import Hero from "./Hero";
 
 const Home = () => {
   const features = [
@@ -56,8 +55,7 @@ const Home = () => {
   return (
     <div className="font-sans text-gray-800">
       {/* Hero Section */}
-      <Hero></Hero>
-      <section className="relative bg-gradient-to-r from-emerald-500 to-emerald-700 text-white py-16 px-6 md:px-20 lg:px-40 text-center">
+      {/* <section className="relative bg-gradient-to-r from-emerald-500 to-emerald-700 text-white py-16 px-6 md:px-20 lg:px-40 text-center">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,7 +67,7 @@ const Home = () => {
         <p className="max-w-2xl mx-auto text-lg md:text-xl opacity-90">
           আপনার একাডেমিক ও অ্যাডমিশন প্রস্তুতিকে আরও কার্যকর ও সহজ করে তুলুন।
         </p>
-      </section>
+      </section> */}
 
       {/* New message */}
       <section>
