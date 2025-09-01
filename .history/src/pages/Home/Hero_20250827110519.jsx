@@ -20,14 +20,7 @@ const Hero = () => {
     { name: "Blog", path: "/blog", icon: <FaBlog /> },
   ];
 
-  const notices = [
-  "📢 নতুন ব্যাচ ভর্তি চলছে!",
-  "🎓 লাইভ ক্লাস ও রেকর্ডেড ভিডিও উপলব্ধ।",
-  "💡 পরীক্ষার জন্য বিশেষ প্রস্তুতি কোর্স।",
-  "📝 অনলাইন মক টেস্ট শীঘ্রই শুরু হবে।",
-  "📅 ব্যাচ শুরু: ১০ সেপ্টেম্বর ২০২৫",
-];
-
+  
 
   return (
     <section className="flex flex-col lg:flex-row justify-between items-start p-6 md:p-12 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen">
@@ -72,30 +65,24 @@ const Hero = () => {
       </div>
 
       {/* Right Side Notice */}
-   <motion.div
-  initial={{ opacity: 0, x: 50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8 }}
-  className="lg:w-1/3 mt-8 lg:mt-0 bg-gray-800 border border-gray-700 p-6 rounded-3xl shadow-2xl"
->
-  <h2 className="text-2xl font-bold text-pink-500 mb-4 flex items-center gap-2">
-    📌 বিশেষ নোটিশ
-  </h2>
-
-  <ul className="space-y-3 text-gray-300">
-    {notices.map((notice, idx) => (
-      <li key={idx}>{notice}</li>
-    ))}
-  </ul>
-
-  <Link
-    to="/exam-batch/details" // <-- Path specific for exam batch
-    className="mt-6 w-full block text-center bg-pink-500 text-white py-3 rounded-2xl hover:bg-purple-500 transition duration-300 font-semibold shadow-lg"
-  >
-    বিস্তারিত দেখুন
-  </Link>
-</motion.div>
-
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="lg:w-1/3 mt-8 lg:mt-0 bg-gray-800 border border-gray-700 p-6 rounded-3xl shadow-2xl"
+      >
+        <h2 className="text-2xl font-bold text-pink-500 mb-4 flex items-center gap-2">
+          📌 বিশেষ নোটিশ
+        </h2>
+        <ul className="space-y-3 text-gray-300">
+          <li>📢 নতুন ব্যাচ ভর্তি চলছে!</li>
+          <li>🎓 লাইভ ক্লাস ও রেকর্ডেড ভিডিও উপলব্ধ।</li>
+          <li>💡 পরীক্ষার জন্য বিশেষ প্রস্তুতি কোর্স।</li>
+        </ul>
+        <button className="mt-6 w-full bg-pink-500 text-white py-3 rounded-2xl hover:bg-purple-500 transition duration-300 font-semibold shadow-lg">
+          বিস্তারিত দেখুন
+        </button>
+      </motion.div>
     </section>
   );
 };

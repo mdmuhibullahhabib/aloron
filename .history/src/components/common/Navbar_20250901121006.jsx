@@ -19,8 +19,8 @@ const Navbar = () => {
     { name: 'কোর্স', path: '/courses' },
     { name: 'জার্নাল', path: '/journal' },
     { name: 'Blog', path: '/blog' },
-    { name: 'Add Subject', path: '/addsubject' },
-    { name: 'Manage Subject', path: '/managesubject' },
+    { name: 'জার্নাল', path: '/addsubject' },
+    { name: 'Managesubject', path: '/managesubject' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);

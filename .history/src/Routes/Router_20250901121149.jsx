@@ -18,7 +18,6 @@ import Practice from '../pages/QuestionBank/Practice/Practice';
 import SignIn from '../pages/Auth/SignIn';
 import SignUp from '../pages/Auth/SignUp';
 import Addsubject from '../pages/demo/Addsubject';
-import Managesubject from '../pages/demo/ManageSubject';
 
 
 const Router = createBrowserRouter([
@@ -99,8 +98,8 @@ const Router = createBrowserRouter([
                 element: <Addsubject></Addsubject>
             },
             {
-                path: "/managesubject",
-                element: <Managesubject></Managesubject>
+                path: "/courses",
+                element: <Courses></Courses>
             },
 
         ],
