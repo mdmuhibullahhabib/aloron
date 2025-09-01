@@ -26,7 +26,6 @@ import ManageCourses from '../components/Dashboard/Admin/ManageCourses';
 import Reports from '../components/Dashboard/Admin/Reports';
 import EnrolledCourses from '../components/Dashboard/Student/EnrolledCourses';
 import MyProgress from '../components/Dashboard/Student/MyProgress';
-import CourseDetails from '../pages/Courses/CourseDetails';
 
 
 const Router = createBrowserRouter([
@@ -107,8 +106,8 @@ const Router = createBrowserRouter([
                 element: <Courses></Courses>
             },
             {
-                path: "/courses/:id",
-                element: <CourseDetails></CourseDetails>
+                path: "/coursesdetails",
+                element: <Courses
             },
             {
                 path: "/addsubject",

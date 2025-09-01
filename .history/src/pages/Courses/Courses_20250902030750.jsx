@@ -59,7 +59,7 @@ const courses = [
   },
 ];
 
-const Courses = () => {
+const CoursesHSC = () => {
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-center mb-10">
@@ -105,5 +105,5 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default CoursesHSC;
 export { courses };
