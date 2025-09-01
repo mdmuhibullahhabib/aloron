@@ -24,8 +24,6 @@ import Dashboard from '../Layouts/Dashboard/Dashboard';
 import ManageUsers from '../components/Dashboard/Admin/ManageUsers';
 import ManageCourses from '../components/Dashboard/Admin/ManageCourses';
 import Reports from '../components/Dashboard/Admin/Reports';
-import EnrolledCourses from '../components/Dashboard/Student/EnrolledCourses';
-import MyProgress from '../components/Dashboard/Student/MyProgress';
 
 
 const Router = createBrowserRouter([
@@ -119,7 +117,6 @@ const Router = createBrowserRouter([
                 path: "/dashboard",
                 element: <Dashboard></Dashboard>,
                 children: [
-                    // ADMIN
                     {
                         path: "/dashboard/manage-users",
                         element: <ManageUsers></ManageUsers>
@@ -132,18 +129,6 @@ const Router = createBrowserRouter([
                         path: "/dashboard/reports",
                         element: <Reports></Reports>
                     },
-
-                    // STUDENT
-                     {
-                        path: "/dashboard/enrolled-courses",
-                        element: <EnrolledCourses></EnrolledCourses>
-                    },
-                     {
-                        path: "/dashboard/progress",
-                        element: <MyProgress></MyProgress>
-                    },
-                    
-
                 ]
             },
 

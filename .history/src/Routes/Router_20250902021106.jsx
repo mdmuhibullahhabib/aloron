@@ -140,7 +140,7 @@ const Router = createBrowserRouter([
                     },
                      {
                         path: "/dashboard/progress",
-                        element: <MyProgress></MyProgress>
+                        element: <MyProgress
                     },
                     
 
