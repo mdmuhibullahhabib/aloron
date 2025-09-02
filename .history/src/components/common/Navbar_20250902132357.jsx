@@ -65,21 +65,12 @@ const Navbar = () => {
               {theme === 'light' ? 'Dark' : 'Light'}
             </button>
 
-                        {user && user?.email ? (
-              <button
-                onClick={handleLogout}
-                className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/auth/signin"
-                className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
-              >
-                {t.login}
-              </Link>
-            )}
+            <Link
+              to="/auth/signin"
+              className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition"
+            >
+              {t.login}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}

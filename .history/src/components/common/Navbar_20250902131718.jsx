@@ -7,7 +7,7 @@ import { translations } from '../../i18n';
 import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
-  const { user, logOut } = useAuth()
+    const {user} = useAuth()
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
@@ -28,10 +28,6 @@ const Navbar = () => {
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
-    const handleLogout = () => {
-    logOut()
-  }
 
   return (
     <nav className="bg-base-100 shadow-md sticky top-0 z-50">
@@ -65,21 +61,12 @@ const Navbar = () => {
               {theme === 'light' ? 'Dark' : 'Light'}
             </button>
 
-                        {user && user?.email ? (
-              <button
-                onClick={handleLogout}
-                className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/auth/signin"
-                className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
-              >
-                {t.login}
-              </Link>
-            )}
+            <Link
+              to="/auth/signin"
+              className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition"
+            >
+              {t.login}
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -110,7 +97,7 @@ const Navbar = () => {
             ))}
 
             {/* Language & Theme Buttons */}
-            {/* <button
+            <button
               onClick={() => { toggleLanguage(); setIsOpen(false); }}
               className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center mt-2"
             >
@@ -121,23 +108,27 @@ const Navbar = () => {
               className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center mt-1"
             >
               {theme === 'light' ? 'Dark' : 'Light'}
-            </button> */}
+            </button>
 
-            {user && user?.email ? (
-              <button
-                onClick={handleLogout}
-                className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                to="/auth/signin"
-                className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
-              >
-                {t.login}
-              </Link>
-            )}
+                 {user ? (
+        <button
+          onClick={() => {
+            onLogout(); // clear auth state
+            setIsOpen(false);
+          }}
+          className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
+        >
+          {t.logout}
+        </button>
+      ) : (
+        <Link
+          to="/auth/signin"
+          onClick={() => setIsOpen(false)}
+          className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
+        >
+          {t.login}
+        </Link>
+      )}
           </div>
         </div>
       )}

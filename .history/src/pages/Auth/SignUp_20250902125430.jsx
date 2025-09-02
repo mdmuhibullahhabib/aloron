@@ -8,6 +8,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 const SignUp = () => {
 
   const axiosPublic = useAxiosPublic();
+  const {user} = useAu
   const navigate = useNavigate();
   const [error, setError] = useState();
   const { user, signUp, setUser, updateUserProfile } = useContext(AuthContext);

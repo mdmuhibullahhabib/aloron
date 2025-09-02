@@ -4,15 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
+// import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
 
   const axiosPublic = useAxiosPublic();
+  // const {user} = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState();
   const { user, signUp, setUser, updateUserProfile } = useContext(AuthContext);
 
-
+console.log(user)
   const handleSignup = (e) => {
     e.preventDefault();
     const form = e.target;

@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_apiKey,
-  authDomain: import.meta.env.VITE_authDomain,
-  projectId: import.meta.env.VITE_projectId,
-  storageBucket: import.meta.env.VITE_storageBucket,
-  messagingSenderId: import.meta.env.VITE_messagingSenderId,
-  appId: import.meta.env.VITE_appId
+  apiKey: "AIzaSyDJW2PGbqCHzAMbUWP9Gmofuf-F8QsVuX4",
+  authDomain: "aloron-67310.firebaseapp.com",
+  projectId: "aloron-67310",
+  storageBucket: "aloron-67310.firebasestorage.app",
+  messagingSenderId: "566876834827",
+  appId: "1:566876834827:web:5d36e973f92a1964bdcb0e"
 };
 
 // Initialize Firebase

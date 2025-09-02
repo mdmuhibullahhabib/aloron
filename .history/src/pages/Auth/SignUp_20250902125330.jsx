@@ -35,7 +35,7 @@ const SignUp = () => {
     signUp(email, password)
       .then((result) => {
         const user = result.user;
-        updateUserProfile({ displayName: name })
+        updateUserProfile({ displayName: name, photoURL: image })
         .then(() => {
           axiosPublic.post('/users', userData)
           .then(res => {
