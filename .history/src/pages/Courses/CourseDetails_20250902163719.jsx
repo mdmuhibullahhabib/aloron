@@ -53,7 +53,7 @@ const CourseDetails = () => {
 
       if (res.status === 200 || res.status === 201) {
       toast.success(`Successfully enrolled in ${course.title}`);
-        // navigate("/dashboard"); // go to dashboard or My Courses page
+        navigate("/dashboard"); // go to dashboard or My Courses page
       } else {
         alert(res.data?.message || "Something went wrong!");
       }

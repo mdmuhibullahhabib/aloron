@@ -5,7 +5,6 @@ import { FaStar, FaClock, FaBook, FaUserTie } from "react-icons/fa";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -52,8 +51,7 @@ const CourseDetails = () => {
       const res = await axiosPublic.post("/enrollments", enrollmentData);
 
       if (res.status === 200 || res.status === 201) {
-      toast.success(`Successfully enrolled in ${course.title}`);
-        // navigate("/dashboard"); // go to dashboard or My Courses page
+<Toaster        navigate("/dashboard"); // go to dashboard or My Courses page
       } else {
         alert(res.data?.message || "Something went wrong!");
       }

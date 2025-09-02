@@ -8,7 +8,7 @@ import { Toaster } from 'react-hot-toast';
 const Main = () => {
     return (
         <div>
-            <Toaster/>
+            <Toaster
             <header>
                 <Navbar></Navbar>
             </header>
