@@ -24,9 +24,9 @@ const CourseDetails = () => {
     },
   });
 
-  const userId = databaseUser[0]?._id; // ✅ safe access
+const userId = databaseUser[0]?._id; // ✅ safe access
 
-  console.log(userId)
+console.log(userId)
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;
@@ -48,13 +48,15 @@ const CourseDetails = () => {
       };
 
       //POST request
-      const res = await axiosPublic.post("/enrollments", enrollmentData);
+    const res = await axiosPublic.post("/enrollments", enrollmentData);
 
-      if (res.status === 200 || res.status === 201) {
+      const data = await res.json();
+
+      if (res.ok) {
         alert(`Successfully enrolled in ${course.title}`);
-        navigate("/dashboard"); // go to dashboard or My Courses page
+        // navigate("/dashboard"); 
       } else {
-        alert(res.data?.message || "Something went wrong!");
+        alert(data.message || "Something went wrong!");
       }
     } catch (error) {
       console.error(error);

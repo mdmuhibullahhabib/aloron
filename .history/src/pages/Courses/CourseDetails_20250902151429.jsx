@@ -2,64 +2,21 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useCourses from "../../hooks/useCourses";
 import { FaStar, FaClock, FaBook, FaUserTie } from "react-icons/fa";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAuth from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth()
-  const axiosPublic = useAxiosPublic();
   const [courses] = useCourses();
 
   const course = courses.find((c) => c._id === id);
-
-  const { data: databaseUser = [] } = useQuery({
-    queryKey: ['user', user?.email],   // unique key per user
-    queryFn: async () => {
-      if (!user?.email) return [];
-      const res = await axiosPublic.get(`/user?email=${user?.email}`);
-      return res.data;
-    },
-  });
-
-  const userId = databaseUser[0]?._id; // ✅ safe access
-
-  console.log(userId)
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;
   }
 
-  // CHANGE: Buy ফাংশন আপডেট করা হয়েছে যাতে ডাটা MongoDB তে পোস্ট হয়
-  const handleBuy = async () => {
-    try {
-      if (!userId) {
-        alert("Please login first!");
-        return;
-      }
-
-      const enrollmentData = {
-        userId: userId,
-        courseId: course._id,
-        purchaseDate: new Date().toISOString(),
-        status: "active"
-      };
-
-      //POST request
-      const res = await axiosPublic.post("/enrollments", enrollmentData);
-
-      if (res.status === 200 || res.status === 201) {
-        alert(`Successfully enrolled in ${course.title}`);
-        navigate("/dashboard"); // go to dashboard or My Courses page
-      } else {
-        alert(res.data?.message || "Something went wrong!");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Failed to enroll!");
-    }
+  const handleBuy = () => {
+    alert(`You bought ${course.title} for ৳${course.price}`);
+    navigate("/dashboard"); // অথবা অন্য কোনো পেজ
   };
 
   return (
@@ -129,7 +86,7 @@ const CourseDetails = () => {
           {/* Buy Button */}
           <button
             onClick={handleBuy}
-            className="btn w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
+            className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
           >
             Buy Now
           </button>

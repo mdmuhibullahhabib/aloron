@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
-import useCourses from "../../hooks/useCourses";
 // import useCourses from "../../hooks/useCourses";
 
 const Courses = () => {

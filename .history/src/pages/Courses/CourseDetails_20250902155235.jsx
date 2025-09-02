@@ -2,31 +2,22 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useCourses from "../../hooks/useCourses";
 import { FaStar, FaClock, FaBook, FaUserTie } from "react-icons/fa";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
-import useAuth from "../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 
 const CourseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useAuth()
-  const axiosPublic = useAxiosPublic();
   const [courses] = useCourses();
 
   const course = courses.find((c) => c._id === id);
 
-  const { data: databaseUser = [] } = useQuery({
-    queryKey: ['user', user?.email],   // unique key per user
-    queryFn: async () => {
-      if (!user?.email) return [];
-      const res = await axiosPublic.get(`/user?email=${user?.email}`);
-      return res.data;
-    },
-  });
-
-  const userId = databaseUser[0]?._id; // ✅ safe access
-
-  console.log(userId)
+  const { data: cart = [], refetch } = useQuery({
+  queryKey: ['cart', user?.email],   // unique key per user
+  queryFn: async () => {
+    if (!user?.email) return [];      // safety check
+    const res = await axiosPublic.get(`/cart?email=${user.email}`);
+    return res.data;
+  },
+});
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;
@@ -35,6 +26,7 @@ const CourseDetails = () => {
   // CHANGE: Buy ফাংশন আপডেট করা হয়েছে যাতে ডাটা MongoDB তে পোস্ট হয়
   const handleBuy = async () => {
     try {
+      const userId = localStorage.getItem("userId"); // CHANGE: ইউজার আইডি কোথা থেকে নেবে সেটি ঠিক করো (JWT থেকেও নিতে পারো)
       if (!userId) {
         alert("Please login first!");
         return;
@@ -47,14 +39,22 @@ const CourseDetails = () => {
         status: "active"
       };
 
-      //POST request
-      const res = await axiosPublic.post("/enrollments", enrollmentData);
+      // CHANGE: API এ POST রিকোয়েস্ট
+      const res = await fetch("http://localhost:5000/api/enrollments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(enrollmentData)
+      });
 
-      if (res.status === 200 || res.status === 201) {
+      const data = await res.json();
+
+      if (res.ok) {
         alert(`Successfully enrolled in ${course.title}`);
-        navigate("/dashboard"); // go to dashboard or My Courses page
+        navigate("/dashboard"); // বা ইউজারের My Courses পেজে
       } else {
-        alert(res.data?.message || "Something went wrong!");
+        alert(data.message || "Something went wrong!");
       }
     } catch (error) {
       console.error(error);
@@ -129,7 +129,7 @@ const CourseDetails = () => {
           {/* Buy Button */}
           <button
             onClick={handleBuy}
-            className="btn w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
+            className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
           >
             Buy Now
           </button>

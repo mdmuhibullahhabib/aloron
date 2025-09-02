@@ -24,9 +24,9 @@ const CourseDetails = () => {
     },
   });
 
-  const userId = databaseUser[0]?._id; // ✅ safe access
+  console.log(databaseUser[0]?._id)
 
-  console.log(userId)
+  
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;
@@ -41,20 +41,22 @@ const CourseDetails = () => {
       }
 
       const enrollmentData = {
-        userId: userId,
+        userId: databaseUser[0]?._id,
         courseId: course._id,
         purchaseDate: new Date().toISOString(),
         status: "active"
       };
 
-      //POST request
-      const res = await axiosPublic.post("/enrollments", enrollmentData);
+      // CHANGE: API এ POST রিকোয়েস্ট
+    const res = await axiosPublic.post("/orders", enrollmentData);
 
-      if (res.status === 200 || res.status === 201) {
+      const data = await res.json();
+
+      if (res.ok) {
         alert(`Successfully enrolled in ${course.title}`);
-        navigate("/dashboard"); // go to dashboard or My Courses page
+        // navigate("/dashboard"); 
       } else {
-        alert(res.data?.message || "Something went wrong!");
+        alert(data.message || "Something went wrong!");
       }
     } catch (error) {
       console.error(error);
@@ -129,7 +131,7 @@ const CourseDetails = () => {
           {/* Buy Button */}
           <button
             onClick={handleBuy}
-            className="btn w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
+            className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
           >
             Buy Now
           </button>
