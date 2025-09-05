@@ -1,25 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const EnrolledCourses = () => {
   const [expandedCourse, setExpandedCourse] = useState(null);
-  const axiosSecure = useAxiosSecure()
-  const {user} = useAuth();
 
-    const { data: enrolledCourse = [] } = useQuery({
-    queryKey: ['enrolled', user?.email],
+    const { data: enrolledCourses = [] } = useQuery({
+    queryKey: ['course', user?.email],   // unique key per user
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axiosSecure.get(`/enrolled?email=${user?.email}`);
+      const res = await axiosPublic.get(`/student-enrooled?email=${user?.email}`);
       return res.data;
     },
   });
-  console.log(enrolledCourse)
-
-  console.log(user?.email)
 
   // Fake courses data
   const courses = [

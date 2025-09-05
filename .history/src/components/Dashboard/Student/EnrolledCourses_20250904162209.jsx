@@ -1,25 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const EnrolledCourses = () => {
   const [expandedCourse, setExpandedCourse] = useState(null);
-  const axiosSecure = useAxiosSecure()
-  const {user} = useAuth();
 
-    const { data: enrolledCourse = [] } = useQuery({
-    queryKey: ['enrolled', user?.email],
+    const { data: enrolledCourses = [] } = useQuery({
+    queryKey: ['course', user?.email],   // unique key per user
     queryFn: async () => {
       if (!user?.email) return [];
-      const res = await axiosSecure.get(`/enrolled?email=${user?.email}`);
+      const res = await axiosPublic.get(`/student-enrolled-course?email=${user?.email}`);
       return res.data;
     },
   });
-  console.log(enrolledCourse)
-
-  console.log(user?.email)
 
   // Fake courses data
   const courses = [
@@ -47,7 +40,7 @@ const EnrolledCourses = () => {
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Enrolled Courses</h2>
-      {courses.map((course) => (
+      {enrolledCourses.map((course) => (
         <div key={course.id} className="bg-white p-4 rounded-lg shadow mb-4">
           <button
             className="flex justify-between w-full items-center text-left"

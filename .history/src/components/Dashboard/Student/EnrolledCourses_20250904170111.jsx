@@ -2,11 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const EnrolledCourses = () => {
   const [expandedCourse, setExpandedCourse] = useState(null);
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosPublic()
   const {user} = useAuth();
 
     const { data: enrolledCourse = [] } = useQuery({

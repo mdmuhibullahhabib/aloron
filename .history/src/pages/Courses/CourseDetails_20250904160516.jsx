@@ -25,9 +25,9 @@ const CourseDetails = () => {
     },
   });
 
-  const userId = databaseUser[0]?._id; 
+  const userId = databaseUser[0]?._id; // ✅ safe access
 
-  console.log(user?.email)
+  console.log(userId)
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;
@@ -42,7 +42,6 @@ const CourseDetails = () => {
       }
 
       const enrollmentData = {
-        email: user?.email,
         userId: userId,
         courseId: course._id,
         purchaseDate: new Date().toISOString(),

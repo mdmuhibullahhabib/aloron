@@ -27,7 +27,7 @@ const CourseDetails = () => {
 
   const userId = databaseUser[0]?._id; 
 
-  console.log(user?.email)
+  console.log(user.email)
 
   if (!course) {
     return <p className="text-center mt-10">Course not found!</p>;

@@ -23,7 +23,7 @@ const Navbar = () => {
     { name: 'কোর্স', path: '/courses' },
     { name: 'জার্নাল', path: '/journal' },
     { name: 'Blog', path: '/blog' },
-    { name: 'Dashboard', path: '/dashboard' },
+    { name: 'Dashboard', path: '/blog' },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
