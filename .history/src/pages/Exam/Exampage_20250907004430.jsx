@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Dropdowns from "./Dropdowns"; // Dropdown component
+import Dropdowns from "./Dropdowns"; // Import your dropdown component
 import useExamQuestion from "../../hooks/useExamQuestion"; // Hook to fetch questions
 
 const Exampage = () => {
@@ -10,20 +10,21 @@ const Exampage = () => {
   const [currentQ, setCurrentQ] = useState(1);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState({ group: "", subject: "", chapter: "" });
-  const [questionSet, setQuestionSet] = useState(null); // initially null for async check
+  const [questionSet, setQuestionSet] = useState([]); // state to hold questions
 
-  const { data, isLoading, error, refetch } = useExamQuestion(); // Fetch questions from MongoDB
+  const { data, refetch } = useExamQuestion(); // hook for fetching questions
 
-  // Filter questions when dropdown selection changes
+  // Fetch questions whenever dropdown selection changes
   useEffect(() => {
-    if (selected.group && selected.subject && selected.chapter && data) {
-      const filtered = data.find(
+    if (selected.group && selected.subject && selected.chapter) {
+      const filtered = data?.find(
         (item) =>
           item.group === selected.group &&
           item.subject === selected.subject &&
           item.chapter === selected.chapter
       );
-      setQuestionSet(filtered ? filtered.questions : []);
+      if (filtered) setQuestionSet(filtered.questions);
+      else setQuestionSet([]); // no questions
     }
   }, [selected, data]);
 
@@ -38,11 +39,6 @@ const Exampage = () => {
     }
   };
 
-  // Loading or error state
-  if (isLoading) return <p className="text-center mt-6">Loading questions...</p>;
-  if (error) return <p className="text-center mt-6 text-red-500">Failed to load questions</p>;
-
-  // Finished exam view
   if (finished) {
     return (
       <div className="max-w-2xl mx-auto p-6 text-center">
@@ -65,8 +61,7 @@ const Exampage = () => {
     );
   }
 
-  // Exam in progress
-  if (started && questionSet && questionSet.length > 0) {
+  if (started) {
     const q = questionSet[currentQ - 1];
     return (
       <div className="max-w-2xl mx-auto p-6">
@@ -91,13 +86,10 @@ const Exampage = () => {
     );
   }
 
-  // Main page before exam starts
   return (
     <div className="max-w-3xl mx-auto p-6">
-      {/* Dropdown Filter Section */}
       <Dropdowns setSelected={setSelected} />
 
-      {/* Instructions */}
       <div className="bg-gray-50 p-4 rounded-lg border mb-6">
         <h3 className="text-red-500 font-bold mb-2">পরীক্ষার্থীদের প্রতি নির্দেশনাবলীঃ</h3>
         <ul className="list-disc pl-5 text-sm space-y-1">
@@ -107,7 +99,6 @@ const Exampage = () => {
         </ul>
       </div>
 
-      {/* Question & Time Input */}
       <div className="flex items-center gap-4 mb-6">
         <div>
           <label className="block text-sm">প্রশ্ন সংখ্যা</label>
@@ -129,10 +120,9 @@ const Exampage = () => {
         </div>
       </div>
 
-      {/* Start Button */}
       <button
         className="w-full bg-green-500 text-white py-2 rounded-lg shadow hover:bg-green-600 disabled:opacity-50"
-        disabled={!selected.chapter || !questionSet || questionSet.length === 0}
+        disabled={!selected.chapter || questionSet.length === 0}
         onClick={() => setStarted(true)}
       >
         শুরু করি

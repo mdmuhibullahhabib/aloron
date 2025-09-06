@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Dropdowns from "./Dropdowns"; // Dropdown component
-import useExamQuestion from "../../hooks/useExamQuestion"; // Hook to fetch questions
+import React, { useState } from "react";
+import Dropdowns from "./Dropdowns"; // Import your dropdown component
+import useExamQuestion from "../../hooks/useExamQuestion";
 
 const Exampage = () => {
   const [started, setStarted] = useState(false);
@@ -9,26 +9,47 @@ const Exampage = () => {
   const [questions, setQuestions] = useState(20);
   const [currentQ, setCurrentQ] = useState(1);
   const [score, setScore] = useState(0);
-  const [selected, setSelected] = useState({ group: "", subject: "", chapter: "" });
-  const [questionSet, setQuestionSet] = useState(null); // initially null for async check
+  const [selected, setSelected] = useState({
+    group: "",
+    subject: "",
+    chapter: "",
+  });
+  const [questions, refetch] = useExamQuestion()
 
-  const { data, isLoading, error, refetch } = useExamQuestion(); // Fetch questions from MongoDB
-
-  // Filter questions when dropdown selection changes
-  useEffect(() => {
-    if (selected.group && selected.subject && selected.chapter && data) {
-      const filtered = data.find(
-        (item) =>
-          item.group === selected.group &&
-          item.subject === selected.subject &&
-          item.chapter === selected.chapter
-      );
-      setQuestionSet(filtered ? filtered.questions : []);
-    }
-  }, [selected, data]);
+  // Dummy Questions
+  const questionSet = [
+    {
+      id: 1,
+      q: "বাংলাদেশের রাজধানী কোথায়?",
+      options: ["ঢাকা", "চট্টগ্রাম", "খুলনা", "সিলেট"],
+      correct: "ঢাকা",
+    },
+    {
+      id: 2,
+      q: "SSC এর পূর্ণরূপ কী?",
+      options: [
+        "Secondary School Certificate",
+        "School Standard Certificate",
+        "Super School Course",
+        "None",
+      ],
+      correct: "Secondary School Certificate",
+    },
+    {
+      id: 3,
+      q: "জাতীয় কবি কে?",
+      options: [
+        "রবীন্দ্রনাথ ঠাকুর",
+        "কাজী নজরুল ইসলাম",
+        "জসীম উদ্দিন",
+        "সেলিম আল দীন",
+      ],
+      correct: "কাজী নজরুল ইসলাম",
+    },
+  ];
 
   const handleAnswer = (ans) => {
-    if (ans === questionSet[currentQ - 1]?.answer) {
+    if (ans === questionSet[currentQ - 1].correct) {
       setScore(score + 1);
     }
     if (currentQ < questionSet.length) {
@@ -38,11 +59,6 @@ const Exampage = () => {
     }
   };
 
-  // Loading or error state
-  if (isLoading) return <p className="text-center mt-6">Loading questions...</p>;
-  if (error) return <p className="text-center mt-6 text-red-500">Failed to load questions</p>;
-
-  // Finished exam view
   if (finished) {
     return (
       <div className="max-w-2xl mx-auto p-6 text-center">
@@ -65,8 +81,7 @@ const Exampage = () => {
     );
   }
 
-  // Exam in progress
-  if (started && questionSet && questionSet.length > 0) {
+  if (started) {
     const q = questionSet[currentQ - 1];
     return (
       <div className="max-w-2xl mx-auto p-6">
@@ -91,7 +106,6 @@ const Exampage = () => {
     );
   }
 
-  // Main page before exam starts
   return (
     <div className="max-w-3xl mx-auto p-6">
       {/* Dropdown Filter Section */}
@@ -99,7 +113,9 @@ const Exampage = () => {
 
       {/* Instructions */}
       <div className="bg-gray-50 p-4 rounded-lg border mb-6">
-        <h3 className="text-red-500 font-bold mb-2">পরীক্ষার্থীদের প্রতি নির্দেশনাবলীঃ</h3>
+        <h3 className="text-red-500 font-bold mb-2">
+          পরীক্ষার্থীদের প্রতি নির্দেশনাবলীঃ
+        </h3>
         <ul className="list-disc pl-5 text-sm space-y-1">
           <li>তোমার প্রস্তুতি অনুযায়ী প্রশ্নের ধরণ সিলেক্ট করো।</li>
           <li>প্রতিটি ভুল উত্তরের জন্য নেগেটিভ মার্ক থাকবে।</li>
@@ -132,7 +148,7 @@ const Exampage = () => {
       {/* Start Button */}
       <button
         className="w-full bg-green-500 text-white py-2 rounded-lg shadow hover:bg-green-600 disabled:opacity-50"
-        disabled={!selected.chapter || !questionSet || questionSet.length === 0}
+        disabled={!selected.chapter}
         onClick={() => setStarted(true)}
       >
         শুরু করি

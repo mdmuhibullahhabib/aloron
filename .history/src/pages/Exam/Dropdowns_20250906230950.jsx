@@ -99,163 +99,31 @@ const subjects = {
 
   },
   মানবিক: {
-    ইংরেজি_১ম: [
-  {
-    unit: "Unit One: Education and Life",
-    lessons: [
-      "Lesson 1: The Parrot's Tale",
-      "Lesson 2: Education and Technology",
-      "Lesson 3: Children in School",
-      "Lesson 4: Civic Engagement"
-    ]
-  },
-  {
-    unit: "Unit Two: Art and Craft",
-    lessons: [
-      "Lesson 1: What is Beauty?",
-      "Lesson 2: Folk Music",
-      "Lesson 3: Art",
-      "Lesson 4: Craft"
-    ]
-  },
-  {
-    unit: "Unit Three: Myths and Literature",
-    lessons: [
-      "Lesson 1: Myths of Bengal",
-      "Lesson 2: Icarus",
-      "Lesson 3: The Legend of Gazi",
-      "Lesson 4: Khona"
-    ]
-  },
-  {
-    unit: "Unit Four: History",
-    lessons: [
-      "Lesson 1: Three Speeches",
-      "Lesson 2: Great Women"
-    ]
-  },
-  {
-    unit: "Unit Five: Human Rights",
-    lessons: [
-      "Lesson 1: Are We Aware of These Rights-I?",
-      "Lesson 2: Are We Aware of These Rights-II?",
-      "Lesson 3: Rights to Health and Education",
-      "Lesson 4: Coal Miners",
-      "Lesson 5: Frederick Douglass"
-    ]
-  },
-  {
-    unit: "Unit Six: Dreams",
-    lessons: [
-      "Lesson 1: What is a Dream?",
-      "Lesson 2: Dreams in Literature"
-    ]
-  },
-  {
-    unit: "Unit Seven: Youthful Achievers",
-    lessons: [
-      "Lesson 1: Brojen Das: On Crossing the English Channel",
-      "Lesson 2: Scaling a Mountain Peak",
-      "Lesson 3: The Unbeaten Girls"
-    ]
-  },
-  {
-    unit: "Unit Eight: Relationships",
-    lessons: [
-      "Lesson 1: Family Relationship",
-      "Lesson 2: Warmth in Relationships",
-      "Lesson 3: A Mother in Mannville",
-      "Lesson 4: Love"
-    ]
-  },
-  {
-    unit: "Unit Nine: Adolescence",
-    lessons: [
-      "Lesson 1: Storm and Stresses of Adolescence",
-      "Lesson 2: Adolescence and Some (Related) Problems in Bangladesh",
-      "Lesson 3: The Story of Shilpi",
-      "Lesson 4: Say 'No' to Bullying"
-    ]
-  },
-  {
-    unit: "Unit Ten: Lifestyle",
-    lessons: [
-      "Lesson 1: Manners around the World",
-      "Lesson 2: Etiquette Netiquette",
-      "Lesson 3: Food and Culture",
-      "Lesson 4: Fitness",
-      "Lesson 5: Consumerism"
-    ]
-  },
-  {
-    unit: "Unit Eleven: Peace and Conflict",
-    lessons: [
-      "Lesson 1: Situations of Conflict",
-      "Lesson 2: \"The Old Man at the Bridge\" by Ernest Hemingway",
-      "Lesson 3: Stories From Gaza",
-      "Lesson 4: Peace in Literature",
-      "Lesson 5: Opinions through images"
-    ]
-  },
-  {
-    unit: "Unit Twelve: Environment and Nature",
-    lessons: [
-      "Lesson 1: Water, Water Everywhere...",
-      "Lesson 2: The Greta Effect",
-      "Lesson 3: Endangered Species",
-      "Lesson 4: What is Environmental Justice?",
-      "Lesson 5: Limits of the Scientific Method"
-    ]
-  }
-],
-    বাংলা_১ম: [
-  {
-    category: "সাহিত্যপাঠ গদ্য",
-    items: [
-      "বাঙ্গালার নব্য লেখকদিগের প্রতি নিবেদন - বঙ্কিমচন্দ্র চট্টোপাধ্যায়",
-      "অপরিচিতা - রবীন্দ্রনাথ ঠাকুর",
-      "সাহিত্যে খেলা - প্রমথ চৌধুরী",
-      "বিলাসী - শরৎচন্দ্র চট্টোপাধ্যায়",
-      "অর্ধাঙ্গী - রোকেয়া সাখাওয়াত হোসেন",
-      "যৌবনের গান - কাজী নজরুল ইসলাম",
-      "জীবন ও বৃক্ষ - মোতাহের হোসেন চৌধুরী",
-      "গন্তব্য কাবুল - সৈয়দ মুজতবা আলী",
-      "মাসি-পিসি - মানিক বন্দ্যোপাধ্যায়",
-      "কপিলদাস মুর্মুর শেষ কাজ - শওকত আলী",
-      "রেইনকোট - আখতারুজ্জামান ইলিয়াস",
-      "নেকলেস - গী দ্য মোপাসাঁ"
-    ]
-  },
-  {
-    category: "সাহিত্যপাঠ কবিতা",
-    items: [
-      "ঋতু-বর্ণন - আলাওল",
-      "বিভীষণের প্রতি মেঘনাদ - মাইকেল মধুসূদন দত্ত",
-      "সোনার তরী - রবীন্দ্রনাথ ঠাকুর",
-      "বিদ্রোহী - কাজী নজরুল ইসলাম",
-      "সুচেতনা - জীবনানন্দ দাশ",
-      "প্রতিদান - জসীমউদ্‌দীন",
-      "তাহারেই পড়ে মনে - সুফিয়া কামাল",
-      "পদ্মা - ফরুখ আহমদ",
-      "ফেব্রুয়ারি ১৯৬৯ - শামসুর রাহমান",
-      "আঠার বছর বয়স - সুকান্ত ভট্টাচার্য",
-      "আমি কিংবদন্তির কথা বলছি - আবু জাফর ওবায়দুল্লাহ্",
-      "প্রত্যাবর্তনের লজ্জা - আল মাহমুদ"
-    ]
-  },
-  {
-    category: "সহপাঠ উপন্যাস",
-    items: [
-      "লালসালু - সৈয়দ ওয়ালীউল্লাহ"
-    ]
-  },
-  {
-    category: "সহপাঠ নাটক",
-    items: [
-      "সিরাজউদ্দৌলা - সিকান্দার আবু জাফর"
-    ]
-  }
-],
+    ইতিহাস: [
+      "অধ্যায় ১: প্রাচীন সভ্যতা",
+      "অধ্যায় ২: মধ্যযুগ",
+      "অধ্যায় ৩: বাংলাদেশ",
+    ],
+    ইতিহাস: [
+      "অধ্যায় ১: প্রাচীন সভ্যতা",
+      "অধ্যায় ২: মধ্যযুগ",
+      "অধ্যায় ৩: বাংলাদেশ",
+    ],
+    রাষ্ট্রবিজ্ঞান: [
+      "অধ্যায় ১: রাষ্ট্র",
+      "অধ্যায় ২: সরকার",
+      "অধ্যায় ৩: সংবিধান",
+    ],
+    অর্থনীতি: [
+      "অধ্যায় ১: মৌলিক ধারণা",
+      "অধ্যায় ২: চাহিদা ও জোগান",
+      "অধ্যায় ৩: জাতীয় আয়",
+    ],
+    ভূগোল: [
+      "অধ্যায় ১: ভৌগোলিক মানচিত্র",
+      "অধ্যায় ২: জলবায়ু",
+      "অধ্যায় ৩: পরিবেশ ও সম্পদ",
+    ],
   },
   বাণিজ্য: {
     হিসাববিজ্ঞান: [
