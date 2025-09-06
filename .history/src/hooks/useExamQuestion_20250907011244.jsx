@@ -5,14 +5,16 @@ import useAxiosSecure from './useAxiosSecure';
 const useExamQuestion = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data, refetch } = useQuery({
+    const { data: questionSet = [], refetch } = useQuery({
         queryKey: ['questions'],
         queryFn: async () => {
             const res = await axiosSecure.get('/questions')
             return res.data;
         }
     })
-    return [data, refetch]
+      console.log(questionSet)
+
+    return [questionSet:, refetch]
 };
 
 export default useExamQuestion;

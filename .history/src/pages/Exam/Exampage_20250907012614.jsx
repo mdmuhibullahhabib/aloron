@@ -12,7 +12,7 @@ const Exampage = () => {
   const [selected, setSelected] = useState({ group: "", subject: "", chapter: "" });
   const [questionSet, setQuestionSet] = useState([]);
   
-  const [ data, isLoading, refetch ] = useExamQuestion(selected);
+  const { data, isLoading, refetch ] = useExamQuestion(selected);
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
 
@@ -69,7 +69,7 @@ const Exampage = () => {
     return `${m}:${s}`;
   };
 
-  // if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
+  if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
 
   if (finished) {
     return (

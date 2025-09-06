@@ -69,7 +69,7 @@ const Exampage = () => {
     return `${m}:${s}`;
   };
 
-  // if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
+  if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
 
   if (finished) {
     return (

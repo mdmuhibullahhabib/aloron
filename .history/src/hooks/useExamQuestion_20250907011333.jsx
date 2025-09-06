@@ -12,7 +12,9 @@ const useExamQuestion = () => {
             return res.data;
         }
     })
-    return [data, refetch]
+      console.log(data)
+
+    return [questionSet, refetch]
 };
 
 export default useExamQuestion;

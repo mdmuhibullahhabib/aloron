@@ -12,6 +12,8 @@ const useExamQuestion = () => {
             return res.data;
         }
     })
+      console.log(data)
+
     return [data, refetch]
 };
 
