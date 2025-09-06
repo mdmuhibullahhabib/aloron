@@ -1,0 +1,62 @@
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
+import { FaChevronDown } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useCourses from "../../../hooks/useCourses";
+
+const EnrolledCourses = () => {
+  const [expandedCourse, setExpandedCourse] = useState(null);
+  const [courses, refetch] = useCourses();
+  const axiosSecure = useAxiosSecure()
+  const {user} = useAuth();
+
+    const { data: enrolledCourse = [] } = useQuery({
+    queryKey: ['enrolled', user?.email],
+    queryFn: async () => {
+      if (!user?.email) return [];
+      const res = await axiosSecure.get(`/enrolled?email=${user?.email}`);
+      return res.data;
+    },
+  });
+  console.log(enrolledCourse)
+
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Enrolled Courses</h2>
+      {courses.map((course) => (
+        <div key={course.id} className="bg-white p-4 rounded-lg shadow mb-4">
+          <button
+            className="flex justify-between w-full items-center text-left"
+            onClick={() =>
+              setExpandedCourse(expandedCourse === course.id ? null : course.id)
+            }
+          >
+            <div>
+              <h3 className="font-semibold">{course.title}</h3>
+              <p className="text-gray-600 text-sm">Progress: {course.progress}</p>
+            </div>
+            <FaChevronDown
+              className={`transition-transform ${
+                expandedCourse === course.id ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+
+          {expandedCourse === course.id && (
+            <ul className="mt-3 pl-4 text-sm text-gray-700">
+              {course.lessons.map((lesson) => (
+                <li key={lesson.id} className="border-b py-1">
+                  {lesson.title} - {lesson.status}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default EnrolledCourses;
