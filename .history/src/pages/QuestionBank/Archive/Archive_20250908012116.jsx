@@ -30,7 +30,7 @@ const cardData = {
   ]
 };
 
-const tabs = ['all', 'subject-based', 'institution-based'];
+const tabs = ['all', 'model-test', 'subject-based', 'institution-based'];
 
 const Archive = () => {
   const [activeTab, setActiveTab] = useState('all');

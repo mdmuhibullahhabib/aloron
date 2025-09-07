@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 // Cards data
 const cardData = {
+
   'subject-based': [
     { id: 5, title: 'বাংলা', subtitle: '১ম পত্র', path: 'bangla-1', color: '#f97316' },
     { id: 6, title: 'বাংলা', subtitle: '২য় পত্র', path: 'bangla-2', color: '#ca8a04' },
@@ -30,7 +31,7 @@ const cardData = {
   ]
 };
 
-const tabs = ['all', 'subject-based', 'institution-based'];
+const tabs = ['all', 'model-test', 'subject-based', 'institution-based'];
 
 const Archive = () => {
   const [activeTab, setActiveTab] = useState('all');
