@@ -1,7 +1,7 @@
 // Archive.jsx
 import React, { useState } from 'react';
 import { MdOutlineSearch } from 'react-icons/md';
-import Faculty from './Faculty';
+import Faculty from './Faculty/Faculty';
 import { Link } from 'react-router-dom';
 
 // Cards data
@@ -41,6 +41,7 @@ const tabs = ['all', 'model-test', 'subject-based', 'institution-based'];
 const Archive = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [selectedInstitution, setSelectedInstitution] = useState(null);
+  const navigate = use
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -92,7 +93,7 @@ const Archive = () => {
                 key={idx}
                 className="p-6 rounded-3xl shadow-lg cursor-pointer hover:scale-105 transition transform"
                 style={{ backgroundColor: card.color }}
-                onClick={() => setSelectedInstitution(card.institution)}
+                onClick={() => navigate(`/faculty/${card.institution}`)}
               >
                 <h3 className="text-white text-lg font-semibold">{card.title}</h3>
                 <p className="text-white opacity-90">{card.subtitle}</p>

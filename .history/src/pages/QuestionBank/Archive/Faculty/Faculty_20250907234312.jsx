@@ -1,7 +1,7 @@
 // Archive.jsx
 import React, { useState } from 'react';
 import { MdOutlineSearch } from 'react-icons/md';
-import Faculty from './Faculty';
+import Faculty from './Faculty/Faculty';
 import { Link } from 'react-router-dom';
 
 // Cards data

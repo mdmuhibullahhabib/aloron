@@ -1,8 +1,11 @@
-// Archive.jsx
+
+
 import React, { useState } from 'react';
 import { MdOutlineSearch } from 'react-icons/md';
-import Faculty from './Faculty';
+import Faculty from './Faculty/Faculty';
 import { Link } from 'react-router-dom';
+// import ArchiveCard from './components/ArchiveCard';
+// import Faculty from './Faculty';
 
 // Cards data
 const cardData = {
@@ -10,7 +13,7 @@ const cardData = {
     { id: 1, title: 'বিবরণী ২৫', subtitle: 'প্রাইভেট এডমিশন', path: 'bibrani-25-private', color: '#8b5cf6' },
     { id: 2, title: 'বিবরণী ২৫', subtitle: 'ফিজিক্যাল এডমিশন', path: 'bibrani-25-physical', color: '#10b981' },
     { id: 3, title: 'এইচএসসি ২৫', subtitle: 'কুইজ এন্ড এডমিশন', path: 'hsc-25-quiz', color: '#ef4444' },
-    { id: 4, title: 'ঢাকা কেন্দ্রীয়', subtitle: 'বিশ্ববিদ্যালয়', path: 'du', color: '#3b82f6', institution: 'du' },
+    { id: 4, title: 'ঢাকা কেন্দ্রীয়', subtitle: 'বিশ্ববিদ্যালয়', path: 'dhaka-central', color: '#3b82f6' },
   ],
   'subject-based': [
     { id: 5, title: 'বাংলা', subtitle: '১ম পত্র', path: 'bangla-1', color: '#f97316' },
@@ -23,34 +26,30 @@ const cardData = {
     { id: 12, title: 'রসায়ন', subtitle: '১ম পত্র', path: 'chemistry-1', color: '#ef4444' },
   ],
   'institution-based': [
-    { id: 13, title: 'মেডিকেল ও ডেন্টাল', subtitle: 'প্রাইভেট', path: 'medical', color: '#4d7c0f', institution: 'medical' },
-    { id: 14, title: 'জাতীয় বিশ্ববিদ্যালয়', subtitle: 'এডমিশন', path: 'national-university', color: '#a855f7', institution: 'national-university' },
-    { id: 15, title: 'সাত কলেজ', subtitle: 'ভাইভা', path: 'sat-college', color: '#8b5cf6', institution: 'sat-college' },
-    { id: 16, title: 'বিইউপি', subtitle: 'এডমিশন', path: 'bup', color: '#10b981', institution: 'bup' },
-    { id: 17, title: 'মেরিটাইম', subtitle: 'এডমিশন', path: 'maritime', color: '#3b82f6', institution: 'maritime' },
-    { id: 18, title: 'বুয়েট', subtitle: 'প্রস্তুতি', path: 'buet', color: '#ef4444', institution: 'buet' },
-    { id: 19, title: 'গুচ্ছ ইঞ্জিনিয়ারিং', subtitle: 'প্রস্তুতি', path: 'cluster-engineering', color: '#f97316', institution: 'cluster-engineering' },
-    { id: 20, title: 'রুয়েট', subtitle: 'এডমিশন', path: 'ruet', color: '#ca8a04', institution: 'ruet' },
-    { id: 21, title: 'কুয়েট', subtitle: 'এডমিশন', path: 'kuet', color: '#4d7c0f', institution: 'kuet' },
-    { id: 22, title: 'চুয়েট', subtitle: 'এডমিশন', path: 'cuet', color: '#a855f7', institution: 'cuet' },
+    { id: 13, title: 'মেডিকেল ও ডেন্টাল', subtitle: 'প্রাইভেট', path: 'medical', color: '#4d7c0f' },
+    { id: 14, title: 'জাতীয় বিশ্ববিদ্যালয়', subtitle: 'এডমিশন', path: 'national-university', color: '#a855f7' },
+    { id: 15, title: 'সাত কলেজ', subtitle: 'ভাইভা', path: 'sat-college', color: '#8b5cf6' },
+    { id: 16, title: 'বিইউপি', subtitle: 'এডমিশন', path: 'bup', color: '#10b981' },
+    { id: 17, title: 'মেরিটাইম', subtitle: 'এডমিশন', path: 'maritime', color: '#3b82f6' },
+    { id: 18, title: 'বুয়েট', subtitle: 'প্রস্তুতি', path: 'buet', color: '#ef4444' },
+    { id: 19, title: 'গুচ্ছ ইঞ্জিনিয়ারিং', subtitle: 'প্রস্তুতি', path: 'cluster-engineering', color: '#f97316' },
+    { id: 20, title: 'রুয়েট', subtitle: 'এডমিশন', path: 'ruet', color: '#ca8a04' },
+    { id: 21, title: 'কুয়েট', subtitle: 'এডমিশন', path: 'kuet', color: '#4d7c0f' },
+    { id: 22, title: 'চুয়েট', subtitle: 'এডমিশন', path: 'cuet', color: '#a855f7' },
   ]
 };
 
+// Tabs details
 const tabs = ['all', 'model-test', 'subject-based', 'institution-based'];
 
 const Archive = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [selectedInstitution, setSelectedInstitution] = useState(null);
 
+  console.log(first)
   const handleTabClick = (tab) => {
     setActiveTab(tab);
-    setSelectedInstitution(null);
-  };
-
-  const getCards = () => {
-    return activeTab === 'all'
-      ? Object.values(cardData).flat()
-      : cardData[activeTab] || [];
+    setSelectedInstitution(null); // reset institution selection
   };
 
   return (
@@ -81,33 +80,29 @@ const Archive = () => {
         ))}
       </div>
 
-      {/* Show Faculty if institution selected */}
+      {/* Content */}
       {activeTab === 'institution-based' && selectedInstitution ? (
         <Faculty institution={selectedInstitution} />
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {getCards().map((card, idx) => (
-            activeTab === 'institution-based' ? (
-              <div
-                key={idx}
-                className="p-6 rounded-3xl shadow-lg cursor-pointer hover:scale-105 transition transform"
-                style={{ backgroundColor: card.color }}
-                onClick={() => setSelectedInstitution(card.institution)}
-              >
-                <h3 className="text-white text-lg font-semibold">{card.title}</h3>
-                <p className="text-white opacity-90">{card.subtitle}</p>
-              </div>
-            ) : (
-              <Link
-                to={`/question-bank/${card.path}`}
-                key={idx}
-                className="p-6 rounded-3xl shadow-lg cursor-pointer hover:scale-105 transition transform"
-                style={{ backgroundColor: card.color }}
-              >
-                <h3 className="text-white text-lg font-semibold">{card.title}</h3>
-                <p className="text-white opacity-90">{card.subtitle}</p>
-              </Link>
-            )
+          {(activeTab === 'all'
+            ? Object.values(cardData).flat()
+            : cardData[activeTab] || []
+          ).map(card => (
+            <Link
+              to={`/question-bank/${card.path}`}
+              key={card.id}
+              className="p-6 rounded-3xl shadow-lg cursor-pointer hover:scale-105 transition transform"
+              style={{ backgroundColor: card.color }}
+                     onClick={() => {
+              if (activeTab === 'institution-based') {
+                setSelectedInstitution(card.path); // এখানে path ব্যবহার করে institution সেট হবে
+              }
+            }}
+            >
+              <h3 className="text-white text-lg font-semibold">{card.title}</h3>
+              <p className="text-white opacity-90">{card.subtitle}</p>
+            </Link>
           ))}
         </div>
       )}
@@ -116,3 +111,5 @@ const Archive = () => {
 };
 
 export default Archive;
+
+

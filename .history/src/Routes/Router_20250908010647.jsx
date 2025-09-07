@@ -13,7 +13,7 @@ import Community from '../pages/QuestionBank/Community/Community';
 import Archive from '../pages/QuestionBank/Archive/Archive';
 import Faculty from '../pages/QuestionBank/Archive/Faculty';
 import Exam from '../pages/QuestionBank/Archive/Exam';
-import FacultyExam from '../pages/QuestionBank/Archive/FacultyExam';
+import FacultyExam from '../pages/QuestionBank/Archive/FacultyExam/FacultyExam';
 import Practice from '../pages/QuestionBank/Practice/Practice';
 import SignIn from '../pages/Auth/SignIn';
 import SignUp from '../pages/Auth/SignUp';
