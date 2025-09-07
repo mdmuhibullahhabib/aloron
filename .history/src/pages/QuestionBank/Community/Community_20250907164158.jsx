@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaHeart, FaComment, FaShareAlt } from "react-icons/fa";
-import PostData from "./components/PostData";
+import PostForm from "./PostForm";
 
 // Sample initial data
 const initialPosts = [
@@ -84,7 +84,7 @@ const Community = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
       {/* Post Form */}
-      <PostData onPost={addPost} />
+      <PostForm onPost={addPost} />
 
       {/* Posts Feed */}
       {posts.map((post) => (

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FaHeart, FaComment, FaShareAlt } from "react-icons/fa";
-import PostData from "./components/PostData";
 
 // Sample initial data
 const initialPosts = [
