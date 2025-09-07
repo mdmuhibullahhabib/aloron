@@ -14,7 +14,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
 
   const axiosSecure = useAxiosSecure();
 
-  // React Query to fetch filtered questions
+  // Fetch filtered questions
   const { data, isLoading, isError } = useQuery({
     queryKey: ["questions", subjectId, paperId, chapter],
     queryFn: async () => {
@@ -22,12 +22,12 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
       const res = await axiosSecure.get(
         `/practice-questions?subject=${subjectId}&paper=${paperId}&chapter=${chapter}`
       );
-      return res.data;
+      return res.data.map(q => ({ ...q, userAnswer: null })); // add userAnswer field
     },
     enabled: !!subjectId && !!paperId && !!chapter,
   });
 
-  // Update local state when query data changes
+  // Set questions when data arrives
   useEffect(() => {
     if (data?.length) {
       setQuestions(data);
@@ -42,18 +42,10 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
     if (showAnswer || questions.length === 0) return;
 
     const interval = setInterval(() => {
-      setTimer((prev) => {
+      setTimer(prev => {
         if (prev <= 1) {
           clearInterval(interval);
-          // Auto-submit when timeout
-          setQuestions((prev) =>
-            prev.map((q, i) =>
-              i === currentQuestionIndex && !q.userAnswer
-                ? { ...q, userAnswer: "timeout" }
-                : q
-            )
-          );
-          setShowAnswer(true);
+          handleTimeOut();
           return 0;
         }
         return prev - 1;
@@ -63,21 +55,35 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
     return () => clearInterval(interval);
   }, [currentQuestionIndex, showAnswer, questions.length]);
 
-  // Handle option selection
+  // When student selects an option
   const handleSelectOption = (questionId, selectedOption) => {
-    setQuestions((prev) =>
-      prev.map((q) =>
+    setQuestions(prev =>
+      prev.map(q =>
         q._id === questionId ? { ...q, userAnswer: selectedOption } : q
       )
     );
     setShowAnswer(true);
   };
 
-  // Handle next question
+  // Handle when timer runs out
+  const handleTimeOut = () => {
+    const currentQ = questions[currentQuestionIndex];
+    if (!currentQ.userAnswer) {
+      // mark as wrong if not answered
+      setQuestions(prev =>
+        prev.map((q, i) =>
+          i === currentQuestionIndex ? { ...q, userAnswer: "timeout" } : q
+        )
+      );
+    }
+    setShowAnswer(true);
+  };
+
+  // Go to next question
   const handleNextQuestion = () => {
     setShowAnswer(false);
     setTimer(30);
-    setCurrentQuestionIndex((prev) => (prev + 1) % questions.length);
+    setCurrentQuestionIndex(prev => (prev + 1) % questions.length);
   };
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -102,9 +108,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
 
       {/* Loading/Error */}
       {isLoading && <p className="text-gray-400">লোড হচ্ছে...</p>}
-      {isError && (
-        <p className="text-red-500">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>
-      )}
+      {isError && <p className="text-red-500">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>}
 
       {/* Questions */}
       {questions.length > 0 && !isLoading && !isError ? (

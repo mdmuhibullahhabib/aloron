@@ -14,7 +14,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
 
   const axiosSecure = useAxiosSecure();
 
-  // React Query to fetch filtered questions
+  // Fetch filtered questions using React Query
   const { data, isLoading, isError } = useQuery({
     queryKey: ["questions", subjectId, paperId, chapter],
     queryFn: async () => {
@@ -45,14 +45,6 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
       setTimer((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          // Auto-submit when timeout
-          setQuestions((prev) =>
-            prev.map((q, i) =>
-              i === currentQuestionIndex && !q.userAnswer
-                ? { ...q, userAnswer: "timeout" }
-                : q
-            )
-          );
           setShowAnswer(true);
           return 0;
         }
@@ -81,8 +73,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
   };
 
   const currentQuestion = questions[currentQuestionIndex];
-  const isCorrect =
-    currentQuestion?.userAnswer === currentQuestion?.correct;
+  const isCorrect = currentQuestion?.userAnswer === currentQuestion?.correct;
 
   return (
     <div className="p-8 min-h-screen bg-[#1a1e2a] text-white flex flex-col items-center">
@@ -102,9 +93,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
 
       {/* Loading/Error */}
       {isLoading && <p className="text-gray-400">লোড হচ্ছে...</p>}
-      {isError && (
-        <p className="text-red-500">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>
-      )}
+      {isError && <p className="text-red-500">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>}
 
       {/* Questions */}
       {questions.length > 0 && !isLoading && !isError ? (

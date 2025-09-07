@@ -1,5 +1,5 @@
 import React from "react";
-import { subjectsData } from "./subjectsData";
+import { subjectsData } from "../../data/subjectsData";
 
 const PracticeDashboard = ({ onSubjectSelect }) => {
   return (

@@ -34,7 +34,7 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
             <button
               key={i}
               className={buttonClass}
-              onClick={() => onSelectOption(question._id, option)}
+              onClick={() => onSelectOption(question.id, option)}
               disabled={showAnswer}
             >
               {option}

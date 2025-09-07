@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from "react";
+import QuestionCard from "./QuestionCard";
+import TimerBar from "./TimerBar";
+import AnswerStatus from "./AnswerStatus";
+import NavigationButtons from "./NavigationButtons";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+
+const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [timer, setTimer] = useState(30);
+  const axiosSecure = useAxiosSecure();
+
+  // MongoDB থেকে প্রশ্ন লোড করা
+  const { data: practiceQuestion = [], isLoading } = useQuery({
+    queryKey: ["questions", subjectId, paperId, chapter],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/questions?subject=${subjectId}&paper=${paperId}&chapter=${chapter}`
+      );
+      return res.data;
+    },
+  });
+
+  // Filter করা questions
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    if (practiceQuestion.length > 0) {
+      // userAnswer null সেট করা যাতে MCQ কাজ করে
+      const initialized = practiceQuestion.map((q) => ({
+        ...q,
+        userAnswer: null,
+      }));
+      setQuestions(initialized);
+    }
+  }, [practiceQuestion]);
+
+  // Timer effect
+  useEffect(() => {
+    if (showAnswer) return;
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          setShowAnswer(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [currentQuestionIndex, showAnswer]);
+
+  const handleSelectOption = (questionId, selectedOption) => {
+    setQuestions((prev) =>
+      prev.map((q) =>
+        q._id === questionId ? { ...q, userAnswer: selectedOption } : q
+      )
+    );
+    setShowAnswer(true);
+  };
+
+  const handleNextQuestion = () => {
+    setShowAnswer(false);
+    setTimer(30);
+    setCurrentQuestionIndex(
+      (prevIndex) => (prevIndex + 1) % questions.length
+    );
+  };
+
+  const handleUnlockExplanation = () => {
+    alert("This would unlock the explanation in a real app!");
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        Loading questions...
+      </div>
+    );
+  }
+
+  if (!questions.length) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        No questions found for {subjectId} / {paperId} / {chapter}
+      </div>
+    );
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const isCorrect = currentQuestion.userAnswer === currentQuestion.correct;
+
+  return (
+    <div className="p-8 text-white bg-[#1a1e2a] min-h-screen font-sans flex flex-col items-center">
+      {/* Header */}
+      <div className="w-full flex justify-between items-center mb-6">
+        <button
+          onClick={onGoBack}
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#2e3445] text-gray-400 hover:bg-[#3e4555] transition-colors"
+        >
+          ←
+        </button>
+        <div className="text-2xl font-bold text-gray-200">
+          {subjectId} / {paperId} / {chapter}
+        </div>
+        <div className="w-10 h-10"></div>
+      </div>
+
+      {/* Timer */}
+      <div className="w-full max-w-2xl">
+        <TimerBar timer={timer} />
+
+        {/* Status */}
+        <div className="flex justify-between items-center mb-4">
+          <AnswerStatus showAnswer={showAnswer} isCorrect={isCorrect} />
+        </div>
+
+        {/* Question */}
+        <QuestionCard
+          question={currentQuestion}
+          onSelectOption={handleSelectOption}
+          isCorrect={isCorrect}
+          showAnswer={showAnswer}
+        />
+
+        {/* Buttons */}
+        {showAnswer && (
+          <NavigationButtons
+            onNext={handleNextQuestion}
+            onUnlock={handleUnlockExplanation}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default MCQPage;
