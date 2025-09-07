@@ -9,7 +9,7 @@ import PostCard from './components/PostCard';
 const Community = () => {
   const [posts, refetch] = useCommunity()
 
-  console.log(posts)
+console.log(posts)
 
 
   return (
@@ -21,7 +21,7 @@ const Community = () => {
       {/* Posts Feed */}
       {posts.map((post) => (
         <div key={post._id} className="bg-white rounded-xl shadow-lg p-6 mb-6">
-          <PostCard post={post}></PostCard>
+<PostCard post={post}></PostCard>
         </div>
       ))}
     </div>

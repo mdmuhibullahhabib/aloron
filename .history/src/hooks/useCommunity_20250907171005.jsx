@@ -5,7 +5,7 @@ import useAxiosSecure from './useAxiosSecure';
 const useCommunity = () => {
     const axiosSecure = useAxiosSecure();
 
-    const { data: posts = [], refetch } = useQuery({
+    const { data: posts= [], refetch } = useQuery({
         queryKey: ['community'],
         queryFn: async () => {
             const res = await axiosSecure.get('/community')
