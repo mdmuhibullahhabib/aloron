@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PostForm from './components/PostForm';
+import PostData from './components/PostForm';
 import useCommunity from '../../../hooks/useCommunity';
 import PostCard from './components/PostCard';
 
