@@ -15,7 +15,7 @@ const ArchiveDashboard = () => {
         {/* Main Routing */}
         <Routes>
           <Route path="/" element={<Archive />} />
-          <Route path="/faculty/:institution" element={<Faculty />} />
+          <Route path="/question/:institution" element={<Faculty />} />
           <Route path="/faculty-exam" element={<FacultyExam />} />
           <Route path="/exam" element={<Exam />} />
           <Route path="/question-bank/:questionSet" element={<QuestionPage />} />

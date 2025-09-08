@@ -1,0 +1,139 @@
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
+
+const Faculty = ({ institution }) => {
+  const {institution} = useParams()
+  console.log("Selected Institution:", institution);
+  console.log("Selected params:", institution);
+
+const facultiesData = {
+  du: [
+    { title: "Unit A", subtitle: "Science", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Commerce", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Business Studies", color: "#10b981" },
+  ],
+  ru: [
+    { title: "Unit A", subtitle: "Science", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Commerce", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Business Studies", color: "#10b981" },
+    { title: "Unit E", subtitle: "Engineering", color: "#a855f7" },
+  ],
+  ju: [
+    { title: "Unit A", subtitle: "Science", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Commerce", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Business Studies", color: "#10b981" },
+    { title: "Unit E", subtitle: "Engineering", color: "#a855f7" },
+    { title: "Unit F", subtitle: "Medical", color: "#4d7c0f" },
+    { title: "Unit G", subtitle: "Agriculture", color: "#6366f1" },
+  ],
+  cu: [
+    { title: "Unit A", subtitle: "Science", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Commerce", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Engineering", color: "#10b981" },
+  ],
+  jnu: [
+    { title: "Unit A", subtitle: "Science", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Commerce", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Engineering", color: "#10b981" },
+  ],
+  agri: [
+    { title: "Unit A", subtitle: "Agriculture", color: "#4d7c0f" },
+  ],
+  sust: [
+    { title: "Unit A", subtitle: "Science & Engineering", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Arts & Commerce", color: "#ef4444" },
+  ],
+  bup: [
+    { title: "Business", subtitle: "BBA Program", color: "#10b981" },
+    { title: "Public Administration", subtitle: "BPA Program", color: "#f97316" },
+    { title: "Law", subtitle: "LLB Program", color: "#3b82f6" },
+    { title: "Economics", subtitle: "BEP Program", color: "#a855f7" },
+  ],
+  maritime: [
+    { title: "Navigation", subtitle: "Marine Studies", color: "#3b82f6" },
+    { title: "Engineering", subtitle: "Ship Engineering", color: "#ef4444" },
+    { title: "Logistics", subtitle: "Maritime Management", color: "#f59e0b" },
+    { title: "Safety", subtitle: "Marine Safety", color: "#10b981" },
+  ],
+  buet: [
+    { title: "Civil Engineering", subtitle: "BUET", color: "#3b82f6" },
+    { title: "Electrical Engineering", subtitle: "BUET", color: "#ef4444" },
+    { title: "Mechanical Engineering", subtitle: "BUET", color: "#f59e0b" },
+    { title: "Computer Science", subtitle: "BUET", color: "#10b981" },
+    { title: "Architecture", subtitle: "BUET", color: "#a855f7" },
+  ],
+  "combined-engineering": [
+    { title: "Engineering Unit 1", subtitle: "Combined", color: "#3b82f6" },
+    { title: "Engineering Unit 2", subtitle: "Combined", color: "#ef4444" },
+    { title: "Engineering Unit 3", subtitle: "Combined", color: "#f59e0b" },
+    { title: "Engineering Unit 4", subtitle: "Combined", color: "#10b981" },
+  ],
+  ruet: [
+    { title: "Unit A", subtitle: "Engineering", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Engineering", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Engineering", color: "#f59e0b" },
+  ],
+  kuet: [
+    { title: "Unit A", subtitle: "Engineering", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Engineering", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Engineering", color: "#f59e0b" },
+  ],
+  cuet: [
+    { title: "Unit A", subtitle: "Engineering", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Engineering", color: "#ef4444" },
+    { title: "Unit C", subtitle: "Engineering", color: "#f59e0b" },
+    { title: "Unit D", subtitle: "Engineering", color: "#10b981" },
+  ],
+  iut: [
+    { title: "Unit A", subtitle: "Engineering", color: "#3b82f6" },
+    { title: "Unit B", subtitle: "Engineering", color: "#ef4444" },
+  ],
+  medical: [
+    { title: "Medicine", subtitle: "MBBS", color: "#4d7c0f" },
+  ],
+  dental: [
+    { title: "Dentistry", subtitle: "BDS", color: "#a855f7" },
+  ],
+  afmc: [
+    { title: "AFMC Unit", subtitle: "Medical Studies", color: "#10b981" },
+  ]
+};
+
+
+  const faculties = facultiesData[institution] || [];
+
+  return (
+    <div className="mt-6">
+      <h2 className="text-2xl font-bold mb-6">
+        {faculties.length > 0
+          ? `Faculties for ${institution?.toUpperCase()}`
+          : "কোনো ডাটা পাওয়া যায়নি"}
+      </h2> 
+
+      {faculties.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {faculties.map((faculty, idx) => (
+            <Link
+              key={idx}
+              to={`/question-bank/${faculty.title.toLowerCase().replace(/\s+/g, '-')}`}
+              className="p-6 rounded-3xl shadow-lg cursor-pointer hover:scale-105 transition transform"
+              style={{ backgroundColor: faculty.color }}
+            >
+              <h3 className="text-white text-lg font-semibold">{faculty.title}</h3>
+              <p className="text-white opacity-90">{faculty.subtitle}</p>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="text-gray-500">এই ইনস্টিটিউশনের কোনো ফ্যাকাল্টি পাওয়া যায়নি।</p>
+      )}
+    </div>
+  );
+};
+
+export default Faculty;
