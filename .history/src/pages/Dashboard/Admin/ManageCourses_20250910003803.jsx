@@ -11,11 +11,10 @@ import {
   FaMoneyBillWave,
   FaStar,
   FaCopy,
-  FaInfoCircle,
   FaCheckCircle,
   FaTimesCircle,
-  FaSearch,
   FaFilter,
+  FaSearch,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -25,12 +24,11 @@ const ManageCourses = () => {
       id: "c1",
       title: "পদার্থবিজ্ঞান MCQ কোর্স",
       subject: "Physics",
-      teacher: "Rahim Uddin",
       description: "পদার্থবিজ্ঞান ১ম পত্রের MCQ প্রস্তুতি।",
       duration: "৩ মাস",
       price: 500,
       level: "HSC",
-      status: "Published",
+      status: "Pending", // Pending | Published | Draft | Rejected
       students: 120,
       revenue: 60000,
       rating: 4.5,
@@ -38,17 +36,17 @@ const ManageCourses = () => {
         { chapter: "অধ্যায় ১: ভৌত রাশি ও পরিমাপ", mcqs: 40 },
         { chapter: "অধ্যায় ২: ভেক্টর", mcqs: 30 },
       ],
+      studentList: ["Ali Hasan", "Nusrat Jahan", "Rafiq Islam"],
     },
     {
       id: "c2",
       title: "রসায়ন MCQ কোর্স",
       subject: "Chemistry",
-      teacher: "Karim Hossain",
       description: "রসায়ন ২য় পত্রের MCQ প্র্যাকটিস।",
       duration: "২ মাস",
       price: 400,
       level: "Admission",
-      status: "Pending",
+      status: "Published",
       students: 80,
       revenue: 32000,
       rating: 4.2,
@@ -56,20 +54,31 @@ const ManageCourses = () => {
         { chapter: "অধ্যায় ১: পরমাণুর গঠন", mcqs: 25 },
         { chapter: "অধ্যায় ২: পর্যায় সারণি", mcqs: 20 },
       ],
+      studentList: ["Shimul Roy", "Farhana Akter"],
     },
   ]);
 
-  const [selectedCurriculum, setSelectedCurriculum] = useState(null);
-  const [selectedDetails, setSelectedDetails] = useState(null);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  // Filter + Search
+  const filteredCourses = courses.filter(
+    (c) =>
+      (filter ? c.status === filter : true) &&
+      (search
+        ? c.title.toLowerCase().includes(search.toLowerCase()) ||
+          c.subject.toLowerCase().includes(search.toLowerCase()) ||
+          c.level.toLowerCase().includes(search.toLowerCase())
+        : true)
+  );
 
   // Approve course
   const handleApprove = (id) => {
     setCourses((prev) =>
       prev.map((c) => (c.id === id ? { ...c, status: "Published" } : c))
     );
-    toast.success("✅ কোর্স এপ্রুভ হয়েছে");
+    toast.success("✅ কোর্স এপ্রুভড হয়েছে");
   };
 
   // Reject course
@@ -77,7 +86,7 @@ const ManageCourses = () => {
     setCourses((prev) =>
       prev.map((c) => (c.id === id ? { ...c, status: "Rejected" } : c))
     );
-    toast.error("❌ কোর্স রিজেক্ট হয়েছে");
+    toast.error("❌ কোর্স রিজেক্ট হয়েছে");
   };
 
   // Toggle publish/unpublish
@@ -104,7 +113,7 @@ const ManageCourses = () => {
   // Edit course
   const handleEdit = (course) => {
     toast(`✏️ ${course.title} এডিট মোডে খোলা হয়েছে`);
-    // TODO: open modal with form
+    // TODO: open modal form
   };
 
   // Duplicate course
@@ -120,29 +129,18 @@ const ManageCourses = () => {
   };
 
   // View students
-  const handleViewStudents = (title) => {
-    toast.success(`${title} কোর্সের শিক্ষার্থীদের দেখা যাবে`);
+  const handleViewStudents = (course) => {
+    setSelectedCourse(course);
   };
-
-  // Filter + Search
-  const filteredCourses = courses.filter(
-    (c) =>
-      (filter ? c.status === filter : true) &&
-      (search
-        ? c.title.toLowerCase().includes(search.toLowerCase()) ||
-          c.subject.toLowerCase().includes(search.toLowerCase()) ||
-          c.teacher.toLowerCase().includes(search.toLowerCase())
-        : true)
-  );
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="text-2xl font-bold mb-6 text-green-600 text-center">
-        📚 Manage Courses (Admin)
+        📊 Manage Courses (Admin)
       </h2>
 
-      {/* Filter & Search */}
+      {/* Filter + Search */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 mb-6">
         <div className="flex items-center gap-2">
           <FaFilter />
@@ -162,7 +160,7 @@ const ManageCourses = () => {
           <FaSearch />
           <input
             type="text"
-            placeholder="Search by title, subject, teacher"
+            placeholder="Search by title, subject, level"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="input input-bordered input-sm"
@@ -171,7 +169,7 @@ const ManageCourses = () => {
       </div>
 
       {filteredCourses.length === 0 ? (
-        <p className="text-center text-gray-500">কোনো কোর্স পাওয়া যায়নি।</p>
+        <p className="text-center text-gray-500">কোন কোর্স পাওয়া যায়নি।</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCourses.map((course) => (
@@ -184,22 +182,27 @@ const ManageCourses = () => {
                 <FaBookOpen className="text-green-600" /> {course.title}
               </h3>
 
+              {/* Subject & Info */}
               <p className="text-sm text-gray-600">
                 বিষয়: <span className="font-semibold">{course.subject}</span>
               </p>
-              <p className="text-sm text-gray-600">শিক্ষক: {course.teacher}</p>
               <p className="text-sm text-gray-600">লেভেল: {course.level}</p>
               <p className="text-sm text-gray-500 line-clamp-2 my-2">
                 {course.description}
               </p>
 
+              {/* Duration & Price */}
               <p className="text-sm text-gray-600">⏳ মেয়াদ: {course.duration}</p>
               <p className="text-sm text-gray-600">💰 ফি: {course.price} টাকা</p>
+
+              {/* Rating */}
               <p className="text-sm text-yellow-600 flex items-center gap-1 mb-2">
                 <FaStar /> {course.rating} ⭐
               </p>
+
+              {/* Revenue */}
               <p className="text-sm text-green-700 flex items-center gap-1 mb-3">
-                <FaMoneyBillWave /> মোট আয়: {course.revenue} টাকা
+                <FaMoneyBillWave /> আয়: {course.revenue} টাকা
               </p>
 
               {/* Status */}
@@ -217,14 +220,14 @@ const ManageCourses = () => {
                 {course.status}
               </span>
 
+              {/* Students */}
               <p className="text-sm text-gray-600 mb-3 flex items-center gap-2">
                 <FaUsers className="text-blue-600" /> শিক্ষার্থী:{" "}
                 {course.students}
               </p>
 
-              {/* Buttons */}
+              {/* Actions */}
               <div className="flex flex-wrap gap-2 mt-auto">
-                {/* Admin Approve/Reject */}
                 {course.status === "Pending" && (
                   <>
                     <button
@@ -242,25 +245,9 @@ const ManageCourses = () => {
                   </>
                 )}
 
-                {/* Curriculum */}
-                <button
-                  onClick={() => setSelectedCurriculum(course)}
-                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-purple-600 hover:bg-purple-700 text-white text-sm"
-                >
-                  <FaListUl /> কারিকুলাম
-                </button>
-
-                {/* Details */}
-                <button
-                  onClick={() => setSelectedDetails(course)}
-                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white text-sm"
-                >
-                  <FaInfoCircle /> Details
-                </button>
-
                 <button
                   onClick={() => handleTogglePublish(course.id)}
-                  className={`px-3 py-2 rounded-lg flex items-center gap-1 text-white text-sm ${
+                  className={`px-3 py-2 rounded-lg flex items-center gap-1 text-white text-sm transition ${
                     course.status === "Published"
                       ? "bg-yellow-600 hover:bg-yellow-700"
                       : "bg-green-600 hover:bg-green-700"
@@ -278,10 +265,10 @@ const ManageCourses = () => {
                 </button>
 
                 <button
-                  onClick={() => handleViewStudents(course.title)}
+                  onClick={() => handleViewStudents(course)}
                   className="px-3 py-2 rounded-lg flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
                 >
-                  <FaEye /> Students
+                  <FaEye /> Details
                 </button>
 
                 <button
@@ -303,62 +290,54 @@ const ManageCourses = () => {
         </div>
       )}
 
-      {/* Curriculum Modal */}
-      {selectedCurriculum && (
+      {/* Details Modal */}
+      {selectedCourse && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 p-6 relative">
-            <h3 className="text-xl font-bold mb-4 text-purple-700 flex items-center gap-2">
-              📖 {selectedCurriculum.title} - কারিকুলাম
+          <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 p-6 relative overflow-y-auto max-h-[90vh]">
+            <h3 className="text-xl font-bold mb-4 text-green-700">
+              📖 {selectedCourse.title}
             </h3>
-            <ul className="space-y-3 mb-6">
-              {selectedCurriculum.curriculum.map((item, idx) => (
+            <p className="mb-2 text-gray-700">{selectedCourse.description}</p>
+            <p>👨‍🏫 লেভেল: {selectedCourse.level}</p>
+            <p>⏳ মেয়াদ: {selectedCourse.duration}</p>
+            <p>💰 ফি: {selectedCourse.price} টাকা</p>
+            <p>⭐ রেটিং: {selectedCourse.rating}</p>
+            <p>📊 আয়: {selectedCourse.revenue} টাকা</p>
+
+            {/* Curriculum */}
+            <h4 className="mt-4 mb-2 font-semibold flex items-center gap-2">
+              <FaListUl /> কারিকুলাম
+            </h4>
+            <ul className="space-y-2 mb-4">
+              {selectedCourse.curriculum.map((item, idx) => (
                 <li
                   key={idx}
-                  className="p-3 border rounded-lg flex justify-between items-center"
+                  className="p-2 border rounded-md flex justify-between"
                 >
                   <span>{item.chapter}</span>
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-gray-500">
                     MCQs: {item.mcqs}
                   </span>
                 </li>
               ))}
             </ul>
+
+            {/* Students */}
+            <h4 className="mt-4 mb-2 font-semibold flex items-center gap-2">
+              <FaUsers /> Students
+            </h4>
+            <ul className="list-disc list-inside mb-4">
+              {selectedCourse.studentList.map((s, i) => (
+                <li key={i}>{s}</li>
+              ))}
+            </ul>
+
             <button
-              onClick={() => setSelectedCurriculum(null)}
+              onClick={() => setSelectedCourse(null)}
               className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg"
             >
               বন্ধ করুন
             </button>
-          </div>
-        </div>
-      )}
-
-      {/* Details Modal */}
-      {selectedDetails && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 p-6 relative">
-            <h3 className="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2">
-              <FaInfoCircle className="text-blue-600" /> কোর্স ডিটেইলস
-            </h3>
-            <p><strong>শিরোনাম:</strong> {selectedDetails.title}</p>
-            <p><strong>বিষয়:</strong> {selectedDetails.subject}</p>
-            <p><strong>শিক্ষক:</strong> {selectedDetails.teacher}</p>
-            <p><strong>লেভেল:</strong> {selectedDetails.level}</p>
-            <p><strong>বর্ণনা:</strong> {selectedDetails.description}</p>
-            <p><strong>মেয়াদ:</strong> {selectedDetails.duration}</p>
-            <p><strong>ফি:</strong> {selectedDetails.price} টাকা</p>
-            <p><strong>শিক্ষার্থী:</strong> {selectedDetails.students}</p>
-            <p><strong>রেটিং:</strong> {selectedDetails.rating} ⭐</p>
-            <p><strong>মোট আয়:</strong> {selectedDetails.revenue} টাকা</p>
-
-            <div className="mt-6 flex justify-end">
-              <button
-                onClick={() => setSelectedDetails(null)}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg"
-              >
-                বন্ধ করুন
-              </button>
-            </div>
           </div>
         </div>
       )}

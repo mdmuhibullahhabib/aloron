@@ -33,7 +33,6 @@ import CheckoutSuccess from '../pages/Shop/Checkout/CheckoutSuccess';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
 import Payments from '../pages/Dashboard/Admin/payments/Payments';
 import Orders from '../pages/Dashboard/Student/Orders';
-import MyCourses from '../pages/Dashboard/Controller/MyCourses';
 
 
 const Router = createBrowserRouter([
@@ -171,10 +170,7 @@ const Router = createBrowserRouter([
             },
 
             // TEACHER
-                        {
-                path: "my-courses",
-                element: <MyCourses></MyCourses>
-            },
+            
 
             // STUDENT
             {

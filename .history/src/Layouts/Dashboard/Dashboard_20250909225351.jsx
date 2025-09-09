@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa';
 
 const Dashboard = () => {
-  const role = "teacher";
+  const role = "controller";
 
   return (
     <div className="flex min-h-screen">
@@ -84,7 +84,7 @@ const Dashboard = () => {
             </>
           )}
 
-          {role === 'teacher' && (
+          {role === 'te' && (
             <>
               <h2 className="text-xl font-bold mb-4">কন্ট্রোলার ড্যাশবোর্ড</h2>
 
@@ -104,6 +104,15 @@ const Dashboard = () => {
                 }
               >
                 <FaPlusCircle /> নতুন কোর্স যোগ
+              </NavLink>
+
+              <NavLink
+                to="/dashboard/students"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+                }
+              >
+                <FaUserGraduate /> আমার স্টুডেন্টস
               </NavLink>
 
               <NavLink

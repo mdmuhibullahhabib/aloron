@@ -107,6 +107,15 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
+                to="/dashboard/students"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+                }
+              >
+                <FaUserGraduate /> আমার স্টুডেন্টস
+              </NavLink>
+
+              <NavLink
                 to="/dashboard/schedule"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
