@@ -60,10 +60,6 @@ const Router = createBrowserRouter([
                         element: <ExamPage />,
                     },
                     {
-                        path: "facultyexam/:title",
-                        element: <FacultyExam />,
-                    },
-                    {
                         path: "live-exam",
                         element: <Exam />,
                     },

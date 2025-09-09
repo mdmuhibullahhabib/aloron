@@ -170,6 +170,72 @@ const Exam = () => {
 
   // Original Exam Page View
   return (
+    // <div className="flex min-h-screen bg-gray-100 text-gray-800 font-sans w-full">
+    //   {/* Main Content Area */}
+    //   <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+    //     {/* Exam Header */}
+    //     <div className="bg-white rounded-xl p-6 shadow-xl text-center mb-8">
+    //       <h1 className="text-2xl font-bold mb-2">BUP FST Admission 23-24</h1>
+    //       <div className="text-xl font-medium text-green-600">সময়ঃ {formatTime(timeLeft)}</div>
+    //       <p className="text-gray-600 mt-2">
+    //         প্রতি প্রশ্নের পূর্ণমান $5$ এবং ভুল উত্তরের জন্য $0.২৫$ মার্কস কাটা যাবে
+    //       </p>
+    //     </div>
+
+    //     {/* Question Section */}
+    //     <div className="bg-white rounded-xl p-8 shadow-xl mb-20">
+    //       <h2 className="text-xl font-bold border-b border-gray-300 pb-4 mb-6">
+    //         Mathematics (20)
+    //       </h2>
+    //       <div className="space-y-8">
+    //         {mockQuestions.map((question) => (
+    //           <div key={question.id} className="card bg-gray-100 shadow-md rounded-lg p-6">
+    //             <div className="flex justify-between items-start mb-4">
+    //               <div className="prose text-gray-800">
+    //                 <p className="text-lg font-medium">{question.text}</p>
+    //               </div>
+    //               <div className="flex items-center space-x-2 text-gray-600">
+    //                 <span className="text-sm">{question.points}</span>
+    //                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    //                   <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+    //                   <path d="M17 21v-8H7v8" />
+    //                   <path d="M7 3v5h8" />
+    //                 </svg>
+    //               </div>
+    //             </div>
+    //             <div className="form-control space-y-4">
+    //               {question.options.map((option) => (
+    //                 <label key={option.id} className="label cursor-pointer p-4 rounded-lg bg-gray-200 hover:bg-gray-300 transition-colors duration-200">
+    //                   <span className="label-text text-gray-800 text-base">{option.text}</span>
+    //                   <input
+    //                     type="radio"
+    //                     name={`question-${question.id}`}
+    //                     className="radio radio-success"
+    //                     checked={selectedAnswers[question.id] === option.id}
+    //                     onChange={() => handleOptionChange(question.id, option.id)}
+    //                   />
+    //                 </label>
+    //               ))}
+    //             </div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   {/* Fixed Bottom Bar */}
+    //   <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 flex items-center justify-between rounded-t-lg">
+    //     <div className="flex-1 text-center text-xl font-bold text-green-600">
+    //       {formatTime(timeLeft)}
+    //     </div>
+    //     <div className="flex-1 text-center">
+    //       <button className="btn btn-success btn-lg" onClick={handleSubmit}>সাবমিট</button>
+    //     </div>
+    //     <div className="flex-1 text-center text-xl font-bold text-gray-800">
+    //       {answeredCount}/{mockQuestions.length}
+    //     </div>
+    //   </div>
+    // </div>
         <div className="flex min-h-screen bg-gray-100 text-gray-800 w-full">
       <div className="flex-1 flex flex-col p-8">
         {/* হেডার */}

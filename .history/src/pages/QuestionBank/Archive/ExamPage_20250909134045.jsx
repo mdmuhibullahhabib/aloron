@@ -1,12 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
 
-
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [selected, setSelected] = useState({});
 
+  // Fake API (replace later with MongoDB API)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const fakeData = {
+  //       topics: [
+  //         { title: "ভৌত রাশি ও পরিমাপ", count: 63 },
+  //         { title: "তরঙ্গ", count: 251 },
+  //         { title: "পরিমাপ", count: 170 },
+  //         { title: "নিউটনিয়ান বলবিদ্যা", count: 226 },
+  //         { title: "কাজ, ক্ষমতা, ও শক্তি", count: 152 },
+  //         { title: "মহাকর্ষ ও অভিকর্ষ", count: 122 },
+  //       ],
+  //       questions: [
+  //         {
+  //           _id: "q1",
+  //           question: "কোনটি মৌলিক রাশি (base quantity) নয়?",
+  //           options: ["ঘনত্ব", "তাপমাত্রা", "সময়", "তর"],
+  //           correct: "ঘনত্ব",
+  //           tag: "CU A 13-14",
+  //           topic: "ভৌত রাশি ও পরিমাপ",
+  //         },
+  //         {
+  //           _id: "q2",
+  //           question: "১ Å (অ্যাংস্ট্রম) কত মিটারের সমান?",
+  //           options: ["10⁻¹⁰", "10⁻⁶", "10⁻⁸", "10⁻⁹"],
+  //           correct: "10⁻¹⁰",
+  //           tag: "RU C 16-17",
+  //           topic: "পরিমাপ",
+  //         },
+  //       ],
+  //     };
+
+  //     setTopics(fakeData.topics);
+  //     setQuestions(fakeData.questions);
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
   const fetchData = async () => {
     const fakeData = {

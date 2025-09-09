@@ -60,11 +60,9 @@ const Router = createBrowserRouter([
                         element: <ExamPage />,
                     },
                     {
-                        path: "facultyexam/:title",
-                        element: <FacultyExam />,
-                    },
-                    {
-                        path: "live-exam",
+                        path: `/question-bank/facultyexam/${f.title
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")},
                         element: <Exam />,
                     },
                     {

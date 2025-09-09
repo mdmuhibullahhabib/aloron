@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaLock } from "react-icons/fa";
 
 
+
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
   const [questions, setQuestions] = useState([]);

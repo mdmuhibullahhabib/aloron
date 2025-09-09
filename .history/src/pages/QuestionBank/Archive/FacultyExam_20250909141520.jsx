@@ -132,6 +132,34 @@ const FacultyExam = () => {
       {/* Search Bar & Actions */}
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-bold text-gray-900">BUP FST</h1>
+        {/* <div className="flex items-center space-x-4">
+          <button className="flex items-center gap-2 text-sm font-semibold text-green-500 border border-green-500 rounded-full px-4 py-2 hover:bg-green-500 hover:text-white transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+            নতুন ব্যাচ তৈরি করুন
+          </button>
+          <button className="flex items-center gap-2 text-sm font-semibold text-white bg-green-500 rounded-full px-4 py-2 hover:bg-green-600 transition-colors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path d="M10 2a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V3a1 1 0 011-1z" />
+            </svg>
+            নতুন প্রশ্ন যোগ করুন
+          </button>
+        </div> */}
       </div>
       <div className="mb-8">
         <div className="relative">
