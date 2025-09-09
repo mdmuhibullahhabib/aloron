@@ -18,7 +18,7 @@ const Navbar = () => {
   console.log(user)
 
 // Example: current user role (you can get it from context/auth)
-const role = "admin"; // admin | student | teacher
+const role = "teacher"; // admin | student | teacher
 
 const navLinks = [
   { name: 'প্রশ্নব্যাংক', path: '/question-bank/archive' },
@@ -34,7 +34,7 @@ const navLinks = [
         ? '/dashboard/reports'
         : role === 'student'
         ? '/dashboard/enrolled-courses'
-        : '/dashboard/my-courses'
+        : '/dashboard/my-courses' // teacher
   },
 ];
 

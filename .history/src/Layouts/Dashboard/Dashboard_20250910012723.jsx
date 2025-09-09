@@ -29,15 +29,6 @@ const Dashboard = () => {
               <h2 className="text-xl font-bold mb-4">এডমিন ড্যাশবোর্ড</h2>
 
               <NavLink
-                to="/dashboard/reports"
-                className={({ isActive }) =>
-                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
-                }
-              >
-                <FaChartLine /> রিপোর্টস ও অ্যানালিটিক্স
-              </NavLink>
-
-              <NavLink
                 to="/dashboard/manage-users"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
@@ -81,6 +72,8 @@ const Dashboard = () => {
               >
                 <FaMoneyBillWave /> পেমেন্টস ও ইনভয়েস
               </NavLink>
+
+
 
             </>
           )}
