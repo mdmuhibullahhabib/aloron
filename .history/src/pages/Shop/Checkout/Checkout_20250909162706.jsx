@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-import useCart from "../../../hooks/useCart";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Checkout = () => {
   const { user } = useAuth();

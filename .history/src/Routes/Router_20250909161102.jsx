@@ -111,7 +111,7 @@ const Router = createBrowserRouter([
                 element: <Checkout></Checkout>
             },
             {
-                path: "/success-checkout",
+                path: "/checkout",
                 element: <CheckoutSuccess></CheckoutSuccess>
             },
 

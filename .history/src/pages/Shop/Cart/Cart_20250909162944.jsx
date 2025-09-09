@@ -71,13 +71,24 @@ const Cart = () => {
           });
         }
       });
-    } 
+    } else {
+      const updated = cartItems.filter((item) => item.productId !== productId);
+      setCartItems(updated);
+      localStorage.setItem("cart", JSON.stringify(updated));
+      Swal.fire({
+        title: "Removed!",
+        text: "The item has been removed from your cart.",
+        icon: "success",
+        confirmButtonColor: "#6366F1",
+      });
+    }
   };
 
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  console.log(cartItems)
 
   return (
     <>

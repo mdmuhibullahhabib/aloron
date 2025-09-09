@@ -157,14 +157,14 @@ const Dashboard = () => {
                 <FaBook /> ভর্তি হওয়া কোর্স
               </NavLink>
 
-              <NavLink
-                to="/dashboard/order-tracking"
-                className={({ isActive }) =>
-                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
-                }
-              >
-                <FaRegCalendarAlt /> অর্ডার ট্রেসিং
-              </NavLink>
+                  <NavLink
+      to="/dashboard/order-tracking"
+      className={({ isActive }) =>
+        `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+      }
+    >
+      <FaRegCalendarAlt /> অর্ডার ট্রেসিং
+    </NavLink>
 
               <NavLink
                 to="/dashboard/progress"

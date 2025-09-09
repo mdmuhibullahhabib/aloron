@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
-import useCart from "../../../hooks/useCart";
 
 const Cart = () => {
   const [cart, refetch] = useCart();
@@ -71,7 +70,17 @@ const Cart = () => {
           });
         }
       });
-    } 
+    } else {
+      const updated = cartItems.filter((item) => item.productId !== productId);
+      setCartItems(updated);
+      localStorage.setItem("cart", JSON.stringify(updated));
+      Swal.fire({
+        title: "Removed!",
+        text: "The item has been removed from your cart.",
+        icon: "success",
+        confirmButtonColor: "#6366F1",
+      });
+    }
   };
 
   const total = cartItems.reduce(

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Checkout = () => {
   const { user } = useAuth();

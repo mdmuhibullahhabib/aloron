@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import useCart from "../../../hooks/useCart";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const Checkout = () => {
   const { user } = useAuth();
@@ -11,7 +10,7 @@ const Checkout = () => {
   const [localCart, setLocalCart] = useState([]); // Local cart
   const [deliveryArea, setDeliveryArea] = useState("inside");
   const [shippingCost, setShippingCost] = useState(60);
-  const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPubli();
   const navigate = useNavigate();
 
   // Billing form states

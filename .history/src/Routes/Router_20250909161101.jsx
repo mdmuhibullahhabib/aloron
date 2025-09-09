@@ -111,8 +111,8 @@ const Router = createBrowserRouter([
                 element: <Checkout></Checkout>
             },
             {
-                path: "/success-checkout",
-                element: <CheckoutSuccess></CheckoutSuccess>
+                path: "/checkout",
+                element: <CheckoutSuccess
             },
 
             // blog releted route

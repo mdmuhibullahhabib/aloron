@@ -29,7 +29,6 @@ import ProductDetails from '../pages/Shop/components/ProductDetails';
 import Cart from '../pages/Shop/Cart/Cart';
 import ExamPage from '../pages/QuestionBank/Archive/ExamPage';
 import Checkout from '../pages/Shop/Checkout/Checkout';
-import CheckoutSuccess from '../pages/Shop/Checkout/CheckoutSuccess';
 
 
 const Router = createBrowserRouter([
@@ -109,10 +108,6 @@ const Router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <Checkout></Checkout>
-            },
-            {
-                path: "/success-checkout",
-                element: <CheckoutSuccess></CheckoutSuccess>
             },
 
             // blog releted route
