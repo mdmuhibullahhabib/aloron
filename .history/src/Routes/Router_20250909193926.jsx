@@ -175,7 +175,7 @@ const Router = createBrowserRouter([
                 element: <EnrolledCourses></EnrolledCourses>
             },
             {
-                path: "order-tracking",
+                path: "Orders",
                 element: <Orders></Orders>
             },
             {

@@ -32,7 +32,6 @@ import Checkout from '../pages/Shop/Checkout/Checkout';
 import CheckoutSuccess from '../pages/Shop/Checkout/CheckoutSuccess';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
 import Payments from '../pages/Dashboard/Admin/payments/Payments';
-import Orders from '../pages/Dashboard/Student/Orders';
 
 
 const Router = createBrowserRouter([
@@ -175,8 +174,8 @@ const Router = createBrowserRouter([
                 element: <EnrolledCourses></EnrolledCourses>
             },
             {
-                path: "order-tracking",
-                element: <Orders></Orders>
+                path: "Orders",
+                element: <Orders
             },
             {
                 path: "progress",

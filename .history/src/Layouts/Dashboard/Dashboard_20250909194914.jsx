@@ -81,6 +81,15 @@ const Dashboard = () => {
               >
                 <FaBell /> ঘোষণা
               </NavLink>
+
+              <NavLink
+                to="/dashboard/settings"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+                }
+              >
+                <FaCogs /> সিস্টেম সেটিংস
+              </NavLink>
             </>
           )}
 
@@ -123,6 +132,15 @@ const Dashboard = () => {
               >
                 <FaRegCalendarAlt /> ক্লাস সিডিউল
               </NavLink>
+
+              <NavLink
+                to="/dashboard/discussions"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+                }
+              >
+                <FaRegComments /> আলোচনা ফোরাম
+              </NavLink>
             </>
           )}
 
@@ -156,6 +174,7 @@ const Dashboard = () => {
               >
                 <FaChartLine /> আমার প্রগ্রেস
               </NavLink>
+
 
               <NavLink
                 to="/dashboard/payments"

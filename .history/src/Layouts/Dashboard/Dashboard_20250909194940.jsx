@@ -123,6 +123,15 @@ const Dashboard = () => {
               >
                 <FaRegCalendarAlt /> ক্লাস সিডিউল
               </NavLink>
+
+              <NavLink
+                to="/dashboard/discussions"
+                className={({ isActive }) =>
+                  `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
+                }
+              >
+                <FaRegComments /> আলোচনা ফোরাম
+              </NavLink>
             </>
           )}
 
