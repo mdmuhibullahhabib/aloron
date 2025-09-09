@@ -47,15 +47,6 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-  to="/dashboard/add-course"
-  className={({ isActive }) =>
-    `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
-  }
->
-  <FaPlusCircle /> নতুন কোর্স যোগ করুন
-</NavLink>
-
-              <NavLink
                 to="/dashboard/manage-students"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`

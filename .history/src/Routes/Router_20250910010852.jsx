@@ -34,7 +34,6 @@ import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
 import Payments from '../pages/Dashboard/Admin/payments/Payments';
 import Orders from '../pages/Dashboard/Student/Orders';
 import MyCourses from '../pages/Dashboard/Controller/MyCourses';
-import AddCourse from '../pages/Dashboard/Admin/AddCourse';
 
 
 const Router = createBrowserRouter([
@@ -164,7 +163,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "add-course",
-                element: <AddCourse></AddCourse>
+                element: <ManageCourses></ManageCourses>
             },
             {
                 path: "reports",

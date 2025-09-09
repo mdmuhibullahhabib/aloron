@@ -17,7 +17,7 @@ import {
 } from 'react-icons/fa';
 
 const Dashboard = () => {
-  const role = "admin";
+  const role = "ad";
 
   return (
     <div className="flex min-h-screen">
@@ -45,15 +45,6 @@ const Dashboard = () => {
               >
                 <FaBook /> কোর্স ম্যানেজ
               </NavLink>
-
-              <NavLink
-  to="/dashboard/add-course"
-  className={({ isActive }) =>
-    `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
-  }
->
-  <FaPlusCircle /> নতুন কোর্স যোগ করুন
-</NavLink>
 
               <NavLink
                 to="/dashboard/manage-students"

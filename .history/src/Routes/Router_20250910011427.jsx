@@ -164,7 +164,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "add-course",
-                element: <AddCourse></AddCourse>
+                element: <AddCourse
             },
             {
                 path: "reports",
