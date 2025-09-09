@@ -31,7 +31,6 @@ import ExamPage from '../pages/QuestionBank/Archive/ExamPage';
 import Checkout from '../pages/Shop/Checkout/Checkout';
 import CheckoutSuccess from '../pages/Shop/Checkout/CheckoutSuccess';
 import DashboardLayout from '../Layouts/Dashboard/DashboardLayout';
-import Payments from '../pages/Dashboard/Admin/payments/Payments';
 
 
 const Router = createBrowserRouter([
@@ -164,8 +163,8 @@ const Router = createBrowserRouter([
                 element: <Reports></Reports>
             },
             {
-                path: "Payments",
-                element: <Payments></Payments>
+                path: "reporPaymentsts",
+                element: <Reports></Reports>
             },
 
             // STUDENT
