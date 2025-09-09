@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 // A mock array of questions to display. In a real app, this would be fetched from an API.
 // Added a 'correctOptionId' to each question for scoring purposes.
@@ -56,7 +55,6 @@ const Exam = () => {
   const [examResults, setExamResults] = useState(null);
   // State to store the time taken
   const [timeTaken, setTimeTaken] = useState(0);
-    const navigate = useNavigate();
 
   // Update the answered count whenever selectedAnswers changes
   useEffect(() => {
@@ -129,64 +127,44 @@ const Exam = () => {
   // Conditional rendering based on exam state
   if (examState === 'dashboard') {
     return (
-         <div className="flex min-h-screen bg-gray-100 text-gray-800 font-sans w-full">
-      {/* Dashboard Content Area */}
-      <div className="flex-1 flex flex-col p-8 overflow-y-auto">
-        {/* Dashboard Header */}
-        <div className="bg-white rounded-xl p-6 shadow-xl text-center mb-8 relative">
-          {/* 🔙 Back Button */}
-          <button
-            onClick={() => navigate(-1)}
-            className="btn btn-outline btn-error absolute left-4 top-4"
-          >
-            ⬅ ফিরে যান
-          </button>
-
-          <h1 className="text-2xl font-bold mb-2">BUP FST Admission 23-24</h1>
-        </div>
-
-        {/* Result Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-green-600 rounded-xl p-6 shadow-xl text-center text-white">
-            <p className="text-lg font-bold mb-2">উত্তর করেছেন</p>
-            <div className="text-5xl font-extrabold">
-              {examResults.answeredQuestions} / {examResults.totalQuestions}
+      <div className="flex min-h-screen bg-gray-100 text-gray-800 font-sans w-full">
+        {/* Dashboard Content Area */}
+        <div className="flex-1 flex flex-col p-8 overflow-y-auto">
+          {/* Dashboard Header */}
+          <div className="bg-white rounded-xl p-6 shadow-xl text-center mb-8">
+            <h1 className="text-2xl font-bold mb-2">BUP FST Admission 23-24</h1>
+          </div>
+          {/* Result Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="bg-green-600 rounded-xl p-6 shadow-xl text-center text-white">
+              <p className="text-lg font-bold mb-2">উত্তর করেছেন</p>
+              <div className="text-5xl font-extrabold">{examResults.answeredQuestions} / {examResults.totalQuestions}</div>
+            </div>
+            <div className="bg-blue-600 rounded-xl p-6 shadow-xl text-center text-white">
+              <p className="text-lg font-bold mb-2">সময় নিয়েছে</p>
+              <div className="text-5xl font-extrabold">{formatTime(timeTaken)}</div>
             </div>
           </div>
-          <div className="bg-blue-600 rounded-xl p-6 shadow-xl text-center text-white">
-            <p className="text-lg font-bold mb-2">সময় নিয়েছে</p>
-            <div className="text-5xl font-extrabold">
-              {formatTime(timeTaken)}
+          {/* Detailed Results */}
+          <div className="bg-white rounded-xl p-8 shadow-xl">
+            <h2 className="text-xl font-bold border-b border-gray-300 pb-4 mb-6">
+              ফলাফল
+            </h2>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-lg font-medium">মোট মার্কস:</span>
+              <span className="text-xl font-bold text-green-600">{examResults.marks.toFixed(2)}</span>
             </div>
-          </div>
-        </div>
-
-        {/* Detailed Results */}
-        <div className="bg-white rounded-xl p-8 shadow-xl">
-          <h2 className="text-xl font-bold border-b border-gray-300 pb-4 mb-6">
-            ফলাফল
-          </h2>
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-lg font-medium">মোট মার্কস:</span>
-            <span className="text-xl font-bold text-green-600">
-              {examResults.marks.toFixed(2)}
-            </span>
-          </div>
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-lg font-medium">সঠিক উত্তর:</span>
-            <span className="text-xl font-bold text-green-600">
-              {examResults.correctAnswers}
-            </span>
-          </div>
-          <div className="flex justify-between items-center mb-4">
-            <span className="text-lg font-medium">ভুল উত্তর:</span>
-            <span className="text-xl font-bold text-red-600">
-              {examResults.wrongAnswers}
-            </span>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-lg font-medium">সঠিক উত্তর:</span>
+              <span className="text-xl font-bold text-green-600">{examResults.correctAnswers}</span>
+            </div>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-lg font-medium">ভুল উত্তর:</span>
+              <span className="text-xl font-bold text-red-600">{examResults.wrongAnswers}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     );
   }
 
