@@ -237,6 +237,7 @@ const FacultyExam = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

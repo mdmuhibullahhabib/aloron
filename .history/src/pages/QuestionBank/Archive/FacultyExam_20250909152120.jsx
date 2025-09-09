@@ -83,11 +83,11 @@ const FacultyExam = () => {
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [examStarted, setExamStarted] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const { path } = useParams();
+  const [timeLeft, setTimeLeft] = useState(0); 
+    const { path } = useParams();
 
-  console.log(path)
-
+    console.log(path)
+  
 
   // useEffect hook to manage the timer
   useEffect(() => {
@@ -208,35 +208,39 @@ const FacultyExam = () => {
       )}
 
       {/* Modal */}
-      {showModal && selectedFaculty && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
-          <div className="bg-white text-gray-900 p-6 rounded-xl w-full max-w-sm sm:max-w-md md:max-w-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4 text-center">পরীক্ষা শুরু</h3>
+   {showModal && selectedFaculty && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+    <div className="bg-white text-gray-900 p-6 rounded-xl w-full max-w-sm sm:max-w-md md:max-w-lg shadow-lg">
+      {/* শিরোনাম */}
+      <h3 className="text-xl font-bold mb-4 text-center">পরীক্ষা শুরু</h3>
 
-            <p className="mb-6 text-center">
-              আপনি কি নিশ্চিত যে{" "}
-              <span className="font-semibold text-green-600">{selectedFaculty.title}</span>{" "}
-              ব্যাচের পরীক্ষা শুরু করতে চান?
-            </p>
+      {/* বিবরণ */}
+      <p className="mb-6 text-center">
+        আপনি কি নিশ্চিত যে{" "}
+        <span className="font-semibold text-green-600">{selectedFaculty.title}</span>{" "}
+        ব্যাচের পরীক্ষা শুরু করতে চান?
+      </p>
 
-            <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3">
-              <button
-                className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition-colors w-full sm:w-auto"
-                onClick={() => setShowModal(false)}
-              >
-                বাতিল
-              </button>
-              <Link
-                to={`/question-bank/live-exam`}
-                className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors w-full sm:w-auto text-center"
-                onClick={startExam}
-              >
-                পরীক্ষা শুরু করুন
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* বোতামগুলো */}
+      <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3">
+        <button
+          className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition-colors w-full sm:w-auto"
+          onClick={() => setShowModal(false)}
+        >
+          বাতিল
+        </button>
+        <Link
+          to={`/question-bank/live-exam`}
+          className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors w-full sm:w-auto text-center"
+          onClick={startExam}
+        >
+          পরীক্ষা শুরু করুন
+        </Link>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };

@@ -219,6 +219,7 @@ const FacultyExam = () => {
               ব্যাচের পরীক্ষা শুরু করতে চান?
             </p>
 
+            {/* বোতামগুলো */}
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3">
               <button
                 className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition-colors w-full sm:w-auto"
@@ -237,6 +238,7 @@ const FacultyExam = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };

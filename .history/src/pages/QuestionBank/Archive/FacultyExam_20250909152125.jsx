@@ -211,14 +211,17 @@ const FacultyExam = () => {
       {showModal && selectedFaculty && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
           <div className="bg-white text-gray-900 p-6 rounded-xl w-full max-w-sm sm:max-w-md md:max-w-lg shadow-lg">
+            {/* শিরোনাম */}
             <h3 className="text-xl font-bold mb-4 text-center">পরীক্ষা শুরু</h3>
 
+            {/* বিবরণ */}
             <p className="mb-6 text-center">
               আপনি কি নিশ্চিত যে{" "}
               <span className="font-semibold text-green-600">{selectedFaculty.title}</span>{" "}
               ব্যাচের পরীক্ষা শুরু করতে চান?
             </p>
 
+            {/* বোতামগুলো */}
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3">
               <button
                 className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition-colors w-full sm:w-auto"
@@ -237,6 +240,7 @@ const FacultyExam = () => {
           </div>
         </div>
       )}
+
     </div>
   );
 };
