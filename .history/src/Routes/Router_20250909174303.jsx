@@ -23,7 +23,7 @@ import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
 import ManageCourses from '../pages/Dashboard/Admin/ManageCourses';
 import Reports from '../pages/Dashboard/Admin/Reports';
 import EnrolledCourses from '../pages/Dashboard/Student/EnrolledCourses';
-import MyProgress from '../pages/Dashboard/Student/MyProgress';
+import MyProgress from '../components/Dashboard/Student/MyProgress';
 import CourseDetails from '../pages/Courses/CourseDetails';
 import ProductDetails from '../pages/Shop/components/ProductDetails';
 import Cart from '../pages/Shop/Cart/Cart';

@@ -19,11 +19,11 @@ import SignIn from '../pages/Auth/SignIn';
 import SignUp from '../pages/Auth/SignUp';
 import Shop from '../pages/Shop/Shop';
 import Dashboard from '../Layouts/Dashboard/Dashboard';
-import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
-import ManageCourses from '../pages/Dashboard/Admin/ManageCourses';
-import Reports from '../pages/Dashboard/Admin/Reports';
-import EnrolledCourses from '../pages/Dashboard/Student/EnrolledCourses';
-import MyProgress from '../pages/Dashboard/Student/MyProgress';
+import ManageUsers from '../components/Dashboard/Admin/ManageUsers';
+import ManageCourses from '../components/Dashboard/Admin/ManageCourses';
+import Reports from '../components/Dashboard/Admin/Reports';
+import EnrolledCourses from '../components/Dashboard/Student/EnrolledCourses';
+import MyProgress from '../components/Dashboard/Student/MyProgress';
 import CourseDetails from '../pages/Courses/CourseDetails';
 import ProductDetails from '../pages/Shop/components/ProductDetails';
 import Cart from '../pages/Shop/Cart/Cart';
@@ -143,39 +143,39 @@ const Router = createBrowserRouter([
             },
 
         ],
-    },
-    // Dashboard
-    {
-        path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
-        children: [
-            // ADMIN
+    }
+                // Dashboard
             {
-                path: "manage-users",
-                element: <ManageUsers></ManageUsers>
-            },
-            {
-                path: "manage-courses",
-                element: <ManageCourses></ManageCourses>
-            },
-            {
-                path: "reports",
-                element: <Reports></Reports>
-            },
+                path: "/dashboard",
+                element: <DashboardLayout></DashboardLayout>,
+                children: [
+                    // ADMIN
+                    {
+                        path: "/dashboard/manage-users",
+                        element: <ManageUsers></ManageUsers>
+                    },
+                    {
+                        path: "/dashboard/manage-courses",
+                        element: <ManageCourses></ManageCourses>
+                    },
+                    {
+                        path: "/dashboard/reports",
+                        element: <Reports></Reports>
+                    },
 
-            // STUDENT
-            {
-                path: "enrolled-courses",
-                element: <EnrolledCourses></EnrolledCourses>
-            },
-            {
-                path: "progress",
-                element: <MyProgress></MyProgress>
-            },
+                    // STUDENT
+                    {
+                        path: "/dashboard/enrolled-courses",
+                        element: <EnrolledCourses></EnrolledCourses>
+                    },
+                    {
+                        path: "/dashboard/progress",
+                        element: <MyProgress></MyProgress>
+                    },
 
 
-        ]
-    },
+                ]
+            },
 ],
 )
 
