@@ -196,7 +196,9 @@ const Router = createBrowserRouter([
                 path: "progress",
                 element: <MyProgress></MyProgress>
             },
-        ],
+
+
+        ]
     },
     // Subscription
     {

@@ -35,8 +35,6 @@ import Payments from '../pages/Dashboard/Admin/payments/Payments';
 import Orders from '../pages/Dashboard/Student/Orders';
 import MyCourses from '../pages/Dashboard/Controller/MyCourses';
 import AddCourse from '../pages/Dashboard/Admin/AddCourse';
-import Subscribe from '../pages/Subscribtion/Subscribe';
-import PaymentPage from '../pages/Subscribtion/PaymentPage';
 
 
 const Router = createBrowserRouter([
@@ -178,7 +176,7 @@ const Router = createBrowserRouter([
             },
 
             // TEACHER
-            {
+                        {
                 path: "my-courses",
                 element: <MyCourses></MyCourses>
             },
@@ -196,20 +194,15 @@ const Router = createBrowserRouter([
                 path: "progress",
                 element: <MyProgress></MyProgress>
             },
-        ],
+
+
+        ]
     },
     // Subscription
     {
-        path: "/subscribtion",
-        element: <Subscribe></Subscribe>,
-        children: [
-            {
-                path: "payment",
-                element: <PaymentPage></PaymentPage>
-            },
-        ]
-    },
-
+        path: "subscribe",
+        element
+    }
 ],
 )
 

@@ -58,13 +58,13 @@ const Authprovider = ({ children }) => {
         const userInfo = {
           email: currentUser.email
         }
-        axiosPublic.post('/jwt', userInfo)
-        .then(res =>{
-          if(res.data.token){
-                  setUser(currentUser);
-            localStorage.setItem('access-token', res.data.token)
-          }
-        })
+        // axiosPublic.post('/jwt', userInfo)
+        // .then(res =>{
+        //   if(res.data.token){
+        //           setUser(currentUser);
+        //     localStorage.setItem('access-token', res.data.token)
+        //   }
+        // })
       }
       else{
         // remove token

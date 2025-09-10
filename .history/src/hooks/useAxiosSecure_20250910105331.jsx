@@ -1,14 +1,15 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "./useAuth";
+import { AuthContext } from "../Provider/Authprovider";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://prottayshashop-server-delta.vercel.app'
 })
 const useAxiosSecure = () => {
     const navigate = useNavigate();
-    const { logOut } = useAuth();
+    const { logOut } = useContext(AuthContext)
 
     // request interceptor to add authorization header for every secure call to teh api
     axiosSecure.interceptors.request.use(function (config) {

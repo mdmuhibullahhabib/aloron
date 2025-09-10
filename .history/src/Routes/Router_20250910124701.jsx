@@ -178,7 +178,7 @@ const Router = createBrowserRouter([
             },
 
             // TEACHER
-            {
+                        {
                 path: "my-courses",
                 element: <MyCourses></MyCourses>
             },
@@ -196,20 +196,19 @@ const Router = createBrowserRouter([
                 path: "progress",
                 element: <MyProgress></MyProgress>
             },
-        ],
+
+
+        ]
     },
     // Subscription
     {
         path: "/subscribtion",
         element: <Subscribe></Subscribe>,
-        children: [
-            {
-                path: "payment",
-                element: <PaymentPage></PaymentPage>
-            },
-        ]
     },
-
+    {
+        path: "/subscribtion",
+        element: <PaymentPage></PaymentPage>
+    },
 ],
 )
 
