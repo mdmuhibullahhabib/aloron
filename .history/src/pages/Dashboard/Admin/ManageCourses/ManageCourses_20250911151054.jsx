@@ -34,7 +34,9 @@ const ManageCourses = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const axiosSecure = useAxiosSecure();
+
   const [courses, refetch] = useCourses();
+
 
    const updateCourseStatus = async (_id, newStatus) => {
     const result = await Swal.fire({

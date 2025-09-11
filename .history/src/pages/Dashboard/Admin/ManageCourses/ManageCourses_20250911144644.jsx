@@ -24,7 +24,6 @@ import CourseDetailsModal from "./CourseDetailsModal";
 import CourseEditModal from "./CourseEditModal";
 import useCourses from "../../../../hooks/useCourses";
 import CourseStudentsModal from "./CourseStudentsModal";
-import Swal from "sweetalert2";
 
 const ManageCourses = () => {
   const [selectedCurriculum, setSelectedCurriculum] = useState(null);
@@ -34,57 +33,37 @@ const ManageCourses = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const axiosSecure = useAxiosSecure();
+
   const [courses, refetch] = useCourses();
 
-   const updateCourseStatus = async (_id, newStatus) => {
-    const result = await Swal.fire({
-      title: `Mark this order as "${newStatus}"?`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: `Yes, ${newStatus}`,
-      cancelButtonText: "Cancel",
-    });
-
-    if (result.isConfirmed) {
-      try {
-        const res = await axiosSecure.patch(`/courses/${_id}`, { status: newStatus });
-        if (res.data.modifiedCount > 0) {
-          Swal.fire({
-            icon: "success",
-            title: `Course ${newStatus}`,
-            text: `Course has been updated to ${newStatus}.`,
-            timer: 1500,
-            showConfirmButton: false,
-          });
-          refetch();
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Update Failed",
-            text: "Order status could not be updated.",
-          });
-        }
-      } catch (err) {
-        console.error(err);
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: "Something went wrong.",
-        });
-      }
-    }
+  // ✅ Update course status helper
+  const updateCourseStatus = async (id, status, toastType = "success") => {
+    // if (!id) return;
+    // try {
+    //   await axiosSecure.patch(`/courses/${id}`, { status });
+    //   if (toastType === "success") {
+    //     toast.success(`✅ কোর্স ${status} হয়েছে`);
+    //   } else if (toastType === "error") {
+    //     toast.error(`❌ কোর্স ${status} হয়েছে`);
+    //   }
+    //   refetch();
+    // } catch (err) {
+    //   console.error("Status update error:", err.response?.data || err.message);
+    //   toast.error("Status update ব্যর্থ হয়েছে!");
+    // }
+    console.log(id,status )
   };
 
   // ✅ Approve → Published
-  const handleApprove = (_id) => updateCourseStatus(_id, "Published", "success");
+  const handleApprove = (id) => updateCourseStatus(id, "Published", "success");
 
   // ✅ Reject → Rejected
-  const handleReject = (_id) => updateCourseStatus(_id, "Rejected", "error");
+  const handleReject = (id) => updateCourseStatus(id, "Rejected", "error");
 
   // ✅ Publish / Unpublish toggle
-  const handleTogglePublish = (_id, currentStatus) => {
+  const handleTogglePublish = (id, currentStatus) => {
     const newStatus = currentStatus === "Published" ? "Unpublished" : "Published";
-    updateCourseStatus(_id, newStatus, "success");
+    updateCourseStatus(id, newStatus, "success");
   };
 
   // Delete course

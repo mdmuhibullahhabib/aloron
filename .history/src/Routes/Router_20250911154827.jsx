@@ -38,7 +38,6 @@ import AddCourse from '../pages/Dashboard/Admin/AddCourse';
 import Subscribe from '../pages/Subscribtion/Subscribe';
 import PaymentPage from '../pages/Subscribtion/PaymentPage';
 import ManageCourses from '../pages/Dashboard/Admin/ManageCourses/ManageCourses';
-import ManageStudents from '../pages/Dashboard/Admin/ManageStudents';
 
 
 const Router = createBrowserRouter([
@@ -164,7 +163,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "manage-students",
-                element: <ManageStudents></ManageStudents>
+                element: <ManageUsers></ManageUsers>
             },
             {
                 path: "manage-courses",

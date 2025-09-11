@@ -34,7 +34,21 @@ const ManageCourses = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const axiosSecure = useAxiosSecure();
+
   const [courses, refetch] = useCourses();
+
+  // ✅ Update course status helper
+  // const updateCourseStatus = async (id, status, toastType = "success") => {
+
+  //   //   await axiosSecure.patch(`/courses/${id}`, { status });
+  //   //   if (toastType === "success") {
+  //   //     toast.success(`✅ কোর্স ${status} হয়েছে`);
+  //   //   } else if (toastType === "error") {
+  //   //     toast.error(`❌ কোর্স ${status} হয়েছে`);
+  //   //   }
+  //   //   refetch();
+  //   console.log(id,status)
+  // };
 
    const updateCourseStatus = async (_id, newStatus) => {
     const result = await Swal.fire({

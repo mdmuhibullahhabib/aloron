@@ -24,7 +24,6 @@ import CourseDetailsModal from "./CourseDetailsModal";
 import CourseEditModal from "./CourseEditModal";
 import useCourses from "../../../../hooks/useCourses";
 import CourseStudentsModal from "./CourseStudentsModal";
-import Swal from "sweetalert2";
 
 const ManageCourses = () => {
   const [selectedCurriculum, setSelectedCurriculum] = useState(null);
@@ -34,9 +33,23 @@ const ManageCourses = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const axiosSecure = useAxiosSecure();
+
   const [courses, refetch] = useCourses();
 
-   const updateCourseStatus = async (_id, newStatus) => {
+  // ✅ Update course status helper
+  const updateCourseStatus = async (id, status, toastType = "success") => {
+
+    //   await axiosSecure.patch(`/courses/${id}`, { status });
+    //   if (toastType === "success") {
+    //     toast.success(`✅ কোর্স ${status} হয়েছে`);
+    //   } else if (toastType === "error") {
+    //     toast.error(`❌ কোর্স ${status} হয়েছে`);
+    //   }
+    //   refetch();
+    console.log(id,status)
+  };
+
+   const handleStatusChange = async (_id, newStatus) => {
     const result = await Swal.fire({
       title: `Mark this order as "${newStatus}"?`,
       icon: "question",
@@ -51,8 +64,8 @@ const ManageCourses = () => {
         if (res.data.modifiedCount > 0) {
           Swal.fire({
             icon: "success",
-            title: `Course ${newStatus}`,
-            text: `Course has been updated to ${newStatus}.`,
+            title: `Order ${newStatus}`,
+            text: `Order has been updated to ${newStatus}.`,
             timer: 1500,
             showConfirmButton: false,
           });
@@ -76,7 +89,7 @@ const ManageCourses = () => {
   };
 
   // ✅ Approve → Published
-  const handleApprove = (_id) => updateCourseStatus(_id, "Published", "success");
+  const handleApprove = (_id) => updateCourseStatus(id, "Published", "success");
 
   // ✅ Reject → Rejected
   const handleReject = (_id) => updateCourseStatus(_id, "Rejected", "error");
