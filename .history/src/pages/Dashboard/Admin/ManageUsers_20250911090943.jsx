@@ -8,16 +8,21 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const roleOptions = [
   { value: '', label: 'All Roles' },
   { value: 'user', label: 'User' },
-  { value: 'student', label: 'Student' },
-  { value: 'teacher', label: 'Teacher' },
+  { value: 'tourist', label: 'Tourist' },
+  { value: 'guide', label: 'Tour Guide' },
   { value: 'admin', label: 'Admin' },
+];
+
+const users = [
+  { id: 1, name: "Muhibullah Habib", email: "habib@example.com", role: "Student" },
+  { id: 2, name: "Dr. Karim", email: "karim@example.com", role: "Instructor" },
+  { id: 3, name: "Admin User", email: "admin@example.com", role: "Admin" },
 ];
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
-  
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
@@ -28,9 +33,6 @@ const ManageUsers = () => {
   })
 
   const handleRole = (user, newRole) => {
-    console.log(user)
-    console.log( newRole)
-
     Swal.fire({
       title: "Are you sure?",
       text: `Can you make ${ newRole } ${user.name}!`,
@@ -130,15 +132,15 @@ const ManageUsers = () => {
                       user.role === 'admin' ? (
                         'Admin'
                       ) : user.role === 'teacher' ? (
-                        <button className="btn btn-lg">Teacher</button>
+                        <button className="btn btn-lg">Guide</button>
                       ) : (
                         <select
                           value={user.role}
                           onChange={(e) => handleRole(user, e.target.value)}
                           className="select "
                         >
-                          <option value="student">Student</option>
-                          <option value="teacher">Teacher</option>
+                          <option value="tourist">Tourist</option>
+                          <option value="guide">Guide</option>
                           <option value="admin">Admin</option>
                         </select>
                       )

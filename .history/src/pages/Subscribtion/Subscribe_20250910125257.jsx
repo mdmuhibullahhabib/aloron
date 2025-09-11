@@ -11,7 +11,7 @@ const Subscribe = () => {
   };
 
   const plans = [
-    { id: "15 days", name: "15 days Plan", price: 80, duration: "১৫ দিন" },
+    { id: "15 days", name: "15 days Plan", price: 80, duration: "30 দিন" },
     { id: "monthly", name: "Monthly Plan", price: 150, duration: "30 দিন" },
     { id: "yearly", name: "Yearly Plan", price: 5000, duration: "365 দিন" },
   ];

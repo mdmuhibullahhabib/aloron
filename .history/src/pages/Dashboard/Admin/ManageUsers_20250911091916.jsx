@@ -17,7 +17,6 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
-  
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
@@ -137,8 +136,8 @@ const ManageUsers = () => {
                           onChange={(e) => handleRole(user, e.target.value)}
                           className="select "
                         >
-                          <option value="student">Student</option>
-                          <option value="teacher">Teacher</option>
+                          <option value="Student">Student</option>
+                          <option value="guide">Teacher</option>
                           <option value="admin">Admin</option>
                         </select>
                       )

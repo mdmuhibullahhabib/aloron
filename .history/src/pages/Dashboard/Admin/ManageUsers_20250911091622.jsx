@@ -13,11 +13,16 @@ const roleOptions = [
   { value: 'admin', label: 'Admin' },
 ];
 
+// const users = [
+//   { id: 1, name: "Muhibullah Habib", email: "habib@example.com", role: "Student" },
+//   { id: 2, name: "Dr. Karim", email: "karim@example.com", role: "Instructor" },
+//   { id: 3, name: "Admin User", email: "admin@example.com", role: "Admin" },
+// ];
+
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
-  
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
@@ -30,26 +35,25 @@ const ManageUsers = () => {
   const handleRole = (user, newRole) => {
     console.log(user)
     console.log( newRole)
-
-    Swal.fire({
-      title: "Are you sure?",
-      text: `Can you make ${ newRole } ${user.name}!`,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: `Yes, make ${ newRole }!`
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.patch(`/users/role/${user._id}`, { role: newRole })
-          .then(res => {
-            refetch();
-            if (res.data.modifiedCound > 0) {
-              Swal.fire('Success', `${user.name} is now a ${newRole}.`, 'success');
-            }
-          })
-      }
-    });
+    // Swal.fire({
+    //   title: "Are you sure?",
+    //   text: `Can you make ${ newRole } ${user.name}!`,
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: `Yes, make ${ newRole }!`
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     axiosSecure.patch(`/users/role/${user._id}`, { role: newRole })
+    //       .then(res => {
+    //         refetch();
+    //         if (res.data.modifiedCound > 0) {
+    //           Swal.fire('Success', `${user.name} is now a ${newRole}.`, 'success');
+    //         }
+    //       })
+    //   }
+    // });
   }
 
   const handleDeleteUser = user => {
@@ -137,8 +141,8 @@ const ManageUsers = () => {
                           onChange={(e) => handleRole(user, e.target.value)}
                           className="select "
                         >
-                          <option value="student">Student</option>
-                          <option value="teacher">Teacher</option>
+                          <option value="tourist">Student</option>
+                          <option value="guide">Teacher</option>
                           <option value="admin">Admin</option>
                         </select>
                       )

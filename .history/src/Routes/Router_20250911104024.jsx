@@ -37,7 +37,6 @@ import MyCourses from '../pages/Dashboard/Controller/MyCourses';
 import AddCourse from '../pages/Dashboard/Admin/AddCourse';
 import Subscribe from '../pages/Subscribtion/Subscribe';
 import PaymentPage from '../pages/Subscribtion/PaymentPage';
-import ManageCourses from '../pages/Dashboard/Admin/ManageCourses/ManageCourses';
 
 
 const Router = createBrowserRouter([

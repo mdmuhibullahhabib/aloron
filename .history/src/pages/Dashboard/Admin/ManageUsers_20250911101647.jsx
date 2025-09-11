@@ -17,6 +17,7 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
+    const [courses] = useCourses();
   
 
   const { data: users = [], refetch } = useQuery({

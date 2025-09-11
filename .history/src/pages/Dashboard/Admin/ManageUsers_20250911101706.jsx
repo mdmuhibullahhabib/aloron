@@ -4,6 +4,7 @@ import { FaSearch, FaTrashAlt, FaUsers } from 'react-icons/fa';
 import { useQuery } from '@tanstack/react-query'
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useCourses from '../../../hooks/useCourses';
 
 const roleOptions = [
   { value: '', label: 'All Roles' },
@@ -17,6 +18,7 @@ const ManageUsers = () => {
   const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
+    const [courses, re] = useCourses();
   
 
   const { data: users = [], refetch } = useQuery({

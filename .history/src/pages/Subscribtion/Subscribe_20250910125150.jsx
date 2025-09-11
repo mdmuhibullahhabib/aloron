@@ -7,7 +7,7 @@ const Subscribe = () => {
 
   const handleSubscribe = (plan) => {
     // এখানে পেমেন্ট পেজে পাঠানো হবে
-    navigate("/payment", { state: { plan } });
+    navigate("/subscription/payment", { state: { plan } });
   };
 
   const plans = [

@@ -20,7 +20,7 @@ import SignUp from '../pages/Auth/SignUp';
 import Shop from '../pages/Shop/Shop';
 import Dashboard from '../Layouts/Dashboard/Dashboard';
 import ManageUsers from '../pages/Dashboard/Admin/ManageUsers';
-// import ManageCourses from '../pages/Dashboard/Admin/ManageCourses';
+import ManageCourses from '../pages/Dashboard/Admin/ManageCourses';
 import Reports from '../pages/Dashboard/Admin/Reports';
 import EnrolledCourses from '../pages/Dashboard/Student/EnrolledCourses';
 import MyProgress from '../pages/Dashboard/Student/MyProgress';
@@ -37,7 +37,6 @@ import MyCourses from '../pages/Dashboard/Controller/MyCourses';
 import AddCourse from '../pages/Dashboard/Admin/AddCourse';
 import Subscribe from '../pages/Subscribtion/Subscribe';
 import PaymentPage from '../pages/Subscribtion/PaymentPage';
-import ManageCourses from '../pages/Dashboard/Admin/ManageCourses/ManageCourses';
 
 
 const Router = createBrowserRouter([

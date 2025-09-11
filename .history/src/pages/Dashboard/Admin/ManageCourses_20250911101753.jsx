@@ -18,6 +18,7 @@ import {
   FaFilter,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
+import useCourses from "../../../hooks/useCourses";
 
 const ManageCourses = () => {
   const [courses, setCourses] = useState([
@@ -63,6 +64,8 @@ const ManageCourses = () => {
   const [selectedDetails, setSelectedDetails] = useState(null);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+      const [courses, refetch] = useCourses();
+  
 
   // Approve course
   const handleApprove = (id) => {
