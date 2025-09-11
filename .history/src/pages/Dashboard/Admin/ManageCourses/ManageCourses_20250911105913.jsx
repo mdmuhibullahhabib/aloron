@@ -18,7 +18,8 @@ import {
   FaFilter,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+// import useCourses from "../../../hooks/useCourses";
+import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import CourseCurriculumModal from "./CourseCurriculumModal";
 import CourseDetailsModal from "./CourseDetailsModal";
 import CourseEditModal from "./CourseEditModal";
@@ -32,76 +33,62 @@ const ManageCourses = () => {
   const [selectedStudents, setSelectedStudents] = useState(null);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
-  const axiosSecure = useAxiosSecure();
 
   const [courses, refetch] = useCourses();
+  const axiosPublic = useAxiosPublic();
 
-  // ✅ Update course status helper
-  const updateCourseStatus = async (id, status, toastType = "success") => {
-    if (!id) return;
-    try {
-      await axiosSecure.patch(`/courses/${id}`, { status });
-      if (toastType === "success") {
-        toast.success(`✅ কোর্স ${status} হয়েছে`);
-      } else if (toastType === "error") {
-        toast.error(`❌ কোর্স ${status} হয়েছে`);
-      }
-      refetch();
-    } catch (err) {
-      console.error("Status update error:", err.response?.data || err.message);
-      toast.error("Status update ব্যর্থ হয়েছে!");
-    }
+  // Approve course
+  const handleApprove = async (id) => {
+    await axiosPublic.patch(`/courses/${id}`, { status: "Published" });
+    toast.success("✅ কোর্স এপ্রুভ হয়েছে");
+    refetch();
   };
 
-  // ✅ Approve → Published
-  const handleApprove = (id) => updateCourseStatus(id, "Published", "success");
+  // Reject course
+  const handleReject = async (id) => {
+    await axiosPublic.patch(`/courses/${id}`, { status: "Rejected" });
+    toast.error("❌ কোর্স রিজেক্ট হয়েছে");
+    refetch();
+  };
 
-  // ✅ Reject → Rejected
-  const handleReject = (id) => updateCourseStatus(id, "Rejected", "error");
-
-  // ✅ Publish / Unpublish toggle
-  const handleTogglePublish = (id, currentStatus) => {
-    const newStatus = currentStatus === "Published" ? "Unpublished" : "Published";
-    updateCourseStatus(id, newStatus, "success");
+  // Toggle publish/unpublish
+  const handleTogglePublish = async (id, currentStatus) => {
+    const newStatus = currentStatus === "Published" ? "Draft" : "Published";
+    await axiosPublic.patch(`/courses/${id}`, { status: newStatus });
+    toast.success(
+      newStatus === "Published"
+        ? "✅ কোর্স Published হয়েছে"
+        : "⏸️ কোর্স Unpublished হয়েছে"
+    );
+    refetch();
   };
 
   // Delete course
   const handleDelete = async (id) => {
-    if (!id) return;
     if (confirm("আপনি কি নিশ্চিত এই কোর্স ডিলিট করতে চান?")) {
-      try {
-        await axiosSecure.delete(`/courses/${id}`);
-        toast.error("🗑️ কোর্স ডিলিট হয়েছে");
-        refetch();
-      } catch (err) {
-        console.error("Delete error:", err.response?.data || err.message);
-        toast.error("Delete ব্যর্থ হয়েছে!");
-      }
+      await axiosPublic.delete(`/courses/${id}`);
+      toast.error("🗑️ কোর্স ডিলিট হয়েছে");
+      refetch();
     }
   };
 
   // Duplicate course
   const handleDuplicate = async (course) => {
-    if (!course) return;
     const newCourse = {
       ...course,
       _id: undefined,
       title: course.title + " (Copy)",
-      status: "Unpublished",
+      status: "Draft",
     };
-    try {
-      await axiosSecure.post("/courses", newCourse);
-      toast.success("📑 কোর্স ডুপ্লিকেট হয়েছে");
-      refetch();
-    } catch (err) {
-      console.error("Duplicate error:", err.response?.data || err.message);
-      toast.error("Duplicate ব্যর্থ হয়েছে!");
-    }
+    await axiosPublic.post("/courses", newCourse);
+    toast.success("📑 কোর্স ডুপ্লিকেট হয়েছে");
+    refetch();
   };
 
   // Students
   const handleViewStudents = (course) => {
     toast.success(`${course.title} কোর্সের শিক্ষার্থীদের লিস্ট আসবে`);
+    // TODO: Make Students Modal later
   };
 
   // Filter + Search
@@ -110,8 +97,8 @@ const ManageCourses = () => {
       (filter ? c.status === filter : true) &&
       (search
         ? c.title.toLowerCase().includes(search.toLowerCase()) ||
-          c.subject.toLowerCase().includes(search.toLowerCase()) ||
-          c.teacher.toLowerCase().includes(search.toLowerCase())
+        c.subject.toLowerCase().includes(search.toLowerCase()) ||
+        c.teacher.toLowerCase().includes(search.toLowerCase())
         : true)
   );
 
@@ -133,7 +120,7 @@ const ManageCourses = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Published">Published</option>
-            <option value="Unpublished">Unpublished</option>
+            <option value="Draft">Draft</option>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
           </select>
@@ -159,6 +146,7 @@ const ManageCourses = () => {
               key={course._id}
               className="bg-white shadow-md rounded-xl p-6 border border-gray-200 flex flex-col"
             >
+              {/* Title */}
               <h3 className="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
                 <FaBookOpen className="text-green-600" /> {course.title}
               </h3>
@@ -183,23 +171,24 @@ const ManageCourses = () => {
 
               {/* Status */}
               <span
-                className={`inline-block px-3 py-1 text-xs rounded-full font-medium mb-3 ${
-                  course.status === "Published"
+                className={`inline-block px-3 py-1 text-xs rounded-full font-medium mb-3 ${course.status === "Published"
                     ? "bg-green-100 text-green-700"
-                    : course.status === "Unpublished"
-                    ? "bg-yellow-100 text-yellow-700"
-                    : course.status === "Pending"
-                    ? "bg-blue-100 text-blue-700"
-                    : "bg-red-100 text-red-700"
-                }`}
+                    : course.status === "Draft"
+                      ? "bg-yellow-100 text-yellow-700"
+                      : course.status === "Pending"
+                        ? "bg-blue-100 text-blue-700"
+                        : "bg-red-100 text-red-700"
+                  }`}
               >
                 {course.status}
               </span>
 
               <p className="text-sm text-gray-600 mb-3 flex items-center gap-2">
-                <FaUsers className="text-blue-600" /> শিক্ষার্থী: {course.students}
+                <FaUsers className="text-blue-600" /> শিক্ষার্থী:{" "}
+                {course.students}
               </p>
 
+              {/* Buttons */}
               <div className="flex flex-wrap gap-2 mt-auto">
                 {course.status === "Pending" && (
                   <>
@@ -234,9 +223,10 @@ const ManageCourses = () => {
 
                 <button
                   onClick={() => handleTogglePublish(course._id, course.status)}
-                  className={`btn btn-xs text-white ${
-                    course.status === "Published" ? "bg-yellow-600" : "bg-green-600"
-                  }`}
+                  className={`btn btn-xs text-white ${course.status === "Published"
+                      ? "bg-yellow-600"
+                      : "bg-green-600"
+                    }`}
                 >
                   {course.status === "Published" ? <FaToggleOff /> : <FaToggleOn />}
                   {course.status === "Published" ? "Unpublish" : "Publish"}
@@ -295,6 +285,7 @@ const ManageCourses = () => {
           refetch={refetch}
         />
       )}
+
       {selectedStudents && (
         <CourseStudentsModal
           course={selectedStudents}

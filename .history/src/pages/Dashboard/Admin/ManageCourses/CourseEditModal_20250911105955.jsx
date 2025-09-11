@@ -22,7 +22,7 @@ const CourseEditModal = ({ course, onClose, refetch }) => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      await axiosSecure.patch(`/courses/${course._id}`, formData);
+      await axiosPublic.patch(`/courses/${course._id}`, formData);
       toast.success("✅ কোর্স সফলভাবে আপডেট হয়েছে");
       refetch();
       onClose();

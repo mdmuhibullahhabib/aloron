@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import toast from "react-hot-toast";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const CourseEditModal = ({ course, onClose, refetch }) => {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosPublic();
   const [formData, setFormData] = useState({
     title: course.title,
     subject: course.subject,
@@ -22,7 +21,7 @@ const CourseEditModal = ({ course, onClose, refetch }) => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      await axiosSecure.patch(`/courses/${course._id}`, formData);
+      await axiosPublic.patch(`/courses/${course._id}`, formData);
       toast.success("✅ কোর্স সফলভাবে আপডেট হয়েছে");
       refetch();
       onClose();

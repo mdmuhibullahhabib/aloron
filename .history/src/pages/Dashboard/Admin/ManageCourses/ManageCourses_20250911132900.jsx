@@ -38,19 +38,20 @@ const ManageCourses = () => {
 
   // ✅ Update course status helper
   const updateCourseStatus = async (id, status, toastType = "success") => {
-    if (!id) return;
-    try {
-      await axiosSecure.patch(`/courses/${id}`, { status });
-      if (toastType === "success") {
-        toast.success(`✅ কোর্স ${status} হয়েছে`);
-      } else if (toastType === "error") {
-        toast.error(`❌ কোর্স ${status} হয়েছে`);
-      }
-      refetch();
-    } catch (err) {
-      console.error("Status update error:", err.response?.data || err.message);
-      toast.error("Status update ব্যর্থ হয়েছে!");
-    }
+    // if (!id) return;
+    // try {
+    //   const res = await axiosSecure.patch(`/courses/${id}`, { status });
+    //   if (toastType === "success") {
+    //     toast.success(`✅ কোর্স ${status} হয়েছে`);
+    //   } else if (toastType === "error") {
+    //     toast.error(`❌ কোর্স ${status} হয়েছে`);
+    //   }
+    //   refetch();
+    // } catch (err) {
+    //   console.error("Status update error:", err.response?.data || err.message);
+    //   toast.error("Status update ব্যর্থ হয়েছে!");
+    // }
+    console.log
   };
 
   // ✅ Approve → Published
@@ -61,7 +62,7 @@ const ManageCourses = () => {
 
   // ✅ Publish / Unpublish toggle
   const handleTogglePublish = (id, currentStatus) => {
-    const newStatus = currentStatus === "Published" ? "Unpublished" : "Published";
+    const newStatus = currentStatus === "Published" ? "Draft" : "Published";
     updateCourseStatus(id, newStatus, "success");
   };
 
@@ -87,7 +88,7 @@ const ManageCourses = () => {
       ...course,
       _id: undefined,
       title: course.title + " (Copy)",
-      status: "Unpublished",
+      status: "Draft",
     };
     try {
       await axiosSecure.post("/courses", newCourse);
@@ -133,7 +134,7 @@ const ManageCourses = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Published">Published</option>
-            <option value="Unpublished">Unpublished</option>
+            <option value="Draft">Draft</option>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
           </select>
@@ -186,7 +187,7 @@ const ManageCourses = () => {
                 className={`inline-block px-3 py-1 text-xs rounded-full font-medium mb-3 ${
                   course.status === "Published"
                     ? "bg-green-100 text-green-700"
-                    : course.status === "Unpublished"
+                    : course.status === "Draft"
                     ? "bg-yellow-100 text-yellow-700"
                     : course.status === "Pending"
                     ? "bg-blue-100 text-blue-700"

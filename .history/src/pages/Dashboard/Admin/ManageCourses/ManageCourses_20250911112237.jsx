@@ -18,93 +18,75 @@ import {
   FaFilter,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import CourseCurriculumModal from "./CourseCurriculumModal";
-import CourseDetailsModal from "./CourseDetailsModal";
-import CourseEditModal from "./CourseEditModal";
 import useCourses from "../../../../hooks/useCourses";
+import useAxiosSecure from "../../../../hooks/useAxiosPrivate"; // JWT বা Auth Axios
+import CourseCurriculumModal from "./CourseCurriculumModal";
 import CourseStudentsModal from "./CourseStudentsModal";
+import CourseEditModal from "./CourseEditModal";
 
 const ManageCourses = () => {
+  const axiosPrivate = useAxiosPrivate(); // ব্যাকএন্ড কলের জন্য
   const [selectedCurriculum, setSelectedCurriculum] = useState(null);
-  const [selectedDetails, setSelectedDetails] = useState(null);
-  const [selectedEdit, setSelectedEdit] = useState(null);
   const [selectedStudents, setSelectedStudents] = useState(null);
+  const [selectedEdit, setSelectedEdit] = useState(null);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
-  const axiosSecure = useAxiosSecure();
 
+  // কাস্টম হুক থেকে কোর্স ডেটা এবং refetch
   const [courses, refetch] = useCourses();
 
-  // ✅ Update course status helper
-  const updateCourseStatus = async (id, status, toastType = "success") => {
-    if (!id) return;
+  // -----------------------
+  // Backend Status Update
+  // -----------------------
+  const updateCourseStatus = async (courseId, status) => {
     try {
-      await axiosSecure.patch(`/courses/${id}`, { status });
-      if (toastType === "success") {
-        toast.success(`✅ কোর্স ${status} হয়েছে`);
-      } else if (toastType === "error") {
-        toast.error(`❌ কোর্স ${status} হয়েছে`);
-      }
+      // PATCH রিকোয়েস্ট ব্যাকএন্ডে
+      await axiosPrivate.patch(`/courses/${courseId}`, { status });
+      toast.success(`কোর্স স্ট্যাটাস পরিবর্তন হয়েছে: ${status}`);
+      refetch(); // কোর্স তালিকা আপডেট
+    } catch (err) {
+      console.error(err);
+      toast.error("কোর্স স্ট্যাটাস পরিবর্তন ব্যর্থ হয়েছে!");
+    }
+  };
+
+  // -----------------------
+  // Course Operations
+  // -----------------------
+  const handleApprove = (id) => updateCourseStatus(id, "Published");
+  const handleReject = (id) => updateCourseStatus(id, "Rejected");
+  const handleTogglePublish = (course) =>
+    updateCourseStatus(
+      course._id,
+      course.status === "Published" ? "Draft" : "Published"
+    );
+  const handleDelete = async (courseId) => {
+    try {
+      await axiosPrivate.delete(`/courses/${courseId}`);
+      toast.success("কোর্স ডিলিট হয়েছে");
       refetch();
     } catch (err) {
-      console.error("Status update error:", err.response?.data || err.message);
-      toast.error("Status update ব্যর্থ হয়েছে!");
+      console.error(err);
+      toast.error("ডিলিট ব্যর্থ হয়েছে!");
     }
   };
-
-  // ✅ Approve → Published
-  const handleApprove = (id) => updateCourseStatus(id, "Published", "success");
-
-  // ✅ Reject → Rejected
-  const handleReject = (id) => updateCourseStatus(id, "Rejected", "error");
-
-  // ✅ Publish / Unpublish toggle
-  const handleTogglePublish = (id, currentStatus) => {
-    const newStatus = currentStatus === "Published" ? "Unpublished" : "Published";
-    updateCourseStatus(id, newStatus, "success");
-  };
-
-  // Delete course
-  const handleDelete = async (id) => {
-    if (!id) return;
-    if (confirm("আপনি কি নিশ্চিত এই কোর্স ডিলিট করতে চান?")) {
-      try {
-        await axiosSecure.delete(`/courses/${id}`);
-        toast.error("🗑️ কোর্স ডিলিট হয়েছে");
-        refetch();
-      } catch (err) {
-        console.error("Delete error:", err.response?.data || err.message);
-        toast.error("Delete ব্যর্থ হয়েছে!");
-      }
-    }
-  };
-
-  // Duplicate course
   const handleDuplicate = async (course) => {
-    if (!course) return;
-    const newCourse = {
-      ...course,
-      _id: undefined,
-      title: course.title + " (Copy)",
-      status: "Unpublished",
-    };
     try {
-      await axiosSecure.post("/courses", newCourse);
-      toast.success("📑 কোর্স ডুপ্লিকেট হয়েছে");
+      const newCourse = { ...course, title: course.title + " (Copy)" };
+      delete newCourse._id; // MongoDB নতুন আইডি জেনারেট করবে
+      newCourse.status = "Draft";
+
+      await axiosPrivate.post(`/courses`, newCourse);
+      toast.success("কোর্স ডুপ্লিকেট হয়েছে");
       refetch();
     } catch (err) {
-      console.error("Duplicate error:", err.response?.data || err.message);
-      toast.error("Duplicate ব্যর্থ হয়েছে!");
+      console.error(err);
+      toast.error("ডুপ্লিকেট ব্যর্থ হয়েছে!");
     }
   };
 
-  // Students
-  const handleViewStudents = (course) => {
-    toast.success(`${course.title} কোর্সের শিক্ষার্থীদের লিস্ট আসবে`);
-  };
-
-  // Filter + Search
+  const handleViewStudents = (course) => setSelectedStudents(course);
+  const handleEdit = (course) => setSelectedEdit(course);
   const filteredCourses = courses.filter(
     (c) =>
       (filter ? c.status === filter : true) &&
@@ -133,7 +115,7 @@ const ManageCourses = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Published">Published</option>
-            <option value="Unpublished">Unpublished</option>
+            <option value="Draft">Draft</option>
             <option value="Pending">Pending</option>
             <option value="Rejected">Rejected</option>
           </select>
@@ -159,6 +141,7 @@ const ManageCourses = () => {
               key={course._id}
               className="bg-white shadow-md rounded-xl p-6 border border-gray-200 flex flex-col"
             >
+              {/* Title */}
               <h3 className="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
                 <FaBookOpen className="text-green-600" /> {course.title}
               </h3>
@@ -186,7 +169,7 @@ const ManageCourses = () => {
                 className={`inline-block px-3 py-1 text-xs rounded-full font-medium mb-3 ${
                   course.status === "Published"
                     ? "bg-green-100 text-green-700"
-                    : course.status === "Unpublished"
+                    : course.status === "Draft"
                     ? "bg-yellow-100 text-yellow-700"
                     : course.status === "Pending"
                     ? "bg-blue-100 text-blue-700"
@@ -197,21 +180,23 @@ const ManageCourses = () => {
               </span>
 
               <p className="text-sm text-gray-600 mb-3 flex items-center gap-2">
-                <FaUsers className="text-blue-600" /> শিক্ষার্থী: {course.students}
+                <FaUsers className="text-blue-600" /> শিক্ষার্থী:{" "}
+                {course.students || 0}
               </p>
 
+              {/* Buttons */}
               <div className="flex flex-wrap gap-2 mt-auto">
                 {course.status === "Pending" && (
                   <>
                     <button
                       onClick={() => handleApprove(course._id)}
-                      className="btn btn-xs bg-green-600 text-white"
+                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white text-sm"
                     >
                       <FaCheckCircle /> Approve
                     </button>
                     <button
                       onClick={() => handleReject(course._id)}
-                      className="btn btn-xs bg-red-600 text-white"
+                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                     >
                       <FaTimesCircle /> Reject
                     </button>
@@ -219,55 +204,64 @@ const ManageCourses = () => {
                 )}
 
                 <button
-                  onClick={() => setSelectedCurriculum(course)}
-                  className="btn btn-xs bg-purple-600 text-white"
-                >
-                  <FaListUl /> কারিকুলাম
-                </button>
-
-                <button
-                  onClick={() => setSelectedDetails(course)}
-                  className="btn btn-xs bg-gray-700 text-white"
-                >
-                  <FaInfoCircle /> Details
-                </button>
-
-                <button
-                  onClick={() => handleTogglePublish(course._id, course.status)}
-                  className={`btn btn-xs text-white ${
-                    course.status === "Published" ? "bg-yellow-600" : "bg-green-600"
+                  onClick={() => handleTogglePublish(course)}
+                  className={`px-3 py-2 rounded-lg flex items-center gap-1 text-white text-sm ${
+                    course.status === "Published"
+                      ? "bg-yellow-600 hover:bg-yellow-700"
+                      : "bg-green-600 hover:bg-green-700"
                   }`}
                 >
-                  {course.status === "Published" ? <FaToggleOff /> : <FaToggleOn />}
-                  {course.status === "Published" ? "Unpublish" : "Publish"}
+                  {course.status === "Published" ? (
+                    <>
+                      <FaToggleOff /> Unpublish
+                    </>
+                  ) : (
+                    <>
+                      <FaToggleOn /> Publish
+                    </>
+                  )}
                 </button>
 
                 <button
                   onClick={() => setSelectedEdit(course)}
-                  className="btn btn-xs bg-blue-600 text-white"
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm"
                 >
                   <FaEdit /> Edit
                 </button>
 
                 <button
                   onClick={() => handleViewStudents(course)}
-                  className="btn btn-xs bg-indigo-600 text-white"
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
                 >
                   <FaEye /> Students
                 </button>
 
                 <button
                   onClick={() => handleDuplicate(course)}
-                  className="btn btn-xs bg-teal-600 text-white"
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-teal-600 hover:bg-teal-700 text-white text-sm"
                 >
                   <FaCopy /> Duplicate
                 </button>
 
                 <button
                   onClick={() => handleDelete(course._id)}
-                  className="btn btn-xs bg-red-600 text-white"
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                 >
                   <FaTrash /> Delete
+                </button>
+
+                <button
+                  onClick={() => setSelectedCurriculum(course)}
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-purple-600 hover:bg-purple-700 text-white text-sm"
+                >
+                  <FaListUl /> কারিকুলাম
+                </button>
+
+                <button
+                  onClick={() => alert("কোর্স ডিটেইলস দেখুন")}
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-gray-700 hover:bg-gray-800 text-white text-sm"
+                >
+                  <FaInfoCircle /> Details
                 </button>
               </div>
             </div>
@@ -282,10 +276,10 @@ const ManageCourses = () => {
           onClose={() => setSelectedCurriculum(null)}
         />
       )}
-      {selectedDetails && (
-        <CourseDetailsModal
-          course={selectedDetails}
-          onClose={() => setSelectedDetails(null)}
+      {selectedStudents && (
+        <CourseStudentsModal
+          course={selectedStudents}
+          onClose={() => setSelectedStudents(null)}
         />
       )}
       {selectedEdit && (
@@ -293,12 +287,6 @@ const ManageCourses = () => {
           course={selectedEdit}
           onClose={() => setSelectedEdit(null)}
           refetch={refetch}
-        />
-      )}
-      {selectedStudents && (
-        <CourseStudentsModal
-          course={selectedStudents}
-          onClose={() => setSelectedStudents(null)}
         />
       )}
     </div>
