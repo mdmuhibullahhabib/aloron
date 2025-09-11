@@ -13,8 +13,7 @@ import {
   FaRegCalendarAlt,
   FaRegComments,
   FaBell,
-  FaCogs,
-  FaJediOrder
+  FaCogs
 } from 'react-icons/fa';
 import useRole from '../../hooks/useRole';
 
@@ -85,12 +84,12 @@ const Dashboard = () => {
                 <FaMoneyBillWave /> পেমেন্টস ও ইনভয়েস
               </NavLink>
               <NavLink
-                to="/dashboard/manage-orders"
+                to="/dashboard/payments"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
-                <FaJediOrder /> ম্যানেজ অর্ডার 
+                <FaMoneyBillWave /> পেমেন্টস ও ইনভয়েস
               </NavLink>
 
             </>

@@ -13,8 +13,7 @@ import {
   FaRegCalendarAlt,
   FaRegComments,
   FaBell,
-  FaCogs,
-  FaJediOrder
+  FaCogs
 } from 'react-icons/fa';
 import useRole from '../../hooks/useRole';
 
@@ -90,7 +89,7 @@ const Dashboard = () => {
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
-                <FaJediOrder /> ম্যানেজ অর্ডার 
+                <FaO /> ম্যানেজ
               </NavLink>
 
             </>

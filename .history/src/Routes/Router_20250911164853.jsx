@@ -39,7 +39,6 @@ import Subscribe from '../pages/Subscribtion/Subscribe';
 import PaymentPage from '../pages/Subscribtion/PaymentPage';
 import ManageCourses from '../pages/Dashboard/Admin/ManageCourses/ManageCourses';
 import ManageStudents from '../pages/Dashboard/Admin/ManageStudents';
-import ManageShopOrders from '../pages/Dashboard/Admin/ManageShopOrders';
 
 
 const Router = createBrowserRouter([
@@ -184,8 +183,8 @@ const Router = createBrowserRouter([
                 element: <Payments></Payments>
             },
             {
-                path: "manage-orders",
-                element: <ManageShopOrders></ManageShopOrders>
+                path: "Payments",
+                element: <ManageShopOrder
             },
             {
                 path: "Payments",

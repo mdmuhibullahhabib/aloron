@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 
 const Orders = () => {
   const [orders] = useState([

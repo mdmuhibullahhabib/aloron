@@ -184,7 +184,7 @@ const Router = createBrowserRouter([
                 element: <Payments></Payments>
             },
             {
-                path: "manage-orders",
+                path: "manage",
                 element: <ManageShopOrders></ManageShopOrders>
             },
             {

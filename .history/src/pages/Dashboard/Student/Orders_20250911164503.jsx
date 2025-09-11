@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { FaBox, FaTruck, FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAuth from "../../../hooks/useAuth";
-import { useQuery } from "@tanstack/react-query";
 
 const Orders = () => {
   const [orders] = useState([
@@ -32,16 +29,7 @@ const Orders = () => {
   // Progress steps
   const steps = ["Pending", "Shipped", "Delivered"];
 
-    const axiosSecure = useAxiosSecure();
-  const { user } = useAuth()
-
-    const { data: userOrders = [], refetch } = useQuery({
-    queryKey: ['userOrders'],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/order?email=${user.email}`)
-      return res.data;
-    }
-  })
+  
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">

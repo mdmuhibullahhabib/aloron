@@ -90,7 +90,7 @@ const Dashboard = () => {
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
-                <FaJediOrder /> ম্যানেজ অর্ডার 
+                <FaJediOrder /> ম্যানেজ 
               </NavLink>
 
             </>
