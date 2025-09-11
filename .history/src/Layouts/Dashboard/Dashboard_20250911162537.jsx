@@ -15,10 +15,9 @@ import {
   FaBell,
   FaCogs
 } from 'react-icons/fa';
-import useRole from '../../hooks/useRole';
 
 const Dashboard = () => {
-  const [isRole, isRoleLoading] = useRole();
+  
   const role = "student";
 
   return (
