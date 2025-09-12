@@ -1,0 +1,13 @@
+import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+
+const SubscriptionRoute = ({ children }) => {
+  const { user } = useAuth(); // লগিন করা ইউজারের ডেটা
+
+  if (!user?.subscription?.isActive) {
+    return <Navigate to="/subscribtion" replace />;
+  }
+  return children;
+};
+
+export default SubscriptionRoute;
