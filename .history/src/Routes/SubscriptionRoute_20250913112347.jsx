@@ -5,10 +5,9 @@ import useSubscription from '../hooks/useSubscription';
 const SubscriptionRoute = ({ children }) => {
   const [subscriptions, isLoading] = useSubscription();
 
-//  if (isLoading) {
-//     return <p>Loading...</p>;
-//   }
-
+make a beautiful loading spinner 3 sec int his code-   if (isLoading) {
+    return <p>Loading...</p>; // লোডিং এর সময় কিছু দেখান
+  }
   // subscriptions যদি array আসে, প্রথম সাবস্ক্রিপশন ধরলাম
   const subscription = Array.isArray(subscriptions) ? subscriptions[0] : subscriptions;
 

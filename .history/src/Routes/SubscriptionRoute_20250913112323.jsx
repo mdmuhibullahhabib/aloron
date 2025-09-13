@@ -5,9 +5,7 @@ import useSubscription from '../hooks/useSubscription';
 const SubscriptionRoute = ({ children }) => {
   const [subscriptions, isLoading] = useSubscription();
 
-//  if (isLoading) {
-//     return <p>Loading...</p>;
-//   }
+  // }
 
   // subscriptions যদি array আসে, প্রথম সাবস্ক্রিপশন ধরলাম
   const subscription = Array.isArray(subscriptions) ? subscriptions[0] : subscriptions;

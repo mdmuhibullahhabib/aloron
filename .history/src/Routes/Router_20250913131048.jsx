@@ -223,7 +223,7 @@ const Router = createBrowserRouter([
     },
     {
         path: "/payment",
-        element: <Payment></Payment>
+        element: <Payment
     },
     // {
     //     path: "/payment-page",

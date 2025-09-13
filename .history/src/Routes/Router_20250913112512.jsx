@@ -40,7 +40,6 @@ import ManageCourses from '../pages/Dashboard/Admin/ManageCourses/ManageCourses'
 import ManageStudents from '../pages/Dashboard/Admin/ManageStudents';
 import ManageShopOrders from '../pages/Dashboard/Admin/ManageShopOrders';
 import SubscriptionRoute from './SubscriptionRoute';
-import Payment from '../pages/Payment/ssl-Payment';
 
 
 const Router = createBrowserRouter([
@@ -223,12 +222,8 @@ const Router = createBrowserRouter([
     },
     {
         path: "/payment",
-        element: <Payment></Payment>
+        element: <PaymentPage></PaymentPage>
     },
-    // {
-    //     path: "/payment-page",
-    //     element: <PaymentPage></PaymentPage>
-    // },
 ],
 )
 
