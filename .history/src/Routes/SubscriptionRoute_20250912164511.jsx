@@ -1,0 +1,17 @@
+import React from 'react';
+import { Navigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import useSubscription from '../hooks/useSubscription';
+
+const SubscriptionRoute = ({ children }) => {
+  const { user } = useAuth(); 
+  const [ user ] = useSubscription(); 
+  
+
+  if (!user?.subscription?.isActive) {
+    return <Navigate to="/subscribtion" replace />;
+  }
+  return children;
+};
+
+export default SubscriptionRoute;
