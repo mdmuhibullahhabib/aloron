@@ -9,31 +9,31 @@ const Payment = () => {
   const { user } = useAuth();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
-  console.log(totalPrice, user?.email);
+  console.log(totalPrice, user?.email)
 
   const handleCreatePayment = async () => {
-    try {
-      const payment = {
-        email: user.email,
-        price: totalPrice,
-        transactionId: "",
-        date: new Date(),
-        cartIds: cart.map((item) => item._id),
-        menuItemIds: cart.map((item) => item.menuId),
-        status: "pending",
-      };
+    // now save the payment in the database
+    const payment = {
+      email: user.email,
+      price: totalPrice,
+      transactionId: "",
+      date: new Date(),
+      cartIds: cart.map((item) => item._id),
+      menuItemIds: cart.map((item) => item.menuId),
+      status: "pending",
+    };
 
-      const response = await axiosSecure.post("/create-ssl-payment", payment);
+    const response = await axiosSecure.post("/create-ssl-payment", payment);
+    console.log(response)
 
-      console.log("response", response.data);
 
-      if (response.data?.gatewayUrl) {
-        // redirect user to SSLCommerz payment gateway
-        window.location.replace(response.data.gatewayUrl);
-      }
-    } catch (error) {
-      console.error("Payment initiation failed", error);
+    if (response.data?.gatewayUrl) {
+      // redirect user to SSLCommerz payment gateway
+
+      window.location.replace(response.data.gatewayUrl);
     }
+
+    console.log("response", response.data);
   };
 
   return (
@@ -62,12 +62,12 @@ const Payment = () => {
             </div>
           </div>
 
-          {/* Only one button needed */}
+          {/* Button for creating order */}
           <button
             onClick={handleCreatePayment}
             className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
           >
-            Pay Now
+            Place Order
           </button>
         </div>
       </div>

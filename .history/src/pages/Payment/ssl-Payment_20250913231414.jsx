@@ -9,31 +9,31 @@ const Payment = () => {
   const { user } = useAuth();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
-  console.log(totalPrice, user?.email);
+  console.log(totalPrice, user?.email)
 
   const handleCreatePayment = async () => {
-    try {
-      const payment = {
-        email: user.email,
-        price: totalPrice,
-        transactionId: "",
-        date: new Date(),
-        cartIds: cart.map((item) => item._id),
-        menuItemIds: cart.map((item) => item.menuId),
-        status: "pending",
-      };
+    // now save the payment in the database
+    const payment = {
+      email: user.email,
+      price: totalPrice,
+      transactionId: "",
+      date: new Date(),
+      cartIds: cart.map((item) => item._id),
+      menuItemIds: cart.map((item) => item.menuId),
+      status: "pending",
+    };
 
-      const response = await axiosSecure.post("/create-ssl-payment", payment);
+    const response = await axiosSecure.post("/create-ssl-payment", payment);
+    console.log(response)
 
-      console.log("response", response.data);
 
-      if (response.data?.gatewayUrl) {
-        // redirect user to SSLCommerz payment gateway
-        window.location.replace(response.data.gatewayUrl);
-      }
-    } catch (error) {
-      console.error("Payment initiation failed", error);
+    if (response.data?.gatewayUrl) {
+      // redirect user to SSLCommerz payment gateway
+
+      window.location.replace(response.data.gatewayUrl);
     }
+
+    console.log("response", response.data);
   };
 
   return (
@@ -59,19 +59,36 @@ const Payment = () => {
                 placeholder="your.email@gmail.com"
                 readOnly
               />
+              <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
 
-          {/* Only one button needed */}
+          {/* Button for creating order */}
           <button
             onClick={handleCreatePayment}
             className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
           >
-            Pay Now
+            Place Order
           </button>
         </div>
       </div>
     </div>
+
   );
 };
 

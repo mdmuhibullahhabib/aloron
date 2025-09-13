@@ -11,30 +11,58 @@ const Payment = () => {
 
   console.log(totalPrice, user?.email);
 
+  // const handleCreatePayment = async () => {
+  //   try {
+  //     const payment = {
+  //       email: user.email,
+  //       price: totalPrice,
+  //       transactionId: "",
+  //       date: new Date(),
+  //       cartIds: cart.map((item) => item._id),
+  //       menuItemIds: cart.map((item) => item.menuId),
+  //       status: "pending",
+  //     };
+
+  //     const response = await axiosSecure.post("/create-ssl-payment", payment);
+
+  //     console.log("response", response.data);
+
+  //     if (response.data?.gatewayUrl) {
+  //       // redirect user to SSLCommerz payment gateway
+  //       window.location.replace(response.data.gatewayUrl);
+  //     }
+  //   } catch (error) {
+  //     console.error("Payment initiation failed", error);
+  //   }
+  // };
   const handleCreatePayment = async () => {
-    try {
-      const payment = {
-        email: user.email,
-        price: totalPrice,
-        transactionId: "",
-        date: new Date(),
-        cartIds: cart.map((item) => item._id),
-        menuItemIds: cart.map((item) => item.menuId),
-        status: "pending",
-      };
-
-      const response = await axiosSecure.post("/create-ssl-payment", payment);
-
-      console.log("response", response.data);
-
-      if (response.data?.gatewayUrl) {
-        // redirect user to SSLCommerz payment gateway
-        window.location.replace(response.data.gatewayUrl);
-      }
-    } catch (error) {
-      console.error("Payment initiation failed", error);
+  try {
+    if (cart.length === 0) {
+      alert("Cart is empty!");
+      return;
     }
-  };
+
+    const payment = {
+      email: user.email,
+      price: totalPrice,
+      transactionId: "",
+      date: new Date(),
+      cartIds: cart.map((item) => item._id),
+      menuItemIds: cart.map((item) => item.menuId),
+      status: "pending",
+    };
+
+    const response = await axiosSecure.post("/create-ssl-payment", payment);
+    console.log("Payment gateway response:", response.data);
+
+    if (response.data?.gatewayUrl) {
+      window.location.href = response.data.gatewayUrl;
+    }
+  } catch (error) {
+    console.error("Payment initiation failed", error.response?.data || error);
+  }
+};
+
 
   return (
     <div>
