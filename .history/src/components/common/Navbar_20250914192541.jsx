@@ -15,19 +15,20 @@ const Navbar = () => {
   const t = translations[language];
   const location = useLocation();
 
+  console.log(user)
 
 // Example: current user role (you can get it from context/auth)
 const role = "admin"; // admin | student | teacher
 
 const navLinks = [
   { name: 'প্রশ্নব্যাংক', path: '/question-bank/archive' },
-  { name: 'শপ', path: '/shop' },
+  { name: ' শপ', path: '/shop' },
   { name: 'পরীক্ষা', path: '/exams' },
   { name: 'কোর্স', path: '/courses' },
   { name: 'জার্নাল', path: '/journal' },
   { name: 'Blog', path: '/blog' },
   { 
-    name: 'Dashboard',
+    name: 'Dashboard', 
     path:
       role === 'admin'
         ? '/dashboard/reports'

@@ -27,7 +27,7 @@ const navLinks = [
   { name: 'জার্নাল', path: '/journal' },
   { name: 'Blog', path: '/blog' },
   { 
-    name: 'Dashboard',
+    name: 'Dashboard', 
     path:
       role === 'admin'
         ? '/dashboard/reports'
