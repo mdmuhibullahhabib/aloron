@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
@@ -51,8 +51,6 @@ const SignUp = () => {
                     icon: "success",
                     draggable: true
                   });
-                  navigate(from, { replace: true });
-
                 }
               })
           })

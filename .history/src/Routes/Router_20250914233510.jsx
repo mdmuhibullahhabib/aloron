@@ -64,7 +64,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "archive/:category/:cardPath",
-                        element: <PrivateRoute> <Faculty /> </PrivateRoute> ,
+                        element: <Faculty />,
                     },
                     {
                         path: "archive/:path",
@@ -76,7 +76,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "facultyexam/:title",
-                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute> ,
+                        element: <PrivateRoute> </PrivateRoute> ,
                     },
                     {
                         path: "live-exam",

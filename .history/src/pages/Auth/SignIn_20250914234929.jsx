@@ -8,9 +8,9 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { signIn } = useAuth()
-  
   const from = location.state?.from?.pathname || "/";
+  const { signIn } = useAuth()
+
    const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -20,7 +20,7 @@ const SignIn = () => {
     signIn(email, password)
       .then(result => {
         const user = result.user;
-      navigate(from, { replace: true });
+        navigate(location?.state ? location.state : "/")
         Swal.fire({
           title: "Login Successfully!",
           icon: "success",

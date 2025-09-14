@@ -51,7 +51,7 @@ const SignUp = () => {
                     icon: "success",
                     draggable: true
                   });
-                  navigate(from, { replace: true });
+                                  navigate(from, { replace: true });
 
                 }
               })

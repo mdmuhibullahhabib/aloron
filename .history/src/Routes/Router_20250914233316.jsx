@@ -42,7 +42,6 @@ import ManageShopOrders from '../pages/Dashboard/Admin/ManageShopOrders';
 import SubscriptionRoute from './SubscriptionRoute';
 import Payment from '../pages/Payment/ssl-Payment';
 import PaymentSuccess from '../pages/Payment/PaymentSuccess';
-import PrivateRoute from './PrivateRoute';
 
 
 const Router = createBrowserRouter([
@@ -64,7 +63,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "archive/:category/:cardPath",
-                        element: <PrivateRoute> <Faculty /> </PrivateRoute> ,
+                        element: <Faculty />,
                     },
                     {
                         path: "archive/:path",
@@ -76,7 +75,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "facultyexam/:title",
-                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute> ,
+                        element: < <FacultyExam />,
                     },
                     {
                         path: "live-exam",

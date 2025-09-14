@@ -38,7 +38,7 @@ const ProductDetails = () => {
         title: "Please login to add items to cart",
         timer: 2000,
       });
-    navigate("/auth/signin", { state: { from: location } });
+      navigate("/auth/signin");
       return;
     }
 

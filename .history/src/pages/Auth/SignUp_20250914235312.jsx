@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import { AuthContext } from '../../provider/AuthProvider';
@@ -11,7 +11,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [error, setError] = useState();
   const { user, signUp, setUser, updateUserProfile } = useContext(AuthContext);
-  const location = useLocation();
+  const location = useLocatio();
   const from = location.state?.from?.pathname || "/";
 
   const handleSignup = (e) => {
@@ -51,8 +51,6 @@ const SignUp = () => {
                     icon: "success",
                     draggable: true
                   });
-                  navigate(from, { replace: true });
-
                 }
               })
           })

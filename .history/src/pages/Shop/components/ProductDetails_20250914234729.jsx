@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate,useLocation } from "react-router-dom";
+import { useParams, useNavigate,useLocation, useNavigate  } from "react-router-dom";
 import { FaShoppingCart, FaArrowLeft } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useShop from "../../../hooks/useShop";
@@ -38,7 +38,7 @@ const ProductDetails = () => {
         title: "Please login to add items to cart",
         timer: 2000,
       });
-    navigate("/auth/signin", { state: { from: location } });
+      navigate("/auth/signin");
       return;
     }
 

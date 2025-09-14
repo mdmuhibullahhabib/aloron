@@ -64,7 +64,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "archive/:category/:cardPath",
-                        element: <PrivateRoute> <Faculty /> </PrivateRoute> ,
+                        element: <PrivateRoute></PrivateRoute> <Faculty />,
                     },
                     {
                         path: "archive/:path",

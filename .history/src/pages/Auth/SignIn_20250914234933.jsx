@@ -20,7 +20,7 @@ const SignIn = () => {
     signIn(email, password)
       .then(result => {
         const user = result.user;
-      navigate(from, { replace: true });
+        navigate(location?.state ? location.state : "/")
         Swal.fire({
           title: "Login Successfully!",
           icon: "success",
