@@ -84,11 +84,11 @@ const Checkout = () => {
     };
 
     navigate("/payment", {
-      state: {
-        category: "shop",
-        items: cart,
-      },
-    });
+    state: {
+      category: "shop", // explicitly send category
+      items: cart,      // send cart items
+    },
+  }););
 
 
     // if (user?.email) {

@@ -83,7 +83,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { useLocation } from "react-router-dom";
 
-const Payment = () => {
+const Payment = ({ category, item }) => {
   /**
    * Props:
    * category: "shop" | "course" | "subscription"
@@ -99,9 +99,7 @@ const Payment = () => {
   const location = useLocation();
   const { category, items } = location.state || {};
 
-console.log("categiry",category )
-console.log("items",items )
-
+console.log(car)
   // Calculate total price safely
   const totalPrice =
     category === "shop"

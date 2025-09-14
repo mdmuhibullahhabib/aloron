@@ -134,12 +134,14 @@ console.log("items",items )
         userId: user._id,
       };
 
-      const response = await axiosSecure.post("/create-ssl-payment", payment);
+      console.log(paym)
 
-      if (response.data?.gatewayUrl) {
-        // Redirect to SSLCommerz payment gateway
-        window.location.replace(response.data.gatewayUrl);
-      }
+      // const response = await axiosSecure.post("/create-ssl-payment", payment);
+
+      // if (response.data?.gatewayUrl) {
+      //   // Redirect to SSLCommerz payment gateway
+      //   window.location.replace(response.data.gatewayUrl);
+      // }
     } catch (error) {
       console.error("Payment initiation failed", error);
     }

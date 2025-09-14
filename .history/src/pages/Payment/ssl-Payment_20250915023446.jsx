@@ -83,7 +83,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { useLocation } from "react-router-dom";
 
-const Payment = () => {
+const Payment = ({ category, item }) => {
   /**
    * Props:
    * category: "shop" | "course" | "subscription"
@@ -134,12 +134,12 @@ console.log("items",items )
         userId: user._id,
       };
 
-      const response = await axiosSecure.post("/create-ssl-payment", payment);
+      // const response = await axiosSecure.post("/create-ssl-payment", payment);
 
-      if (response.data?.gatewayUrl) {
-        // Redirect to SSLCommerz payment gateway
-        window.location.replace(response.data.gatewayUrl);
-      }
+      // if (response.data?.gatewayUrl) {
+      //   // Redirect to SSLCommerz payment gateway
+      //   window.location.replace(response.data.gatewayUrl);
+      // }
     } catch (error) {
       console.error("Payment initiation failed", error);
     }

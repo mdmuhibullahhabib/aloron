@@ -134,6 +134,8 @@ console.log("items",items )
         userId: user._id,
       };
 
+      console.log(payment)
+
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 
       if (response.data?.gatewayUrl) {

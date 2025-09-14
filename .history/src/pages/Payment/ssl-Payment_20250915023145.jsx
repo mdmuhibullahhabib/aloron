@@ -83,7 +83,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { useLocation } from "react-router-dom";
 
-const Payment = () => {
+const Payment = ({ category, item }) => {
   /**
    * Props:
    * category: "shop" | "course" | "subscription"

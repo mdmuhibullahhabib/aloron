@@ -81,9 +81,8 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
-import { useLocation } from "react-router-dom";
 
-const Payment = () => {
+const Payment = ({ category, item }) => {
   /**
    * Props:
    * category: "shop" | "course" | "subscription"
@@ -96,17 +95,13 @@ const Payment = () => {
   const [cart] = useCart(); // only used for shop
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const location = useLocation();
-  const { category, items } = location.state || {};
-
-console.log("categiry",category )
-console.log("items",items )
+  const location
 
   // Calculate total price safely
   const totalPrice =
     category === "shop"
-      ? (items || cart).reduce((total, i) => total + (i.price || 0), 0)
-      : 0;
+      ? cart.reduce((total, i) => total + (i.price || 0), 0)
+      : item?.price || 0;
 
   // Payment handler
   const handleCreatePayment = async () => {
@@ -124,8 +119,8 @@ console.log("items",items )
           category === "shop"
             ? null
             : category === "course"
-              ? item?._id
-              : item?.planId,
+            ? item?._id
+            : item?.planId,
         transactionId: "",
         date: new Date(),
         cartIds: category === "shop" ? cart.map((i) => i._id) : [],
