@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
-import { FaSearch, FaTrashAlt } from 'react-icons/fa';
-import { useQuery } from '@tanstack/react-query';
+import { FaSearch, FaTrashAlt, FaUsers } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query'
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
@@ -14,71 +14,64 @@ const roleOptions = [
 ];
 
 const ManageUsers = () => {
-  const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure()
   const [search, setSearch] = useState('');
   const [selectedRole, setSelectedRole] = useState(roleOptions[0]);
+  
 
   const { data: users = [], refetch } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/users');
+      const res = await axiosSecure.get('/users')
       return res.data;
-    },
-  });
-
-  // 🔎 সার্চ এবং ফিল্টার প্রয়োগ
-  const filteredUsers = useMemo(() => {
-    return users.filter((user) => {
-      const matchSearch =
-        user.name?.toLowerCase().includes(search.toLowerCase()) ||
-        user.email?.toLowerCase().includes(search.toLowerCase());
-
-      const matchRole =
-        selectedRole.value === '' || user.role === selectedRole.value;
-
-      return matchSearch && matchRole;
-    });
-  }, [users, search, selectedRole]);
+    }
+  })
 
   const handleRole = (user, newRole) => {
+    console.log(user)
+    console.log( newRole)
+
     Swal.fire({
-      title: 'Are you sure?',
-      text: `Do you want to make ${user.name} a ${newRole}?`,
-      icon: 'warning',
+      title: "Are you sure?",
+      text: `Can you make ${ newRole } ${user.name}!`,
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: `Yes, make ${newRole}`,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, make ${ newRole }!`
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .patch(`/users/role/${user._id}`, { role: newRole })
-          .then((res) => {
+        axiosSecure.patch(`/users/role/${user._id}`, { role: newRole })
+          .then(res => {
             refetch();
-            if (res.data.modifiedCount > 0) {
+            if (res.data.modifiedCound > 0) {
               Swal.fire('Success', `${user.name} is now a ${newRole}.`, 'success');
+            }
+          })
+      }
+    });
+  }
+
+  const handleDeleteUser = user => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this User?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, Delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`)
+          .then(res => {
+            refetch()
+            console.log(res)
+            if (res.data.deletedCount > 0) {
+              Swal.fire('Deleted!', 'Your User has been Delete.', 'success');
             }
           });
       }
     });
-  };
-
-  const handleDeleteUser = (user) => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to delete this user?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/users/${user._id}`).then((res) => {
-          refetch();
-          if (res.data.deletedCount > 0) {
-            Swal.fire('Deleted!', 'User has been deleted.', 'success');
-          }
-        });
-      }
-    });
-  };
+  }
 
   return (
     <div className="p-6 bg-base-100 rounded shadow">
@@ -119,8 +112,8 @@ const ManageUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.length ? (
-              filteredUsers.map((user, index) => (
+            {users.length ? (
+              users.map((user, index) => (
                 <tr key={user._id}>
                   <td>{index + 1}</td>
                   <td>
@@ -133,33 +126,35 @@ const ManageUsers = () => {
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td className="capitalize">
-                    {user.role === 'admin' ? (
-                      'Admin'
-                    ) : (
-                      <select
-                        value={user.role}
-                        onChange={(e) => handleRole(user, e.target.value)}
-                        className="select"
-                      >
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="admin">Admin</option>
-                      </select>
-                    )}
+                    {
+                      user.role === 'admin' ? (
+                        'Admin'
+                      ) : user.role === 'teacher' ? (
+                        <button className="btn btn-lg">Teacher</button>
+                      ) : (
+                        <select
+                          value={user.role}
+                          onChange={(e) => handleRole(user, e.target.value)}
+                          className="select "
+                        >
+                          <option value="student">Student</option>
+                          <option value="teacher">Teacher</option>
+                          <option value="admin">Admin</option>
+                        </select>
+                      )
+                    }
                   </td>
+
                   <td>
-                    <button
-                      onClick={() => handleDeleteUser(user)}
-                      className="btn btn-ghost btn-lg"
-                    >
-                      <FaTrashAlt className="text-red-600" />
+                    <button onClick={() => handleDeleteUser(user)} className='btn btn-ghost btn-lg'>
+                      <FaTrashAlt className='text-red-600'></FaTrashAlt>
                     </button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="6" className="text-center py-4">
+                <td colSpan="5" className="text-center py-4">
                   No users found.
                 </td>
               </tr>
@@ -170,5 +165,6 @@ const ManageUsers = () => {
     </div>
   );
 };
+
 
 export default ManageUsers;
