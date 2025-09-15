@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import Dropdowns from "./Dropdowns"; 
 import useExamQuestion from "../../hooks/useExamQuestion";
 import useAuth from "../../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
 
 const Exampage = () => {
   const [started, setStarted] = useState(false);
@@ -18,8 +17,8 @@ const Exampage = () => {
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
 
-    const { user } = useAuth();
-  const navigate = useNavigate(); 
+    const { user } = useAuth(); // ✅ [3] ইউজার অবজেক্ট
+  const navigate = useNavigate(); // ✅ [4]
   const location = useLocation(); 
 
   useEffect(() => {
@@ -73,16 +72,6 @@ const Exampage = () => {
     const m = Math.floor(seconds / 60).toString().padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
-  };
-
-    // ✅ [6] Start Exam button handler
-  const handleStartExam = () => {
-    if (!user?.email) {
-      // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
-      navigate("/auth/signin", { state: { from: location } });
-      return;
-    }
-    setStarted(true);
   };
 
   // if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
@@ -175,7 +164,7 @@ const Exampage = () => {
       <button
         className="w-full bg-green-500 text-white py-2 rounded-lg shadow hover:bg-green-600 disabled:opacity-50"
         disabled={!selected.chapter || questionSet.length === 0}
-        onClick={handleStartExam}
+        onClick={() => setStarted(true)}
       >
         শুরু করি
       </button>

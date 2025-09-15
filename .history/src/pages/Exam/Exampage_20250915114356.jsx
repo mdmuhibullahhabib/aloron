@@ -18,7 +18,7 @@ const Exampage = () => {
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
 
-    const { user } = useAuth();
+    const { user } = useAuth(); // ✅ [3] ইউজার অবজেক্ট
   const navigate = useNavigate(); 
   const location = useLocation(); 
 

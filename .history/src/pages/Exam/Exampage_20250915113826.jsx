@@ -18,8 +18,8 @@ const Exampage = () => {
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
 
-    const { user } = useAuth();
-  const navigate = useNavigate(); 
+    const { user } = useAuth(); // ✅ [3] ইউজার অবজেক্ট
+  const navigate = useNavigate(); // ✅ [4]
   const location = useLocation(); 
 
   useEffect(() => {
@@ -175,8 +175,7 @@ const Exampage = () => {
       <button
         className="w-full bg-green-500 text-white py-2 rounded-lg shadow hover:bg-green-600 disabled:opacity-50"
         disabled={!selected.chapter || questionSet.length === 0}
-        onClick={handleStartExam}
-      >
+        onClick={handleStartExam}      >
         শুরু করি
       </button>
     </div>
