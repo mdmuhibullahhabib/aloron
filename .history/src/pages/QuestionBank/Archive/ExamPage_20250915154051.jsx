@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FaLock, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import useSubscription from "../../../hooks/useSubscription";
-import { useNavigate } from "react-router-dom";
+import { FaLock } from "react-icons/fa";
+
 
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [selected, setSelected] = useState({});
-  const [openExplanation, setOpenExplanation] = useState({});
-  const [user, , isLoading] = useSubscription()
-  const navigate = useNavigate(); 
+  const [activeCategory, setActiveCategory] = useState("All"); // ✅ CHANGE-1: Category filter state
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +27,7 @@ const ExamPage = () => {
             correct: "ঘনত্ব",
             tag: "CU A 13-14",
             topic: "ভৌত রাশি ও পরিমাপ",
-            explanation:
-              "মৌলিক রাশি হলো যেগুলো অন্য কোনো রাশি দিয়ে প্রকাশ করা যায় না। ঘনত্ব ভর ও আয়তনের উপর নির্ভরশীল, তাই এটি মৌলিক নয়।",
+            category: "MCQ",
           },
           {
             _id: "q2",
@@ -40,8 +36,7 @@ const ExamPage = () => {
             correct: "10⁻¹⁰",
             tag: "RU C 16-17",
             topic: "পরিমাপ",
-            explanation:
-              "১ Å (অ্যাংস্ট্রম) = 10⁻¹⁰ মিটার, এটি সাধারণত পরমাণুর ব্যাস বা ছোট মাপ বোঝাতে ব্যবহৃত হয়।",
+            category: "MCQ",
           },
         ],
       };
@@ -60,17 +55,19 @@ const ExamPage = () => {
     fetchData();
   }, []);
 
-  // ✅ Toggle dropdown open/close
-  const handleToggle = (id) => {
-    setOpenExplanation((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
+    // ✅ CHANGE-3: Filtered questions by category
+  const filteredQuestions =
+    activeCategory === "All"
+      ? questions
+      : questions.filter((q) => q.category === activeCategory);
+
 
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 px-6 py-6">
-      <h1 className="text-2xl font-bold mb-4">
-        পদার্থবিজ্ঞান ১ম পত্র (Varsity)
-      </h1>
+      {/* Header */}
+      <h1 className="text-2xl font-bold mb-4">পদার্থবিজ্ঞান ১ম পত্র (Varsity)</h1>
 
+      {/* Topics from DB */}
       <div className="flex flex-wrap gap-2 mb-6">
         {topics.map((t, idx) => (
           <span
@@ -82,6 +79,7 @@ const ExamPage = () => {
         ))}
       </div>
 
+      {/* Toggle */}
       <div className="flex gap-4 mb-6">
         <button className="px-4 py-2 rounded-full bg-blue-500 text-white">
           MCQ
@@ -89,6 +87,7 @@ const ExamPage = () => {
         <button className="px-4 py-2 rounded-full bg-gray-200">Written</button>
       </div>
 
+      {/* Questions from DB */}
       <div className="space-y-6">
         {questions.map((q) => (
           <div
@@ -110,49 +109,19 @@ const ExamPage = () => {
                     setSelected((prev) => ({ ...prev, [q._id]: opt }))
                   }
                   className={`px-3 py-2 text-left rounded-lg border transition ${selected[q._id] === opt
-                    ? opt === q.correct
-                      ? "bg-green-100 border-green-400 text-green-700"
-                      : "bg-red-100 border-red-400 text-red-700"
-                    : "bg-gray-50 border-gray-300 hover:bg-gray-100"
+                      ? opt === q.correct
+                        ? "bg-green-100 border-green-400 text-green-700"
+                        : "bg-red-100 border-red-400 text-red-700"
+                      : "bg-gray-50 border-gray-300 hover:bg-gray-100"
                     }`}
                 >
                   {opt}
                 </button>
               ))}
             </div>
-
-            {/* ✅ Collapsible explanation dropdown */}
-            {user[0]?.status === "active" ? (
-              <div className="mt-2">
-                <button
-                  onClick={() => handleToggle(q._id)}
-                  className="w-full flex justify-between items-center px-3 py-2 text-left bg-blue-50 border border-blue-200 rounded hover:bg-blue-100"
-                >
-                  <span className="flex items-center">
-                    <FaLock className="mr-2" />
-                    ব্যাখ্যা
-                  </span>
-                  {openExplanation[q._id] ? <FaChevronUp /> : <FaChevronDown />}
-                </button>
-
-                {openExplanation[q._id] && (
-                  <div className="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 rounded">
-                    {q.explanation}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="btn w-full mt-2">
-                <button
-                  onClick={() => navigate("/subscription")}  
-                  className="text-center flex items-center w-full justify-center bg-red-100 hover:bg-red-200 px-3 py-2 rounded-md transition"
-                >
-                  <FaLock className="mt-1 mr-2" />
-                  ব্যাখ্যা আনলক করতে আলোড়ন প্রিমিয়াম এ আপগ্রেড করো
-                </button>
-              </div>
-            )}
-
+            <div className="btn w-full mt-2">
+              <button className="text-center flex  item-center"> <FaLock className="mt-1 mr-2" /> ব্যাখ্যা আনলক করতে আলোড়ন  প্রিমিয়াম এ আপগ্রেড করো </button>
+            </div>
           </div>
         ))}
       </div>

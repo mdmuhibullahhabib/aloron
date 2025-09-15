@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom"; // ✅ CHANGE 1: added useNavigate
+import { Link, useParams } from "react-router-dom";
 import useSubscription from "../../../hooks/useSubscription";
 
+// Example data updated to match the screenshot's design
 const facultiesData = [
   {
     id: 1,
     title: "23-24",
     subtitle: "Admission Question",
     path: "bup-fst",
-    color: "#e2e8f0",
+    color: "#e2e8f0", // A light gray for the card background
     questionCount: 30,
     duration: 60,
   },
@@ -68,19 +69,30 @@ const facultiesData = [
   },
 ];
 
+const facultyQuestions = {
+  "bup-fst": [
+    { id: 1, question: "What is 2+2?" },
+    { id: 2, question: "Who is the founder of BUP?" },
+  ],
+  "medical-mbbs": [
+    { id: 1, question: "What is human heart rate?" },
+    { id: 2, question: "Define anatomy." },
+  ],
+};
+
 const FacultyExam = () => {
   const [selectedFaculty, setSelectedFaculty] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [examStarted, setExamStarted] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
   const { path } = useParams();
-  const [user, , isLoading] = useSubscription();
-  const navigate = useNavigate(); // ✅ CHANGE 2: navigation hook
+    const [user, , isLoading] = useSubscription()
+  
+  console.log(path)
+  console.log(path)
 
-  console.log(user[0]?.status, "user");
-  console.log(path);
 
-  // Timer effect
+  // useEffect hook to manage the timer
   useEffect(() => {
     let timer;
     if (examStarted && timeLeft > 0) {
@@ -88,7 +100,7 @@ const FacultyExam = () => {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
     } else if (timeLeft === 0 && examStarted) {
-      alert("Time's up!");
+      alert("Time's up!"); // This would be replaced with a proper modal
       setExamStarted(false);
     }
     return () => clearInterval(timer);
@@ -99,19 +111,11 @@ const FacultyExam = () => {
     setShowModal(true);
   };
 
-  // ✅ CHANGE 3: check subscription status before navigating
   const startExam = () => {
     setShowModal(false);
-
-    if (user[0]?.status === "active") {
-      // ✅ If active → go to exam page
-      navigate(`/question-bank/live-exam`);
-      setExamStarted(true);
-      setTimeLeft(selectedFaculty.duration * 60);
-    } else {
-      // ❌ If not active → go to subscription page
-      navigate(`/subscription`);
-    }
+    setExamStarted(true);
+    // Set the initial time for the exam based on the faculty's duration
+    setTimeLeft(selectedFaculty.duration * 60);
   };
 
   const goBackToFaculties = () => {
@@ -123,7 +127,7 @@ const FacultyExam = () => {
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
   return (
@@ -165,10 +169,9 @@ const FacultyExam = () => {
                 style={{ backgroundColor: faculty.color }}
                 onClick={() => handleCardClick(faculty)}
               >
-                <h3 className="text-gray-900 text-lg font-bold mb-2">
-                  {faculty.title}
-                </h3>
+                <h3 className="text-gray-900 text-lg font-bold mb-2">{faculty.title}</h3>
                 <div className="flex items-center space-x-4 text-sm">
+                  {/* Question count icon */}
                   <div className="flex items-center gap-1 text-gray-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -184,6 +187,7 @@ const FacultyExam = () => {
                     </svg>
                     <span>{faculty.questionCount} টি প্রশ্ন</span>
                   </div>
+                  {/* Duration icon */}
                   <div className="flex items-center gap-1 text-gray-600">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -214,9 +218,7 @@ const FacultyExam = () => {
 
             <p className="mb-6 text-center">
               আপনি কি নিশ্চিত যে{" "}
-              <span className="font-semibold text-green-600">
-                {selectedFaculty.title}
-              </span>{" "}
+              <span className="font-semibold text-green-600">{selectedFaculty.title}</span>{" "}
               ব্যাচের পরীক্ষা শুরু করতে চান?
             </p>
 
@@ -227,14 +229,13 @@ const FacultyExam = () => {
               >
                 বাতিল
               </button>
-
-              {/* ✅ CHANGE 4: Removed <Link>, used button with startExam */}
-              <button
-                onClick={startExam}
+              <Link
+                to={`/question-bank/live-exam`}
                 className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors w-full sm:w-auto text-center"
+                onClick={startExam}
               >
                 পরীক্ষা শুরু করুন
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaLock, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import useSubscription from "../../../hooks/useSubscription";
-import { useNavigate } from "react-router-dom";
 
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
@@ -9,7 +8,6 @@ const ExamPage = () => {
   const [selected, setSelected] = useState({});
   const [openExplanation, setOpenExplanation] = useState({});
   const [user, , isLoading] = useSubscription()
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -144,10 +142,9 @@ const ExamPage = () => {
             ) : (
               <div className="btn w-full mt-2">
                 <button
-                  onClick={() => navigate("/subscription")}  
+                  onClick={() => navigate("/subscription")}   // ✅ Navigate to subscription
                   className="text-center flex items-center w-full justify-center bg-red-100 hover:bg-red-200 px-3 py-2 rounded-md transition"
-                >
-                  <FaLock className="mt-1 mr-2" />
+                >                  <FaLock className="mt-1 mr-2" />
                   ব্যাখ্যা আনলক করতে আলোড়ন প্রিমিয়াম এ আপগ্রেড করো
                 </button>
               </div>

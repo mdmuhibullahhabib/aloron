@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FaLock, FaChevronDown, FaChevronUp } from "react-icons/fa";
-import useSubscription from "../../../hooks/useSubscription";
-import { useNavigate } from "react-router-dom";
 
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [selected, setSelected] = useState({});
   const [openExplanation, setOpenExplanation] = useState({});
-  const [user, , isLoading] = useSubscription()
-  const navigate = useNavigate(); 
+  const [user] = useSubscriptio
 
   useEffect(() => {
     const fetchData = async () => {
@@ -109,12 +106,13 @@ const ExamPage = () => {
                   onClick={() =>
                     setSelected((prev) => ({ ...prev, [q._id]: opt }))
                   }
-                  className={`px-3 py-2 text-left rounded-lg border transition ${selected[q._id] === opt
-                    ? opt === q.correct
-                      ? "bg-green-100 border-green-400 text-green-700"
-                      : "bg-red-100 border-red-400 text-red-700"
-                    : "bg-gray-50 border-gray-300 hover:bg-gray-100"
-                    }`}
+                  className={`px-3 py-2 text-left rounded-lg border transition ${
+                    selected[q._id] === opt
+                      ? opt === q.correct
+                        ? "bg-green-100 border-green-400 text-green-700"
+                        : "bg-red-100 border-red-400 text-red-700"
+                      : "bg-gray-50 border-gray-300 hover:bg-gray-100"
+                  }`}
                 >
                   {opt}
                 </button>
@@ -122,37 +120,24 @@ const ExamPage = () => {
             </div>
 
             {/* ✅ Collapsible explanation dropdown */}
-            {user[0]?.status === "active" ? (
-              <div className="mt-2">
-                <button
-                  onClick={() => handleToggle(q._id)}
-                  className="w-full flex justify-between items-center px-3 py-2 text-left bg-blue-50 border border-blue-200 rounded hover:bg-blue-100"
-                >
-                  <span className="flex items-center">
-                    <FaLock className="mr-2" />
-                    ব্যাখ্যা
-                  </span>
-                  {openExplanation[q._id] ? <FaChevronUp /> : <FaChevronDown />}
-                </button>
+            <div className="mt-2">
+              <button
+                onClick={() => handleToggle(q._id)}
+                className="w-full flex justify-between items-center px-3 py-2 text-left bg-blue-50 border border-blue-200 rounded hover:bg-blue-100"
+              >
+                <span className="flex items-center">
+                  <FaLock className="mr-2" />
+                  ব্যাখ্যা
+                </span>
+                {openExplanation[q._id] ? <FaChevronUp /> : <FaChevronDown />}
+              </button>
 
-                {openExplanation[q._id] && (
-                  <div className="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 rounded">
-                    {q.explanation}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="btn w-full mt-2">
-                <button
-                  onClick={() => navigate("/subscription")}  
-                  className="text-center flex items-center w-full justify-center bg-red-100 hover:bg-red-200 px-3 py-2 rounded-md transition"
-                >
-                  <FaLock className="mt-1 mr-2" />
-                  ব্যাখ্যা আনলক করতে আলোড়ন প্রিমিয়াম এ আপগ্রেড করো
-                </button>
-              </div>
-            )}
-
+              {openExplanation[q._id] && (
+                <div className="mt-2 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 rounded">
+                  {q.explanation}
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>

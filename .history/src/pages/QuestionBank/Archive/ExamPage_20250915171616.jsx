@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaLock, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import useSubscription from "../../../hooks/useSubscription";
-import { useNavigate } from "react-router-dom";
 
 const ExamPage = () => {
   const [topics, setTopics] = useState([]);
