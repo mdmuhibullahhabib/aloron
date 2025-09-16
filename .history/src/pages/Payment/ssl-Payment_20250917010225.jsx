@@ -135,6 +135,7 @@ const Payment = () => {
         status: "pending",
         userId: databaseUser[0]?._id,
               examCredit: items?.examCredit || 1,
+
       };
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 

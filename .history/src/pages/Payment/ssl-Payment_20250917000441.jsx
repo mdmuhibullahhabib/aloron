@@ -91,8 +91,8 @@ const Payment = () => {
   const { user } = useAuth();
   const location = useLocation();
   const { category, items } = location.state || {};
-  const [databaseUser] = useDatabaseUser();
-
+      const [databaseUser] = useDatabaseUser();
+  
 
   console.log("categiry", category)
   console.log("items", items)
@@ -134,8 +134,8 @@ const Payment = () => {
         menuItemIds: category === "shop" ? cart.map((i) => i.menuId) : [],
         status: "pending",
         userId: databaseUser[0]?._id,
-              examCredit: items?.examCredit || 1,
       };
+
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 
       // ✅ If subscription, also post to subscriptions collection
@@ -146,7 +146,7 @@ const Payment = () => {
           planId: items.id,
           planName: items.name,
           price: items.price,
-          transactionId: "",
+          transactionId: response.data.transactionId, // empty for now
           status: "pending",
           startDate: new Date(), // initiate start date
           endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
