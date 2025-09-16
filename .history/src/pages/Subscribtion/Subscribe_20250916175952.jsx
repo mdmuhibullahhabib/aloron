@@ -22,6 +22,11 @@ const Subscribe = () => {
     navigate("/payment", { state: { plan } });
   };
 
+  const plans = [
+    { id: "15 days", name: "15 days Plan", price: 80, duration: "১৫ দিন" },
+    { id: "monthly", name: "Monthly Plan", price: 150, duration: "30 দিন" },
+    { id: "yearly", name: "Yearly Plan", price: 5000, duration: "365 দিন" },
+  ];
 
   return (
     <div className="p-6 min-h-screen bg-gray-50 flex flex-col items-center">

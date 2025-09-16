@@ -4,11 +4,8 @@ import { FaMoneyBillWave } from "react-icons/fa";
 import useDatabaseUser from "../../hooks/useDatabaseUser";
 import useSubscription from "../../hooks/useSubscription";
 
-  const plans = [
-    { id: "15 days", name: "15 days Plan", price: 80, duration: "১৫ দিন" },
-    { id: "monthly", name: "Monthly Plan", price: 150, duration: "30 দিন" },
-    { id: "yearly", name: "Yearly Plan", price: 5000, duration: "365 দিন" },
-  ];
+
+
 const Subscribe = () => {
   const navigate = useNavigate();
     const [databaseUser] = useDatabaseUser();
@@ -21,6 +18,7 @@ const Subscribe = () => {
     // এখানে পেমেন্ট পেজে পাঠানো হবে
     navigate("/payment", { state: { plan } });
   };
+
 
 
   return (
