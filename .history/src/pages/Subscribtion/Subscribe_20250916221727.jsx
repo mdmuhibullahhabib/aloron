@@ -19,13 +19,14 @@ const Subscribe = () => {
 
   const handleSubscribe = (plan) => {
     // এখানে পেমেন্ট পেজে পাঠানো হবে
-        navigate("/payment", {
+    navigate("/payment", { state: { plan } });
+  };
+      navigate("/payment", {
       state: {
-        category: "subscription",
-        items: plan,
+        category: "shop",
+        items: cart,
       },
     });
-  };
 
 
   return (

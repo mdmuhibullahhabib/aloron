@@ -22,7 +22,7 @@ const Subscribe = () => {
         navigate("/payment", {
       state: {
         category: "subscription",
-        items: plan,
+        item: plan,
       },
     });
   };

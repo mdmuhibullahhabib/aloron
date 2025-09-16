@@ -82,7 +82,6 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { useLocation } from "react-router-dom";
-import useDatabaseUser from "../../hooks/useDatabaseUser";
 
 const Payment = () => {
 
@@ -91,24 +90,15 @@ const Payment = () => {
   const { user } = useAuth();
   const location = useLocation();
   const { category, items } = location.state || {};
-      const [databaseUser] = useDatabaseUser();
-  
 
-  console.log("categiry", category)
-  console.log("items", items)
-  console.log("user", databaseUser[0]?._id)
+console.log("categiry",category )
+console.log("items",items )
 
-  // Calculate total price 
+  // Calculate total price safely
   const totalPrice =
     category === "shop"
       ? (items || cart).reduce((total, i) => total + (i.price || 0), 0)
-      : category === "subscription"
-        ? items?.price || 0
-        : category === "course"
-          ? items?.price || 0
-          : 0;
-
-  console.log(totalPrice)
+      : 0;
 
   // Payment handler
   const handleCreatePayment = async () => {
@@ -126,8 +116,8 @@ const Payment = () => {
           category === "shop"
             ? null
             : category === "course"
-              ? items?._id
-              : items?.planId,
+              ? item?._id
+              : item?.planId,
         transactionId: "",
         date: new Date(),
         cartIds: category === "shop" ? cart.map((i) => i._id) : [],
@@ -137,25 +127,9 @@ const Payment = () => {
       };
 
       const response = await axiosSecure.post("/create-ssl-payment", payment);
+ 
 
-      // ✅ If subscription, also post to subscriptions collection
-      if (category === "subscription") {
-        const subscriptionData = {
-          userId: databaseUser[0]?._id,
-          userEmail: user.email,
-          planId: items.id,
-          planName: items.name,
-          price: items.price,
-          transactionId: response.data.transactionId, // empty for now
-          status: "pending",
-          startDate: new Date(), // initiate start date
-          endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
-          examCredit: items.examCredit || 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        };
-        await axiosSecure.post("/subscriptions", subscriptionData);
-      }
+      
 
 
       // ✅ Redirect to SSLCommerz if gateway URL exists

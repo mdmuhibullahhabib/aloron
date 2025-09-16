@@ -21,11 +21,12 @@ const Subscribe = () => {
     // এখানে পেমেন্ট পেজে পাঠানো হবে
         navigate("/payment", {
       state: {
-        category: "subscription",
-        items: plan,
+        category: "shop",
+        items: cart,
       },
     });
   };
+z
 
 
   return (

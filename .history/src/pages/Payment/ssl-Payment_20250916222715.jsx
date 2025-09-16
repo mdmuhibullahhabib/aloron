@@ -82,7 +82,6 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
 import { useLocation } from "react-router-dom";
-import useDatabaseUser from "../../hooks/useDatabaseUser";
 
 const Payment = () => {
 
@@ -90,25 +89,22 @@ const Payment = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const location = useLocation();
-  const { category, items } = location.state || {};
-      const [databaseUser] = useDatabaseUser();
-  
+  const { category, items, item } = location.state || {};
 
   console.log("categiry", category)
+  console.log("item", item)
   console.log("items", items)
-  console.log("user", databaseUser[0]?._id)
 
-  // Calculate total price 
-  const totalPrice =
-    category === "shop"
-      ? (items || cart).reduce((total, i) => total + (i.price || 0), 0)
-      : category === "subscription"
+  // Calculate total price s
+const totalPrice =
+  category === "shop"
+    ? (items || cart).reduce((total, i) => total + (i.price || 0), 0)
+    : category === "subscription"
+      ? items?.price || 0
+      : category === "course"
         ? items?.price || 0
-        : category === "course"
-          ? items?.price || 0
-          : 0;
+        : 0;
 
-  console.log(totalPrice)
 
   // Payment handler
   const handleCreatePayment = async () => {
@@ -138,15 +134,15 @@ const Payment = () => {
 
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 
+
       // ✅ If subscription, also post to subscriptions collection
       if (category === "subscription") {
         const subscriptionData = {
-          userId: databaseUser[0]?._id,
           userEmail: user.email,
-          planId: items.id,
-          planName: items.name,
+          planId: items.planId,
+          planName: items.planName,
           price: items.price,
-          transactionId: response.data.transactionId, // empty for now
+          transactionId: "", // empty for now
           status: "pending",
           startDate: new Date(), // initiate start date
           endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example

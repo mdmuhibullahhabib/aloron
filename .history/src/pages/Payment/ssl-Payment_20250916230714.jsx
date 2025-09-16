@@ -96,7 +96,7 @@ const Payment = () => {
 
   console.log("categiry", category)
   console.log("items", items)
-  console.log("user", databaseUser[0]?._id)
+  console.log("user", databaseUser[])
 
   // Calculate total price 
   const totalPrice =
@@ -141,12 +141,12 @@ const Payment = () => {
       // ✅ If subscription, also post to subscriptions collection
       if (category === "subscription") {
         const subscriptionData = {
-          userId: databaseUser[0]?._id,
+          userId: databaseUser._id,
           userEmail: user.email,
           planId: items.id,
           planName: items.name,
           price: items.price,
-          transactionId: response.data.transactionId, // empty for now
+          transactionId: "", // empty for now
           status: "pending",
           startDate: new Date(), // initiate start date
           endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example

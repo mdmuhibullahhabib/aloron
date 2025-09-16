@@ -19,13 +19,9 @@ const Subscribe = () => {
 
   const handleSubscribe = (plan) => {
     // এখানে পেমেন্ট পেজে পাঠানো হবে
-        navigate("/payment", {
-      state: {
-        category: "subscription",
-        items: plan,
-      },
-    });
+    navigate("/payment", { state: { plan } });
   };
+  
 
 
   return (

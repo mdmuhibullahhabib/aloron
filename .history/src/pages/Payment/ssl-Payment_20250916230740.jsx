@@ -146,7 +146,7 @@ const Payment = () => {
           planId: items.id,
           planName: items.name,
           price: items.price,
-          transactionId: response.data.transactionId, // empty for now
+          transactionId: "", // empty for now
           status: "pending",
           startDate: new Date(), // initiate start date
           endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
