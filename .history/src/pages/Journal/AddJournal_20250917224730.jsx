@@ -58,6 +58,7 @@ const AddJournal = () => {
       } else {
         await axiosSecure.post("/journals", payload);
       }
+
         toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
       reset();
       setPreview(false);

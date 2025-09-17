@@ -58,11 +58,12 @@ const AddJournal = () => {
       } else {
         await axiosSecure.post("/journals", payload);
       }
+
         toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
       reset();
       setPreview(false);
     } catch (error) {
-      toast.error("❌ Journal submit failed:", error);
+      toate.error("❌ Journal submit failed:", error);
       alert("জার্নাল জমা দেওয়ার সময় সমস্যা হয়েছে!");
     } finally {
       setLoading(false);

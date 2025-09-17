@@ -65,7 +65,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "archive/:category/:cardPath",
-                        element: <PrivateRoute> <Faculty /> </PrivateRoute>,
+                        element: <PrivateRoute> <Faculty /> </PrivateRoute> ,
                     },
                     {
                         path: "archive/:path",
@@ -77,7 +77,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "facultyexam/:title",
-                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute>,
+                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute> ,
                     },
                     {
                         path: "live-exam",
@@ -143,7 +143,7 @@ const Router = createBrowserRouter([
                 path: "/published-your-innovative-project",
                 element: <AddJournal></AddJournal>
             },
-            {
+                {
                 path: "/journal/:id",
                 element: <JournalDetails></JournalDetails>
             },
@@ -202,7 +202,7 @@ const Router = createBrowserRouter([
             },
 
             // TEACHER
-            {
+                        {
                 path: "my-courses",
                 element: <MyCourses></MyCourses>
             },
@@ -214,7 +214,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "order-tracking",
-                element: <Orders></Orders>
+                element: <Orders></Orders> 
             },
             {
                 path: "progress",

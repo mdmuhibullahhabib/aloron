@@ -43,7 +43,6 @@ import SubscriptionRoute from './SubscriptionRoute';
 import Payment from '../pages/Payment/ssl-Payment';
 import PaymentSuccess from '../pages/Payment/PaymentSuccess';
 import PrivateRoute from './PrivateRoute';
-import JournalDetails from '../pages/Journal/JournalDetails';
 
 
 const Router = createBrowserRouter([
@@ -65,7 +64,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "archive/:category/:cardPath",
-                        element: <PrivateRoute> <Faculty /> </PrivateRoute>,
+                        element: <PrivateRoute> <Faculty /> </PrivateRoute> ,
                     },
                     {
                         path: "archive/:path",
@@ -77,7 +76,7 @@ const Router = createBrowserRouter([
                     },
                     {
                         path: "facultyexam/:title",
-                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute>,
+                        element: <PrivateRoute> <FacultyExam /> </PrivateRoute> ,
                     },
                     {
                         path: "live-exam",
@@ -143,9 +142,9 @@ const Router = createBrowserRouter([
                 path: "/published-your-innovative-project",
                 element: <AddJournal></AddJournal>
             },
-            {
-                path: "/journal/:id",
-                element: <JournalDetails></JournalDetails>
+                {
+                path: "/courses/:id",
+                element: <jour
             },
             {
                 path: "/information",
@@ -202,7 +201,7 @@ const Router = createBrowserRouter([
             },
 
             // TEACHER
-            {
+                        {
                 path: "my-courses",
                 element: <MyCourses></MyCourses>
             },
@@ -214,7 +213,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "order-tracking",
-                element: <Orders></Orders>
+                element: <Orders></Orders> 
             },
             {
                 path: "progress",

@@ -9,33 +9,32 @@ import {
 import useJournal from "../../hooks/useJournal";
 
 const JournalDetails = () => {
-  const { id } = useParams(); // id from route
+  const { id } = useParams();
   const [journals] = useJournal();
   const [journal, setJournal] = useState(null);
   const [relatedJournals, setRelatedJournals] = useState([]);
 
   useEffect(() => {
     if (journals && journals.length > 0) {
-      // Find journal by MongoDB _id
-      const found = journals.find((j) => j._id === id || j._id.$oid === id);
+      const found = journals.find((j) => String(j.id) === String(id));
       setJournal(found);
 
       if (found) {
         const related = journals.filter(
-          (j) => j._id !== found._id && j.journal === found.journal
+          (j) => String(j.id) !== String(id) && j.journal === found.journal
         );
         setRelatedJournals(related);
       }
     }
   }, [id, journals]);
 
-  if (!journal) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
-  }
+  // if (!journal) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <span className="loading loading-spinner loading-lg text-primary"></span>
+  //     </div>
+  //   );
+  // }
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
@@ -94,7 +93,7 @@ const JournalDetails = () => {
           <div className="grid gap-6 md:grid-cols-2">
             {relatedJournals.map((r) => (
               <div
-                key={r._id}
+                key={r.id}
                 className="card bg-white shadow-md hover:shadow-xl border border-gray-100 p-6 rounded-xl transition-all duration-300"
               >
                 <h4 className="text-lg font-semibold mb-2 text-gray-900">
@@ -104,7 +103,7 @@ const JournalDetails = () => {
                   {r.abstract}
                 </p>
                 <Link
-                  to={`/journal/${r._id}`}
+                  to={`/journal/${r.id}`}
                   className="text-indigo-600 hover:text-indigo-800 hover:underline text-sm font-medium"
                 >
                   বিস্তারিত পড়ুন →

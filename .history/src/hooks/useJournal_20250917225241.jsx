@@ -13,7 +13,7 @@ const useJournal = () => {
             return res.data;
         }
     })
-    return [journals, refetch]
+    return [products, refetch]
 };
 
 export default useJournal;

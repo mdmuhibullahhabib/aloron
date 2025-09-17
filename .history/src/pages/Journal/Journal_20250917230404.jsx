@@ -120,7 +120,7 @@ const JournalPage = () => {
                 {/* Actions */}
                 <div className="flex gap-3 mt-auto">
                   <Link
-                    to={`/journal/${journal._id}`}
+                    to={`/journal/${journal.id}`}
                     className="flex-1 inline-flex items-center justify-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition"
                   >
                     বিস্তারিত পড়ুন

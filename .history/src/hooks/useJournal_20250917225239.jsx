@@ -7,13 +7,13 @@ const useJournal = () => {
     const axiosPublic = useAxiosPublic();
 
     const { data: journals = [], refetch } = useQuery({
-        queryKey: ['journals'],
+        queryKey: ['shop'],
         queryFn: async () => {
             const res = await axiosPublic.get('/journals')
             return res.data;
         }
     })
-    return [journals, refetch]
+    return [products, refetch]
 };
 
 export default useJournal;
