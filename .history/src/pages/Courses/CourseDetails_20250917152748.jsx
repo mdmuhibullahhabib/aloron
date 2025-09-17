@@ -25,6 +25,7 @@ const CourseDetails = () => {
 
   const course = courses.find((c) => c._id === id);
 
+
   const userId = databaseUser[0]?._id;
 
   if (!course) {
@@ -35,22 +36,34 @@ const CourseDetails = () => {
     );
   }
 
-  const handleBuy = (course) => {
-    if (!userId) {
-      toast.error("Please login first!");
-      navigate("/login");
-      return;
+  const handleBuy = async () => {
+    try {
+      if (!userId) {
+        toast.error("Please login first!");
+        navigate("/login");
+        return;
+      }
+
+      const enrollmentData = {
+        email: user?.email,
+        userId: userId,
+        courseId: course._id,
+        purchaseDate: new Date().toISOString(),
+        status: "pending",
+      };
+
+      const res = await axiosPublic.post("/enrollments", enrollmentData);
+
+      if (res.status === 200 || res.status === 201) {
+        toast.success(`Successfully enrolled in ${course.title}`);
+      } else {
+        toast.error(res.data?.message || "Something went wrong!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to enroll!");
     }
-
-    // Payment page এ পাঠানো হবে
-    navigate("/payment", {
-      state: {
-        category: "course", // category course
-        items: course,      // course এর data
-      },
-    });
   };
-
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">

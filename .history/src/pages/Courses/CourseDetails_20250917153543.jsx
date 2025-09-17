@@ -35,21 +35,21 @@ const CourseDetails = () => {
     );
   }
 
-  const handleBuy = (course) => {
-    if (!userId) {
-      toast.error("Please login first!");
-      navigate("/login");
-      return;
-    }
+const handleBuy = (course) => {
+  if (!userId) {
+    toast.error("Please login first!");
+    navigate("/login");
+    return;
+  }
 
-    // Payment page এ পাঠানো হবে
-    navigate("/payment", {
-      state: {
-        category: "course", // category course
-        items: course,      // course এর data
-      },
-    });
-  };
+  // Payment page এ পাঠানো হবে
+  navigate("/payment", {
+    state: {
+      category: "course", // category course
+      items: course,      // course এর data
+    },
+  });
+};
 
 
   return (

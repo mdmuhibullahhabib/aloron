@@ -16,7 +16,7 @@ const Payment = () => {
   const [databaseUser] = useDatabaseUser();
 
   console.log("category", category)
-  console.log("items", items?.id)
+  console.log("items", items)
   console.log("user", databaseUser[0]?._id)
 
   // Calculate total price 
@@ -46,9 +46,9 @@ const Payment = () => {
         referenceId:
           category === "shop"
             ? null
-            : category === "course"
-              ? items?._id
-              : items?.id,
+            : category === "subscription"
+              ? items?.id
+              : items?.name,
         transactionId: "",
         date: new Date(),
         cartIds: category === "shop" ? cart.map((i) => i._id) : [],
@@ -57,6 +57,12 @@ const Payment = () => {
         userId: databaseUser[0]?._id,
         examCredit: items?.examCredit || 1,
 
+        // subscrription
+        // startDate: new Date(), // initiate start date
+        // endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
+        // examCredit: items.examCredit || 1,
+        // createdAt: new Date(),
+        // updatedAt: new Date(),
       };
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 

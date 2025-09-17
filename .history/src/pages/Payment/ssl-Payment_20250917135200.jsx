@@ -57,6 +57,12 @@ const Payment = () => {
         userId: databaseUser[0]?._id,
         examCredit: items?.examCredit || 1,
 
+        // subscrription
+        // startDate: new Date(), // initiate start date
+        // endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
+        // examCredit: items.examCredit || 1,
+        // createdAt: new Date(),
+        // updatedAt: new Date(),
       };
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 

@@ -8,15 +8,16 @@ import useDatabaseUser from "../../hooks/useDatabaseUser";
 
 const Payment = () => {
 
-  const [cart] = useCart();
+  const [cart] = useCart(); // only used for shop
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const location = useLocation();
   const { category, items } = location.state || {};
   const [databaseUser] = useDatabaseUser();
 
-  console.log("category", category)
-  console.log("items", items?.id)
+
+  console.log("categiry", category)
+  console.log("items", items)
   console.log("user", databaseUser[0]?._id)
 
   // Calculate total price 
@@ -48,7 +49,7 @@ const Payment = () => {
             ? null
             : category === "course"
               ? items?._id
-              : items?.id,
+              : items?.planId,
         transactionId: "",
         date: new Date(),
         cartIds: category === "shop" ? cart.map((i) => i._id) : [],
@@ -57,6 +58,12 @@ const Payment = () => {
         userId: databaseUser[0]?._id,
         examCredit: items?.examCredit || 1,
 
+        // subscrription
+        // startDate: new Date(), // initiate start date
+        endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)), // 1 month plan example
+        examCredit: items.examCredit || 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       };
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 
