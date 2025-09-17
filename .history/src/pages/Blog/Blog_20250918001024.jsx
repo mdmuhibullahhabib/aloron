@@ -42,19 +42,4 @@ const Blog = () => {
                   <FaCalendarAlt className="text-indigo-500" /> {blog.date}
                 </span>
               </div>
-              <p className="text-gray-700 flex-grow line-clamp-3">{blog.excerpt}</p>
-              <Link
-                to={`/blog/${blog._id}`}
-                className="mt-4 inline-flex items-center justify-center gap-2 text-indigo-600 font-medium hover:text-indigo-800"
-              >
-                বিস্তারিত পড়ুন <FaArrowRight />
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-export default Blog;
+              <p className="text

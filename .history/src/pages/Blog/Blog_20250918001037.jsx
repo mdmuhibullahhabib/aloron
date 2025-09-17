@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import useBlog from "../../hooks/useBlog";
 
 const Blog = () => {
-  const [blogs] = useBlog();
-
+  const [blogs, refetch] = useBlog()
   return (
     <section className="max-w-7xl mx-auto px-4 py-12">
       {/* Section Heading */}
@@ -22,10 +21,10 @@ const Blog = () => {
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {blogs.map((blog) => (
           <div
-            key={blog._id}
+            key={blog.id}
             className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
           >
-            <Link to={`/blog/${blog._id}`} className="overflow-hidden">
+            <Link to={`/blog/${blog.id}`} className="overflow-hidden">
               <img
                 src={blog.image}
                 alt={blog.title}
@@ -42,9 +41,9 @@ const Blog = () => {
                   <FaCalendarAlt className="text-indigo-500" /> {blog.date}
                 </span>
               </div>
-              <p className="text-gray-700 flex-grow line-clamp-3">{blog.excerpt}</p>
+              <p className="text-gray-700 flex-grow">{blog.excerpt}</p>
               <Link
-                to={`/blog/${blog._id}`}
+                to={`/blog/${blog.id}`}
                 className="mt-4 inline-flex items-center justify-center gap-2 text-indigo-600 font-medium hover:text-indigo-800"
               >
                 বিস্তারিত পড়ুন <FaArrowRight />

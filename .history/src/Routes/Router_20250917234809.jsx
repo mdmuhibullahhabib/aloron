@@ -44,7 +44,6 @@ import Payment from '../pages/Payment/ssl-Payment';
 import PaymentSuccess from '../pages/Payment/PaymentSuccess';
 import PrivateRoute from './PrivateRoute';
 import JournalDetails from '../pages/Journal/JournalDetails';
-import BlogDetails from '../pages/Blog/BlogDetails';
 
 
 const Router = createBrowserRouter([
@@ -137,7 +136,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "/blog/:id",
-                element: <BlogDetails></BlogDetails>
+                element: <BlogDet
             },
             // journal
             {
