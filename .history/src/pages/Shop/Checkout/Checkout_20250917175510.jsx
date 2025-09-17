@@ -84,7 +84,7 @@ const Checkout = () => {
     };
 
 
-    // TO DO (Payment)
+// TO DO (Payment)
     // navigate("/payment", {
     //   state: {
     //     category: "shop",
@@ -93,13 +93,13 @@ const Checkout = () => {
     // });
 
 
-    if (user?.email) {
-      // Logged in → Send to DB
-      const res = await axiosPublic.post("/orders", orderData);
-      if (res.status === 201 || res.status === 200) {
-        await Promise.all(cart.map((item) => axiosPublic.delete(`/cart/${item._id}`)));
-        Swal.fire({
-          title: "Order placed successfully!",
+    // if (user?.email) {
+    //   // Logged in → Send to DB
+    //   const res = await axiosPublic.post("/orders", orderData);
+    //   if (res.status === 201 || res.status === 200) {
+    //     await Promise.all(cart.map((item) => axiosPublic.delete(`/cart/${item._id}`)));
+    //     Swal.fire({
+    //       title: "Order placed successfully!",
           icon: "success",
           timer: 2000,
           showConfirmButton: false,

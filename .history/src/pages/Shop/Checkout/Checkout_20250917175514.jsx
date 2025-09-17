@@ -84,7 +84,7 @@ const Checkout = () => {
     };
 
 
-    // TO DO (Payment)
+// TO DO (Payment)
     // navigate("/payment", {
     //   state: {
     //     category: "shop",
