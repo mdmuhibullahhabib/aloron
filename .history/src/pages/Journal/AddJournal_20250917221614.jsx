@@ -1,73 +1,45 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { FaPlusCircle, FaFilePdf, FaLightbulb } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
 
 const AddJournal = () => {
-  const axiosSecure = useAxiosSecure();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const [formData, setFormData] = useState({
+    title: "",
+    authors: "",
+    journal: "",
+    date: "",
+    abstract: "",
+    pdfFile: null,
+    pdfLink: "",
+  });
 
   const [preview, setPreview] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([
     "ইনোভেটিভ প্রোজেক্ট জার্নাল",
     "গ্লোবাল ইনোভেশন জার্নাল",
     "স্টুডেন্ট ইনোভেশন জার্নাল",
   ]);
 
-  const formData = watch();
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (files) {
+      setFormData({ ...formData, [name]: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
+  };
 
   const handleAddCategory = () => {
     const newCat = prompt("নতুন ক্যাটাগরি লিখুন:");
     if (newCat && !categories.includes(newCat)) {
       setCategories([...categories, newCat]);
+      setFormData({ ...formData, journal: newCat });
     }
   };
 
-  // ✅ Submit handler
-  const onSubmit = async (data) => {
-    try {
-      setLoading(true);
-
-      // If PDF file uploaded, append to FormData (for backend handling)
-      const payload = {
-        title: data.title,
-        authors: data.authors,
-        journal: data.journal,
-        date: data.date,
-        abstract: data.abstract,
-        pdfLink: data.pdfLink || null,
-      };
-
-      // If file exists, send separately as FormData
-      if (data.pdfFile && data.pdfFile[0]) {
-        const formData = new FormData();
-        formData.append("pdfFile", data.pdfFile[0]);
-        formData.append("info", JSON.stringify(payload));
-
-        await axiosSecure.post("/journals", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      } else {
-        await axiosSecure.post("/journals", payload);
-      }
-
-        toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
-      reset();
-      setPreview(false);
-    } catch (error) {
-      console.error("❌ Journal submit failed:", error);
-      alert("জার্নাল জমা দেওয়ার সময় সমস্যা হয়েছে!");
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitted Data:", formData);
+    alert("✅ জার্নাল সফলভাবে জমা হয়েছে!");
   };
 
   return (
@@ -86,22 +58,21 @@ const AddJournal = () => {
 
       {/* Form */}
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         className="bg-white rounded-2xl shadow-md p-6 md:p-8 space-y-6"
       >
-        {/* Inputs (same as before) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Title */}
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-1">প্রোজেক্টের শিরোনাম *</label>
             <input
               type="text"
-              {...register("title", { required: "শিরোনাম দিতে হবে" })}
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
-            {errors.title && (
-              <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
-            )}
           </div>
 
           {/* Authors */}
@@ -109,12 +80,12 @@ const AddJournal = () => {
             <label className="block text-sm font-medium mb-1">লেখক/গবেষক *</label>
             <input
               type="text"
-              {...register("authors", { required: "লেখক দিতে হবে" })}
+              name="authors"
+              value={formData.authors}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
-            {errors.authors && (
-              <p className="text-red-500 text-xs mt-1">{errors.authors.message}</p>
-            )}
           </div>
 
           {/* Journal Category */}
@@ -122,10 +93,13 @@ const AddJournal = () => {
             <label className="block text-sm font-medium mb-1">জার্নাল ক্যাটাগরি *</label>
             <div className="flex gap-2">
               <select
-                {...register("journal", { required: "ক্যাটাগরি নির্বাচন করুন" })}
+                name="journal"
+                value={formData.journal}
+                onChange={handleChange}
+                required
                 className="flex-1 px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
               >
-                <option value="">-- নির্বাচন করুন --</option>
+                <option value="">ক্যাটাগরি নির্বাচন করুন</option>
                 {categories.map((cat, i) => (
                   <option key={i} value={cat}>
                     {cat}
@@ -140,9 +114,6 @@ const AddJournal = () => {
                 নতুন+
               </button>
             </div>
-            {errors.journal && (
-              <p className="text-red-500 text-xs mt-1">{errors.journal.message}</p>
-            )}
           </div>
 
           {/* Date */}
@@ -150,25 +121,25 @@ const AddJournal = () => {
             <label className="block text-sm font-medium mb-1">প্রকাশের তারিখ *</label>
             <input
               type="date"
-              {...register("date", { required: "তারিখ দিতে হবে" })}
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
               className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
-            {errors.date && (
-              <p className="text-red-500 text-xs mt-1">{errors.date.message}</p>
-            )}
           </div>
 
           {/* Abstract */}
           <div className="col-span-2">
             <label className="block text-sm font-medium mb-1">অ্যাবস্ট্রাক্ট *</label>
             <textarea
-              {...register("abstract", { required: "অ্যাবস্ট্রাক্ট দিতে হবে" })}
+              name="abstract"
+              value={formData.abstract}
+              onChange={handleChange}
+              required
               rows="4"
               className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             ></textarea>
-            {errors.abstract && (
-              <p className="text-red-500 text-xs mt-1">{errors.abstract.message}</p>
-            )}
           </div>
 
           {/* PDF Upload */}
@@ -176,8 +147,9 @@ const AddJournal = () => {
             <label className="block text-sm font-medium mb-1">PDF ফাইল</label>
             <input
               type="file"
+              name="pdfFile"
               accept="application/pdf"
-              {...register("pdfFile")}
+              onChange={handleChange}
               className="w-full px-3 py-2 border rounded-lg shadow-sm bg-gray-50"
             />
           </div>
@@ -187,8 +159,10 @@ const AddJournal = () => {
             <label className="block text-sm font-medium mb-1">PDF লিঙ্ক (যদি থাকে)</label>
             <input
               type="url"
+              name="pdfLink"
+              value={formData.pdfLink}
+              onChange={handleChange}
               placeholder="https://example.com/my-journal.pdf"
-              {...register("pdfLink")}
               className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
           </div>
@@ -205,10 +179,9 @@ const AddJournal = () => {
           </button>
           <button
             type="submit"
-            disabled={loading}
-            className="w-full md:w-1/3 inline-flex items-center justify-center px-5 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition disabled:opacity-60"
+            className="w-full md:w-1/3 inline-flex items-center justify-center px-5 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition"
           >
-            {loading ? "⏳ জমা হচ্ছে..." : <><FaPlusCircle className="mr-2" /> জমা দিন</>}
+            <FaPlusCircle className="mr-2" /> জমা দিন
           </button>
         </div>
       </form>
@@ -217,24 +190,13 @@ const AddJournal = () => {
       {preview && (
         <div className="mt-12 bg-gray-50 p-6 rounded-xl shadow-inner">
           <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-gray-800">
-            <FaLightbulb className="text-yellow-500" />{" "}
-            {formData.title || "শিরোনাম"}
+            <FaLightbulb className="text-yellow-500" /> {formData.title || "শিরোনাম"}
           </h2>
           <p className="text-sm text-gray-600 mb-2">👤 {formData.authors}</p>
           <p className="text-sm text-gray-600 mb-2">📅 {formData.date}</p>
           <p className="text-gray-700 text-sm leading-relaxed">
             {formData.abstract || "অ্যাবস্ট্রাক্ট এখানে দেখানো হবে..."}
           </p>
-          {formData.pdfLink && (
-            <a
-              href={formData.pdfLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center mt-3 text-indigo-600 hover:underline"
-            >
-              <FaFilePdf className="mr-2" /> PDF দেখুন
-            </a>
-          )}
         </div>
       )}
     </section>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlusCircle, FaFilePdf, FaLightbulb } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAxiosSecure from "../../hooks/useAxiosSecure"; // ✅ import secure axios
 import { toast } from "react-hot-toast";
 
 const AddJournal = () => {

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlusCircle, FaFilePdf, FaLightbulb } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure"; // ✅ import secure axios
 
 const AddJournal = () => {
   const axiosSecure = useAxiosSecure();
@@ -59,7 +58,7 @@ const AddJournal = () => {
         await axiosSecure.post("/journals", payload);
       }
 
-        toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
+      alert("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
       reset();
       setPreview(false);
     } catch (error) {

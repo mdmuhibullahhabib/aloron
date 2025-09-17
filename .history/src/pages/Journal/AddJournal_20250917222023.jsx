@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlusCircle, FaFilePdf, FaLightbulb } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
 
 const AddJournal = () => {
-  const axiosSecure = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -15,7 +12,6 @@ const AddJournal = () => {
   } = useForm();
 
   const [preview, setPreview] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([
     "ইনোভেটিভ প্রোজেক্ট জার্নাল",
     "গ্লোবাল ইনোভেশন জার্নাল",
@@ -31,43 +27,11 @@ const AddJournal = () => {
     }
   };
 
-  // ✅ Submit handler
-  const onSubmit = async (data) => {
-    try {
-      setLoading(true);
-
-      // If PDF file uploaded, append to FormData (for backend handling)
-      const payload = {
-        title: data.title,
-        authors: data.authors,
-        journal: data.journal,
-        date: data.date,
-        abstract: data.abstract,
-        pdfLink: data.pdfLink || null,
-      };
-
-      // If file exists, send separately as FormData
-      if (data.pdfFile && data.pdfFile[0]) {
-        const formData = new FormData();
-        formData.append("pdfFile", data.pdfFile[0]);
-        formData.append("info", JSON.stringify(payload));
-
-        await axiosSecure.post("/journals", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      } else {
-        await axiosSecure.post("/journals", payload);
-      }
-
-        toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
-      reset();
-      setPreview(false);
-    } catch (error) {
-      console.error("❌ Journal submit failed:", error);
-      alert("জার্নাল জমা দেওয়ার সময় সমস্যা হয়েছে!");
-    } finally {
-      setLoading(false);
-    }
+  const onSubmit = (data) => {
+    console.log("✅ Submitted Data:", data);
+    alert("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
+    reset();
+    setPreview(false);
   };
 
   return (
@@ -89,7 +53,6 @@ const AddJournal = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white rounded-2xl shadow-md p-6 md:p-8 space-y-6"
       >
-        {/* Inputs (same as before) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Title */}
           <div className="col-span-2">
@@ -205,10 +168,9 @@ const AddJournal = () => {
           </button>
           <button
             type="submit"
-            disabled={loading}
-            className="w-full md:w-1/3 inline-flex items-center justify-center px-5 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition disabled:opacity-60"
+            className="w-full md:w-1/3 inline-flex items-center justify-center px-5 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition"
           >
-            {loading ? "⏳ জমা হচ্ছে..." : <><FaPlusCircle className="mr-2" /> জমা দিন</>}
+            <FaPlusCircle className="mr-2" /> জমা দিন
           </button>
         </div>
       </form>

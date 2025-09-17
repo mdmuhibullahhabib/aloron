@@ -63,49 +63,18 @@ const JournalPage = () => {
   });
 
   return (
-    <section className="max-w-7xl mx-auto px-4 py-12">
-      {/* Page Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10 gap-4">
-        {/* Left: Search + Filter */}
-        <div className="flex flex-col md:flex-row gap-3 w-full md:w-2/3">
-          {/* Search */}
-          <div className="relative flex-1">
-            <FaSearch className="absolute left-3 top-3 text-gray-400" />
-            <input
-              type="text"
-              placeholder="প্রোজেক্ট খুঁজুন..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
-            />
-          </div>
-
-          {/* Category Dropdown */}
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
-          >
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat === "all" ? "সব ক্যাটাগরি" : cat}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Right: CTA */}
-        <div className="flex-shrink-0">
-          <Link
-            to="/published-your-innovative-project"
-            className="inline-flex items-center px-5 py-2.5 bg-green-600 text-white font-medium rounded-lg shadow-md hover:bg-green-700 transition text-sm md:text-base"
-          >
-            <FaPlusCircle className="mr-2" /> নতুন প্রোজেক্ট প্রকাশ করুন
-          </Link>
-        </div>
+    <section className="max-w-7xl mx-auto px-4 py-12 relative">
+      {/* CTA Button */}
+      <div className="absolute top-4 right-4">
+        <Link
+          to="/submit-project"
+          className="inline-flex items-center px-5 py-2.5 bg-green-600 text-white font-medium rounded-full shadow-lg hover:bg-green-700 transition text-sm md:text-base"
+        >
+          <FaPlusCircle className="mr-2" /> আপনার ইনোভেটিভ প্রোজেক্ট প্রকাশ করুন
+        </Link>
       </div>
 
-      {/* Section Intro */}
+      {/* Section Heading */}
       <div className="text-center mb-14">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
           💡 ইনোভেটিভ প্রোজেক্ট জার্নাল (বাংলাদেশ ভিত্তিক)
@@ -115,6 +84,34 @@ const JournalPage = () => {
           গবেষণা এখানে প্রকাশ করতে পারবেন। আন্তর্জাতিক মানের প্ল্যাটফর্মের
           মাধ্যমে বিশ্ববাসী বাংলাদেশের উদ্ভাবন সম্পর্কে জানবে।
         </p>
+      </div>
+
+      {/* Search & Filter */}
+      <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-10">
+        {/* Typing Search */}
+        <div className="relative w-full md:w-1/2">
+          <FaSearch className="absolute left-3 top-3 text-gray-400" />
+          <input
+            type="text"
+            placeholder="প্রোজেক্ট খুঁজুন..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
+          />
+        </div>
+
+        {/* Category Dropdown */}
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat === "all" ? "সব ক্যাটাগরি" : cat}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Journal List */}

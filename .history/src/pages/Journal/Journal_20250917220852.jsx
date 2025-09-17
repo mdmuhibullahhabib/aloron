@@ -97,7 +97,7 @@ const JournalPage = () => {
         {/* Right: CTA */}
         <div className="flex-shrink-0">
           <Link
-            to="/published-your-innovative-project"
+            to="/submit-project"
             className="inline-flex items-center px-5 py-2.5 bg-green-600 text-white font-medium rounded-lg shadow-md hover:bg-green-700 transition text-sm md:text-base"
           >
             <FaPlusCircle className="mr-2" /> নতুন প্রোজেক্ট প্রকাশ করুন

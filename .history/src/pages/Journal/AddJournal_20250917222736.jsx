@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaPlusCircle, FaFilePdf, FaLightbulb } from "react-icons/fa";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { toast } from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure"; // ✅ import secure axios
 
 const AddJournal = () => {
   const axiosSecure = useAxiosSecure();
@@ -52,14 +51,14 @@ const AddJournal = () => {
         formData.append("pdfFile", data.pdfFile[0]);
         formData.append("info", JSON.stringify(payload));
 
-        await axiosSecure.post("/journals", formData, {
+        await axiosSecure.post("/journals/upload", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
         await axiosSecure.post("/journals", payload);
       }
 
-        toast.success("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
+      alert("🎉 জার্নাল সফলভাবে জমা হয়েছে!");
       reset();
       setPreview(false);
     } catch (error) {
