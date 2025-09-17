@@ -15,7 +15,7 @@ const Navbar = () => {
   const t = translations[language];
   const location = useLocation();
 
-  const role = "admin";
+  const role = "admin"; // Example user role
   const navLinks = [
     { name: 'প্রশ্নব্যাংক', path: '/question-bank/archive' },
     { name: 'শপ', path: '/shop' },
@@ -35,12 +35,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50 backdrop-blur-md transition-all">
+    <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
 
           {/* Logo */}
-          <Link to="/" className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400 hover:scale-105 transform transition">
+          <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 transform transition">
             আলোড়ন
           </Link>
 
@@ -52,10 +52,10 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 
                     ${isActive 
-                      ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-lg'
-                      : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
+                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg'
+                      : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'} 
                   `}
                 >
                   {link.name}
@@ -65,7 +65,7 @@ const Navbar = () => {
 
             {/* Cart */}
             <Link to="/cart" className="ml-2 relative group">
-              <button className="btn btn-sm rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 transition transform group-hover:scale-105">
+              <button className="btn btn-sm rounded-full bg-indigo-600 hover:bg-indigo-700 text-white transition transform group-hover:scale-110">
                 <FaShoppingCart />
               </button>
             </Link>
@@ -73,7 +73,7 @@ const Navbar = () => {
             {/* Language */}
             <button
               onClick={toggleLanguage}
-              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105"
+              className="btn btn-sm ml-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105"
             >
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
@@ -81,23 +81,24 @@ const Navbar = () => {
             {/* Theme */}
             <button
               onClick={toggleTheme}
-              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105 flex items-center gap-1"
+              className="btn btn-sm ml-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105 flex items-center gap-1"
             >
               {theme === 'light' ? <FaMoon /> : <FaSun />}
+              {theme === 'light' ? 'Dark' : 'Light'}
             </button>
 
             {/* Auth */}
             {user?.email ? (
               <button
                 onClick={logOut}
-                className="ml-2 px-4 py-2 rounded-full bg-red-400 hover:bg-red-500 text-white font-medium shadow-sm transition transform hover:scale-105"
+                className="ml-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-medium shadow-md transition transform hover:scale-105"
               >
                 Logout
               </button>
             ) : (
               <Link
                 to="/auth/signin"
-                className="ml-2 px-4 py-2 rounded-full bg-indigo-400 hover:bg-indigo-500 text-white font-medium shadow-sm transition transform hover:scale-105"
+                className="ml-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium shadow-md transition transform hover:scale-105"
               >
                 {t.login}
               </Link>
@@ -115,8 +116,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg backdrop-blur-md transition-all duration-300 rounded-b-xl">
-          <div className="px-2 pt-2 pb-3 space-y-2">
+        <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg transition-all duration-300">
+          <div className="px-2 pt-2 pb-3 space-y-1">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
               return (
@@ -124,9 +125,9 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-2 rounded-full text-center font-medium transition-all duration-300
+                  className={`block px-4 py-2 rounded-lg text-center font-medium transition-all duration-300
                     ${isActive
-                      ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-md'
+                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md'
                       : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
                   `}
                 >
@@ -139,7 +140,7 @@ const Navbar = () => {
             {user?.email ? (
               <button
                 onClick={() => { logOut(); setIsOpen(false); }}
-                className="block w-full px-4 py-2 rounded-full bg-red-400 hover:bg-red-500 text-white font-medium mt-2 transition transform hover:scale-105"
+                className="block w-full px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white font-medium mt-2 transition transform hover:scale-105"
               >
                 Logout
               </button>
@@ -147,7 +148,7 @@ const Navbar = () => {
               <Link
                 to="/auth/signin"
                 onClick={() => setIsOpen(false)}
-                className="block w-full px-4 py-2 rounded-full bg-indigo-400 hover:bg-indigo-500 text-white font-medium mt-2 transition transform hover:scale-105"
+                className="block w-full px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium mt-2 transition transform hover:scale-105"
               >
                 {t.login}
               </Link>
@@ -156,14 +157,14 @@ const Navbar = () => {
             {/* Mobile Language & Theme */}
             <button
               onClick={() => { toggleLanguage(); setIsOpen(false); }}
-              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105"
+              className="block w-full px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105"
             >
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
 
             <button
               onClick={() => { toggleTheme(); setIsOpen(false); }}
-              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105 flex items-center justify-center gap-1"
+              className="block w-full px-4 py-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105 flex items-center justify-center gap-1"
             >
               {theme === 'light' ? <FaMoon /> : <FaSun />} {theme === 'light' ? 'Dark' : 'Light'}
             </button>

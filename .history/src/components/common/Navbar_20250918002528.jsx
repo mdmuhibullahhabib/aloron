@@ -1,30 +1,47 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
-import { useLanguage } from '../../provider/LanguageProvider';
-import { useTheme } from '../../provider/ThemeProvider';
+import { useLanguage } from '../../Provider/LanguageProvider';
+import { useTheme } from '../../Provider/ThemeProvider';
 import { translations } from '../../i18n';
+import useAuth from '../../hooks/useAuth';
+import { FaShoppingCart } from 'react-icons/fa';
 
 const Navbar = () => {
+  const { user, logOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
   const location = useLocation();
 
-  const navLinks = [
-    { name: 'প্রশ্নব্যাংক', path: '/question-bank' },
-    { name: 'ক্লাস', path: '/classes' },
-    { name: 'পরীক্ষা', path: '/exams' },
-    { name: 'PDF', path: '/pdfs' },
-    { name: 'তথ্য', path: '/information' },
-    { name: 'কোর্স', path: '/courses' },
-    { name: 'কেয়ার', path: '/care' },
-    { name: 'জার্নাল', path: '/journal' },
-    { name: 'Blog', path: '/blog' },
-  ];
+// Example: current user role (you can get it from context/auth)
+const role = "admin"; // admin | student | teacher
+
+const navLinks = [
+  { name: 'প্রশ্নব্যাংক', path: '/question-bank/archive' },
+  { name: 'শপ', path: '/shop' },
+  { name: 'পরীক্ষা', path: '/exams' },
+  { name: 'কোর্স', path: '/courses' },
+  { name: 'জার্নাল', path: '/journal' },
+  { name: 'Blog', path: '/blog' },
+  { 
+    name: 'Dashboard',
+    path:
+      role === 'admin'
+        ? '/dashboard/reports'
+        : role === 'student'
+        ? '/dashboard/enrolled-courses'
+        : '/dashboard/my-courses'
+  },
+];
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleLogout = () => {
+    logOut()
+  }
 
   return (
     <nav className="bg-base-100 shadow-md sticky top-0 z-50">
@@ -32,7 +49,7 @@ const Navbar = () => {
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold text-indigo-600">
-            Aloron
+            আলোড়ন
           </Link>
 
           {/* Desktop Links */}
@@ -50,6 +67,14 @@ const Navbar = () => {
               </Link>
             ))}
 
+            {/* cart */}
+            <Link 
+            to={"/cart"}
+            >
+            <button className="btn btn-sm ml-2">
+              <FaShoppingCart></FaShoppingCart>
+            </button>
+            </Link>
             {/* Language & Theme Buttons */}
             <button onClick={toggleLanguage} className="btn btn-sm ml-2">
               {language === 'en' ? 'বাংলা' : 'English'}
@@ -58,12 +83,21 @@ const Navbar = () => {
               {theme === 'light' ? 'Dark' : 'Light'}
             </button>
 
-            <Link
-              to="/login"
-              className="ml-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-500 transition"
-            >
-              {t.login}
-            </Link>
+            {user && user?.email ? (
+              <button
+                onClick={handleLogout}
+                className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/auth/signin"
+                className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
+              >
+                {t.login}
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,7 +128,7 @@ const Navbar = () => {
             ))}
 
             {/* Language & Theme Buttons */}
-            <button
+            {/* <button
               onClick={() => { toggleLanguage(); setIsOpen(false); }}
               className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center mt-2"
             >
@@ -105,15 +139,23 @@ const Navbar = () => {
               className="block w-full px-3 py-2 rounded bg-gray-200 hover:bg-gray-300 text-center mt-1"
             >
               {theme === 'light' ? 'Dark' : 'Light'}
-            </button>
+            </button> */}
 
-            <Link
-              to="/login"
-              onClick={() => setIsOpen(false)}
-              className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
-            >
-              {t.login}
-            </Link>
+            {user && user?.email ? (
+              <button
+                onClick={handleLogout}
+                className="block px-3 py-2 mt-1 rounded bg-red-600 text-white text-center hover:bg-red-500 transition"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to="/auth/signin"
+                className="block px-3 py-2 mt-1 rounded bg-indigo-600 text-white text-center hover:bg-indigo-500 transition"
+              >
+                {t.login}
+              </Link>
+            )}
           </div>
         </div>
       )}
