@@ -36,22 +36,29 @@ const CourseDetails = () => {
   }
 
 
+
 const handleBuy = (course) => {
-  console.log(course)
+  consolw.log(course)
   if (!userId) {
     toast.error("Please login first!");
     navigate("/login");
     return;
   }
 
-  // Payment page এ পাঠানো হবে
+  // শুধু প্রয়োজনীয় ফিল্ড পাঠানো হচ্ছে
   navigate("/payment", {
     state: {
-      category: "course", // category course
-      items: course,      // course এর data
+      category: "course",
+      items: {
+        _id: course._id,
+        title: course.title,
+        price: course.price,
+        examCredit: course.examCredit || 0,
+      },
     },
   });
 };
+
 
 
 

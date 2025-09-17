@@ -36,6 +36,7 @@ const CourseDetails = () => {
   }
 
 
+
 const handleBuy = (course) => {
   console.log(course)
   if (!userId) {
@@ -45,13 +46,15 @@ const handleBuy = (course) => {
   }
 
   // Payment page এ পাঠানো হবে
-  navigate("/payment", {
-    state: {
-      category: "course", // category course
-      items: course,      // course এর data
-    },
-  });
+  // navigate("/payment", {
+  //   state: {
+  //     category: "course", // category course
+  //     items: course,      // course এর data
+  //   },
+  // });
 };
+
+
 
 
 

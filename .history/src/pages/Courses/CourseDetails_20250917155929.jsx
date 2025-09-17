@@ -36,8 +36,9 @@ const CourseDetails = () => {
   }
 
 
+
 const handleBuy = (course) => {
-  console.log(course)
+  console.log(co)
   if (!userId) {
     toast.error("Please login first!");
     navigate("/login");
@@ -52,6 +53,8 @@ const handleBuy = (course) => {
     },
   });
 };
+
+
 
 
 

@@ -36,22 +36,29 @@ const CourseDetails = () => {
   }
 
 
+
 const handleBuy = (course) => {
-  console.log(course)
+  consolw.log(course)
   if (!userId) {
     toast.error("Please login first!");
     navigate("/login");
     return;
   }
 
-  // Payment page এ পাঠানো হবে
+  // শুধু প্রয়োজনীয় ফিল্ড পাঠানো হচ্ছে
   navigate("/payment", {
     state: {
-      category: "course", // category course
-      items: course,      // course এর data
+      category: "course",
+      items: {
+        _id: course._id,
+        title: course.title,
+        price: course.price,
+        examCredit: course.examCredit || 0,
+      },
     },
   });
 };
+
 
 
 
@@ -152,7 +159,7 @@ const handleBuy = (course) => {
             </ul>
 
             <button
-              onClick={() => handleBuy(course)}
+              onClick={handleBuy(course)}
               className="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow-md transition duration-300"
             >
               Buy Now

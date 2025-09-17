@@ -36,6 +36,7 @@ const CourseDetails = () => {
   }
 
 
+
 const handleBuy = (course) => {
   console.log(course)
   if (!userId) {
