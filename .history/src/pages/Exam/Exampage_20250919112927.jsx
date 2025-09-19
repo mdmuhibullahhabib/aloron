@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Dropdowns from "./Dropdowns";
+import Dropdowns from "./Dropdowns"; 
 import useExamQuestion from "../../hooks/useExamQuestion";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,11 +14,11 @@ const Exampage = () => {
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState({ group: "", subject: "", chapter: "" });
   const [questionSet, setQuestionSet] = useState([]);
-  const [data, isLoading, refetch] = useExamQuestion(selected);
+  const [ data, isLoading, refetch ] = useExamQuestion(selected);
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
   const [subscription] = useSubscription()
-  const { user } = useAuth();
+    const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -77,22 +77,21 @@ const Exampage = () => {
     return `${m}:${s}`;
   };
 
-  // Start Exam button handler
-  const handleStartExam = () => {
-    if (!user?.email) {
-      // লগইন না করা থাকলে → login page এ পাঠানো হবে
-      navigate("/auth/signin", { state: { from: location } });
-      return;
-    }
+    // Start Exam button handler
+  // const handleStartExam = () => {
+  //   if (!user?.email) {
+  //     // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
+  //     navigate("/auth/signin", { state: { from: location } });
+  //     return;
+  //   }
+  //   if (!subscription[0]?.status === "active") {
+  //     navigate("/subscription", { state: { from: location } });
+  //     return;
+  //   }
+  //   setStarted(true);
+  // };
 
-    if (subscription[0]?.status !== "active") {
-      // সাবস্ক্রিপশন active না থাকলে → subscription page এ পাঠানো হবে
-      navigate("/subscription", { state: { from: location } });
-      return;
-    }
-
-    setStarted(true);
-  };
+  
 
   // if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
 

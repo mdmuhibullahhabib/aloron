@@ -8,9 +8,8 @@ const ExamPage = () => {
   const [questions, setQuestions] = useState([]);
   const [selected, setSelected] = useState({});
   const [openExplanation, setOpenExplanation] = useState({});
-  const [subscription, , isLoading] = useSubscription()
+  const [user, , isLoading] = useSubscription()
   const navigate = useNavigate(); 
-  console.log(subscription)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -123,7 +122,7 @@ const ExamPage = () => {
             </div>
 
             {/* ✅ Collapsible explanation dropdown */}
-            {subscription[0]?.status === "active" ? (
+            {user[0]?.status === "active" ? (
               <div className="mt-2">
                 <button
                   onClick={() => handleToggle(q._id)}
@@ -153,6 +152,7 @@ const ExamPage = () => {
                 </button>
               </div>
             )}
+
           </div>
         ))}
       </div>

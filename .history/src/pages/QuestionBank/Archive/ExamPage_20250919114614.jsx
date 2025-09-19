@@ -10,7 +10,6 @@ const ExamPage = () => {
   const [openExplanation, setOpenExplanation] = useState({});
   const [subscription, , isLoading] = useSubscription()
   const navigate = useNavigate(); 
-  console.log(subscription)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,6 +152,7 @@ const ExamPage = () => {
                 </button>
               </div>
             )}
+
           </div>
         ))}
       </div>

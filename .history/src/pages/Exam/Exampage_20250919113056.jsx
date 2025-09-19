@@ -94,6 +94,7 @@ const Exampage = () => {
     setStarted(true);
   };
 
+
   // if (isLoading) return <p className="text-center p-6">⏳ লোড হচ্ছে...</p>;
 
   if (finished) {
