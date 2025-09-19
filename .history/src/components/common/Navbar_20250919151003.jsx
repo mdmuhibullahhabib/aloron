@@ -6,7 +6,6 @@ import { useLanguage } from '../../Provider/LanguageProvider';
 import { useTheme } from '../../Provider/ThemeProvider';
 import { translations } from '../../i18n';
 import useAuth from '../../hooks/useAuth';
-import useRole from '../../hooks/useRole';
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -15,7 +14,7 @@ const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
   const location = useLocation();
-  const [isRole, isRoleLoading] = useRole();
+  const [isRole, isRoleLoading]
 
   const role = "admin";
   const navLinks = [

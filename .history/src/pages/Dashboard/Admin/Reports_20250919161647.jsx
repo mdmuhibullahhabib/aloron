@@ -61,6 +61,15 @@ const Reports = () => {
     { month: "Jun", students: 90 },
   ];
 
+  // const revenueData = [
+  //   { month: "Jan", revenue: 20000 },
+  //   { month: "Feb", revenue: 32000 },
+  //   { month: "Mar", revenue: 28000 },
+  //   { month: "Apr", revenue: 45000 },
+  //   { month: "May", revenue: 50000 },
+  //   { month: "Jun", revenue: 39000 },
+  // ];
+
   const courseData = [
     { name: "Subscription", value: 120 },
     { name: "Course", value: 90 },

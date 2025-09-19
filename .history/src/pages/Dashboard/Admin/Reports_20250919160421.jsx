@@ -20,37 +20,18 @@ import usePayment from "../../../hooks/useRevenue";
 
 const Reports = () => {
   const [courses] = useCourses();
-  const [users] = useUsers();
-  const [payments, refetch] = usePayment();
+  const [users, refetch] = useUsers();
+  const [payments] = usePayment();
 
-    //  শুধু success পেমেন্টগুলো ফিল্টার করা
+    // ✅ CHANGE: শুধু success পেমেন্টগুলো ফিল্টার করা
   const successfulPayments = payments.filter((p) => p.status === "success");
 
-  // success পেমেন্ট থেকে মোট revenue ক্যালকুলেট করা
+  // ✅ CHANGE: success পেমেন্ট থেকে মোট revenue ক্যালকুলেট করা
   const totalRevenue = successfulPayments.reduce(
     (sum, payment) => sum + payment.price,
-    0,
-    refetch()
+    0
   );
-
-
-    // মাসিক revenue বানানো
-  const monthlyRevenue = {};
-  successfulPayments.forEach((payment) => {
-    const date = new Date(payment.date);
-    const month = date.toLocaleString("default", { month: "short" }); // যেমন "Sep"
-    if (!monthlyRevenue[month]) {
-      monthlyRevenue[month] = 0;
-    }
-    monthlyRevenue[month] += payment.price;
-  });
-
-  // Recharts এর জন্য ডাটা কনভার্ট
-  const revenueData = Object.keys(monthlyRevenue).map((month) => ({
-    month,
-    revenue: monthlyRevenue[month],
-  }));
-
+  
   // Fake Data
   const enrollmentData = [
     { month: "Jan", students: 50 },
@@ -59,6 +40,15 @@ const Reports = () => {
     { month: "Apr", students: 100 },
     { month: "May", students: 120 },
     { month: "Jun", students: 90 },
+  ];
+
+  const revenueData = [
+    { month: "Jan", revenue: 20000 },
+    { month: "Feb", revenue: 32000 },
+    { month: "Mar", revenue: 28000 },
+    { month: "Apr", revenue: 45000 },
+    { month: "May", revenue: 50000 },
+    { month: "Jun", revenue: 39000 },
   ];
 
   const courseData = [

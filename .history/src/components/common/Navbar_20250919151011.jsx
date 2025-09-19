@@ -15,7 +15,7 @@ const Navbar = () => {
   const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
   const location = useLocation();
-  const [isRole, isRoleLoading] = useRole();
+  const [isRole, isRoleLoading] = useRole()
 
   const role = "admin";
   const navLinks = [

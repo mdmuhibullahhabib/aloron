@@ -33,8 +33,7 @@ const Reports = () => {
     refetch()
   );
 
-
-    // মাসিক revenue বানানো
+    // ✅ মাসিক revenue বানানো
   const monthlyRevenue = {};
   successfulPayments.forEach((payment) => {
     const date = new Date(payment.date);
@@ -45,7 +44,7 @@ const Reports = () => {
     monthlyRevenue[month] += payment.price;
   });
 
-  // Recharts এর জন্য ডাটা কনভার্ট
+  // ✅ Recharts এর জন্য ডাটা কনভার্ট
   const revenueData = Object.keys(monthlyRevenue).map((month) => ({
     month,
     revenue: monthlyRevenue[month],
@@ -59,6 +58,15 @@ const Reports = () => {
     { month: "Apr", students: 100 },
     { month: "May", students: 120 },
     { month: "Jun", students: 90 },
+  ];
+
+  const revenueData = [
+    { month: "Jan", revenue: 20000 },
+    { month: "Feb", revenue: 32000 },
+    { month: "Mar", revenue: 28000 },
+    { month: "Apr", revenue: 45000 },
+    { month: "May", revenue: 50000 },
+    { month: "Jun", revenue: 39000 },
   ];
 
   const courseData = [

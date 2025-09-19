@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import Select from 'react-select';
 import { FaSearch, FaTrashAlt } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useUsers from '../../../hooks/useUsers';
 
 const roleOptions = [
   { value: '', label: 'All Roles' },
