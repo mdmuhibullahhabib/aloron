@@ -23,6 +23,7 @@ const Exampage = () => {
   const location = useLocation();
 
   console.log(subscription[0]?.status)
+  console.log(subscription[0]?._id)
 
   useEffect(() => {
     if (selected.group && selected.subject && selected.chapter && data) {
@@ -84,7 +85,7 @@ const Exampage = () => {
       navigate("/auth/signin", { state: { from: location } });
       return;
     }
-    if (!subscription[0]?.status === "active") {
+    if (!subscription[0]?._id) {
       navigate("/subscription", { state: { from: location } });
       return;
     }

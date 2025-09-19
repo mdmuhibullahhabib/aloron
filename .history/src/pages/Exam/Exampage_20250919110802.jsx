@@ -17,12 +17,12 @@ const Exampage = () => {
   const [ data, isLoading, refetch ] = useExamQuestion(selected);
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
-  const [subscription] = useSubscription()
+  const [subscriptionUser] = useSubscription()
     const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(subscription[0]?.status)
+  console.log(subscription[0]?._id)
 
   useEffect(() => {
     if (selected.group && selected.subject && selected.chapter && data) {
@@ -77,14 +77,15 @@ const Exampage = () => {
     return `${m}:${s}`;
   };
 
-    // Start Exam button handler
+    // ✅ [6] Start Exam button handler
   const handleStartExam = () => {
     if (!user?.email) {
       // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
       navigate("/auth/signin", { state: { from: location } });
       return;
     }
-    if (!subscription[0]?.status === "active") {
+    if (!subscriptionUser[0]?._id) {
+      // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
       navigate("/subscription", { state: { from: location } });
       return;
     }

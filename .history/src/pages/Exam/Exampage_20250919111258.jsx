@@ -23,6 +23,7 @@ const Exampage = () => {
   const location = useLocation();
 
   console.log(subscription[0]?.status)
+  console.log(subscription[0]?._id)
 
   useEffect(() => {
     if (selected.group && selected.subject && selected.chapter && data) {
