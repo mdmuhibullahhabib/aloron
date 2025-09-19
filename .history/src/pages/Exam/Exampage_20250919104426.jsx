@@ -86,7 +86,7 @@ const Exampage = () => {
     }
     if (!subscriptionUser[0]?._id) {
       // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
-      navigate("/subscription", { state: { from: location } });
+      navigate("subscription", { state: { from: location } });
       return;
     }
     setStarted(true);

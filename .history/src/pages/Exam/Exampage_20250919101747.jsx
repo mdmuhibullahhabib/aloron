@@ -3,7 +3,6 @@ import Dropdowns from "./Dropdowns";
 import useExamQuestion from "../../hooks/useExamQuestion";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
-import useSubscription from "../../hooks/useSubscription";
 
 const Exampage = () => {
   const [started, setStarted] = useState(false);
@@ -17,12 +16,11 @@ const Exampage = () => {
   const [ data, isLoading, refetch ] = useExamQuestion(selected);
   const timerRef = useRef(null);
   const [remainingTime, setRemainingTime] = useState(time * 60); // seconds
-  const [subscriptionUser] = useSubscription()
+  const {user}
+
     const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log(subscriptionUser[0]?._id)
 
   useEffect(() => {
     if (selected.group && selected.subject && selected.chapter && data) {
@@ -82,11 +80,6 @@ const Exampage = () => {
     if (!user?.email) {
       // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
       navigate("/auth/signin", { state: { from: location } });
-      return;
-    }
-    if (!subscriptionUser[0]?._id) {
-      // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
-      navigate("/subscription", { state: { from: location } });
       return;
     }
     setStarted(true);

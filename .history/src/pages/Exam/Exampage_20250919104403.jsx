@@ -84,9 +84,9 @@ const Exampage = () => {
       navigate("/auth/signin", { state: { from: location } });
       return;
     }
-    if (!subscriptionUser[0]?._id) {
+    if (!subscriptionUser[0]?._id?.email) {
       // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
-      navigate("/subscription", { state: { from: location } });
+      navigate("/auth/signin", { state: { from: location } });
       return;
     }
     setStarted(true);

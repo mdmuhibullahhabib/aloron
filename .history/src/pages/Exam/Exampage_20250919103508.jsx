@@ -22,7 +22,7 @@ const Exampage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(subscriptionUser[0]?._id)
+  console.log(subscriptionUser[])
 
   useEffect(() => {
     if (selected.group && selected.subject && selected.chapter && data) {
@@ -82,11 +82,6 @@ const Exampage = () => {
     if (!user?.email) {
       // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
       navigate("/auth/signin", { state: { from: location } });
-      return;
-    }
-    if (!subscriptionUser[0]?._id) {
-      // যদি লগইন না করা থাকে → login page এ পাঠানো হবে
-      navigate("/subscription", { state: { from: location } });
       return;
     }
     setStarted(true);
