@@ -61,13 +61,13 @@ const ManageStudents = () => {
   // 🟢 Filter + Search + Sort
   const filteredStudents = students
     .filter((s) =>
-      (filter ? s.status?.toLowerCase() === filter.toLowerCase() : true)
+      filter ? s.status === filter || s.course === filter : true
     )
     .filter((s) =>
       search
         ? s.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.email.toLowerCase().includes(search.toLowerCase()) ||
-        s.course.toLowerCase().includes(search.toLowerCase())
+          s.email.toLowerCase().includes(search.toLowerCase()) ||
+          s.course.toLowerCase().includes(search.toLowerCase())
         : true
     )
     .sort((a, b) => {
@@ -155,44 +155,49 @@ const ManageStudents = () => {
               <p className="text-sm text-gray-600">💰 Fee: {student.price} টাকা</p>
               <p className="text-sm text-gray-600">📅 Joined: {student.joinDate}</p>
 
+
+   
+ 
               {/* Status Badge */}
-              <span
-                className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${student.status?.toLowerCase() === "active"
-                    ? "bg-green-100 text-green-700 border border-green-300"
-                    : "bg-red-100 text-red-700 border border-red-300"
-                  }`}
-              >
-                {student.status}
-              </span>
+<span
+  className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${
+    student.status?.toLowerCase() === "active"
+      ? "bg-green-100 text-green-700 border border-green-300"
+      : "bg-red-100 text-red-700 border border-red-300"
+  }`}
+>
+  {student.status}
+</span>
 
-              {/* Actions */}
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <button
-                  onClick={() => setSelectedStudent(student)}
-                  className="btn btn-xs bg-gray-700 text-white"
-                >
-                  <FaEye /> Details
-                </button>
-                <button
-                  onClick={() => handleToggleStatus(student._id, student.status)}
-                  className={`btn btn-xs text-white ${student.status?.toLowerCase() === "active"
-                      ? "bg-yellow-600 hover:bg-yellow-700"
-                      : "bg-green-600 hover:bg-green-700"
-                    }`}
-                >
-                  {student.status?.toLowerCase() === "active" ? <FaToggleOff /> : <FaToggleOn />}
-                  {student.status?.toLowerCase() === "active" ? "Deactivate" : "Activate"}
-                </button>
-                <button
-                  onClick={() => handleRemove(student._id)}
-                  className="btn btn-xs bg-red-600 text-white hover:bg-red-700"
-                >
-                  <FaTrash /> Remove
-                </button>
-              </div>
+{/* Actions */}
+<div className="flex flex-wrap gap-2 mt-auto">
+  <button
+    onClick={() => setSelectedStudent(student)}
+    className="btn btn-xs bg-gray-700 text-white"
+  >
+    <FaEye /> Details
+  </button>
+  <button
+    onClick={() => handleToggleStatus(student._id, student.status)}
+    className={`btn btn-xs text-white ${
+      student.status?.toLowerCase() === "active"
+        ? "bg-yellow-600 hover:bg-yellow-700"
+        : "bg-green-600 hover:bg-green-700"
+    }`}
+  >
+    {student.status?.toLowerCase() === "active" ? <FaToggleOff /> : <FaToggleOn />}
+    {student.status?.toLowerCase() === "active" ? "Deactivate" : "Activate"}
+  </button>
+  <button
+    onClick={() => handleRemove(student._id)}
+    className="btn btn-xs bg-red-600 text-white hover:bg-red-700"
+  >
+    <FaTrash /> Remove
+  </button>
+</div>
 
 
-
+              
             </div>
           ))}
         </div>

@@ -61,7 +61,7 @@ const ManageStudents = () => {
   // 🟢 Filter + Search + Sort
   const filteredStudents = students
     .filter((s) =>
-      (filter ? s.status?.toLowerCase() === filter.toLowerCase() : true)
+  .filter((s) => (filter ? s.status?.toLowerCase() === filter.toLowerCase() : true))
     )
     .filter((s) =>
       search

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaUserGraduate,
   FaSearch,
@@ -11,30 +11,83 @@ import {
   FaToggleOff,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useManageStudents from "../../../hooks/useManageStudents";
 
 const ManageStudents = () => {
+  const [students, setStudents] = useState([]);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [students, refetch, isLoading] = useMange
 
-  // ✅ Real data from hook (No fake data now)
-  const [students, refetch, isLoading] = useManageStudents();
+  // 🟢 Fake Data load
+  useEffect(() => {
+    const fakeData = [
+      {
+        _id: "1",
+        name: "Rahim Uddin",
+        email: "rahim@example.com",
+        course: "Physics 101",
+        price: 1200,
+        joinDate: "2025-08-01",
+        status: "Active",
+      },
+      {
+        _id: "2",
+        name: "Karima Akter",
+        email: "karima@example.com",
+        course: "Math Advanced",
+        price: 1500,
+        joinDate: "2025-08-05",
+        status: "Inactive",
+      },
+      {
+        _id: "3",
+        name: "Sajid Hasan",
+        email: "sajid@example.com",
+        course: "Biology Basics",
+        price: 1000,
+        joinDate: "2025-08-08",
+        status: "Active",
+      },
+      {
+        _id: "4",
+        name: "Nadia Chowdhury",
+        email: "nadia@example.com",
+        course: "English Literature",
+        price: 2000,
+        joinDate: "2025-08-10",
+        status: "Active",
+      },
+      {
+        _id: "5",
+        name: "Tanvir Ahmed",
+        email: "tanvir@example.com",
+        course: "Chemistry Lab",
+        price: 1800,
+        joinDate: "2025-08-12",
+        status: "Inactive",
+      },
+    ];
+    setStudents(fakeData);
+  }, []);
 
-  // 🟢 Update Status (local UI update + toast)
+  // 🟢 Update Status
   const handleToggleStatus = (id, currentStatus) => {
     const newStatus = currentStatus === "Active" ? "Inactive" : "Active";
+    setStudents(
+      students.map((s) =>
+        s._id === id ? { ...s, status: newStatus } : s
+      )
+    );
     toast.success(`✅ Student status updated to ${newStatus}`);
-    // TODO: Backend update করতে axiosSecure.patch() কল করা লাগবে
   };
 
   // 🟢 Remove Student
   const handleRemove = (id) => {
     if (confirm("আপনি কি নিশ্চিত এই শিক্ষার্থীকে রিমুভ করতে চান?")) {
+      setStudents(students.filter((s) => s._id !== id));
       toast.error("🗑️ শিক্ষার্থী রিমুভ হয়েছে");
-      // TODO: Backend delete কল করতে হবে → axiosSecure.delete(`/subscriptions/${id}`)
-      refetch();
     }
   };
 
@@ -61,13 +114,13 @@ const ManageStudents = () => {
   // 🟢 Filter + Search + Sort
   const filteredStudents = students
     .filter((s) =>
-      (filter ? s.status?.toLowerCase() === filter.toLowerCase() : true)
+      filter ? s.status === filter || s.course === filter : true
     )
     .filter((s) =>
       search
         ? s.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.email.toLowerCase().includes(search.toLowerCase()) ||
-        s.course.toLowerCase().includes(search.toLowerCase())
+          s.email.toLowerCase().includes(search.toLowerCase()) ||
+          s.course.toLowerCase().includes(search.toLowerCase())
         : true
     )
     .sort((a, b) => {
@@ -96,6 +149,8 @@ const ManageStudents = () => {
             <option value="">সবগুলো</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
+            <option value="Physics 101">Physics 101</option>
+            <option value="Math Advanced">Math Advanced</option>
           </select>
         </div>
 
@@ -135,9 +190,7 @@ const ManageStudents = () => {
       </div>
 
       {/* Student Cards */}
-      {isLoading ? (
-        <p className="text-center text-gray-500">Loading students...</p>
-      ) : filteredStudents.length === 0 ? (
+      {filteredStudents.length === 0 ? (
         <p className="text-center text-gray-500">কোনো শিক্ষার্থী পাওয়া যায়নি।</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -155,12 +208,13 @@ const ManageStudents = () => {
               <p className="text-sm text-gray-600">💰 Fee: {student.price} টাকা</p>
               <p className="text-sm text-gray-600">📅 Joined: {student.joinDate}</p>
 
-              {/* Status Badge */}
+              {/* Status */}
               <span
-                className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${student.status?.toLowerCase() === "active"
-                    ? "bg-green-100 text-green-700 border border-green-300"
-                    : "bg-red-100 text-red-700 border border-red-300"
-                  }`}
+                className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${
+                  student.status === "Active"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
               >
                 {student.status}
               </span>
@@ -174,25 +228,23 @@ const ManageStudents = () => {
                   <FaEye /> Details
                 </button>
                 <button
-                  onClick={() => handleToggleStatus(student._id, student.status)}
-                  className={`btn btn-xs text-white ${student.status?.toLowerCase() === "active"
-                      ? "bg-yellow-600 hover:bg-yellow-700"
-                      : "bg-green-600 hover:bg-green-700"
-                    }`}
+                  onClick={() =>
+                    handleToggleStatus(student._id, student.status)
+                  }
+                  className={`btn btn-xs text-white ${
+                    student.status === "Active" ? "bg-yellow-600" : "bg-green-600"
+                  }`}
                 >
-                  {student.status?.toLowerCase() === "active" ? <FaToggleOff /> : <FaToggleOn />}
-                  {student.status?.toLowerCase() === "active" ? "Deactivate" : "Activate"}
+                  {student.status === "Active" ? <FaToggleOff /> : <FaToggleOn />}
+                  {student.status === "Active" ? "Deactivate" : "Activate"}
                 </button>
                 <button
                   onClick={() => handleRemove(student._id)}
-                  className="btn btn-xs bg-red-600 text-white hover:bg-red-700"
+                  className="btn btn-xs bg-red-600 text-white"
                 >
                   <FaTrash /> Remove
                 </button>
               </div>
-
-
-
             </div>
           ))}
         </div>

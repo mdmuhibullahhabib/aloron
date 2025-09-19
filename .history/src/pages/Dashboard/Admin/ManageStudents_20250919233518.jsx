@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaUserGraduate,
   FaSearch,
@@ -19,22 +19,54 @@ const ManageStudents = () => {
   const [sortBy, setSortBy] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
 
-  // ✅ Real data from hook (No fake data now)
+  // 🔥 useManageStudents hook
   const [students, refetch, isLoading] = useManageStudents();
 
-  // 🟢 Update Status (local UI update + toast)
+  // 🟢 Fake Data fallback (if API empty)
+  const [localStudents, setLocalStudents] = useState([]);
+  useEffect(() => {
+    if (!isLoading && students.length > 0) {
+      setLocalStudents(students);
+    } else {
+      setLocalStudents([
+        {
+          _id: "1",
+          name: "Rahim Uddin",
+          email: "rahim@example.com",
+          course: "Physics 101",
+          price: 1200,
+          joinDate: "2025-08-01",
+          status: "Active",
+        },
+        {
+          _id: "2",
+          name: "Karima Akter",
+          email: "karima@example.com",
+          course: "Math Advanced",
+          price: 1500,
+          joinDate: "2025-08-05",
+          status: "Inactive",
+        },
+      ]);
+    }
+  }, [students, isLoading]);
+
+  // 🟢 Update Status
   const handleToggleStatus = (id, currentStatus) => {
     const newStatus = currentStatus === "Active" ? "Inactive" : "Active";
+    setLocalStudents(
+      localStudents.map((s) =>
+        s._id === id ? { ...s, status: newStatus } : s
+      )
+    );
     toast.success(`✅ Student status updated to ${newStatus}`);
-    // TODO: Backend update করতে axiosSecure.patch() কল করা লাগবে
   };
 
   // 🟢 Remove Student
   const handleRemove = (id) => {
     if (confirm("আপনি কি নিশ্চিত এই শিক্ষার্থীকে রিমুভ করতে চান?")) {
+      setLocalStudents(localStudents.filter((s) => s._id !== id));
       toast.error("🗑️ শিক্ষার্থী রিমুভ হয়েছে");
-      // TODO: Backend delete কল করতে হবে → axiosSecure.delete(`/subscriptions/${id}`)
-      refetch();
     }
   };
 
@@ -44,7 +76,7 @@ const ManageStudents = () => {
       "data:text/csv;charset=utf-8," +
       ["Name,Email,Course,Status,Join Date"]
         .concat(
-          students.map(
+          localStudents.map(
             (s) =>
               `${s.name},${s.email},${s.course},${s.status},${s.joinDate}`
           )
@@ -59,15 +91,15 @@ const ManageStudents = () => {
   };
 
   // 🟢 Filter + Search + Sort
-  const filteredStudents = students
+  const filteredStudents = localStudents
     .filter((s) =>
-      (filter ? s.status?.toLowerCase() === filter.toLowerCase() : true)
+      filter ? s.status === filter || s.course === filter : true
     )
     .filter((s) =>
       search
         ? s.name.toLowerCase().includes(search.toLowerCase()) ||
-        s.email.toLowerCase().includes(search.toLowerCase()) ||
-        s.course.toLowerCase().includes(search.toLowerCase())
+          s.email.toLowerCase().includes(search.toLowerCase()) ||
+          s.course.toLowerCase().includes(search.toLowerCase())
         : true
     )
     .sort((a, b) => {
@@ -155,12 +187,13 @@ const ManageStudents = () => {
               <p className="text-sm text-gray-600">💰 Fee: {student.price} টাকা</p>
               <p className="text-sm text-gray-600">📅 Joined: {student.joinDate}</p>
 
-              {/* Status Badge */}
+              {/* Status */}
               <span
-                className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${student.status?.toLowerCase() === "active"
-                    ? "bg-green-100 text-green-700 border border-green-300"
-                    : "bg-red-100 text-red-700 border border-red-300"
-                  }`}
+                className={`inline-block px-3 py-1 text-xs rounded-full font-medium my-3 ${
+                  student.status === "Active"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-red-100 text-red-700"
+                }`}
               >
                 {student.status}
               </span>
@@ -174,25 +207,23 @@ const ManageStudents = () => {
                   <FaEye /> Details
                 </button>
                 <button
-                  onClick={() => handleToggleStatus(student._id, student.status)}
-                  className={`btn btn-xs text-white ${student.status?.toLowerCase() === "active"
-                      ? "bg-yellow-600 hover:bg-yellow-700"
-                      : "bg-green-600 hover:bg-green-700"
-                    }`}
+                  onClick={() =>
+                    handleToggleStatus(student._id, student.status)
+                  }
+                  className={`btn btn-xs text-white ${
+                    student.status === "Active" ? "bg-yellow-600" : "bg-green-600"
+                  }`}
                 >
-                  {student.status?.toLowerCase() === "active" ? <FaToggleOff /> : <FaToggleOn />}
-                  {student.status?.toLowerCase() === "active" ? "Deactivate" : "Activate"}
+                  {student.status === "Active" ? <FaToggleOff /> : <FaToggleOn />}
+                  {student.status === "Active" ? "Deactivate" : "Activate"}
                 </button>
                 <button
                   onClick={() => handleRemove(student._id)}
-                  className="btn btn-xs bg-red-600 text-white hover:bg-red-700"
+                  className="btn btn-xs bg-red-600 text-white"
                 >
                   <FaTrash /> Remove
                 </button>
               </div>
-
-
-
             </div>
           ))}
         </div>

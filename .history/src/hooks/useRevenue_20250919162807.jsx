@@ -9,7 +9,7 @@ const usePayment = () => {
     const { data: payments = [], refetch } = useQuery({
     queryKey: ['payment'],
     queryFn: async () => {
-      const res = await axiosSecure.get('/payments');
+      const res = await axiosSecure.get('/payment');
       return res.data;
     },
   });
