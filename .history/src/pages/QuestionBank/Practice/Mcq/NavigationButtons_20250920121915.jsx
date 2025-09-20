@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLock, FaUnlock } from "react-icons/fa";
+import { LuLockKeyhole, LuUnlockKeyhole } from "react-icons/lu";
 import { useNavigate, useLocation } from "react-router-dom";
 import useSubscription from "../../../../hooks/useSubscription";
 
@@ -12,7 +12,7 @@ const NavigationButtons = ({ onNext, onUnlock }) => {
 
   const handleUnlockClick = () => {
     if (!isActive) {
-      // ❌ Not active → subscription page
+      // ✅ Not active → redirect subscription page
       navigate("/subscription", { state: { from: location } });
     } else {
       // ✅ Active → show explanation
@@ -27,7 +27,11 @@ const NavigationButtons = ({ onNext, onUnlock }) => {
         onClick={handleUnlockClick}
         className="bg-[#242939] flex gap-2 items-center text-blue-500 py-3 px-6 rounded-full font-semibold border-2 border-blue-500 hover:bg-[#2e3445] transition-colors"
       >
-        {isActive ? <FaUnlock className="mt-1" /> : <FaLock className="mt-1" />}
+        {isActive ? (
+          <LuUnlockKeyhole className="mt-1" />
+        ) : (
+          <LuLockKeyhole className="mt-1" />
+        )}
         {isActive ? "ব্যাখ্যা" : "ব্যাখ্যা দেখতে প্রিমিয়াম এ আপগ্রেড করুন"}
       </button>
 
