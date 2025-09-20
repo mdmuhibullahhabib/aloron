@@ -19,7 +19,7 @@ const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
       return;
     }
 
-    if (!subscription || subscription[0]?.status !== "active") {
+    if (!subscription || subscription[].status !== "active") {
       // ✅ No subscription or not active → redirect subscription page
       navigate("/subscription", { state: { from: location } });
       return;
