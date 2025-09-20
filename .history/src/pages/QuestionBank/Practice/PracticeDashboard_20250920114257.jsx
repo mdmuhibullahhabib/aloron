@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { subjectsData } from "./subjectsData";
-import useAuth from "../../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth"; // ✅ Assuming you already have this hook
 
 const PracticeDashboard = ({ onSubjectSelect }) => {
-  const { user } = useAuth(); 
+  const { user } = useAuth(); // ✅ Get logged-in user
   const navigate = useNavigate();
   const location = useLocation();
 

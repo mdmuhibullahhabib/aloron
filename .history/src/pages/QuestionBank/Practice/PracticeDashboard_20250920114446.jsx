@@ -4,7 +4,7 @@ import { subjectsData } from "./subjectsData";
 import useAuth from "../../../hooks/useAuth";
 
 const PracticeDashboard = ({ onSubjectSelect }) => {
-  const { user } = useAuth(); 
+  const { user } = useAuth(); // ✅ Get logged-in user
   const navigate = useNavigate();
   const location = useLocation();
 

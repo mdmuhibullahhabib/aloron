@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { subjectsData } from "./subjectsData";
 import useAuth from "../../../hooks/useAuth";
-import useSubscription from "../../../hooks/useSubscription";
+import useSubscription from "../../../hooks/useSubscription"; // ✅ custom hook for subscription
 
 const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
   const { user } = useAuth();

@@ -1,8 +1,33 @@
 import React from "react";
-import { subjectsData } from "../data/subjectsData";
+import { useNavigate, useLocation } from "react-router-dom";
+import { subjectsData } from "./subjectsData";
+import useAuth from "../../../hooks/useAuth";
+import useSubscription from "../../../hooks/useSubscription"; // ✅ custom hook for subscription
 
 const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
+  const { user } = useAuth();
+  const [subscription] = useSubscription(); // ✅ Get subscription data
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const chapters = subjectsData[subjectId].papers[paperId];
+
+  const handleChapterClick = (chapter) => {
+    if (!user?.email) {
+      // ✅ Not logged in → redirect login
+      navigate("/auth/signin", { state: { from: location } });
+      return;
+    }
+
+    if (!subscription || subscription.status !== "active") {
+      // ✅ No subscription or not active → redirect subscription page
+      navigate("/subscription", { state: { from: location } });
+      return;
+    }
+
+    // ✅ If everything ok → go to chapter
+    onChapterSelect(chapter);
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-900 text-white w-full p-8">
@@ -23,7 +48,7 @@ const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
             <div
               key={idx}
               className="bg-gray-800 rounded-xl p-4 shadow-lg flex items-center justify-between hover:bg-gray-700 cursor-pointer"
-              onClick={() => onChapterSelect(chapter)}
+              onClick={() => handleChapterClick(chapter)}
             >
               <span className="text-xl">{chapter}</span>
               <span>→</span>

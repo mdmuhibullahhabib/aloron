@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { subjectsData } from "./subjectsData";
-import useAuth from "../../../hooks/useAuth";
-import useSubscription from "../../../hooks/useSubscription";
+// import useAuth from "../../hooks/useAuth"; // ✅ your auth hook
+// import useSubscription from "../../hooks/useSubscription"; // ✅ custom hook for subscription
 
 const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
   const { user } = useAuth();
-  const [subscription] = useSubscription();
+  const [subscription] = useSubscription(); // ✅ Get subscription data
   const navigate = useNavigate();
   const location = useLocation();
 
