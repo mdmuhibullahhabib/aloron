@@ -103,6 +103,7 @@ const courseData = [
   { name: "Shop", value: 7 },
 ];
 
+
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   return (

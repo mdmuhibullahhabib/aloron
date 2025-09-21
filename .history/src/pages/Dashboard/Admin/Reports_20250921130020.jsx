@@ -52,56 +52,67 @@ const Reports = () => {
     revenue: monthlyRevenue[month],
   }));
 
+
   // Process data for chart
-  const subscriptionsData = useMemo(() => {
-    if (!subscriptions || subscriptions.length === 0) return [];
+const subscriptionsData = useMemo(() => {
+  if (!subscriptions || subscriptions.length === 0) return [];
 
-    // ✅ শেষ 12 মাসের জন্য তারিখ
-    const today = new Date();
-    const months = [];
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
-      const key = d.toLocaleString("default", { month: "short" }) + " " + d.getFullYear();
-      months.push({ key, date: d });
-    }
+  // বর্তমান তারিখ
+  const today = new Date();
+  // এক বছর আগে
+  const lastYear = new Date();
+  lastYear.setFullYear(today.getFullYear() - 1);
 
-    // শুধু active subscription এবং last 12 months
-    const activeSubs = subscriptions.filter(
-      (sub) => sub.status?.toLowerCase() === "active"
+  // ✅ শুধু active data এবং last 1 year
+  const filtered = subscriptions.filter((sub) => {
+    const start = new Date(sub.startDate);
+    return (
+      sub.status?.toLowerCase() === "active" &&
+      start >= lastYear &&
+      start <= today
     );
+  });
 
-    // মাসে subscription count করা
-    const monthMap = {};
-    months.forEach((m) => (monthMap[m.key] = 0)); // সব মাসে 0 দিয়ে শুরু
+  const monthMap = {};
 
-    activeSubs.forEach((sub) => {
-      const start = new Date(sub.startDate);
-      if (!isNaN(start)) {
-        const key = start.toLocaleString("default", { month: "short" }) + " " + start.getFullYear();
-        if (key in monthMap) monthMap[key] += 1;
-      }
-    });
+  filtered.forEach((sub) => {
+    const start = new Date(sub.startDate);
+    if (!isNaN(start)) {
+      // মাস + বছর key বানাই
+      const key =
+        start.toLocaleString("default", { month: "short" }) +
+        " " +
+        start.getFullYear();
 
-    // Object to array for chart
-    const arr = Object.entries(monthMap).map(([month, students]) => ({
-      month,
-      students,
-    }));
+      monthMap[key] = (monthMap[key] || 0) + 1;
+    }
+  });
 
-    return arr;
-  }, [subscriptions]);
+  const arr = Object.entries(monthMap).map(([month, count]) => ({
+    month,
+    students: count,
+  }));
+
+  // তারিখ অনুযায়ী sort করা
+  arr.sort((a, b) => {
+    const [ma, ya] = a.month.split(" ");
+    const [mb, yb] = b.month.split(" ");
+    const da = new Date(`${ma} 1, ${ya}`);
+    const db = new Date(`${mb} 1, ${yb}`);
+    return da - db;
+  }));
+
+  return arr;
+}, [subscriptions]);
 
 
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
 
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

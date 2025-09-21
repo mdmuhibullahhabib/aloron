@@ -2,15 +2,16 @@ import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import {
   MdOutlineDescription,
+
   MdOutlineQuestionAnswer,
 } from 'react-icons/md';
-import { FaUsers, FaListOl } from 'react-icons/fa';
+import { FaUsers, FaClipboardList } from 'react-icons/fa';
 
 const QuestionBank = () => {
   // Sidebar navigation items with component references
   const navItems = [
     { name: 'দ্রুত প্র্যাকটিস', icon: <MdOutlineQuestionAnswer className="w-6 h-6" />, path: 'practice' },
-{ name: 'মক পরীক্ষা', icon: <FaListOl  className="w-6 h-6" />, path: 'mocktest' },
+{ name: 'মক পরীক্ষা', icon: <FaClipboardList className="w-6 h-6" />, path: 'mocktest' },
     { name: 'কমিউনিটি', icon: <FaUsers className="w-6 h-6" />, path: 'community' },
     { name: 'আর্কাইভ', icon: <MdOutlineDescription className="w-6 h-6" />, path: 'archive' },
   ];

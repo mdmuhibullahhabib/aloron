@@ -52,6 +52,7 @@ const Reports = () => {
     revenue: monthlyRevenue[month],
   }));
 
+
   // Process data for chart
   const subscriptionsData = useMemo(() => {
     if (!subscriptions || subscriptions.length === 0) return [];
@@ -92,16 +93,13 @@ const Reports = () => {
   }, [subscriptions]);
 
 
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
 
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

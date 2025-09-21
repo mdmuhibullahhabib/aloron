@@ -92,16 +92,16 @@ const Reports = () => {
   }, [subscriptions]);
 
 
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
-
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+      // শুধু active subscription এবং last 12 months
+    const activeSubs = subscriptions.filter(
+      (sub) => sub.status?.toLowerCase() === "active"
+    );
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

@@ -45,7 +45,6 @@ import PaymentSuccess from '../pages/Payment/PaymentSuccess';
 import PrivateRoute from './PrivateRoute';
 import JournalDetails from '../pages/Journal/JournalDetails';
 import BlogDetails from '../pages/Blog/BlogDetails';
-import MockTest from '../pages/QuestionBank/MockTest/MockTest';
 
 
 const Router = createBrowserRouter([
@@ -90,8 +89,8 @@ const Router = createBrowserRouter([
                         element: <Practice></Practice>
                     },
                     {
-                        path: "mocktest",
-                        element: <MockTest></MockTest>
+                        path: "practice",
+                        element: <Practice></Practice>
                     },
                     {
                         path: "community",

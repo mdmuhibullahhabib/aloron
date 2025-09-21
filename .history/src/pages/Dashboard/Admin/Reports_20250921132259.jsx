@@ -100,8 +100,9 @@ const activeSubs = subscriptions.filter(
 const courseData = [
   { name: "Subscription", value: activeSubs.length },
   { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
+  { name: "Shop", value: 70 },
 ];
+
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

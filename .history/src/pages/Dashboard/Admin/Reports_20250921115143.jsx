@@ -52,56 +52,58 @@ const Reports = () => {
     revenue: monthlyRevenue[month],
   }));
 
-  // Process data for chart
-  const subscriptionsData = useMemo(() => {
-    if (!subscriptions || subscriptions.length === 0) return [];
 
-    // ✅ শেষ 12 মাসের জন্য তারিখ
-    const today = new Date();
-    const months = [];
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
-      const key = d.toLocaleString("default", { month: "short" }) + " " + d.getFullYear();
-      months.push({ key, date: d });
+  // Process data for chart
+const subscriptionsData = useMemo(() => {
+  if (!subscriptions || subscriptions.length === 0) return [];
+
+  // শুধু active ডেটা নাও
+  const filtered = subscriptions.filter(
+    (sub) => sub.status?.toLowerCase() === "active"
+  );
+  console.log(filtered)
+
+  const monthMap = {};
+
+  filtered.forEach((sub) => {
+    let start;
+
+    // 1. যদি MongoDB ISO string হয়
+    if (typeof sub.startDate === "string" || typeof sub.startDate === "number") {
+      start = new Date(sub.startDate);
     }
 
-    // শুধু active subscription এবং last 12 months
-    const activeSubs = subscriptions.filter(
-      (sub) => sub.status?.toLowerCase() === "active"
-    );
+    // 2. যদি MongoDB object আকারে আসে { $date: { $numberLong: "..." } }
+    else if (sub.startDate?.$date?.$numberLong) {
+      start = new Date(Number(sub.startDate.$date.$numberLong));
+    }
 
-    // মাসে subscription count করা
-    const monthMap = {};
-    months.forEach((m) => (monthMap[m.key] = 0)); // সব মাসে 0 দিয়ে শুরু
+    if (!isNaN(start)) {
+      const month = start.toLocaleString("default", { month: "short" });
+      monthMap[month] = (monthMap[month] || 0) + 1;
+    }
+  });
 
-    activeSubs.forEach((sub) => {
-      const start = new Date(sub.startDate);
-      if (!isNaN(start)) {
-        const key = start.toLocaleString("default", { month: "short" }) + " " + start.getFullYear();
-        if (key in monthMap) monthMap[key] += 1;
-      }
-    });
+  const monthsOrder = [
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec",
+  ];
 
-    // Object to array for chart
-    const arr = Object.entries(monthMap).map(([month, students]) => ({
-      month,
-      students,
-    }));
-
-    return arr;
-  }, [subscriptions]);
+  return monthsOrder.map((m) => ({
+    month: m,
+    students: monthMap[m] || 0,
+  }));
+  console.log(monthsOrder)
+}, [subscriptions]);
 
 
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
 
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

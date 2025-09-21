@@ -90,7 +90,7 @@ const Router = createBrowserRouter([
                         element: <Practice></Practice>
                     },
                     {
-                        path: "mocktest",
+                        path: "practice",
                         element: <MockTest></MockTest>
                     },
                     {

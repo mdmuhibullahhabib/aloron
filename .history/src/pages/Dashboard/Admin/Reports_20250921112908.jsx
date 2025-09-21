@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -24,6 +24,7 @@ const Reports = () => {
   const [users] = useUsers();
   const [payments, refetch] = usePayment();
     const [subscriptions] = useManageSubscriptions();
+
 
     //  শুধু success পেমেন্টগুলো ফিল্টার করা
   const successfulPayments = payments.filter((p) => p.status === "success");
@@ -52,56 +53,52 @@ const Reports = () => {
     revenue: monthlyRevenue[month],
   }));
 
+
   // Process data for chart
-  const subscriptionsData = useMemo(() => {
+  const subscriptionsData = useMem(() => {
     if (!subscriptions || subscriptions.length === 0) return [];
 
-    // ✅ শেষ 12 মাসের জন্য তারিখ
-    const today = new Date();
-    const months = [];
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
-      const key = d.toLocaleString("default", { month: "short" }) + " " + d.getFullYear();
-      months.push({ key, date: d });
-    }
-
-    // শুধু active subscription এবং last 12 months
-    const activeSubs = subscriptions.filter(
-      (sub) => sub.status?.toLowerCase() === "active"
+    // ✅ Only include subscriptions with status "success"
+    const filtered = subscriptions.filter(
+      (sub) => sub.status?.toLowerCase() === "success"
     );
 
-    // মাসে subscription count করা
     const monthMap = {};
-    months.forEach((m) => (monthMap[m.key] = 0)); // সব মাসে 0 দিয়ে শুরু
 
-    activeSubs.forEach((sub) => {
+    filtered.forEach((sub) => {
       const start = new Date(sub.startDate);
-      if (!isNaN(start)) {
-        const key = start.toLocaleString("default", { month: "short" }) + " " + start.getFullYear();
-        if (key in monthMap) monthMap[key] += 1;
-      }
+      const month = start.toLocaleString("default", { month: "short" }); // "Jan", "Feb"
+      monthMap[month] = (monthMap[month] || 0) + 1;
     });
 
-    // Object to array for chart
-    const arr = Object.entries(monthMap).map(([month, students]) => ({
-      month,
-      students,
-    }));
+    // Ensure all months are shown
+    const monthsOrder = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
 
-    return arr;
+    return monthsOrder.map((m) => ({
+      month: m,
+      students: monthMap[m] || 0,
+    }));
   }, [subscriptions]);
 
-
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
-
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

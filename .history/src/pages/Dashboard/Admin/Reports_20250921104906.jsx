@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import {
   BarChart,
   Bar,
@@ -17,13 +17,11 @@ import {
 import useCourses from "../../../hooks/useCourses";
 import useUsers from "../../../hooks/useUsers";
 import usePayment from "../../../hooks/useRevenue";
-import useManageSubscriptions from "../../../hooks/useManageSubscriptions";
 
 const Reports = () => {
   const [courses] = useCourses();
   const [users] = useUsers();
   const [payments, refetch] = usePayment();
-    const [subscriptions] = useManageSubscriptions();
 
     //  শুধু success পেমেন্টগুলো ফিল্টার করা
   const successfulPayments = payments.filter((p) => p.status === "success");
@@ -52,56 +50,23 @@ const Reports = () => {
     revenue: monthlyRevenue[month],
   }));
 
-  // Process data for chart
-  const subscriptionsData = useMemo(() => {
-    if (!subscriptions || subscriptions.length === 0) return [];
+  const [subscriptions] = useManageSubscriptions
+  // Fake Data
+  const enrollmentData = [
+    { month: "Jan", students: 50 },
+    { month: "Feb", students: 80 },
+    { month: "Mar", students: 65 },
+    { month: "Apr", students: 100 },
+    { month: "May", students: 120 },
+    { month: "Jun", students: 90 },
+  ];
 
-    // ✅ শেষ 12 মাসের জন্য তারিখ
-    const today = new Date();
-    const months = [];
-    for (let i = 11; i >= 0; i--) {
-      const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
-      const key = d.toLocaleString("default", { month: "short" }) + " " + d.getFullYear();
-      months.push({ key, date: d });
-    }
-
-    // শুধু active subscription এবং last 12 months
-    const activeSubs = subscriptions.filter(
-      (sub) => sub.status?.toLowerCase() === "active"
-    );
-
-    // মাসে subscription count করা
-    const monthMap = {};
-    months.forEach((m) => (monthMap[m.key] = 0)); // সব মাসে 0 দিয়ে শুরু
-
-    activeSubs.forEach((sub) => {
-      const start = new Date(sub.startDate);
-      if (!isNaN(start)) {
-        const key = start.toLocaleString("default", { month: "short" }) + " " + start.getFullYear();
-        if (key in monthMap) monthMap[key] += 1;
-      }
-    });
-
-    // Object to array for chart
-    const arr = Object.entries(monthMap).map(([month, students]) => ({
-      month,
-      students,
-    }));
-
-    return arr;
-  }, [subscriptions]);
-
-
-// pie chart
-const activeSubs = subscriptions.filter(
-  (sub) => sub.status?.toLowerCase() === "active"
-);
-
-const courseData = [
-  { name: "Subscription", value: activeSubs.length },
-  { name: "Course", value: courses.length },
-  { name: "Shop", value: 7 },
-];
+  const courseData = [
+    { name: "Subscription", value: 120 },
+    { name: "Course", value: 90 },
+    { name: "Shop", value: 70 },
+    // { name: "Python", value: 50 },
+  ];
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -130,18 +95,18 @@ const courseData = [
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Student Enrollment Bar Chart */}
-     <div className="bg-white shadow p-4 rounded-xl">
-      <h2 className="text-lg font-bold mb-4">📈 Student Subscriptions</h2>
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={subscriptionsData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis allowDecimals={false} />
-          <Tooltip />
-          <Bar dataKey="students" fill="#4F46E5" radius={[8, 8, 0, 0]} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+        <div className="bg-white shadow p-4 rounded-xl">
+          <h2 className="text-lg font-bold mb-4">📈 Student Subscriptions</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={enrollmentData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="students" fill="#4F46E5" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
         {/* Revenue Line Chart */}
         <div className="bg-white shadow p-4 rounded-xl">
