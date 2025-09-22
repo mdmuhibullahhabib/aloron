@@ -79,7 +79,7 @@ const Navbar = () => {
                   className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300
                     ${isActive 
                       ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-lg'
-                      : ' hover:text-indigo-600 hover:bg-indigo-50 dark:text-white-600 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
+                      : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
                   `}
                 >
                   {link.name}

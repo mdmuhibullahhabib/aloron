@@ -12,7 +12,7 @@ const Main = () => {
             <header>
                 <Navbar></Navbar>
             </header>
-            <div className="mt-16">
+            <div className="mt-">
                 <Outlet></Outlet>
             </div>
 

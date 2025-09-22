@@ -86,7 +86,7 @@ const handleDuplicate = async (course) => {
   try {
     const { data } = await axiosSecure.post("/courses", newCourse);
     if (data.insertedId) {
-      refetch();
+      setCourses((prev) => [...prev, { ...newCourse, _id: data.insertedId }]);
       toast.success("কোর্স ডুপ্লিকেট হয়েছে");
     }
   } catch (error) {

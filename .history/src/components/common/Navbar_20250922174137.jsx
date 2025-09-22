@@ -47,7 +47,6 @@ const Navbar = () => {
   ];
 
   return (
-    // ✅ CHANGE: theme + scroll + dark mode
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-500
         ${scrolled
@@ -79,7 +78,7 @@ const Navbar = () => {
                   className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300
                     ${isActive 
                       ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-lg'
-                      : ' hover:text-indigo-600 hover:bg-indigo-50 dark:text-white-600 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
+                      : 'text-gray-700 dark:text-white hover:text-indigo-600 hover:bg-indigo-50 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
                   `}
                 >
                   {link.name}
@@ -87,17 +86,17 @@ const Navbar = () => {
               );
             })}
 
-            {/* Cart */}
+            {/* ✅ Cart */}
             <Link to="/cart" className="ml-2 relative group">
-              <button className="btn btn-sm rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 transition transform group-hover:scale-105">
+              <button className="btn btn-sm rounded-full bg-pink-100 hover:bg-pink-200 text-pink-600 dark:text-white transition transform group-hover:scale-105">
                 <FaShoppingCart />
               </button>
             </Link>
 
-            {/* Language */}
+            {/* ✅ Language */}
             <button
               onClick={toggleLanguage}
-              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105"
+              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white transition transform hover:scale-105"
             >
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
@@ -106,7 +105,7 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 
-                dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 
+                dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white 
                 transition transform hover:scale-105 flex items-center gap-1"
             >
               {theme === 'light' ? <FaMoon /> : <FaSun />}
@@ -132,7 +131,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 dark:text-gray-200 focus:outline-none">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 dark:text-white focus:outline-none">
               {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
           </div>
@@ -153,7 +152,7 @@ const Navbar = () => {
                   className={`block px-4 py-2 rounded-full text-center font-medium transition-all duration-300
                     ${isActive
                       ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-md'
-                      : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
+                      : 'text-gray-700 dark:text-white hover:text-indigo-600 hover:bg-indigo-50 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
                   `}
                 >
                   {link.name}
@@ -179,10 +178,10 @@ const Navbar = () => {
               </Link>
             )}
 
-            {/* Mobile Language & Theme */}
+            {/* Mobile Language */}
             <button
               onClick={() => { toggleLanguage(); setIsOpen(false); }}
-              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105"
+              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white mt-2 transition transform hover:scale-105"
             >
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
@@ -190,7 +189,7 @@ const Navbar = () => {
             {/* ✅ Mobile Theme Toggle */}
             <button
               onClick={() => { toggleTheme(); setIsOpen(false); }}
-              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105 flex items-center justify-center gap-1"
+              className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white mt-2 transition transform hover:scale-105 flex items-center justify-center gap-1"
             >
               {theme === 'light' ? <FaMoon /> : <FaSun />} {theme === 'light' ? 'Dark' : 'Light'}
             </button>

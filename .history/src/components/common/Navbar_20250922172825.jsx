@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { FaShoppingCart, FaMoon, FaSun } from 'react-icons/fa';
 import { useLanguage } from '../../Provider/LanguageProvider';
-import { useTheme } from '../../Provider/ThemeProvider';
+import { useTheme } from '../../Provider/ThemeProvider'; // ✅ THEME: Theme context
 import { translations } from '../../i18n';
 import useAuth from '../../hooks/useAuth';
 import useRole from '../../hooks/useRole';
@@ -11,18 +11,16 @@ import useRole from '../../hooks/useRole';
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme(); // ✅ THEME
   const { language, toggleLanguage } = useLanguage();
   const t = translations[language];
   const location = useLocation();
   const [isRole, isRoleLoading] = useRole();
 
-  // ✅ CHANGE: scroll effect
+  // ✅ SCROLL EFFECT
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -47,15 +45,14 @@ const Navbar = () => {
   ];
 
   return (
-    // ✅ CHANGE: theme + scroll + dark mode
+    // ✅ THEME: theme class support + scroll effect
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-500
+      className={`fixed top-0 w-full z-50 transition-all duration-500 
         ${scrolled
           ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md'
-          : theme === 'dark'
-            ? 'bg-gray-900 text-white'
-            : 'bg-white text-gray-900'}
+          : 'bg-white dark:bg-gray-900'}
       `}
+      data-theme={theme} // ✅ THEME: DaisyUI theme sync
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
@@ -79,7 +76,7 @@ const Navbar = () => {
                   className={`px-4 py-2 rounded-full font-medium text-sm transition-all duration-300
                     ${isActive 
                       ? 'bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300 text-white shadow-lg'
-                      : ' hover:text-indigo-600 hover:bg-indigo-50 dark:text-white-600 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
+                      : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 dark:text-gray-300 dark:hover:text-indigo-400 dark:hover:bg-gray-800'}
                   `}
                 >
                   {link.name}
@@ -102,12 +99,10 @@ const Navbar = () => {
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
 
-            {/* ✅ Theme Toggle */}
+            {/* ✅ THEME TOGGLE */}
             <button
               onClick={toggleTheme}
-              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 
-                dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 
-                transition transform hover:scale-105 flex items-center gap-1"
+              className="btn btn-sm ml-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 transition transform hover:scale-105 flex items-center gap-1"
             >
               {theme === 'light' ? <FaMoon /> : <FaSun />}
             </button>
@@ -187,7 +182,7 @@ const Navbar = () => {
               {language === 'en' ? 'বাংলা' : 'English'}
             </button>
 
-            {/* ✅ Mobile Theme Toggle */}
+            {/* ✅ THEME TOGGLE MOBILE */}
             <button
               onClick={() => { toggleTheme(); setIsOpen(false); }}
               className="block w-full px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-100 mt-2 transition transform hover:scale-105 flex items-center justify-center gap-1"
