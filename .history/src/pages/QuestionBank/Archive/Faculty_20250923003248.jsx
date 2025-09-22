@@ -159,13 +159,13 @@ const Faculty = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 px-5 py-2.5 rounded-full font-medium hover:bg-gray-300 transition"
+        className="mb-6 px-5 py-2.5 rounded-full text-gray-700 font-medium hover:bg-gray-300 transition"
       >
         ⬅️ Back
       </button>
 
       {/* Title */}
-      <h2 className="text-2xl md:text-3xl font-bold mb-8">
+      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-800">
         {faculties.length > 0
           ? `Details for ${cardPath.replace("-", " ").toUpperCase()}`
           : "❌ কোনো ডাটা পাওয়া যায়নি"}
@@ -190,15 +190,15 @@ const Faculty = () => {
                 className="group p-6 rounded-3xl shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
                 style={{ backgroundColor: f.color }}
               >
-                <h3 className="text-lg md:text-xl font-semibold group-hover:underline">
+                <h3 className="text-white text-lg md:text-xl font-semibold group-hover:underline">
                   {f.title}
                 </h3>
-                <p className="opacity-90 mt-1">{f.subtitle}</p>
+                <p className="text-white opacity-90 mt-1">{f.subtitle}</p>
               </Link>
             );
           })
         ) : (
-          <p className="">⚠️ এই কার্ডের কোনো তথ্য পাওয়া যায়নি।</p>
+          <p className="text-gray-500">⚠️ এই কার্ডের কোনো তথ্য পাওয়া যায়নি।</p>
         )}
       </div>
     </div>

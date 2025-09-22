@@ -15,7 +15,7 @@ const ArchiveCard = ({ card }) => {
             <h3 className="text-lg font-semibold mb-1">
                 {card.title}
             </h3>
-            <p className="text-sm opacity-90">{card.subtitle}</p>
+            <p className="text-white text-sm opacity-90">{card.subtitle}</p>
         </Link>
     )
 }

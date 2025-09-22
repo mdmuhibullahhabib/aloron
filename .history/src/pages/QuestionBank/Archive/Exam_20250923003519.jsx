@@ -147,13 +147,13 @@ const Exam = () => {
 
           {/* Result Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-green-600 rounded-xl p-6 shadow-xl text-center">
+            <div className="bg-green-600 rounded-xl p-6 shadow-xl text-center text-white">
               <p className="text-lg font-bold mb-2">উত্তর করেছেন</p>
               <div className="text-5xl font-extrabold">
                 {examResults.answeredQuestions} / {examResults.totalQuestions}
               </div>
             </div>
-            <div className="bg-blue-600 rounded-xl p-6 shadow-xl text-center">
+            <div className="bg-blue-600 rounded-xl p-6 shadow-xl text-center text-white">
               <p className="text-lg font-bold mb-2">সময় নিয়েছে</p>
               <div className="text-5xl font-extrabold">
                 {formatTime(timeTaken)}
@@ -192,10 +192,10 @@ const Exam = () => {
 
   // Original Exam Page View
   return (
-    <div className="flex min-h-screen w-full">
+    <div className="flex min-h-screen bg-gray-100 text-gray-800 w-full">
       <div className="flex-1 flex flex-col p-8">
         {/* হেডার */}
-        <div className="rounded-xl p-6 shadow-xl text-center mb-8 relative">
+        <div className="bg-white rounded-xl p-6 shadow-xl text-center mb-8 relative">
           {/* 🔙 Back Button */}
           <button
             onClick={() => {
@@ -213,28 +213,28 @@ const Exam = () => {
           <div className="text-xl font-medium text-green-600">
             সময় বাকি: {formatTime(timeLeft)}
           </div>
-          <p className=" mt-2">
+          <p className="text-gray-600 mt-2">
             প্রতি প্রশ্নের পূর্ণমান ৫ এবং ভুলের জন্য ০.২৫ মার্কস কাটা হবে
           </p>
         </div>
 
         {/* প্রশ্ন */}
-        <div className="rounded-xl p-8 shadow-xl mb-20">
-          <h2 className="text-xl font-bold border-b pb-4 mb-6">
+        <div className="bg-white rounded-xl p-8 shadow-xl mb-20">
+          <h2 className="text-xl font-bold border-b border-gray-300 pb-4 mb-6">
             গণিত (৩)
           </h2>
           <div className="space-y-8">
             {mockQuestions.map((q) => (
-              <div key={q.id} className="card shadow-md rounded-lg p-6">
+              <div key={q.id} className="card bg-gray-50 shadow-md rounded-lg p-6">
                 <div className="flex justify-between mb-4">
                   <p className="text-lg font-medium">{q.text}</p>
-                  <span className="text-sm ">{q.points} মার্কস</span>
+                  <span className="text-sm text-gray-500">{q.points} মার্কস</span>
                 </div>
                 <div className="space-y-3">
                   {q.options.map((opt) => (
                     <label
                       key={opt.id}
-                      className="flex justify-between items-center p-3 rounded-lg hover:bg-gray-300 cursor-pointer"
+                      className="flex justify-between items-center p-3 rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer"
                     >
                       <span>{opt.text}</span>
                       <input
@@ -254,7 +254,7 @@ const Exam = () => {
       </div>
 
       {/* নিচের ফিক্সড বার */}
-      <div className="fixed bottom-0 left-0 right-0 shadow-lg p-4 flex justify-between items-center rounded-t-lg">
+      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 flex justify-between items-center rounded-t-lg">
         <div className="text-xl font-bold text-green-600">{formatTime(timeLeft)}</div>
         <button className="btn btn-success btn-lg" onClick={handleSubmit}>
           সাবমিট

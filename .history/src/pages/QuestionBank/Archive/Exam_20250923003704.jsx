@@ -254,7 +254,7 @@ const Exam = () => {
       </div>
 
       {/* নিচের ফিক্সড বার */}
-      <div className="fixed bottom-0 left-0 right-0 shadow-lg p-4 flex justify-between items-center rounded-t-lg">
+      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 flex justify-between items-center rounded-t-lg">
         <div className="text-xl font-bold text-green-600">{formatTime(timeLeft)}</div>
         <button className="btn btn-success btn-lg" onClick={handleSubmit}>
           সাবমিট

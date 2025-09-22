@@ -137,7 +137,7 @@ const FacultyExam = () => {
           <input
             type="text"
             placeholder="Search for exams..."
-            className="w-full border border-gray-300  rounded-full py-2 px-4 pl-10 focus:outline-none focus:border-green-500"
+            className="w-full bg-gray-100 border border-gray-300  rounded-full py-2 px-4 pl-10 focus:outline-none focus:border-green-500"
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -84,17 +84,17 @@ const ExamPage = () => {
       </div>
 
       <div className="flex gap-4 mb-6">
-        <button className="px-4 py-2 rounded-full bg-blue-500 ">
+        <button className="px-4 py-2 rounded-full bg-blue-500 text-white">
           MCQ
         </button>
-        <button className="px-4 py-2 rounded-full">Written</button>
+        <button className="px-4 py-2 rounded-full bg-gray-200">Written</button>
       </div>
 
       <div className="space-y-6">
         {questions.map((q) => (
           <div
             key={q._id}
-            className="rounded-lg shadow-md p-4 border border-gray-200"
+            className="bg-white rounded-lg shadow-md p-4 border border-gray-200"
           >
             <div className="flex justify-between items-center mb-3">
               <p className="text-lg font-medium">{q.question}</p>

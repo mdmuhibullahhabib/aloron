@@ -190,15 +190,15 @@ const Faculty = () => {
                 className="group p-6 rounded-3xl shadow-lg hover:shadow-xl hover:scale-105 transition-transform"
                 style={{ backgroundColor: f.color }}
               >
-                <h3 className="text-lg md:text-xl font-semibold group-hover:underline">
+                <h3 className="text-white text-lg md:text-xl font-semibold group-hover:underline">
                   {f.title}
                 </h3>
-                <p className="opacity-90 mt-1">{f.subtitle}</p>
+                <p className="text-white opacity-90 mt-1">{f.subtitle}</p>
               </Link>
             );
           })
         ) : (
-          <p className="">⚠️ এই কার্ডের কোনো তথ্য পাওয়া যায়নি।</p>
+          <p className="text-gray-500">⚠️ এই কার্ডের কোনো তথ্য পাওয়া যায়নি।</p>
         )}
       </div>
     </div>

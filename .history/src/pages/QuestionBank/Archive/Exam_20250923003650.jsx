@@ -228,13 +228,13 @@ const Exam = () => {
               <div key={q.id} className="card shadow-md rounded-lg p-6">
                 <div className="flex justify-between mb-4">
                   <p className="text-lg font-medium">{q.text}</p>
-                  <span className="text-sm ">{q.points} মার্কস</span>
+                  <span className="text-sm text-gray-500">{q.points} মার্কস</span>
                 </div>
                 <div className="space-y-3">
                   {q.options.map((opt) => (
                     <label
                       key={opt.id}
-                      className="flex justify-between items-center p-3 rounded-lg hover:bg-gray-300 cursor-pointer"
+                      className="flex justify-between items-center p-3 rounded-lg bg-gray-200 hover:bg-gray-300 cursor-pointer"
                     >
                       <span>{opt.text}</span>
                       <input
@@ -254,7 +254,7 @@ const Exam = () => {
       </div>
 
       {/* নিচের ফিক্সড বার */}
-      <div className="fixed bottom-0 left-0 right-0 shadow-lg p-4 flex justify-between items-center rounded-t-lg">
+      <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 flex justify-between items-center rounded-t-lg">
         <div className="text-xl font-bold text-green-600">{formatTime(timeLeft)}</div>
         <button className="btn btn-success btn-lg" onClick={handleSubmit}>
           সাবমিট

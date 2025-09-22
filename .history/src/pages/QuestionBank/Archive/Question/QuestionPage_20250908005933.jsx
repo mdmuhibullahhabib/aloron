@@ -37,7 +37,7 @@ const QuestionPage = () => {
           ))}
         </div>
       ) : (
-        <p className="">No questions found for this set.</p>
+        <p className="text-gray-500">No questions found for this set.</p>
       )}
     </div>
   );

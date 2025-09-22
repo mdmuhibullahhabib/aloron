@@ -12,10 +12,10 @@ const ArchiveCard = ({ card }) => {
             <div className="absolute top-4 right-4 text-xs font-bold px-2 py-1 rounded-full">
                 Live
             </div>
-            <h3 className="text-lg font-semibold mb-1">
+            <h3 className="text-white text-lg font-semibold mb-1">
                 {card.title}
             </h3>
-            <p className="text-sm opacity-90">{card.subtitle}</p>
+            <p className="text-white text-sm opacity-90">{card.subtitle}</p>
         </Link>
     )
 }

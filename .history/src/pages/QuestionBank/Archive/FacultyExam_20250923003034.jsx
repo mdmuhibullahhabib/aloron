@@ -137,7 +137,7 @@ const FacultyExam = () => {
           <input
             type="text"
             placeholder="Search for exams..."
-            className="w-full border border-gray-300  rounded-full py-2 px-4 pl-10 focus:outline-none focus:border-green-500"
+            className="w-full bg-gray-100 border border-gray-300  rounded-full py-2 px-4 pl-10 focus:outline-none focus:border-green-500"
           />
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -222,7 +222,7 @@ const FacultyExam = () => {
 
             <div className="flex flex-col sm:flex-row justify-center sm:justify-end gap-3">
               <button
-                className="px-4 py-2 rounded-lg hover:bg-gray-400 transition-colors w-full sm:w-auto"
+                className="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400 transition-colors w-full sm:w-auto"
                 onClick={() => setShowModal(false)}
               >
                 বাতিল
@@ -231,7 +231,7 @@ const FacultyExam = () => {
               {/* ✅ CHANGE 4: Removed <Link>, used button with startExam */}
               <button
                 onClick={startExam}
-                className="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 transition-colors w-full sm:w-auto text-center"
+                className="px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors w-full sm:w-auto text-center"
               >
                 পরীক্ষা শুরু করুন
               </button>

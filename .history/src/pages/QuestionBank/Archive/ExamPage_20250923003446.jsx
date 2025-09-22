@@ -94,7 +94,7 @@ const ExamPage = () => {
         {questions.map((q) => (
           <div
             key={q._id}
-            className="rounded-lg shadow-md p-4 border border-gray-200"
+            className="bg-white rounded-lg shadow-md p-4 border border-gray-200"
           >
             <div className="flex justify-between items-center mb-3">
               <p className="text-lg font-medium">{q.question}</p>
