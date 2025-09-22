@@ -111,7 +111,7 @@ const ManageStudents = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Active">Active</option>
-            <option value="Pending">Inactive</option>
+            <option value="Inactive">Inactive</option>
           </select>
         </div>
 

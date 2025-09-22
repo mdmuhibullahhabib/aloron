@@ -12,7 +12,6 @@ import {
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import useManageStudents from "../../../hooks/useManageStudents";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageStudents = () => {
   const [filter, setFilter] = useState("");
@@ -20,29 +19,32 @@ const ManageStudents = () => {
   const [sortBy, setSortBy] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [students, refetch, isLoading] = useManageStudents();
-  const axiosSecure = useAxiosSecure();
-
 
 // handleToggleStatus function
-  const handleToggleStatus = async (id, currentStatus) => {
-    const newStatus =
-      currentStatus.toLowerCase() === "active" ? "pending" : "active";
+const handleToggleStatus = async (id, currentStatus, refetch) => {
+  // Current status check & swap
+  const newStatus =
+    currentStatus.toLowerCase() === "active" ? "pending" : "active";
 
-    const loadingToast = toast.loading(`Updating status to ${newStatus}...`);
+  // Optional: Optimistic UI feedback
+  toast.loading(`Updating status to ${newStatus}...`);
 
-    try {
-      await axiosSecure.patch(`/subscriptions/${id}`, { status: newStatus });
+  try {
+    // Backend PATCH call
+    await axiosSecure.patch(`/subscriptions/${id}`, { status: newStatus });
 
-      toast.dismiss(loadingToast);
-      toast.success(`✅ Status updated to ${newStatus}`);
+    // Success toast
+    toast.dismiss(); // remove loading toast
+    toast.success(`✅ Status updated to ${newStatus}`);
 
-      refetch(); // Refresh UI
-    } catch (error) {
-      toast.dismiss(loadingToast);
-      toast.error("❌ Status update failed!");
-      console.error("Status update error:", error);
-    }
-  };
+    // React Query refetch to refresh UI
+    if (typeof refetch === "function") refetch();
+  } catch (error) {
+    toast.dismiss();
+    toast.error("❌ Status update failed!");
+    console.error("Status update error:", error);
+  }
+};
 
 
   // 🟢 Remove Student
@@ -111,7 +113,7 @@ const ManageStudents = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Active">Active</option>
-            <option value="Pending">Inactive</option>
+            <option value="Inactive">Inactive</option>
           </select>
         </div>
 

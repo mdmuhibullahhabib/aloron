@@ -20,7 +20,7 @@ import useRole from '../../hooks/useRole';
 
 const Dashboard = () => {
   const [isRole, isRoleLoading] = useRole();
-  const role = "student";
+  const role = "admin";
 
   return (
     <div className="flex min-h-screen">
@@ -161,7 +161,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/dashboard/my-payment"
+                to="/dashboard/payments"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }

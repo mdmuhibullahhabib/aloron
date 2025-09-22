@@ -8,60 +8,41 @@ const InvoiceModal = ({ payment, onClose }) => {
 
   if (!payment) return null;
 
-  const handleDownloadPDF = async () => {
-    const element = modalRef.current;
-    if (!element) return;
+  const handleDownloadPDF = () => {
+    const input = modalRef.current;
+    if (!input) return;
 
-    try {
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: "#ffffff", // override Tailwind oklch
-      });
-
+    html2canvas(input, { scale: 2 }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
       pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
       pdf.save(`invoice_${payment.transactionId || "unknown"}.pdf`);
-    } catch (error) {
-      console.error("PDF download error:", error);
-      alert("PDF download failed! Open console for details.");
-    }
+    });
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
       <div
+        className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative"
         ref={modalRef}
-        className="rounded-xl shadow-lg w-full max-w-lg p-6 relative"
-        style={{ backgroundColor: "#ffffff", color: "#111" }}
       >
         {/* Close Button */}
         <button
-          className="absolute top-3 right-3 text-gray-700 hover:text-red-500"
+          className="absolute top-3 right-3 text-gray-500 hover:text-red-500"
           onClick={onClose}
-          style={{ color: "#4b5563" }}
         >
           <FaTimes size={18} />
         </button>
 
         {/* Header */}
-        <h2
-          className="text-2xl font-bold text-center mb-4"
-          style={{ color: "#111" }}
-        >
-          ইনভয়েস
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-4">ইনভয়েস</h2>
 
         {/* Invoice Info */}
-        <div className="space-y-2">
+        <div className="space-y-2 text-gray-700">
           <p>
-            <span className="font-bold">ছাত্রের নাম:</span>{" "}
-            {payment.studentName || "-"}
+            <span className="font-bold">ছাত্রের নাম:</span> {payment.studentName || "-"}
           </p>
           <p>
             <span className="font-bold">ইমেইল:</span> {payment.email || "-"}
@@ -74,12 +55,10 @@ const InvoiceModal = ({ payment, onClose }) => {
             {payment.courseName || payment.category || "-"}
           </p>
           <p>
-            <span className="font-bold">পরিমাণ:</span>{" "}
-            {payment.amount || payment.price} ৳
+            <span className="font-bold">পরিমাণ:</span> {payment.amount || payment.price} ৳
           </p>
           <p>
-            <span className="font-bold">Transaction ID:</span>{" "}
-            {payment.transactionId || "-"}
+            <span className="font-bold">Transaction ID:</span> {payment.transactionId || "-"}
           </p>
           <p>
             <span className="font-bold">তারিখ:</span>{" "}
@@ -94,13 +73,9 @@ const InvoiceModal = ({ payment, onClose }) => {
           <p>
             <span className="font-bold">স্ট্যাটাস:</span>{" "}
             <span
-              className="px-2 py-1 rounded-full text-white text-sm"
-              style={{
-                backgroundColor:
-                  payment.status?.toLowerCase() === "success"
-                    ? "#22c55e"
-                    : "#ef4444", // safe hex color
-              }}
+              className={`px-2 py-1 rounded-full text-white text-sm ${
+                payment.status?.toLowerCase() === "success" ? "bg-green-500" : "bg-red-500"
+              }`}
             >
               {payment.status || "-"}
             </span>

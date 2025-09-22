@@ -12,37 +12,30 @@ import {
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import useManageStudents from "../../../hooks/useManageStudents";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageStudents = () => {
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [selectedStudent, setSelectedStudent] = useState(null);
+
+  // ✅ Real data from hook (No fake data now)
   const [students, refetch, isLoading] = useManageStudents();
-  const axiosSecure = useAxiosSecure();
 
+// 🟢 Update Status (local UI update + toast)
+const handleToggleStatus = (id, currentStatus) => {
+  // currentStatus ছোট হাতের letter এ convert করে check করা
+  const newStatus =
+    currentStatus.toLowerCase() === "active" ? "pending" : "active";
 
-// handleToggleStatus function
-  const handleToggleStatus = async (id, currentStatus) => {
-    const newStatus =
-      currentStatus.toLowerCase() === "active" ? "pending" : "active";
-
-    const loadingToast = toast.loading(`Updating status to ${newStatus}...`);
-
-    try {
-      await axiosSecure.patch(`/subscriptions/${id}`, { status: newStatus });
-
-      toast.dismiss(loadingToast);
-      toast.success(`✅ Status updated to ${newStatus}`);
-
-      refetch(); // Refresh UI
-    } catch (error) {
-      toast.dismiss(loadingToast);
-      toast.error("❌ Status update failed!");
-      console.error("Status update error:", error);
-    }
-  };
+  console.log(`New status for ID ${id}: ${newStatus}`);
+  
+  // TODO: Backend update করতে axiosSecure.patch() কল করা লাগবে
+  // উদাহরণ:
+  // axiosSecure.patch(`/api/subscription/${id}`, { status: newStatus })
+  //   .then(() => toast.success(`✅ Status updated to ${newStatus}`))
+  //   .catch(() => toast.error("❌ Status update failed"));
+};
 
 
   // 🟢 Remove Student
@@ -111,7 +104,7 @@ const ManageStudents = () => {
           >
             <option value="">সবগুলো</option>
             <option value="Active">Active</option>
-            <option value="Pending">Inactive</option>
+            <option value="Inactive">Inactive</option>
           </select>
         </div>
 

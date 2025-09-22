@@ -17,7 +17,7 @@ const InvoiceModal = ({ payment, onClose }) => {
         scale: 2,
         useCORS: true,
         allowTaint: true,
-        backgroundColor: "#ffffff", // override Tailwind oklch
+        backgroundColor: "#ffffff", // override background to avoid oklch
       });
 
       const imgData = canvas.toDataURL("image/png");
@@ -29,7 +29,7 @@ const InvoiceModal = ({ payment, onClose }) => {
       pdf.save(`invoice_${payment.transactionId || "unknown"}.pdf`);
     } catch (error) {
       console.error("PDF download error:", error);
-      alert("PDF download failed! Open console for details.");
+      alert("PDF download failed!");
     }
   };
 
@@ -37,23 +37,19 @@ const InvoiceModal = ({ payment, onClose }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
       <div
         ref={modalRef}
-        className="rounded-xl shadow-lg w-full max-w-lg p-6 relative"
-        style={{ backgroundColor: "#ffffff", color: "#111" }}
+        className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative"
+        style={{ backgroundColor: "#ffffff", color: "#111" }} // override tailwind oklch
       >
         {/* Close Button */}
         <button
-          className="absolute top-3 right-3 text-gray-700 hover:text-red-500"
+          className="absolute top-3 right-3 text-gray-500 hover:text-red-500"
           onClick={onClose}
-          style={{ color: "#4b5563" }}
         >
           <FaTimes size={18} />
         </button>
 
         {/* Header */}
-        <h2
-          className="text-2xl font-bold text-center mb-4"
-          style={{ color: "#111" }}
-        >
+        <h2 className="text-2xl font-bold text-center mb-4" style={{ color: "#111" }}>
           ইনভয়েস
         </h2>
 
@@ -99,7 +95,7 @@ const InvoiceModal = ({ payment, onClose }) => {
                 backgroundColor:
                   payment.status?.toLowerCase() === "success"
                     ? "#22c55e"
-                    : "#ef4444", // safe hex color
+                    : "#ef4444", // override tailwind oklch
               }}
             >
               {payment.status || "-"}

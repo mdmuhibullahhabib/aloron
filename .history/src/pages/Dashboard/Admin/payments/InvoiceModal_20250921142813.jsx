@@ -13,14 +13,14 @@ const InvoiceModal = ({ payment, onClose }) => {
     if (!element) return;
 
     try {
+      // html2canvas to capture the element
       const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
+        scale: 2,          // increase quality
+        useCORS: true,     // in case of external images
         allowTaint: true,
-        backgroundColor: "#ffffff", // override Tailwind oklch
       });
-
       const imgData = canvas.toDataURL("image/png");
+
       const pdf = new jsPDF("p", "mm", "a4");
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
@@ -29,36 +29,29 @@ const InvoiceModal = ({ payment, onClose }) => {
       pdf.save(`invoice_${payment.transactionId || "unknown"}.pdf`);
     } catch (error) {
       console.error("PDF download error:", error);
-      alert("PDF download failed! Open console for details.");
+      alert("PDF download failed!");
     }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4">
       <div
+        className="bg-white rounded-xl shadow-lg w-full max-w-lg p-6 relative"
         ref={modalRef}
-        className="rounded-xl shadow-lg w-full max-w-lg p-6 relative"
-        style={{ backgroundColor: "#ffffff", color: "#111" }}
       >
         {/* Close Button */}
         <button
-          className="absolute top-3 right-3 text-gray-700 hover:text-red-500"
+          className="absolute top-3 right-3 text-gray-500 hover:text-red-500"
           onClick={onClose}
-          style={{ color: "#4b5563" }}
         >
           <FaTimes size={18} />
         </button>
 
         {/* Header */}
-        <h2
-          className="text-2xl font-bold text-center mb-4"
-          style={{ color: "#111" }}
-        >
-          ইনভয়েস
-        </h2>
+        <h2 className="text-2xl font-bold text-center mb-4">ইনভয়েস</h2>
 
         {/* Invoice Info */}
-        <div className="space-y-2">
+        <div className="space-y-2 text-gray-700">
           <p>
             <span className="font-bold">ছাত্রের নাম:</span>{" "}
             {payment.studentName || "-"}
@@ -94,13 +87,11 @@ const InvoiceModal = ({ payment, onClose }) => {
           <p>
             <span className="font-bold">স্ট্যাটাস:</span>{" "}
             <span
-              className="px-2 py-1 rounded-full text-white text-sm"
-              style={{
-                backgroundColor:
-                  payment.status?.toLowerCase() === "success"
-                    ? "#22c55e"
-                    : "#ef4444", // safe hex color
-              }}
+              className={`px-2 py-1 rounded-full text-white text-sm ${
+                payment.status?.toLowerCase() === "success"
+                  ? "bg-green-500"
+                  : "bg-red-500"
+              }`}
             >
               {payment.status || "-"}
             </span>

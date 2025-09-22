@@ -46,7 +46,6 @@ import PrivateRoute from './PrivateRoute';
 import JournalDetails from '../pages/Journal/JournalDetails';
 import BlogDetails from '../pages/Blog/BlogDetails';
 import MockTest from '../pages/QuestionBank/MockTest/MockTest';
-import MyPayment from '../pages/Dashboard/Student/MyPayment';
 
 
 const Router = createBrowserRouter([
@@ -232,9 +231,11 @@ const Router = createBrowserRouter([
                 element: <MyProgress></MyProgress>
             },
             {
-                path: "my-payment",
-                element: <MyPayment></MyPayment>
+                path: "progress",
+                element: <MyPaymen
             },
+
+
         ]
     },
     // Subscription

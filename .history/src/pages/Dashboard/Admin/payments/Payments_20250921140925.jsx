@@ -1,24 +1,18 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { FaTrash, FaEye, FaSearch, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
+import { FaTrash, FaEye, FaSearch } from "react-icons/fa";
 import Select from "react-select";
 import toast, { Toaster } from "react-hot-toast";
 import InvoiceModal from "./InvoiceModal";
 import usePayment from "../../../../hooks/usePayments";
 
 const Payments = () => {
-  const [payments] = usePayment();
+  const [payments, refetch] = usePayment();
   const [localPayments, setLocalPayments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPayment, setSelectedPayment] = useState(null);
 
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
-
-  // Pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
   const categoryOptions = [
     { value: "subscription", label: "Subscription" },
@@ -31,7 +25,6 @@ const Payments = () => {
     setLoading(false);
   }, [payments]);
 
-  // Delete payment
   const handleDelete = (id) => {
     if (window.confirm("আপনি কি নিশ্চিত এই পেমেন্ট মুছতে চান?")) {
       setLocalPayments((prev) => prev.filter((p) => p._id !== id));
@@ -41,52 +34,16 @@ const Payments = () => {
 
   // Filter + Search
   const filteredPayments = useMemo(() => {
-    return localPayments
-      .filter((p) => {
-        const matchesSearch =
-          p.email?.toLowerCase().includes(search.toLowerCase()) ||
-          p.category?.toLowerCase().includes(search.toLowerCase());
-        const matchesCategory = selectedCategory
-          ? p.category === selectedCategory.value
-          : true;
-        return matchesSearch && matchesCategory;
-      })
-      .sort((a, b) => {
-        if (!sortConfig.key) return 0;
-        let aVal = a[sortConfig.key];
-        let bVal = b[sortConfig.key];
-
-        // handle string comparison
-        if (typeof aVal === "string") aVal = aVal.toLowerCase();
-        if (typeof bVal === "string") bVal = bVal.toLowerCase();
-
-        if (aVal < bVal) return sortConfig.direction === "asc" ? -1 : 1;
-        if (aVal > bVal) return sortConfig.direction === "asc" ? 1 : -1;
-        return 0;
-      });
-  }, [localPayments, search, selectedCategory, sortConfig]);
-
-  // Pagination slice
-  const totalPages = Math.ceil(filteredPayments.length / itemsPerPage);
-  const paginatedPayments = filteredPayments.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  const requestSort = (key) => {
-    let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") direction = "desc";
-    setSortConfig({ key, direction });
-  };
-
-  const renderSortIcon = (key) => {
-    if (sortConfig.key !== key) return <FaSort className="inline ml-1" />;
-    return sortConfig.direction === "asc" ? (
-      <FaSortUp className="inline ml-1" />
-    ) : (
-      <FaSortDown className="inline ml-1" />
-    );
-  };
+    return localPayments.filter((p) => {
+      const matchesSearch =
+        p.email?.toLowerCase().includes(search.toLowerCase()) ||
+        p.category?.toLowerCase().includes(search.toLowerCase());
+      const matchesCategory = selectedCategory
+        ? p.category === selectedCategory.value
+        : true;
+      return matchesSearch && matchesCategory;
+    });
+  }, [localPayments, search, selectedCategory]);
 
   return (
     <div className="p-6">
@@ -117,10 +74,9 @@ const Payments = () => {
         </div>
       </div>
 
-      {/* Table */}
       {loading ? (
         <div className="text-center text-gray-500">ডেটা লোড হচ্ছে...</div>
-      ) : paginatedPayments.length === 0 ? (
+      ) : filteredPayments.length === 0 ? (
         <div className="text-center text-gray-500">কোনো পেমেন্ট পাওয়া যায়নি</div>
       ) : (
         <div className="overflow-x-auto bg-white shadow-md rounded-lg">
@@ -128,43 +84,18 @@ const Payments = () => {
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-3 px-4 text-left">ক্রমিক</th>
-                <th
-                  className="py-3 px-4 text-left cursor-pointer"
-                  onClick={() => requestSort("email")}
-                >
-                  ইমেইল {renderSortIcon("email")}
-                </th>
-                <th
-                  className="py-3 px-4 text-left cursor-pointer"
-                  onClick={() => requestSort("category")}
-                >
-                  ক্যাটেগরি {renderSortIcon("category")}
-                </th>
-                <th
-                  className="py-3 px-4 text-left cursor-pointer"
-                  onClick={() => requestSort("price")}
-                >
-                  পরিমাণ {renderSortIcon("price")}
-                </th>
-                <th
-                  className="py-3 px-4 text-left cursor-pointer"
-                  onClick={() => requestSort("date")}
-                >
-                  তারিখ {renderSortIcon("date")}
-                </th>
-                <th
-                  className="py-3 px-4 text-left cursor-pointer"
-                  onClick={() => requestSort("status")}
-                >
-                  স্ট্যাটাস {renderSortIcon("status")}
-                </th>
+                <th className="py-3 px-4 text-left">ইমেইল</th>
+                <th className="py-3 px-4 text-left">ক্যাটেগরি</th>
+                <th className="py-3 px-4 text-left">পরিমাণ</th>
+                <th className="py-3 px-4 text-left">তারিখ</th>
+                <th className="py-3 px-4 text-left">স্ট্যাটাস</th>
                 <th className="py-3 px-4 text-center">অ্যাকশন</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {paginatedPayments.map((payment, index) => (
+              {filteredPayments.map((payment, index) => (
                 <tr key={payment._id} className="hover:bg-gray-50 transition">
-                  <td className="py-3 px-4">{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                  <td className="py-3 px-4">{index + 1}</td>
                   <td className="py-3 px-4">{payment.email}</td>
                   <td className="py-3 px-4">{payment.category}</td>
                   <td className="py-3 px-4">{payment.price} ৳</td>
@@ -204,31 +135,9 @@ const Payments = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Pagination */}
-          <div className="flex justify-end items-center gap-2 mt-4">
-            <button
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              Prev
-            </button>
-            <span>
-              {currentPage} / {totalPages}
-            </span>
-            <button
-              className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"
-              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
         </div>
       )}
 
-      {/* Invoice Modal */}
       {selectedPayment && (
         <InvoiceModal
           payment={selectedPayment}

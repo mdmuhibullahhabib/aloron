@@ -161,7 +161,7 @@ const Dashboard = () => {
               </NavLink>
 
               <NavLink
-                to="/dashboard/my-payment"
+                to="/dashboard/mypayment"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
