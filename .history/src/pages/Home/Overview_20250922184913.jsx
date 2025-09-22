@@ -18,7 +18,7 @@ const Overview = () => {
 
             {/* Feature Box */}
             <div className="p-5 bg-[#1f1f1f] rounded-xl shadow-lg border border-gray-700 hover:scale-[1.03] hover:border-green-400 transition-transform duration-300">
-              <h3 className="text-white text-lg font-semibold mb-2 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
                 <FaClock className="text-green-400 animate-pulse" /> ডেমো টাইমার
               </h3>
               <p className="text-gray-400 text-sm">
