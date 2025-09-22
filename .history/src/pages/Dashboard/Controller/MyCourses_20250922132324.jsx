@@ -56,7 +56,7 @@ const MyCourses = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/courses/${course._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            refetch();
+            fetchCourses(); // reload after delete
             Swal.fire("Deleted!", "Course has been deleted.", "success");
           }
         }).catch((err) => {
@@ -187,7 +187,7 @@ const MyCourses = () => {
                     </button>
 
                     <button
-                      onClick={() => handleDeleteCourse(course)}
+                      onClick={() => handleDelete(course._id)}
                       className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                     >
                       <FaTrash /> Delete

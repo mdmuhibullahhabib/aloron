@@ -20,7 +20,7 @@ import useRole from '../../hooks/useRole';
 
 const Dashboard = () => {
   const [isRole, isRoleLoading] = useRole();
-  const role = "teacher";
+  const role = "t";
 
   return (
     <div className="flex min-h-screen">
@@ -118,15 +118,14 @@ const Dashboard = () => {
                 <FaPlusCircle /> নতুন কোর্স যোগ
               </NavLink>
 
-              {/* TO DO */}
-              {/* <NavLink
+              <NavLink
                 to="/dashboard/schedule"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
                 <FaRegCalendarAlt /> ক্লাস সিডিউল
-              </NavLink> */}
+              </NavLink>
             </>
           )}
 

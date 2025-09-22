@@ -56,7 +56,7 @@ const MyCourses = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/courses/${course._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
-            refetch();
+            frefetch(); 
             Swal.fire("Deleted!", "Course has been deleted.", "success");
           }
         }).catch((err) => {

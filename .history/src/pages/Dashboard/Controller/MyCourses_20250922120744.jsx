@@ -6,80 +6,79 @@ import {
   FaTrash,
   FaEye,
   FaToggleOn,
+  FaToggleOff,
   FaListUl,
   FaMoneyBillWave,
   FaStar,
   FaCopy,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
-import Swal from "sweetalert2";
 
 const MyCourses = () => {
-    const axiosSecure = useAxiosSecure();
-   const { user } = useAuth();
-
-  const { data: courses = [], refetch } = useQuery({
-    queryKey: ["course"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/course?email=${user.email}`);
-      return res.data;
+  const [courses, setCourses] = useState([
+    {
+      id: "c1",
+      title: "পদার্থবিজ্ঞান MCQ কোর্স",
+      subject: "Physics",
+      description: "পদার্থবিজ্ঞান ১ম পত্রের MCQ প্রস্তুতি।",
+      duration: "৩ মাস",
+      price: 500,
+      level: "HSC",
+      published: true,
+      students: 120,
+      revenue: 60000,
+      rating: 4.5,
+      curriculum: [
+        { chapter: "অধ্যায় ১: ভৌত রাশি ও পরিমাপ", mcqs: 40 },
+        { chapter: "অধ্যায় ২: ভেক্টর", mcqs: 30 },
+      ],
     },
-  });
-    console.log(courses)
+    {
+      id: "c2",
+      title: "রসায়ন MCQ কোর্স",
+      subject: "Chemistry",
+      description: "রসায়ন ২য় পত্রের MCQ প্র্যাকটিস।",
+      duration: "২ মাস",
+      price: 400,
+      level: "Admission",
+      published: false,
+      students: 80,
+      revenue: 32000,
+      rating: 4.2,
+      curriculum: [
+        { chapter: "অধ্যায় ১: পরমাণুর গঠন", mcqs: 25 },
+        { chapter: "অধ্যায় ২: পর্যায় সারণি", mcqs: 20 },
+      ],
+    },
+  ]);
 
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  // Toggle publish (Draft → Published)
+  // Toggle publish/unpublish
   const handleTogglePublish = (id) => {
     setCourses((prev) =>
       prev.map((c) =>
-        c._id === id ? { ...c, status: "Published" } : c
+        c.id === id ? { ...c, published: !c.published } : c
       )
     );
-    toast.success("কোর্স Publish হয়েছে");
+    toast.success("কোর্স স্ট্যাটাস পরিবর্তন হয়েছে");
   };
 
-  // Delete course with confirmation
-  const handleDeleteCourse = (course) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to delete this course?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/courses/${course._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
-            Swal.fire("Deleted!", "Course has been deleted.", "success");
-          }
-        }).catch((err) => {
-          console.error(err);
-          toast.error("কোর্স ডিলিট করতে সমস্যা হয়েছে");
-        });
-      }
-    });
+  // Delete course
+  const handleDelete = (id) => {
+    setCourses((prev) => prev.filter((c) => c.id !== id));
+    toast.error("কোর্স ডিলিট হয়েছে");
   };
 
   // Edit course
   const handleEdit = (course) => {
     toast(`✏️ ${course.title} এডিট মোডে খোলা হয়েছে`);
+    // TODO: modal with edit form
   };
 
   // Duplicate course
   const handleDuplicate = (course) => {
-    const newCourse = {
-      ...course,
-      _id: Date.now().toString(),
-      title: course.title + " (Copy)",
-      status: "Draft",
-    };
+    const newCourse = { ...course, id: Date.now().toString(), title: course.title + " (Copy)" };
     setCourses([...courses, newCourse]);
     toast.success("কোর্স ডুপ্লিকেট হয়েছে");
   };
@@ -102,18 +101,9 @@ const MyCourses = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
             <div
-              key={course._id}
-              className="bg-white shadow-md rounded-xl p-6 border border-gray-200 flex flex-col hover:shadow-lg transition"
+              key={course.id}
+              className="bg-white shadow-md rounded-xl p-6 border border-gray-200 flex flex-col"
             >
-              {/* Thumbnail */}
-              {course.thumbnail && (
-                <img
-                  src={course.thumbnail}
-                  alt={course.title}
-                  className="rounded-lg mb-4 h-40 w-full object-cover"
-                />
-              )}
-
               {/* Title */}
               <h3 className="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
                 <FaBookOpen className="text-green-600" /> {course.title}
@@ -124,9 +114,7 @@ const MyCourses = () => {
                 বিষয়: <span className="font-semibold">{course.subject}</span>
               </p>
               <p className="text-sm text-gray-600">লেভেল: {course.level}</p>
-              <p className="text-sm text-gray-500 line-clamp-2 my-2">
-                {course.description}
-              </p>
+              <p className="text-sm text-gray-500 line-clamp-2 my-2">{course.description}</p>
 
               {/* Duration & Price */}
               <p className="text-sm text-gray-600">⏳ মেয়াদ: {course.duration}</p>
@@ -145,18 +133,15 @@ const MyCourses = () => {
               {/* Status */}
               <span
                 className={`inline-block px-3 py-1 text-xs rounded-full font-medium mb-3 ${
-                  course.status === "Published"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-700"
+                  course.published ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
                 }`}
               >
-                {course.status}
+                {course.published ? "Published" : "Draft"}
               </span>
 
               {/* Students */}
               <p className="text-sm text-gray-600 mb-3 flex items-center gap-2">
-                <FaUsers className="text-blue-600" /> শিক্ষার্থী:{" "}
-                {course.studentsEnrolled}
+                <FaUsers className="text-blue-600" /> শিক্ষার্থী: {course.students}
               </p>
 
               {/* Curriculum Button */}
@@ -169,33 +154,23 @@ const MyCourses = () => {
 
               {/* Actions */}
               <div className="flex flex-wrap gap-2 mt-auto">
-                {/* If Draft → Show Publish, Edit, Delete */}
-                {course.status !== "Published" && (
-                  <>
-                    <button
-                      onClick={() => handleTogglePublish(course._id)}
-                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white text-sm"
-                    >
-                      <FaToggleOn /> Publish
-                    </button>
+                <button
+                  onClick={() => handleTogglePublish(course.id)}
+                  className={`px-3 py-2 rounded-lg flex items-center gap-1 text-white text-sm transition ${
+                    course.published ? "bg-yellow-600 hover:bg-yellow-700" : "bg-green-600 hover:bg-green-700"
+                  }`}
+                >
+                  {course.published ? <FaToggleOff /> : <FaToggleOn />}
+                  {course.published ? "Unpublish" : "Publish"}
+                </button>
 
-                    <button
-                      onClick={() => handleEdit(course)}
-                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm"
-                    >
-                      <FaEdit /> Edit
-                    </button>
+                <button
+                  onClick={() => handleEdit(course)}
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm"
+                >
+                  <FaEdit /> Edit
+                </button>
 
-                    <button
-                      onClick={() => handleDeleteCourse(course)}
-                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
-                    >
-                      <FaTrash /> Delete
-                    </button>
-                  </>
-                )}
-
-                {/* Common buttons for all */}
                 <button
                   onClick={() => handleViewStudents(course.title)}
                   className="px-3 py-2 rounded-lg flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm"
@@ -208,6 +183,13 @@ const MyCourses = () => {
                   className="px-3 py-2 rounded-lg flex items-center gap-1 bg-teal-600 hover:bg-teal-700 text-white text-sm"
                 >
                   <FaCopy /> Duplicate
+                </button>
+
+                <button
+                  onClick={() => handleDelete(course.id)}
+                  className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
+                >
+                  <FaTrash /> Delete
                 </button>
               </div>
             </div>
@@ -224,14 +206,9 @@ const MyCourses = () => {
             </h3>
             <ul className="space-y-3 mb-6">
               {selectedCourse.curriculum.map((item, idx) => (
-                <li
-                  key={idx}
-                  className="p-3 border rounded-lg flex justify-between items-center"
-                >
+                <li key={idx} className="p-3 border rounded-lg flex justify-between items-center">
                   <span>{item.chapter}</span>
-                  <span className="text-sm text-gray-600">
-                    MCQs: {item.mcqs}
-                  </span>
+                  <span className="text-sm text-gray-600">MCQs: {item.mcqs}</span>
                 </li>
               ))}
             </ul>

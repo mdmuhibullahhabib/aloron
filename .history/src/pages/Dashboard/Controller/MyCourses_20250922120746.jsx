@@ -6,70 +6,68 @@ import {
   FaTrash,
   FaEye,
   FaToggleOn,
+  FaToggleOff,
   FaListUl,
   FaMoneyBillWave,
   FaStar,
   FaCopy,
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
-import Swal from "sweetalert2";
 
 const MyCourses = () => {
-    const axiosSecure = useAxiosSecure();
-   const { user } = useAuth();
-
-  const { data: courses = [], refetch } = useQuery({
-    queryKey: ["course"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/course?email=${user.email}`);
-      return res.data;
+  const [courses, setCourses] = useState([
+    {
+      _id: "68c2453c0e06c6ca84f52567",
+      title: "রসায়ন MCQ কোর্স",
+      subject: "Chemistry",
+      teacher: "Karim Hossain",
+      instructor: "Karim Hossain",
+      description: "রসায়ন ২য় পত্রের MCQ প্র্যাকটিস।",
+      duration: "২ মাস",
+      price: 400,
+      level: "Admission",
+      status: "Published", // MongoDB field
+      studentsEnrolled: 80,
+      revenue: 32000,
+      rating: 4.2,
+      thumbnail: "https://i.ibb.co/pfQwN3d/chemistry-mcq.jpg",
+      category: "Science",
+      questionCount: 45,
+      courseType: "MCQ",
+      curriculum: [
+        { chapter: "অধ্যায় ১: পরমাণুর গঠন", mcqs: 25 },
+        { chapter: "অধ্যায় ২: পর্যায় সারণি", mcqs: 20 },
+      ],
     },
-  });
-    console.log(courses)
+  ]);
 
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  // Toggle publish (Draft → Published)
+  // Toggle publish/unpublish
   const handleTogglePublish = (id) => {
     setCourses((prev) =>
       prev.map((c) =>
-        c._id === id ? { ...c, status: "Published" } : c
+        c._id === id
+          ? {
+              ...c,
+              status: c.status === "Published" ? "Draft" : "Published",
+            }
+          : c
       )
     );
-    toast.success("কোর্স Publish হয়েছে");
+    toast.success("কোর্স স্ট্যাটাস পরিবর্তন হয়েছে");
   };
 
-  // Delete course with confirmation
-  const handleDeleteCourse = (course) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to delete this course?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/courses/${course._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
-            Swal.fire("Deleted!", "Course has been deleted.", "success");
-          }
-        }).catch((err) => {
-          console.error(err);
-          toast.error("কোর্স ডিলিট করতে সমস্যা হয়েছে");
-        });
-      }
-    });
+  // Delete course
+  const handleDelete = (id) => {
+    setCourses((prev) => prev.filter((c) => c._id !== id));
+    toast.error("কোর্স ডিলিট হয়েছে");
   };
 
   // Edit course
   const handleEdit = (course) => {
     toast(`✏️ ${course.title} এডিট মোডে খোলা হয়েছে`);
+    // TODO: modal with edit form
   };
 
   // Duplicate course
@@ -97,7 +95,9 @@ const MyCourses = () => {
       </h2>
 
       {courses.length === 0 ? (
-        <p className="text-center text-gray-500">এখনো কোন কোর্স তৈরি করেননি।</p>
+        <p className="text-center text-gray-500">
+          এখনো কোন কোর্স তৈরি করেননি।
+        </p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {courses.map((course) => (
@@ -169,16 +169,21 @@ const MyCourses = () => {
 
               {/* Actions */}
               <div className="flex flex-wrap gap-2 mt-auto">
-                {/* If Draft → Show Publish, Edit, Delete */}
+                <button
+                  onClick={() => handleTogglePublish(course._id)}
+                  className={`px-3 py-2 rounded-lg flex items-center gap-1 text-white text-sm transition ${
+                    course.status === "Published"
+                      ? "bg-yellow-600 hover:bg-yellow-700"
+                      : "bg-green-600 hover:bg-green-700"
+                  }`}
+                >
+                  {course.status === "Published" ? <FaToggleOff /> : <FaToggleOn />}
+                  {course.status === "Published" ? "Unpublish" : "Publish"}
+                </button>
+
+                {/* Hide Edit & Delete if Published */}
                 {course.status !== "Published" && (
                   <>
-                    <button
-                      onClick={() => handleTogglePublish(course._id)}
-                      className="px-3 py-2 rounded-lg flex items-center gap-1 bg-green-600 hover:bg-green-700 text-white text-sm"
-                    >
-                      <FaToggleOn /> Publish
-                    </button>
-
                     <button
                       onClick={() => handleEdit(course)}
                       className="px-3 py-2 rounded-lg flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-sm"
@@ -187,7 +192,7 @@ const MyCourses = () => {
                     </button>
 
                     <button
-                      onClick={() => handleDeleteCourse(course)}
+                      onClick={() => handleDelete(course._id)}
                       className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                     >
                       <FaTrash /> Delete
@@ -195,7 +200,6 @@ const MyCourses = () => {
                   </>
                 )}
 
-                {/* Common buttons for all */}
                 <button
                   onClick={() => handleViewStudents(course.title)}
                   className="px-3 py-2 rounded-lg flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white text-sm"

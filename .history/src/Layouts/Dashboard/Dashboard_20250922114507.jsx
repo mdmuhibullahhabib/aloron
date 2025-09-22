@@ -118,7 +118,6 @@ const Dashboard = () => {
                 <FaPlusCircle /> নতুন কোর্স যোগ
               </NavLink>
 
-              {/* TO DO */}
               {/* <NavLink
                 to="/dashboard/schedule"
                 className={({ isActive }) =>

@@ -13,22 +13,103 @@ import {
 } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useDatabaseUser from "../../../hooks/useDatabaseUser";
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../../hooks/useAuth";
-import Swal from "sweetalert2";
 
 const MyCourses = () => {
-    const axiosSecure = useAxiosSecure();
-   const { user } = useAuth();
-
-  const { data: courses = [], refetch } = useQuery({
-    queryKey: ["course"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/course?email=${user.email}`);
-      return res.data;
+  const [courses, setCourses] = useState([
+    {
+      _id: "68c2453c0e06c6ca84f52567",
+      title: "রসায়ন MCQ কোর্স",
+      subject: "Chemistry",
+      teacher: "Karim Hossain",
+      description: "রসায়ন ২য় পত্রের MCQ প্র্যাকটিস।",
+      duration: "২ মাস",
+      price: 400,
+      level: "Admission",
+      status: "Published",
+      studentsEnrolled: 80,
+      revenue: 32000,
+      rating: 4.2,
+      thumbnail: "https://i.ibb.co/pfQwN3d/chemistry-mcq.jpg",
+      curriculum: [
+        { chapter: "অধ্যায় ১: পরমাণুর গঠন", mcqs: 25 },
+        { chapter: "অধ্যায় ২: পর্যায় সারণি", mcqs: 20 },
+      ],
     },
-  });
-    console.log(courses)
+    {
+      _id: "68c2453c0e06c6ca84f52568",
+      title: "পদার্থবিজ্ঞান MCQ কোর্স",
+      subject: "Physics",
+      teacher: "Hasan Ali",
+      description: "পদার্থবিজ্ঞান ১ম পত্রের MCQ প্রস্তুতি।",
+      duration: "৩ মাস",
+      price: 500,
+      level: "HSC",
+      status: "Draft",
+      studentsEnrolled: 120,
+      revenue: 60000,
+      rating: 4.5,
+      thumbnail: "https://i.ibb.co/fXn8pQ7/physics-mcq.jpg",
+      curriculum: [
+        { chapter: "অধ্যায় ১: ভৌত রাশি ও পরিমাপ", mcqs: 40 },
+        { chapter: "অধ্যায় ২: ভেক্টর", mcqs: 30 },
+      ],
+    },
+    {
+      _id: "68c2453c0e06c6ca84f52569",
+      title: "জীববিজ্ঞান প্রস্তুতি",
+      subject: "Biology",
+      teacher: "Rokeya Sultana",
+      description: "জীববিজ্ঞানের গুরুত্বপূর্ণ অধ্যায়গুলোর MCQ অনুশীলন।",
+      duration: "১.৫ মাস",
+      price: 350,
+      level: "SSC",
+      status: "Reject",
+      studentsEnrolled: 60,
+      revenue: 21000,
+      rating: 4.0,
+      thumbnail: "https://i.ibb.co/YRcQtwf/biology-mcq.jpg",
+      curriculum: [
+        { chapter: "অধ্যায় ১: কোষ", mcqs: 15 },
+        { chapter: "অধ্যায় ২: জেনেটিক্স", mcqs: 25 },
+      ],
+    },
+    {
+      _id: "68c2453c0e06c6ca84f52570",
+      title: "গণিত প্র্যাকটিস কোর্স",
+      subject: "Mathematics",
+      teacher: "Rahim Uddin",
+      description: "গণিতের কঠিন অধ্যায়গুলো সহজভাবে MCQ অনুশীলন।",
+      duration: "২.৫ মাস",
+      price: 450,
+      level: "Admission",
+      status: "Published",
+      studentsEnrolled: 200,
+      revenue: 90000,
+      rating: 4.8,
+      thumbnail: "https://i.ibb.co/5Lh7W8j/math-mcq.jpg",
+      curriculum: [
+        { chapter: "অধ্যায় ১: অ্যালজেব্রা", mcqs: 50 },
+        { chapter: "অধ্যায় ২: ক্যালকুলাস", mcqs: 35 },
+      ],
+    },
+  ]);
+    const axiosSecure = useAxiosSecure();
+    const [databaseUser] = useDatabaseUser();
+  
+    const userId = databaseUser[0]?._id;
+  
+    // React Query দিয়ে subscription ডাটা লোড
+    const { data: course = [], refetch, isLoading } = useQuery({
+      queryKey: ["userPayments", userId],
+      queryFn: async () => {
+        if (!userId) return [];
+        const res = await axiosSecure.get(`/payment?id=${userId}`);
+        return res.data;
+      },
+      enabled: !!userId,
+    });
 
   const [selectedCourse, setSelectedCourse] = useState(null);
 
@@ -42,29 +123,10 @@ const MyCourses = () => {
     toast.success("কোর্স Publish হয়েছে");
   };
 
-  // Delete course with confirmation
-  const handleDeleteCourse = (course) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to delete this course?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/courses/${course._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
-            Swal.fire("Deleted!", "Course has been deleted.", "success");
-          }
-        }).catch((err) => {
-          console.error(err);
-          toast.error("কোর্স ডিলিট করতে সমস্যা হয়েছে");
-        });
-      }
-    });
+  // Delete course
+  const handleDelete = (id) => {
+    setCourses((prev) => prev.filter((c) => c._id !== id));
+    toast.error("কোর্স ডিলিট হয়েছে");
   };
 
   // Edit course
@@ -187,7 +249,7 @@ const MyCourses = () => {
                     </button>
 
                     <button
-                      onClick={() => handleDeleteCourse(course)}
+                      onClick={() => handleDelete(course._id)}
                       className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                     >
                       <FaTrash /> Delete

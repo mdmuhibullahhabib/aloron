@@ -15,7 +15,6 @@ import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
-import Swal from "sweetalert2";
 
 const MyCourses = () => {
     const axiosSecure = useAxiosSecure();
@@ -28,7 +27,7 @@ const MyCourses = () => {
       return res.data;
     },
   });
-    console.log(courses)
+    console.log(course)
 
   const [selectedCourse, setSelectedCourse] = useState(null);
 
@@ -42,29 +41,10 @@ const MyCourses = () => {
     toast.success("কোর্স Publish হয়েছে");
   };
 
-  // Delete course with confirmation
-  const handleDeleteCourse = (course) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You want to delete this course?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure.delete(`/courses/${course._id}`).then((res) => {
-          if (res.data.deletedCount > 0) {
-            refetch();
-            Swal.fire("Deleted!", "Course has been deleted.", "success");
-          }
-        }).catch((err) => {
-          console.error(err);
-          toast.error("কোর্স ডিলিট করতে সমস্যা হয়েছে");
-        });
-      }
-    });
+  // Delete course
+  const handleDelete = (id) => {
+    setCourses((prev) => prev.filter((c) => c._id !== id));
+    toast.error("কোর্স ডিলিট হয়েছে");
   };
 
   // Edit course
@@ -187,7 +167,7 @@ const MyCourses = () => {
                     </button>
 
                     <button
-                      onClick={() => handleDeleteCourse(course)}
+                      onClick={() => handleDelete(course._id)}
                       className="px-3 py-2 rounded-lg flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white text-sm"
                     >
                       <FaTrash /> Delete

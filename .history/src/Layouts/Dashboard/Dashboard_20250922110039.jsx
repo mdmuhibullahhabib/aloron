@@ -20,7 +20,7 @@ import useRole from '../../hooks/useRole';
 
 const Dashboard = () => {
   const [isRole, isRoleLoading] = useRole();
-  const role = "teacher";
+  const role = "student";
 
   return (
     <div className="flex min-h-screen">
@@ -90,7 +90,7 @@ const Dashboard = () => {
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
-                <FaJediOrder /> ম্যানেজ অর্ডার
+                <FaJediOrder /> ম্যানেজ অর্ডার 
               </NavLink>
 
             </>
@@ -118,15 +118,14 @@ const Dashboard = () => {
                 <FaPlusCircle /> নতুন কোর্স যোগ
               </NavLink>
 
-              {/* TO DO */}
-              {/* <NavLink
+              <NavLink
                 to="/dashboard/schedule"
                 className={({ isActive }) =>
                   `flex items-center gap-2 w-full btn ${isActive ? 'btn-primary' : 'btn-outline'}`
                 }
               >
                 <FaRegCalendarAlt /> ক্লাস সিডিউল
-              </NavLink> */}
+              </NavLink>
             </>
           )}
 
@@ -143,7 +142,7 @@ const Dashboard = () => {
                 <FaBook /> ভর্তি হওয়া কোর্স
               </NavLink>
 
-              {/* TO DO THIS */}
+{/* TO DO THIS */}
               {/* <NavLink
                 to="/dashboard/order-tracking"
                 className={({ isActive }) =>
