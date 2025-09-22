@@ -12,7 +12,7 @@ import {
 import { useTheme } from "../../Provider/ThemeProvider";
 
 const Hero = () => {
-  const { theme } = useTheme();
+  const { theme } = useTheme(); 
 
   const navLinks = [
     { name: "প্রশ্নব্যাংক", path: "/question-bank/archive", icon: <FaBook /> },
@@ -73,7 +73,16 @@ const Hero = () => {
               whileHover={{ scale: 1.1, rotate: 3 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link to={link.path} className="flex flex-col items-center justify-center bg-gradient-to-tr from-pink-600 to-purple-500 text-white p-4 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 text-center text-sm sm:text-base hover:-translate-y-1" >
+              <Link
+                to={link.path}
+                className={`
+                  flex flex-col items-center justify-center p-4 rounded-2xl shadow-xl hover:shadow-2xl transition duration-300 text-center text-sm sm:text-base hover:-translate-y-1
+                  ${theme === "dark"
+                    ? "bg-gradient-to-tr from-pink-600 to-purple-500 text-white"
+                    : "bg-gradient-to-tr from-pink-400 to-purple-400 "
+                  }
+                `}
+              >
                 <div className="text-3xl mb-2">{link.icon}</div>
                 {link.name}
               </Link>

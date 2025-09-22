@@ -86,11 +86,11 @@ const Home = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="shadow-md rounded-xl p-6 text-center hover:shadow-xl transition"
+              className="bg-white shadow-md rounded-xl p-6 text-center hover:shadow-xl transition"
             >
               <div className="flex justify-center mb-4">{f.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{f.title}</h3>
-              <p className="">{f.desc}</p>
+              <p className="text-gray-600">{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -102,7 +102,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 text-center">
+      <section className="py-16 bg-gray-900 text-white text-center">
         <h2 className="text-3xl font-bold mb-4">আজই শুরু করুন আপনার যাত্রা</h2>
         <p className="text-lg mb-6">
           আলোড়নের সাথে একাডেমিক উৎকর্ষতা অর্জন করুন।

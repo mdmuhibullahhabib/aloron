@@ -25,7 +25,7 @@ const UpcomingCourses = () => {
 
   return (
     <section className="py-16 px-6 md:px-20 lg:px-40">
-      <h2 className="text-3xl font-bold text-center mb-10">
+      <h2 className="text-3xl font-bold text-center mb-10 dark:text-white">
         আসন্ন কোর্সসমূহ
       </h2>
 

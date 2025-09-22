@@ -102,7 +102,7 @@ const Home = () => {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 text-center">
+      <section className="py-16 bg-gray-900 text-white text-center">
         <h2 className="text-3xl font-bold mb-4">আজই শুরু করুন আপনার যাত্রা</h2>
         <p className="text-lg mb-6">
           আলোড়নের সাথে একাডেমিক উৎকর্ষতা অর্জন করুন।
