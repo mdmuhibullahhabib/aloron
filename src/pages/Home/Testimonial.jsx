@@ -11,7 +11,7 @@ const stats = [
 
 const Testimonial = () => {
   return (
-    <section className="bg-gradient-to-b from-[#101010] to-[#181818] text-white py-12">
+    <section className="py-12">
       <div className="max-w-6xl mx-auto text-center px-6">
         <h2 className="text-3xl font-extrabold mb-8 text-green-400 drop-shadow-md">
           আমাদের অর্জন
