@@ -2,8 +2,8 @@ import React from "react";
 
 const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
   return (
-    <div className="bg-[#242939] rounded-xl p-6 shadow-xl space-y-4 border border-[#343a49]">
-      <h2 className="text-xl font-semibold text-white">{question.question}</h2>
+    <div className="rounded-xl p-6 shadow-xl space-y-4 border border-[#343a49]">
+      <h2 className="text-xl font-semibold ">{question.question}</h2>
       <div className="grid grid-cols-2 gap-4">
         {question.options.map((option, i) => {
           const isSelected = question.userAnswer === option;
@@ -14,10 +14,10 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
           if (showAnswer) {
             if (isCorrectOption) {
               buttonClass +=
-                " bg-green-500 text-white shadow-lg border-2 border-green-400";
+                "shadow-lg border-2 border-green-400";
             } else if (isSelected && !isCorrect) {
               buttonClass +=
-                " bg-red-500 text-white shadow-lg border-2 border-red-400";
+                "shadow-lg border-2 border-red-400";
             } else {
               buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
@@ -34,7 +34,7 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
             <button
               key={i}
               className={buttonClass}
-              onClick={() => onSelectOption(question.id, option)}
+              onClick={() => onSelectOption(question._id, option)}
               disabled={showAnswer}
             >
               {option}

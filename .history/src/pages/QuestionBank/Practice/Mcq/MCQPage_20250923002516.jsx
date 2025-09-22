@@ -103,7 +103,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
       {/* Loading/Error */}
       {isLoading && <p className="">লোড হচ্ছে...</p>}
       {isError && (
-        <p className="">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>
+        <p className="text-red-500">প্রশ্ন লোড করতে সমস্যা হয়েছে!</p>
       )}
 
       {/* Questions */}
@@ -125,7 +125,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
           )}
         </div>
       ) : (
-        !isLoading && <p className="">কোনও প্রশ্ন পাওয়া যায়নি...</p>
+        !isLoading && <p className="text-gray-400">কোনও প্রশ্ন পাওয়া যায়নি...</p>
       )}
     </div>
   );

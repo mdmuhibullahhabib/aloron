@@ -24,9 +24,9 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
           } else {
             if (isSelected) {
               buttonClass +=
-                " border-2 border-blue-500";
+                " bg-[#3e4555] text-white border-2 border-blue-500";
             } else {
-              buttonClass += " hover:bg-[#3e4555]";
+              buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
           }
 

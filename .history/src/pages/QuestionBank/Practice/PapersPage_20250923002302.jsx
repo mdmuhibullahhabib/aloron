@@ -11,7 +11,7 @@ const PapersPage = ({ subjectId, onGoBack, onPaperSelect }) => {
         <div className="rounded-xl p-6 shadow-xl flex items-center justify-between mb-8">
           <button
             onClick={onGoBack}
-            className=" hover:text-white"
+            className="text-gray-400 hover:text-white"
           >
             ←
           </button>
@@ -23,7 +23,7 @@ const PapersPage = ({ subjectId, onGoBack, onPaperSelect }) => {
           {paperKeys.map((paper) => (
             <div
               key={paper}
-              className="rounded-xl p-6 shadow-lg flex items-center justify-center hover:bg-gray-700 cursor-pointer"
+              className="bg-gray-800 rounded-xl p-6 shadow-lg flex items-center justify-center hover:bg-gray-700 cursor-pointer"
               onClick={() => onPaperSelect(paper)}
             >
               <span className="text-2xl font-medium">{paper} পত্র</span>

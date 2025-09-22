@@ -125,7 +125,7 @@ const MCQPage = ({ subjectId, paperId, chapter, onGoBack }) => {
           )}
         </div>
       ) : (
-        !isLoading && <p className="">কোনও প্রশ্ন পাওয়া যায়নি...</p>
+        !isLoading && <p className="text-gray-400">কোনও প্রশ্ন পাওয়া যায়নি...</p>
       )}
     </div>
   );

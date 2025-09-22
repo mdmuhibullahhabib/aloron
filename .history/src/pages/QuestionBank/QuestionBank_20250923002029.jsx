@@ -35,7 +35,7 @@ const QuestionBank = () => {
                     `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
                       isActive
                         ? 'bg-emerald-50 text-emerald-600'
-                        : 'hover:bg-black-200'
+                        : 'hover:bg-black-100'
                     }`
                   }
                 >

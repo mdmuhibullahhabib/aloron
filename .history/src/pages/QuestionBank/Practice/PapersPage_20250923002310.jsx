@@ -1,17 +1,17 @@
 import React from "react";
-import { subjectsData } from "../data/subjectsData";
+import { subjectsData } from "./subjectsData";
 
 const PapersPage = ({ subjectId, onGoBack, onPaperSelect }) => {
   const subject = subjectsData[subjectId];
   const paperKeys = Object.keys(subject.papers);
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white w-full p-8">
+    <div className="flex min-h-screen w-full p-8">
       <div className="max-w-4xl mx-auto w-full">
-        <div className="bg-gray-800 rounded-xl p-6 shadow-xl flex items-center justify-between mb-8">
+        <div className="rounded-xl p-6 shadow-xl flex items-center justify-between mb-8">
           <button
             onClick={onGoBack}
-            className="text-gray-400 hover:text-white"
+            className=" hover:text-white"
           >
             ←
           </button>

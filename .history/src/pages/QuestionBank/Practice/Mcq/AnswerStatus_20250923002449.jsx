@@ -2,12 +2,10 @@ import React from "react";
 
 const AnswerStatus = ({ showAnswer, isCorrect }) => {
   return (
-    <span className="text-sm text-gray-400">
+    <span className="text-sm">
       {showAnswer ? (
         isCorrect ? (
-          <span className="text-green-500">
-            ✅ সঠিক উত্তর
-          </span>
+          <span className="text-green-500">✅ সঠিক উত্তর</span>
         ) : (
           <span className="text-red-500">❌ ভুল উত্তর</span>
         )

@@ -18,7 +18,7 @@ const QuestionBank = () => {
   return (
     <div className="flex flex-col lg:flex-row h-screen font-sans">
       {/* --- Sidebar --- */}
-      <aside className="hidden lg:flex flex-col lg:w-64 p-6 shadow-md rounded-r-lg">
+      <aside className="hidden lg:flex flex-col lg:w-64 bg-white p-6 shadow-md rounded-r-lg">
         {/* Logo or App Name */}
         <div className="flex items-center mb-10">
           <span className="text-xl font-bold">QuestionBank</span>
@@ -35,7 +35,7 @@ const QuestionBank = () => {
                     `flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
                       isActive
                         ? 'bg-emerald-50 text-emerald-600'
-                        : 'hover:bg-black-200'
+                        : 'hover:bg-gray-100'
                     }`
                   }
                 >

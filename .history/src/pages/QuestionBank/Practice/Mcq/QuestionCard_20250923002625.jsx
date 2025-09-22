@@ -17,16 +17,16 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
                 "shadow-lg border-2 border-green-400";
             } else if (isSelected && !isCorrect) {
               buttonClass +=
-                "shadow-lg border-2 border-red-400";
+                " bg-red-500 text-white shadow-lg border-2 border-red-400";
             } else {
-              buttonClass += "hover:bg-[#3e4555]";
+              buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
           } else {
             if (isSelected) {
               buttonClass +=
-                " border-2 border-blue-500";
+                " bg-[#3e4555] text-white border-2 border-blue-500";
             } else {
-              buttonClass += " hover:bg-[#3e4555]";
+              buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
           }
 

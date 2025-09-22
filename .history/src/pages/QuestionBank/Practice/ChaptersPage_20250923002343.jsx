@@ -32,10 +32,10 @@ const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
   return (
     <div className="flex min-h-screen w-full p-8">
       <div className="max-w-4xl mx-auto w-full">
-        <div className="rounded-xl p-6 shadow-xl flex items-center justify-between mb-8">
+        <div className="bg-gray-800 rounded-xl p-6 shadow-xl flex items-center justify-between mb-8">
           <button
             onClick={onGoBack}
-            className="hover:text-white"
+            className="text-gray-400 hover:text-white"
           >
             ←
           </button>
@@ -47,7 +47,7 @@ const ChaptersPage = ({ subjectId, paperId, onGoBack, onChapterSelect }) => {
           {chapters.map((chapter, idx) => (
             <div
               key={idx}
-              className="rounded-xl p-4 shadow-lg flex items-center justify-between hover:bg-gray-700 cursor-pointer"
+              className="bg-gray-800 rounded-xl p-4 shadow-lg flex items-center justify-between hover:bg-gray-700 cursor-pointer"
               onClick={() => handleChapterClick(chapter)}
             >
               <span className="text-xl">{chapter}</span>

@@ -3,7 +3,7 @@ import React from "react";
 const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
   return (
     <div className="rounded-xl p-6 shadow-xl space-y-4 border border-[#343a49]">
-      <h2 className="text-xl font-semibold ">{question.question}</h2>
+      <h2 className="text-xl font-semibold text-white">{question.question}</h2>
       <div className="grid grid-cols-2 gap-4">
         {question.options.map((option, i) => {
           const isSelected = question.userAnswer === option;
@@ -14,19 +14,19 @@ const QuestionCard = ({ question, onSelectOption, isCorrect, showAnswer }) => {
           if (showAnswer) {
             if (isCorrectOption) {
               buttonClass +=
-                "shadow-lg border-2 border-green-400";
+                " bg-green-500 text-white shadow-lg border-2 border-green-400";
             } else if (isSelected && !isCorrect) {
               buttonClass +=
-                "shadow-lg border-2 border-red-400";
+                " bg-red-500 text-white shadow-lg border-2 border-red-400";
             } else {
-              buttonClass += "hover:bg-[#3e4555]";
+              buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
           } else {
             if (isSelected) {
               buttonClass +=
-                " border-2 border-blue-500";
+                " bg-[#3e4555] text-white border-2 border-blue-500";
             } else {
-              buttonClass += " hover:bg-[#3e4555]";
+              buttonClass += " bg-[#2e3445] text-white hover:bg-[#3e4555]";
             }
           }
 
