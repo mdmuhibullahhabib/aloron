@@ -17,7 +17,7 @@ const Courses = () => {
           <Link
             key={course._id}
             to={`/courses/${course._id}`}
-            className="rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
+            className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
           >
             {/* Thumbnail */}
             <div className="relative">
@@ -38,7 +38,7 @@ const Courses = () => {
               <h3 className="text-lg font-semibold mb-2 line-clamp-1">
                 {course.title}
               </h3>
-              <p className="text-sm mb-3 line-clamp-2">
+              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                 {course.description}
               </p>
 

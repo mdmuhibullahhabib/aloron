@@ -13,7 +13,7 @@ const QuestionCard = ({ question, onAnswerSelect, selectedAnswer }) => {
               ${
                 selectedAnswer === option
                   ? " border-blue-500"
-                  : " border-gray-300 hover:border-blue-400"
+                  : "bg-gray-50 text-gray-700 border-gray-300 hover:border-blue-400"
               }`}
           >
             {option}

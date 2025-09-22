@@ -100,7 +100,7 @@ const Exampage = () => {
     return (
       <div className="max-w-2xl mx-auto p-6 text-center">
         <h2 className="text-2xl font-bold mb-4">📊 Exam Performance</h2>
-        <div className="shadow-lg rounded-lg p-6 border">
+        <div className="bg-white shadow-lg rounded-lg p-6 border">
           <p className="text-lg">Total Questions: {questionSet.length}</p>
           <p className="text-lg">Correct: {score}</p>
           <p className="text-lg">Wrong: {questionSet.length - score}</p>
@@ -129,15 +129,13 @@ const Exampage = () => {
           <span className="text-red-500 font-bold">⏰ {formatTime(remainingTime)}</span>
         </div>
 
-        <div className="shadow-lg rounded-lg p-6 border">
+        <div className="bg-white shadow-lg rounded-lg p-6 border">
           <p className="text-lg mb-4">{q?.q}</p>
           <div className="grid gap-2">
             {q?.options.map((op, i) => (
               <button
                 key={i}
-                className="w-full px-4 py-2 border rounded-lg 
-             bg-white text-gray-900 hover:bg-green-400 hover:text-gray-900
-             dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition"
+                className="w-full px-4 py-2 border rounded-lg hover:bg-gray-100 transition"
                 onClick={() => handleAnswer(op)}
               >
                 {op}

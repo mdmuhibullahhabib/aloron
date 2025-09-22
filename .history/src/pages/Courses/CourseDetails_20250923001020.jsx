@@ -66,7 +66,7 @@ const handleBuy = (course) => {
             className="w-full h-72 object-cover"
           />
           {course.category && (
-            <span className="absolute top-4 left-4 px-4 py-1 rounded-full text-sm font-semibold shadow-md">
+            <span className="absolute top-4 left-4 bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-md">
               {course.category}
             </span>
           )}
@@ -76,7 +76,7 @@ const handleBuy = (course) => {
         <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Section */}
           <div className="lg:col-span-2">
-            <h2 className="text-3xl font-bold mb-3">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3">
               {course.title}
             </h2>
 
@@ -92,13 +92,13 @@ const handleBuy = (course) => {
                   }
                 />
               ))}
-              <span className="ml-2 text-sm">
+              <span className="ml-2 text-sm text-gray-500">
                 {course.rating} / 5
               </span>
             </div>
 
             {/* Description */}
-            <p className="leading-relaxed mb-6">
+            <p className="text-gray-700 leading-relaxed mb-6">
               {course.description}
             </p>
 
@@ -108,7 +108,7 @@ const handleBuy = (course) => {
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                   <FaBook className="text-green-500" /> Curriculum
                 </h3>
-                <div className="rounded-lg p-4 text-sm">
+                <div className="bg-gray-50 rounded-lg p-4 text-sm">
                   <ul className="space-y-2">
                     {course.curriculum.map((item, idx) => (
                       <li
@@ -116,7 +116,7 @@ const handleBuy = (course) => {
                         className="flex justify-between border-b pb-1 last:border-none"
                       >
                         <span>{item.chapter}</span>
-                        <span className="">
+                        <span className="text-gray-600">
                           {item.mcqs} MCQs
                         </span>
                       </li>
@@ -128,9 +128,9 @@ const handleBuy = (course) => {
           </div>
 
           {/* Right Sidebar */}
-          <div className="p-6 rounded-xl shadow-md">
+          <div className="bg-gray-50 p-6 rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Course Info</h3>
-            <ul className="space-y-3 text-sm ">
+            <ul className="space-y-3 text-sm text-gray-700">
               <li className="flex items-center gap-2">
                 <FaClock className="text-blue-500" /> Duration: {course.duration}
               </li>

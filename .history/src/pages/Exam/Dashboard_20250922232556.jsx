@@ -10,7 +10,7 @@ const Dashboard = ({ questions, userAnswers, onRetake }) => {
     const percentage = (score / totalQuestions) * 100;
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-4">
+        <div className=" min-h-screen flex items-center justify-center p-4">
             <div className="shadow-2xl rounded-2xl w-full max-w-4xl p-8 md:p-12">
                 <h2 className="text-4xl font-extrabold text-center text-indigo-600 mb-8">
                     🏆 Exam Results

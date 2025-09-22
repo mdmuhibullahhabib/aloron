@@ -12,8 +12,8 @@ const QuestionCard = ({ question, onAnswerSelect, selectedAnswer }) => {
             className={`w-full text-left py-3 px-4 rounded-lg border transition
               ${
                 selectedAnswer === option
-                  ? " border-blue-500"
-                  : " border-gray-300 hover:border-blue-400"
+                  ? "bg-blue-500 text-white border-blue-500"
+                  : "bg-gray-50 text-gray-700 border-gray-300 hover:border-blue-400"
               }`}
           >
             {option}

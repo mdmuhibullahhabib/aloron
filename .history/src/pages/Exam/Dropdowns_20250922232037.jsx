@@ -344,7 +344,7 @@ const Dropdowns = ({ setSelected }) => {
 
       {/* অধ্যায় */}
       <select
-        className="w-full border rounded-lg p-2 
+                className="w-full border rounded-lg p-2 
              bg-white text-gray-900   
              dark:bg-gray-800 dark:text-white dark:border-gray-600
              focus:outline-none focus:ring-2"

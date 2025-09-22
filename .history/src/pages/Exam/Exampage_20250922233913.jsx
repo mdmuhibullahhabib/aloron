@@ -135,9 +135,12 @@ const Exampage = () => {
             {q?.options.map((op, i) => (
               <button
                 key={i}
-                className="w-full px-4 py-2 border rounded-lg 
-             bg-white text-gray-900 hover:bg-green-400 hover:text-gray-900
-             dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition"
+                  className="w-full px-4 py-2 border rounded-lg 
+             bg-white text-gray-900                 /* light mode */
+             hover:bg-gray-200 hover:text-gray-900  /* ✅ hover fix for light */
+             dark:bg-gray-800 dark:text-white       /* dark mode */
+             dark:hover:bg-gray-700 dark:hover:text-white /* ✅ hover fix for dark */
+             transition"
                 onClick={() => handleAnswer(op)}
               >
                 {op}

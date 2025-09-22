@@ -136,8 +136,11 @@ const Exampage = () => {
               <button
                 key={i}
                 className="w-full px-4 py-2 border rounded-lg 
-             bg-white text-gray-900 hover:bg-green-400 hover:text-gray-900
-             dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition"
+             bg-white text-gray-900                 
+             hover:bg-gray-200 hover:text-gray-900
+             dark:bg-gray-800 dark:text-white
+             dark:hover:bg-gray-700 dark:hover:text-white 
+             transition"
                 onClick={() => handleAnswer(op)}
               >
                 {op}

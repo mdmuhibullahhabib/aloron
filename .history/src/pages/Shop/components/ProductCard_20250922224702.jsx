@@ -40,7 +40,7 @@ const ProductCard = ({ product }) => {
         />
 
         {/* Category Badge */}
-        <span className="absolute top-2 left-2 bg-indigo-600 text-xs font-semibold px-2 py-1 rounded-full shadow">
+        <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs font-semibold px-2 py-1 rounded-full shadow">
           {product.category}
         </span>
       </figure>
@@ -48,7 +48,7 @@ const ProductCard = ({ product }) => {
       {/* Card Body */}
       <div className="card-body p-5 flex flex-col justify-between h-full">
         {/* Product Name */}
-        <h3 className="text-lg font-bold group-hover:text-indigo-600 transition">
+        <h3 className="text-lg font-bold text-gray-800 group-hover:text-indigo-600 transition">
           {product.name}
         </h3>
 

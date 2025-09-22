@@ -17,7 +17,7 @@ const Courses = () => {
           <Link
             key={course._id}
             to={`/courses/${course._id}`}
-            className="rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
+            className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
           >
             {/* Thumbnail */}
             <div className="relative">
@@ -38,12 +38,12 @@ const Courses = () => {
               <h3 className="text-lg font-semibold mb-2 line-clamp-1">
                 {course.title}
               </h3>
-              <p className="text-sm mb-3 line-clamp-2">
+              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
                 {course.description}
               </p>
 
               {/* Extra Info */}
-              <div className="grid grid-cols-2 gap-2 text-xs mb-3">
+              <div className="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-3">
                 <div className="flex items-center gap-1">
                   <FaClock className="text-blue-500" /> {course.duration}
                 </div>
@@ -70,11 +70,11 @@ const Courses = () => {
                       }
                     />
                   ))}
-                  <span className="text-xs">
+                  <span className="text-xs text-gray-500">
                     ({course.rating})
                   </span>
                 </div>
-                <span className="text-lg font-bold">
+                <span className="text-lg font-bold text-indigo-600">
                   ৳{course.price}
                 </span>
               </div>

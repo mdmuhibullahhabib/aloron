@@ -17,7 +17,7 @@ const Courses = () => {
           <Link
             key={course._id}
             to={`/courses/${course._id}`}
-            className="rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
+            className="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-500 hover:scale-105 hover:shadow-2xl block"
           >
             {/* Thumbnail */}
             <div className="relative">

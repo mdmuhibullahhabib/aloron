@@ -108,7 +108,7 @@ const handleBuy = (course) => {
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                   <FaBook className="text-green-500" /> Curriculum
                 </h3>
-                <div className="rounded-lg p-4 text-sm">
+                <div className=" rounded-lg p-4 text-sm">
                   <ul className="space-y-2">
                     {course.curriculum.map((item, idx) => (
                       <li

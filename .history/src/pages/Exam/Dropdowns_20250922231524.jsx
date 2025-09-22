@@ -310,8 +310,8 @@ const Dropdowns = ({ setSelected }) => {
       <select
         className="w-full border rounded-lg p-2 
              bg-white text-gray-900   
-             dark:bg-gray-800 dark:text-white dark:border-gray-600
-             focus:outline-none focus:ring-2"
+             dark:bg-gray-800 dark:text-white dark:border-gray-600 /* ✅ dark mode */
+             focus:outline-none focus:ring-2 focus:ring-pink-500"
         value={group}
         onChange={(e) => handleChange("group", e.target.value)}
       >
@@ -325,10 +325,7 @@ const Dropdowns = ({ setSelected }) => {
 
       {/* বিষয় */}
       <select
-        className="w-full border rounded-lg p-2 
-             bg-white text-gray-900   
-             dark:bg-gray-800 dark:text-white dark:border-gray-600
-             focus:outline-none focus:ring-2"
+        className="w-full border rounded-lg p-2"
         value={subject}
         onChange={(e) => handleChange("subject", e.target.value)}
         disabled={!group}
@@ -344,10 +341,7 @@ const Dropdowns = ({ setSelected }) => {
 
       {/* অধ্যায় */}
       <select
-        className="w-full border rounded-lg p-2 
-             bg-white text-gray-900   
-             dark:bg-gray-800 dark:text-white dark:border-gray-600
-             focus:outline-none focus:ring-2"
+        className="w-full border rounded-lg p-2"
         value={chapter}
         onChange={(e) => handleChange("chapter", e.target.value)}
         disabled={!subject}

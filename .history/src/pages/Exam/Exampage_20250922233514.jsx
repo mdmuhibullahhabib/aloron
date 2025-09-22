@@ -135,9 +135,7 @@ const Exampage = () => {
             {q?.options.map((op, i) => (
               <button
                 key={i}
-                className="w-full px-4 py-2 border rounded-lg 
-             bg-white text-gray-900 hover:bg-green-400 hover:text-gray-900
-             dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white transition"
+                className="w-full px-4 py-2 border rounded-lg hover:bg-gray-100 transition"
                 onClick={() => handleAnswer(op)}
               >
                 {op}

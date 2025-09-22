@@ -108,7 +108,7 @@ const handleBuy = (course) => {
                 <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
                   <FaBook className="text-green-500" /> Curriculum
                 </h3>
-                <div className="rounded-lg p-4 text-sm">
+                <div className="bg-gray-50 rounded-lg p-4 text-sm">
                   <ul className="space-y-2">
                     {course.curriculum.map((item, idx) => (
                       <li
@@ -128,9 +128,9 @@ const handleBuy = (course) => {
           </div>
 
           {/* Right Sidebar */}
-          <div className="p-6 rounded-xl shadow-md">
+          <div className="bg-gray-50 p-6 rounded-xl shadow-md">
             <h3 className="text-xl font-semibold mb-4">Course Info</h3>
-            <ul className="space-y-3 text-sm ">
+            <ul className="space-y-3 text-sm text-gray-700">
               <li className="flex items-center gap-2">
                 <FaClock className="text-blue-500" /> Duration: {course.duration}
               </li>
