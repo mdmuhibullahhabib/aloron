@@ -32,7 +32,7 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   return (
-    <div className="rounded-xl shadow-lg p-6 mb-6">
+    <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
       {/* Post Header */}
       <div className="flex items-center mb-4">
         <img src={post.profilePic} alt="User" className="w-10 h-10 rounded-full mr-4" />
@@ -55,7 +55,7 @@ const PostCard = ({ post, onUpdate }) => {
       )}
 
       {/* Post Actions */}
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex items-center justify-between text-gray-600 mb-2">
         <div className="flex items-center space-x-2">
           <FaHeart className="text-red-500" />
           <span className="text-sm">{post.likes} Likes</span>
@@ -78,7 +78,7 @@ const PostCard = ({ post, onUpdate }) => {
 
       {/* Comment Section */}
       {post.comments.map((c, idx) => (
-        <div key={idx} className="ml-12 mb-2 text-sm">
+        <div key={idx} className="ml-12 mb-2 text-sm text-gray-700">
           <span className="font-semibold">{c.user}:</span> {c.text}
         </div>
       ))}
@@ -88,14 +88,14 @@ const PostCard = ({ post, onUpdate }) => {
         <div className="ml-12 flex mt-2">
           <input
             type="text"
-            className="border rounded-l px-3 py-1 flex-1 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="border border-gray-300 rounded-l px-3 py-1 flex-1 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             placeholder="আপনার মন্তব্য লিখুন..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
           />
           <button
             onClick={handleComment}
-            className="bg-emerald-500 px-4 py-1 rounded-r font-semibold hover:bg-emerald-600"
+            className="bg-emerald-500 px-4 py-1 rounded-r text-white font-semibold hover:bg-emerald-600"
           >
             পোস্ট
           </button>

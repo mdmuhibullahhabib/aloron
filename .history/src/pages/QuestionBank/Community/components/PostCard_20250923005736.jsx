@@ -32,7 +32,7 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   return (
-    <div className="rounded-xl shadow-lg p-6 mb-6">
+    <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
       {/* Post Header */}
       <div className="flex items-center mb-4">
         <img src={post.profilePic} alt="User" className="w-10 h-10 rounded-full mr-4" />
@@ -95,7 +95,7 @@ const PostCard = ({ post, onUpdate }) => {
           />
           <button
             onClick={handleComment}
-            className="bg-emerald-500 px-4 py-1 rounded-r font-semibold hover:bg-emerald-600"
+            className="bg-emerald-500 px-4 py-1 rounded-r text-white font-semibold hover:bg-emerald-600"
           >
             পোস্ট
           </button>

@@ -32,7 +32,7 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   return (
-    <div className="rounded-xl shadow-lg p-6 mb-6">
+    <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
       {/* Post Header */}
       <div className="flex items-center mb-4">
         <img src={post.profilePic} alt="User" className="w-10 h-10 rounded-full mr-4" />
