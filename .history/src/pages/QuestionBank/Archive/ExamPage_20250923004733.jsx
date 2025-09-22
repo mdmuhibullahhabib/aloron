@@ -114,7 +114,7 @@ const ExamPage = () => {
                     ? opt === q.correct
                       ? "bg-green-100 border-green-400 text-green-700"
                       : "bg-red-100 border-red-400 text-red-700"
-                    : "border-gray-300"
+                    : "bg-gray-50 border-gray-300 hover:bg-gray-100"
                     }`}
                 >
                   {opt}
@@ -127,7 +127,7 @@ const ExamPage = () => {
               <div className="mt-2">
                 <button
                   onClick={() => handleToggle(q._id)}
-                  className="w-full flex justify-between items-center px-3 py-2 text-left border border-blue-200 rounded"
+                  className="w-full flex justify-between items-center px-3 py-2 text-left border border-blue-200 rounded hover:bg-blue-100"
                 >
                   <span className="flex items-center">
                     <FaLock className="mr-2" />
