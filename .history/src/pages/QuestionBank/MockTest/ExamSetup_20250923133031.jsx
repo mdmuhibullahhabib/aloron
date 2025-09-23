@@ -13,7 +13,7 @@ const ExamSetup = ({ onStartExam, onGoBack, selectedChapters }) => {
           <p className="">মোট প্রশ্ন</p>
           <span className="text-xl font-bold">{totalQuestions}</span>
         </div>
-        <div className="p-4rounded-xl text-center">
+        <div className="p-4 bg-gray-100 rounded-xl text-center">
           <p className="">ধরনের ধরন</p>
           <div className="flex justify-center mt-2 gap-2">
             <button
@@ -22,7 +22,7 @@ const ExamSetup = ({ onStartExam, onGoBack, selectedChapters }) => {
             >MCQ</button>
             <button
               onClick={() => setExamType('WRITTEN')}
-              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : ''}`}
+              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
             >WRITTEN</button>
           </div>
         </div>

@@ -19,31 +19,31 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
   const score = correctCount-(examConfig.negativeMarking?incorrectCount*0.25:0);
 
   return (
-    <div className="p-8 min-h-screen">
+    <div className="p-8 bg-gray-50 min-h-screen">
       {/* Back Button */}
-      <button onClick={onGoBack} className="mb-6 hover:text-green-500 font-semibold">← Back</button>
+      <button onClick={onGoBack} className="mb-6 text-gray-600 hover:text-green-500 font-semibold">← Back</button>
 
       {/* Dashboard */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-black text-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center">
         <div className="p-4 bg-orange-200 rounded-xl shadow">
-          <p className="font-semibold">XP পেয়েছে</p>
-          <p className="text-2xl font-bold">{score}</p>
+          <p className="font-semibold text-gray-800">XP পেয়েছে</p>
+          <p className="text-2xl font-bold text-gray-800">{score}</p>
         </div>
         <div className="p-4 bg-green-200 rounded-xl shadow">
-          <p className="font-semibold ">প্রাপ্ত নম্বর</p>
-          <p className="text-2xl font-bold">{score} / {totalQuestions}</p>
+          <p className="font-semibold text-gray-800">প্রাপ্ত নম্বর</p>
+          <p className="text-2xl font-bold text-gray-800">{score} / {totalQuestions}</p>
         </div>
         <div className="p-4 bg-blue-200 rounded-xl shadow">
-          <p className="font-semibold ">সময় লেগেছে</p>
-          <p className="text-2xl font-bold ">00:00</p>
+          <p className="font-semibold text-gray-800">সময় লেগেছে</p>
+          <p className="text-2xl font-bold text-gray-800">00:00</p>
         </div>
       </div>
 
       {/* Questions List */}
       <div className="space-y-6">
         {dummyQuestions.map((q, index) => (
-          <div key={q.id} className="p-6 rounded-xl shadow">
-            <p className="font-medium mb-4">{index + 1}. {q.text}</p>
+          <div key={q.id} className="bg-white p-6 rounded-xl shadow">
+            <p className="text-gray-800 font-medium mb-4">{index + 1}. {q.text}</p>
 
             {/* Options */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -54,12 +54,12 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                   <div
                     key={option}
                     className={`p-3 rounded-lg border ${
-                      isCorrect ? 'border-green-500 ' :
-                      isUserChoice ? 'border-red-500 ' :
+                      isCorrect ? 'border-green-500 bg-green-100' :
+                      isUserChoice ? 'border-red-500 bg-red-100' :
                       'border-gray-200'
                     }`}
                   >
-                    <p className="">{option}</p>
+                    <p className="text-gray-800">{option}</p>
                   </div>
                 );
               })}
@@ -74,7 +74,7 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                 Update
               </button>
               <button 
-                className="px-4 py-2 bg-blue-200 text-black rounded-lg hover:bg-blue-300 font-medium"
+                className="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-300 font-medium"
                 onClick={() => toggleExpand(q.id)}
               >
                 {expandedIds.includes(q.id) ? 'Hide Details' : 'Show Details'}

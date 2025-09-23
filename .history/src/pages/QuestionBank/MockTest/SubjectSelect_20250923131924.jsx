@@ -8,7 +8,7 @@ const SubjectSelect = ({ onSelectSubject }) => (
       {subjects.map(subject => (
         <div
           key={subject.id}
-          className="flex flex-col items-center justify-center p-6 rounded-xl cursor-pointer transition-colors"
+          className="flex flex-col items-center justify-center p-6 rounded-xl cursor-pointertransition-colors"
           onClick={() => onSelectSubject(subject)}
         >
           <div className="flex items-center justify-center w-12 h-12 mb-2 text-2xl">

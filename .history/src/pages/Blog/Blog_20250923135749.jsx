@@ -13,7 +13,7 @@ const Blog = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-transparent bg-clip-text">
           📚 আমাদের ব্লগ
         </h2>
-        <p className="text-sm md:text-base">
+        <p className=" text-sm md:text-base">
           পরীক্ষার প্রস্তুতি ও শিক্ষার্থীদের সহায়ক পরামর্শ পড়ুন
         </p>
       </div>
@@ -23,7 +23,7 @@ const Blog = () => {
         {blogs.map((blog) => (
           <div
             key={blog._id}
-            className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
+            className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col"
           >
             <Link to={`/blog/${blog._id}`} className="overflow-hidden">
               <img
@@ -34,7 +34,7 @@ const Blog = () => {
             </Link>
             <div className="p-6 flex flex-col flex-grow">
               <h3 className="text-xl font-semibold mb-3">{blog.title}</h3>
-              <div className="flex flex-wrap items-center text-sm mb-4 gap-4">
+              <div className="flex flex-wrap items-center text-gray-500 text-sm mb-4 gap-4">
                 <span className="flex items-center gap-1">
                   <FaUser className="text-indigo-500" /> {blog.author}
                 </span>
@@ -42,7 +42,7 @@ const Blog = () => {
                   <FaCalendarAlt className="text-indigo-500" /> {blog.date}
                 </span>
               </div>
-              <p className="flex-grow line-clamp-3">{blog.excerpt}</p>
+              <p className="text-gray-700 flex-grow line-clamp-3">{blog.excerpt}</p>
               <Link
                 to={`/blog/${blog._id}`}
                 className="mt-4 inline-flex items-center justify-center gap-2 text-indigo-600 font-medium hover:text-indigo-800"

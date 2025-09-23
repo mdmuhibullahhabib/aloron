@@ -24,7 +24,7 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
       <button onClick={onGoBack} className="mb-6 hover:text-green-500 font-semibold">← Back</button>
 
       {/* Dashboard */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-black text-center">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-center">
         <div className="p-4 bg-orange-200 rounded-xl shadow">
           <p className="font-semibold">XP পেয়েছে</p>
           <p className="text-2xl font-bold">{score}</p>
@@ -54,8 +54,8 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                   <div
                     key={option}
                     className={`p-3 rounded-lg border ${
-                      isCorrect ? 'border-green-500 ' :
-                      isUserChoice ? 'border-red-500 ' :
+                      isCorrect ? 'border-green-500 bg-green-100' :
+                      isUserChoice ? 'border-red-500 bg-red-100' :
                       'border-gray-200'
                     }`}
                   >
@@ -74,7 +74,7 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                 Update
               </button>
               <button 
-                className="px-4 py-2 bg-blue-200 text-black rounded-lg hover:bg-blue-300 font-medium"
+                className="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-300 font-medium"
                 onClick={() => toggleExpand(q.id)}
               >
                 {expandedIds.includes(q.id) ? 'Hide Details' : 'Show Details'}

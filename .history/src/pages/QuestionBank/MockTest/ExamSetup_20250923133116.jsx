@@ -18,11 +18,11 @@ const ExamSetup = ({ onStartExam, onGoBack, selectedChapters }) => {
           <div className="flex justify-center mt-2 gap-2">
             <button
               onClick={() => setExamType('MCQ')}
-              className={`px-4 py-2 rounded-xl ${examType === 'MCQ' ? 'bg-green-500 text-white' : ''}`}
+              className={`px-4 py-2 rounded-xl ${examType === 'MCQ' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
             >MCQ</button>
             <button
               onClick={() => setExamType('WRITTEN')}
-              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : ''}`}
+              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
             >WRITTEN</button>
           </div>
         </div>

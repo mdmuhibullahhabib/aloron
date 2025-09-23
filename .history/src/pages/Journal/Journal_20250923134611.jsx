@@ -40,7 +40,7 @@ const JournalPage = () => {
         <div className="flex flex-col md:flex-row gap-3 w-full md:w-2/3">
           {/* Search */}
           <div className="relative flex-1">
-            <FaSearch className="absolute left-3 top-3" />
+            <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
               type="text"
               placeholder="প্রোজেক্ট খুঁজুন..."
@@ -50,30 +50,18 @@ const JournalPage = () => {
             />
           </div>
 
-{/* Category Dropdown */}
-<select
-  value={category}
-  onChange={(e) => setCategory(e.target.value)}
-  className="w-full md:w-1/3 px-4 py-2 
-             border border-gray-300 dark:border-gray-600 
-             rounded-lg shadow-sm 
-             focus:ring-2 focus:ring-indigo-500 focus:outline-none 
-             text-sm 
-             bg-white dark:bg-gray-800 
-             text-gray-800 dark:text-gray-100 
-             transition-colors"
->
-  {categories.map((cat) => (
-    <option
-      key={cat}
-      value={cat}
-      className="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
-    >
-      {cat === "all" ? "সব ক্যাটাগরি" : cat}
-    </option>
-  ))}
-</select>
-
+          {/* Category Dropdown */}
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full md:w-1/3 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none text-sm"
+          >
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat === "all" ? "সব ক্যাটাগরি" : cat}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Right: CTA */}

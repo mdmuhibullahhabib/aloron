@@ -28,7 +28,7 @@ const ChapterSelect = ({ selectedSubject, onConfirmChapters, onGoBack }) => {
       <h2 className="text-2xl font-bold mb-4">{selectedSubject.name}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {chaptersForSubject.map(chapter => (
-          <label key={chapter} className="flex items-center gap-3 p-4 rounded-xl cursor-pointer">
+          <label key={chapter} className="flex items-center gap-3 p-4 rounded-xl cursor-pointer hover:bg-green-100">
             <input
               type="checkbox"
               checked={selectedChapters.includes(chapter)}
@@ -41,7 +41,7 @@ const ChapterSelect = ({ selectedSubject, onConfirmChapters, onGoBack }) => {
       </div>
 
       <div className="flex justify-between mt-6">
-        <button onClick={handleSelectAll} className="px-4 py-2 bg-green-400 rounded-lg">
+        <button onClick={handleSelectAll} className="px-4 py-2 bg-green-200 rounded-lg hover:bg-green-300">
           {selectedChapters.length === chaptersForSubject.length ? 'Unselect All' : 'Select All'}
         </button>
         <button

@@ -36,7 +36,7 @@ const ExamPage = ({ examConfig, onEndExam }) => {
           <button
             key={opt}
             onClick={() => handleAnswer(opt)}
-            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':''}`}
+            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':'bg-gray-200 hover:bg-green-100'}`}
           >
             {opt}
           </button>
@@ -44,7 +44,7 @@ const ExamPage = ({ examConfig, onEndExam }) => {
       </div>
 
       <div className="mt-6 flex justify-between">
-        <button onClick={()=>setCurrentIndex(Math.max(0,currentIndex-1))} className="px-4 py-2 rounded-xl">Previous</button>
+        <button onClick={()=>setCurrentIndex(Math.max(0,currentIndex-1))} className="px-4 py- rounded-xl">Previous</button>
         {currentIndex<dummyQuestions.length-1 ? (
           <button onClick={()=>setCurrentIndex(currentIndex+1)} className="px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">Next</button>
         ) : (

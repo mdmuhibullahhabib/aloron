@@ -9,20 +9,20 @@ const ExamSetup = ({ onStartExam, onGoBack, selectedChapters }) => {
     <div className="p-8 rounded-xl shadow-md">
       <button onClick={onGoBack} className="mb-6 hover:text-green-500">← Back</button>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="p-4 rounded-xl text-center">
+        <div className="p-4 bg-gray-100 rounded-xl text-center">
           <p className="">মোট প্রশ্ন</p>
           <span className="text-xl font-bold">{totalQuestions}</span>
         </div>
-        <div className="p-4rounded-xl text-center">
+        <div className="p-4 bg-gray-100 rounded-xl text-center">
           <p className="">ধরনের ধরন</p>
           <div className="flex justify-center mt-2 gap-2">
             <button
               onClick={() => setExamType('MCQ')}
-              className={`px-4 py-2 rounded-xl ${examType === 'MCQ' ? 'bg-green-500 text-white' : ''}`}
+              className={`px-4 py-2 rounded-xl ${examType === 'MCQ' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
             >MCQ</button>
             <button
               onClick={() => setExamType('WRITTEN')}
-              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : ''}`}
+              className={`px-4 py-2 rounded-xl ${examType === 'WRITTEN' ? 'bg-green-500 text-white' : 'bg-gray-200'}`}
             >WRITTEN</button>
           </div>
         </div>

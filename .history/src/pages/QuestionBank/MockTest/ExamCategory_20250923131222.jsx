@@ -10,12 +10,12 @@ const categories = [
 
 const ExamCategory = ({ onSelectCategory, onGoBack }) => (
   <div className="p-8 bg-white rounded-xl shadow-md">
-    <button onClick={onGoBack} className="mb-6  hover:text-green-500">← Back</button>
+    <button onClick={onGoBack} className="mb-6 text-gray-600 hover:text-green-500">← Back</button>
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {categories.map(category => (
         <div
           key={category.id}
-          className="p-6 rounded-xl cursor-pointer hover:bg-green-100 transition"
+          className="p-6 bg-gray-100 rounded-xl cursor-pointer hover:bg-green-100 transition"
           onClick={() => onSelectCategory(category)}
         >
           <span className=" font-medium">{category.name}</span>

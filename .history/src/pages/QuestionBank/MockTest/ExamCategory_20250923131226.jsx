@@ -15,7 +15,7 @@ const ExamCategory = ({ onSelectCategory, onGoBack }) => (
       {categories.map(category => (
         <div
           key={category.id}
-          className="p-6 rounded-xl cursor-pointer hover:bg-green-100 transition"
+          className="p-6 bg-gray-100 rounded-xl cursor-pointer hover:bg-green-100 transition"
           onClick={() => onSelectCategory(category)}
         >
           <span className=" font-medium">{category.name}</span>

@@ -72,7 +72,7 @@ const AddJournal = () => {
   return (
     <section className="max-w-5xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold mb-2">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
           <FaPlusCircle className="inline-block text-green-600 mr-2" />
           নতুন ইনোভেটিভ প্রোজেক্ট জমা দিন
         </h1>
@@ -177,7 +177,7 @@ const AddJournal = () => {
               type="file"
               accept="application/pdf"
               {...register("pdfFile")}
-              className="w-full px-3 py-2 border rounded-lg shadow-sm"
+              className="w-full px-3 py-2 border rounded-lg shadow-sm bg-gray-50"
             />
           </div>
 

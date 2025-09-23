@@ -36,7 +36,7 @@ const ExamPage = ({ examConfig, onEndExam }) => {
           <button
             key={opt}
             onClick={() => handleAnswer(opt)}
-            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':''}`}
+            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':'bg-gray-200 hover:bg-green-100'}`}
           >
             {opt}
           </button>

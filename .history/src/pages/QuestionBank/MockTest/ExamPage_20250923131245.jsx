@@ -26,17 +26,17 @@ const ExamPage = ({ examConfig, onEndExam }) => {
 
   return (
     <div className="p-8 rounded-xl shadow-md">
-      <div className="flex justify-between mb-6 font-semibold">
+      <div className="flex justify-between mb-6 text-gray-800 font-semibold">
         <span>মক পরীক্ষা</span>
         <span>{minutes}:{seconds.toString().padStart(2,'0')}</span>
       </div>
-      <p className=" mb-4">{currentIndex+1}. {currentQuestion.text}</p>
+      <p className="text-gray-800 mb-4">{currentIndex+1}. {currentQuestion.text}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {currentQuestion.options.map(opt => (
           <button
             key={opt}
             onClick={() => handleAnswer(opt)}
-            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':''}`}
+            className={`p-4 rounded-xl transition ${userAnswers[currentIndex]===opt?'bg-green-400 text-white':'bg-gray-200 hover:bg-green-100'}`}
           >
             {opt}
           </button>
@@ -44,7 +44,7 @@ const ExamPage = ({ examConfig, onEndExam }) => {
       </div>
 
       <div className="mt-6 flex justify-between">
-        <button onClick={()=>setCurrentIndex(Math.max(0,currentIndex-1))} className="px-4 py-2 rounded-xl">Previous</button>
+        <button onClick={()=>setCurrentIndex(Math.max(0,currentIndex-1))} className="px-4 py-2 bg-gray-200 rounded-xl">Previous</button>
         {currentIndex<dummyQuestions.length-1 ? (
           <button onClick={()=>setCurrentIndex(currentIndex+1)} className="px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600">Next</button>
         ) : (

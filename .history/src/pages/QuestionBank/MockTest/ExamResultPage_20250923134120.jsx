@@ -54,7 +54,7 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                   <div
                     key={option}
                     className={`p-3 rounded-lg border ${
-                      isCorrect ? 'border-green-500 ' :
+                      isCorrect ? 'border-green-500 bg-green-100' :
                       isUserChoice ? 'border-red-500 ' :
                       'border-gray-200'
                     }`}

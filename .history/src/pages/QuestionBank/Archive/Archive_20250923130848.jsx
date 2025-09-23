@@ -109,7 +109,7 @@ const Archive = () => {
         {tabs.map((tab) => (
           <button
             key={tab}
-            className={`px-5 py-2 rounded-full font-semibold ${activeTab === tab ? "bg-emerald-500 " : ""
+            className={`px-5 py-2 rounded-full font-semibold ${activeTab === tab ? " " : ""
               }`}
             onClick={() => setActiveTab(tab)}
           >

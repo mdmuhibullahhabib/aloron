@@ -54,8 +54,8 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                   <div
                     key={option}
                     className={`p-3 rounded-lg border ${
-                      isCorrect ? 'border-green-500 ' :
-                      isUserChoice ? 'border-red-500 ' :
+                      isCorrect ? 'border-green-500 bg-green-100' :
+                      isUserChoice ? 'border-red-500 bg-red-100' :
                       'border-gray-200'
                     }`}
                   >
@@ -74,7 +74,7 @@ const ExamResultPage = ({ userAnswers, examConfig, onGoBack }) => {
                 Update
               </button>
               <button 
-                className="px-4 py-2 bg-blue-200 text-black rounded-lg hover:bg-blue-300 font-medium"
+                className="px-4 py-2 bg-blue-200 rounded-lg hover:bg-blue-300 font-medium"
                 onClick={() => toggleExpand(q.id)}
               >
                 {expandedIds.includes(q.id) ? 'Hide Details' : 'Show Details'}

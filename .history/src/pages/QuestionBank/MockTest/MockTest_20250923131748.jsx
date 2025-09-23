@@ -70,7 +70,7 @@ const MockTest = () => {
     <div className="min-h-screen flex flex-col items-center py-8">
       <div className="w-full max-w-5xl px-4">
         {/* Header */}
-        <header className="flex justify-between items-center py-4 px-6 rounded-xl shadow-md mb-6">
+        <header className="flex justify-between items-center py-4 px-6 bg-white rounded-xl shadow-md mb-6">
           <h1 className="text-2xl font-bold">Mock Test</h1>
           <div className="bg-green-500 text-white px-3 py-1 rounded-full text-sm">৳0</div>
         </header>

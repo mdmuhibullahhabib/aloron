@@ -177,7 +177,7 @@ const AddJournal = () => {
               type="file"
               accept="application/pdf"
               {...register("pdfFile")}
-              className="w-full px-3 py-2 border rounded-lg shadow-sm"
+              className="w-full px-3 py-2 border rounded-lg shadow-sm bg-gray-50"
             />
           </div>
 

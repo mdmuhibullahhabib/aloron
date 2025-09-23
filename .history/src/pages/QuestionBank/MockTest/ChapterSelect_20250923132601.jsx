@@ -21,32 +21,50 @@ const ChapterSelect = ({ selectedSubject, onConfirmChapters, onGoBack }) => {
   };
 
   return (
-    <div className="p-8 rounded-xl shadow-md">
-      <button onClick={onGoBack} className="mb-6 hover:text-green-500 flex items-center gap-2">
+    <div className="p-8 rounded-xl shadow-md bg-white dark:bg-gray-800 transition-colors"> {/* ✅ CHANGE */}
+      <button 
+        onClick={onGoBack} 
+        className="mb-6 flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400"  // ✅ CHANGE
+      >
         ← Back
       </button>
-      <h2 className="text-2xl font-bold mb-4">{selectedSubject.name}</h2>
+
+      <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white"> {/* ✅ CHANGE */}
+        {selectedSubject.name}
+      </h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {chaptersForSubject.map(chapter => (
-          <label key={chapter} className="flex items-center gap-3 p-4 rounded-xl cursor-pointer">
+          <label 
+            key={chapter} 
+            className="flex items-center gap-3 p-4 rounded-xl cursor-pointer 
+                       bg-gray-50 dark:bg-gray-700 
+                       hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors" // ✅ CHANGE
+          >
             <input
               type="checkbox"
               checked={selectedChapters.includes(chapter)}
               onChange={() => handleCheckboxChange(chapter)}
               className="form-checkbox h-5 w-5 text-green-500"
             />
-            <span className=" font-medium">{chapter}</span>
+            <span className="font-medium text-gray-800 dark:text-gray-200"> {/* ✅ CHANGE */}
+              {chapter}
+            </span>
           </label>
         ))}
       </div>
 
       <div className="flex justify-between mt-6">
-        <button onClick={handleSelectAll} className="px-4 py-2 bg-green-400 rounded-lg">
+        <button 
+          onClick={handleSelectAll} 
+          className="px-4 py-2 bg-green-400 text-white rounded-lg hover:bg-green-500 transition-colors" // ✅ CHANGE
+        >
           {selectedChapters.length === chaptersForSubject.length ? 'Unselect All' : 'Select All'}
         </button>
+
         <button
           onClick={() => onConfirmChapters(selectedChapters)}
-          className="px-6 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600"
+          className="px-6 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors"
         >
           Next
         </button>

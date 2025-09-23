@@ -28,7 +28,7 @@ const ChapterSelect = ({ selectedSubject, onConfirmChapters, onGoBack }) => {
       <h2 className="text-2xl font-bold mb-4">{selectedSubject.name}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {chaptersForSubject.map(chapter => (
-          <label key={chapter} className="flex items-center gap-3 p-4 rounded-xl cursor-pointer">
+          <label key={chapter} className="flex items-center gap-3 p-4 rounded-xl cursor-pointer lue-100">
             <input
               type="checkbox"
               checked={selectedChapters.includes(chapter)}
