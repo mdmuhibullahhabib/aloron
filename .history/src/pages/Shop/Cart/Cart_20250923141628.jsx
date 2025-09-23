@@ -137,7 +137,7 @@ const Cart = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-lg">Your cart is empty.</p>
+              <p className="text-center text-gray-500 text-lg">Your cart is empty.</p>
             )}
           </div>
 
