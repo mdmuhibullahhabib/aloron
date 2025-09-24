@@ -21,7 +21,7 @@ import useRole from '../../hooks/useRole';
 
 const Dashboard = () => {
   const [isRole, isRoleLoading] = useRole();
-  // const role = "admin";
+  const role = "admin";
 
   return (
     <div className="flex min-h-screen">

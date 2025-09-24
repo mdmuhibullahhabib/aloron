@@ -38,9 +38,9 @@ const Navbar = () => {
     { 
       name: 'Dashboard',
       path:
-        isRole === 'admin'
+        role === 'admin'
           ? '/dashboard/reports'
-          : isRole === 'student'
+          : role === 'student'
           ? '/dashboard/enrolled-courses'
           : '/dashboard/my-courses'
     },
