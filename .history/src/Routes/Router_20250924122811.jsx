@@ -48,7 +48,6 @@ import BlogDetails from '../pages/Blog/BlogDetails';
 import MockTest from '../pages/QuestionBank/MockTest/MockTest';
 import MyPayment from '../pages/Dashboard/Student/MyPayment';
 import ManageJournal from '../pages/Dashboard/Admin/ManageJournal';
-import ManageBlogs from '../pages/Dashboard/Admin/ManageBlogs';
 
 
 const Router = createBrowserRouter([
@@ -214,12 +213,12 @@ const Router = createBrowserRouter([
                 element: <Payments></Payments>
             },
             {
-                path: "manage-journal",
-                element: <ManageJournal></ManageJournal>
+                path: "Payments",
+                element: <ManageJournal
             },
             {
-                path: "manage-blogs",
-                element: <ManageBlogs></ManageBlogs>
+                path: "Payments",
+                element: <Payments></Payments>
             },
 
             // TEACHER

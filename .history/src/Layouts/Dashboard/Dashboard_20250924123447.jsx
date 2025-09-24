@@ -102,6 +102,7 @@ const Dashboard = () => {
                 <FaBook /> ম্যানেজ জার্নাল
               </NavLink>
 
+              {/* Manage Blogs */}
               <NavLink
                 to="/dashboard/manage-blogs"
                 className={({ isActive }) =>

@@ -14,8 +14,7 @@ import {
   FaRegComments,
   FaBell,
   FaCogs,
-  FaJediOrder,
-  FaBlog
+  FaJediOrder
 } from 'react-icons/fa';
 import useRole from '../../hooks/useRole';
 
@@ -102,6 +101,7 @@ const Dashboard = () => {
                 <FaBook /> ম্যানেজ জার্নাল
               </NavLink>
 
+              {/* Manage Blogs */}
               <NavLink
                 to="/dashboard/manage-blogs"
                 className={({ isActive }) =>

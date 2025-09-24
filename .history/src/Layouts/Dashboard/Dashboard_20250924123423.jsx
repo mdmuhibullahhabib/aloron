@@ -14,8 +14,7 @@ import {
   FaRegComments,
   FaBell,
   FaCogs,
-  FaJediOrder,
-  FaBlog
+  FaJediOrder
 } from 'react-icons/fa';
 import useRole from '../../hooks/useRole';
 
@@ -93,23 +92,24 @@ const Dashboard = () => {
               >
                 <FaJediOrder /> ম্যানেজ অর্ডার
               </NavLink>
-              <NavLink
-                to="/dashboard/manage-journal"
-                className={({ isActive }) =>
-                  `flex items-center gap-2 w-full btn ${isActive ? "btn-primary" : "btn-outline"}`
-                }
-              >
-                <FaBook /> ম্যানেজ জার্নাল
-              </NavLink>
+<NavLink
+  to="/dashboard/manage-journal"
+  className={({ isActive }) =>
+    `flex items-center gap-2 w-full btn ${isActive ? "btn-primary" : "btn-outline"}`
+  }
+>
+  <FaBook /> ম্যানেজ জার্নাল
+</NavLink>
 
-              <NavLink
-                to="/dashboard/manage-blogs"
-                className={({ isActive }) =>
-                  `flex items-center gap-2 w-full btn ${isActive ? "btn-primary" : "btn-outline"}`
-                }
-              >
-                <FaBlog /> ম্যানেজ ব্লগ
-              </NavLink>
+{/* Manage Blogs */}
+<NavLink
+  to="/dashboard/manage-blogs"
+  className={({ isActive }) =>
+    `flex items-center gap-2 w-full btn ${isActive ? "btn-primary" : "btn-outline"}`
+  }
+>
+  <FaBlog /> ম্যানেজ ব্লগ
+</NavLink>
 
             </>
           )}

@@ -48,7 +48,6 @@ import BlogDetails from '../pages/Blog/BlogDetails';
 import MockTest from '../pages/QuestionBank/MockTest/MockTest';
 import MyPayment from '../pages/Dashboard/Student/MyPayment';
 import ManageJournal from '../pages/Dashboard/Admin/ManageJournal';
-import ManageBlogs from '../pages/Dashboard/Admin/ManageBlogs';
 
 
 const Router = createBrowserRouter([
@@ -218,8 +217,8 @@ const Router = createBrowserRouter([
                 element: <ManageJournal></ManageJournal>
             },
             {
-                path: "manage-blogs",
-                element: <ManageBlogs></ManageBlogs>
+                path: "manage-",
+                element: <Payments></Payments>
             },
 
             // TEACHER

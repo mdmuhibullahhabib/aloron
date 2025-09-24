@@ -219,7 +219,7 @@ const Router = createBrowserRouter([
             },
             {
                 path: "manage-blogs",
-                element: <ManageBlogs></ManageBlogs>
+                element: <ManageBlogs
             },
 
             // TEACHER
