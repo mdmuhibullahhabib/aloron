@@ -40,7 +40,7 @@ const handleBuy = (course) => {
   console.log(course)
   if (!userId) {
     toast.error("Please login first!");
-    navigate("/auth/signin");
+    navigate("/auth/login");
     return;
   }
 

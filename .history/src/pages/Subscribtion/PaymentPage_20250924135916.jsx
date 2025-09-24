@@ -5,6 +5,7 @@ import axios from "axios";
 const PaymentPage = () => {
   const location = useLocation();
   const plan = location.state?.plan;
+  const 
 
   useEffect(() => {
     if (plan) {

@@ -1,4 +1,5 @@
-import React, { useState } from "react"; // ✅ CHANGE: import useState
+
+import React from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useCart from "../../hooks/useCart";
@@ -6,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import useDatabaseUser from "../../hooks/useDatabaseUser";
 
 const Payment = () => {
+
   const [cart] = useCart();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
@@ -13,8 +15,9 @@ const Payment = () => {
   const { category, items } = location.state || {};
   const [databaseUser] = useDatabaseUser();
 
-  // ✅ CHANGE: state for disabling the button
-  const [isPayDisabled, setIsPayDisabled] = useState(false);
+  console.log("category", category)
+  console.log("items", items)
+  console.log("user", databaseUser[0]?._id)
 
   // Calculate total price 
   const totalPrice =
@@ -26,16 +29,14 @@ const Payment = () => {
           ? items?.price || 0
           : 0;
 
+  console.log(totalPrice)
+
   // Payment handler
   const handleCreatePayment = async () => {
     if (!user?.email) {
       console.error("User not logged in!");
       return;
     }
-
-    // ✅ CHANGE: disable button for 10 seconds
-    setIsPayDisabled(true);
-    setTimeout(() => setIsPayDisabled(false), 10000); // 10 seconds
 
     try {
       const payment = {
@@ -57,8 +58,10 @@ const Payment = () => {
       };
       const response = await axiosSecure.post("/create-ssl-payment", payment);
 
-      // Redirect to SSLCommerz if gateway URL exists
+
+      // ✅ Redirect to SSLCommerz if gateway URL exists
       if (response.data?.gatewayUrl) {
+        // Redirect to SSLCommerz payment gateway
         window.location.replace(response.data.gatewayUrl);
       }
     } catch (error) {
@@ -98,17 +101,13 @@ const Payment = () => {
 
       <button
         onClick={handleCreatePayment}
-        className={`w-full rounded-md px-6 py-3 font-medium text-white transition ${
-          isPayDisabled
-            ? "bg-gray-400 cursor-not-allowed" // ✅ CHANGE: disabled style
-            : "bg-gray-900 hover:bg-gray-800"
-        }`}
-        disabled={isPayDisabled} // ✅ CHANGE: disable button
+        className="w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white hover:bg-gray-800 transition"
       >
-        {isPayDisabled ? "Processing..." : "Pay Now"} {/* ✅ CHANGE: optional text change */}
+        Pay Now
       </button>
     </div>
   );
 };
 
 export default Payment;
+
