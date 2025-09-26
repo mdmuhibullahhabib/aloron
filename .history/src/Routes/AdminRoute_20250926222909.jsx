@@ -1,19 +1,19 @@
 import React from 'react'
 import { Navigate, useLocation } from "react-router-dom";
+import useAdmin from "../hooks/useAdmin";
 import useAuth from '../hooks/useAuth';
-import useRole from '../hooks/useRole';
 
 
 const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    const [isRole, isRoleLoading] = useRole();
+    const [isAdmin, isAdminLoading] = useAdmin();
     const location = useLocation();
 
-    if (loading || isRoleLoading) {
+    if (loading || isAdminLoading) {
         return <progress className="progress w-56"></progress>
     }
 
-    if (user && isRole === "admin") {
+    if (user && isAdmin) {
         return children;
     }
 

@@ -13,7 +13,7 @@ const AdminRoute = ({ children }) => {
         return <progress className="progress w-56"></progress>
     }
 
-    if (user && isRole === "admin") {
+    if (user && isRole === "") {
         return children;
     }
 

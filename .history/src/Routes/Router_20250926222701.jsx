@@ -187,11 +187,11 @@ const Router = createBrowserRouter([
             },
             {
                 path: "manage-students",
-                element: <AdminRoute><ManageStudents></ManageStudents></AdminRoute>
+                element: <AdminRoute></AdminRoute><ManageStudents></ManageStudents>
             },
             {
                 path: "manage-courses",
-                element: <AdminRoute><ManageCourses></ManageCourses></AdminRoute>
+                element: <AdminRoute></AdminRoute>
             },
             {
                 path: "add-course",

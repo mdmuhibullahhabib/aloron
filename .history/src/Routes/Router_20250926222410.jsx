@@ -48,7 +48,6 @@ import MockTest from '../pages/QuestionBank/MockTest/MockTest';
 import MyPayment from '../pages/Dashboard/Student/MyPayment';
 import ManageJournal from '../pages/Dashboard/Admin/ManageJournal';
 import ManageBlogs from '../pages/Dashboard/Admin/ManageBlogs';
-import AdminRoute from './AdminRoute';
 
 
 const Router = createBrowserRouter([
@@ -183,43 +182,43 @@ const Router = createBrowserRouter([
             // ADMIN
             {
                 path: "manage-users",
-                element: <AdminRoute> <ManageUsers></ManageUsers> </AdminRoute> 
+                element: <AdminRoute <ManageUsers></ManageUsers>
             },
             {
                 path: "manage-students",
-                element: <AdminRoute><ManageStudents></ManageStudents></AdminRoute>
+                element: <ManageStudents></ManageStudents>
             },
             {
                 path: "manage-courses",
-                element: <AdminRoute><ManageCourses></ManageCourses></AdminRoute>
+                element: <ManageCourses></ManageCourses>
             },
             {
                 path: "add-course",
-                element: <AdminRoute><AddCourse></AddCourse></AdminRoute>
+                element: <AddCourse></AddCourse>
             },
             {
                 path: "reports",
-                element: <AdminRoute><Reports></Reports></AdminRoute>
+                element: <Reports></Reports>
             },
             {
                 path: "Payments",
-                element: <AdminRoute><Payments></Payments></AdminRoute>
+                element: <Payments></Payments>
             },
             {
                 path: "manage-orders",
-                element: <AdminRoute><ManageShopOrders></ManageShopOrders></AdminRoute>
+                element: <ManageShopOrders></ManageShopOrders>
             },
             {
                 path: "Payments",
-                element: <AdminRoute> <Payments></Payments> </AdminRoute>
+                element: <Payments></Payments>
             },
             {
                 path: "manage-journal",
-                element: <AdminRoute> <ManageJournal></ManageJournal> </AdminRoute>
+                element: <ManageJournal></ManageJournal>
             },
             {
                 path: "manage-blogs",
-                element: <AdminRoute> <ManageBlogs></ManageBlogs> </AdminRoute>
+                element: <ManageBlogs></ManageBlogs>
             },
 
             // TEACHER

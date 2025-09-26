@@ -187,39 +187,39 @@ const Router = createBrowserRouter([
             },
             {
                 path: "manage-students",
-                element: <AdminRoute><ManageStudents></ManageStudents></AdminRoute>
+                element: <AdminRoute></AdminRoute><ManageStudents></ManageStudents>
             },
             {
                 path: "manage-courses",
-                element: <AdminRoute><ManageCourses></ManageCourses></AdminRoute>
+                element: <AdminRoute></AdminRoute><ManageCourses></ManageCourses>
             },
             {
                 path: "add-course",
-                element: <AdminRoute><AddCourse></AddCourse></AdminRoute>
+                element: <AdminRoute></AdminRoute><AddCourse></AddCourse>
             },
             {
                 path: "reports",
-                element: <AdminRoute><Reports></Reports></AdminRoute>
+                element: <Reports></Reports>
             },
             {
                 path: "Payments",
-                element: <AdminRoute><Payments></Payments></AdminRoute>
+                element: <Payments></Payments>
             },
             {
                 path: "manage-orders",
-                element: <AdminRoute><ManageShopOrders></ManageShopOrders></AdminRoute>
+                element: <ManageShopOrders></ManageShopOrders>
             },
             {
                 path: "Payments",
-                element: <AdminRoute> <Payments></Payments> </AdminRoute>
+                element: <Payments></Payments>
             },
             {
                 path: "manage-journal",
-                element: <AdminRoute> <ManageJournal></ManageJournal> </AdminRoute>
+                element: <ManageJournal></ManageJournal>
             },
             {
                 path: "manage-blogs",
-                element: <AdminRoute> <ManageBlogs></ManageBlogs> </AdminRoute>
+                element: <ManageBlogs></ManageBlogs>
             },
 
             // TEACHER

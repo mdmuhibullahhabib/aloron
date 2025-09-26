@@ -6,14 +6,14 @@ import useRole from '../hooks/useRole';
 
 const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    const [isRole, isRoleLoading] = useRole();
+    const [isAdmin, isAdminLoading] = useRole();
     const location = useLocation();
 
-    if (loading || isRoleLoading) {
+    if (loading || isAdminLoading) {
         return <progress className="progress w-56"></progress>
     }
 
-    if (user && isRole === "admin") {
+    if (user && isAdmin) {
         return children;
     }
 
