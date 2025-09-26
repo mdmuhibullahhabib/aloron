@@ -111,7 +111,7 @@ const Payment = () => {
         {isPayDisabled ? "Processing..." : "Pay Now"} {/* ✅ CHANGE: optional text change */}
       </button>
     </div>
-    </>
+    <></>
   );
 };
 

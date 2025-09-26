@@ -8,7 +8,7 @@ const Blog = () => {
 
   return (
         <>
-    <title>Blog - Aloron</title>
+    <title>QuestionBank - Aloron</title>
     <section className="max-w-7xl mx-auto px-4 py-12">
       {/* Section Heading */}
       <div className="text-center mb-12">

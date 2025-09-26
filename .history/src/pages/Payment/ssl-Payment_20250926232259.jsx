@@ -68,8 +68,7 @@ const Payment = () => {
 
   return (
         <>
-    <title>Payment - Aloron</title>
-
+    <title>QuestionBank - Aloron</title>
     <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0 max-w-md mx-auto rounded-md shadow-md">
       <p className="text-xl font-medium">Payment Details</p>
       <p className="text-gray-400 mb-4">
@@ -111,7 +110,6 @@ const Payment = () => {
         {isPayDisabled ? "Processing..." : "Pay Now"} {/* ✅ CHANGE: optional text change */}
       </button>
     </div>
-    </>
   );
 };
 

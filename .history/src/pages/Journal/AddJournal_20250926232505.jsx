@@ -71,7 +71,7 @@ const AddJournal = () => {
 
   return (
         <>
-    <title>Add Journal - Aloron</title>
+    <title>Add - Aloron</title>
     <section className="max-w-5xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
         <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -239,7 +239,6 @@ const AddJournal = () => {
         </div>
       )}
     </section>
-    </>
   );
 };
 

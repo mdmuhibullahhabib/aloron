@@ -10,14 +10,14 @@ const QuestionBank = () => {
   // Sidebar navigation items with component references
   const navItems = [
     { name: 'দ্রুত প্র্যাকটিস', icon: <MdOutlineQuestionAnswer className="w-6 h-6" />, path: 'practice' },
-    { name: 'মক পরীক্ষা', icon: <FaListOl className="w-6 h-6" />, path: 'mocktest' },
+{ name: 'মক পরীক্ষা', icon: <FaListOl  className="w-6 h-6" />, path: 'mocktest' },
     { name: 'কমিউনিটি', icon: <FaUsers className="w-6 h-6" />, path: 'community' },
     { name: 'আর্কাইভ', icon: <MdOutlineDescription className="w-6 h-6" />, path: 'archive' },
   ];
 
   return (
-    <>
-    <title>QuestionBank - Aloron</title>
+    
+                <title>Skincare - Prottaysha</title>
 
     <div className="flex flex-col lg:flex-row h-screen font-sans">
       {/* --- Sidebar --- */}
@@ -56,8 +56,6 @@ const QuestionBank = () => {
         <Outlet />
       </main>
     </div>
-        </>
-
   );
 };
 

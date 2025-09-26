@@ -14,7 +14,7 @@ const Shop = () => {
 
   return (
         <>
-    <title>Shop - Aloron</title>
+    <title>QuestionBank - Aloron</title>
     <div className="p-6">
       {/* Header */}
       <h2 className="text-2xl font-bold mb-4">Student Shop</h2>
@@ -42,7 +42,6 @@ const Shop = () => {
         </div>
       )}
     </div>
-    </>
   );
 };
 

@@ -159,7 +159,6 @@ const JournalPage = () => {
         </p>
       )}
     </section>
-    </>
   );
 };
 

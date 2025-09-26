@@ -75,8 +75,7 @@ const ProductDetails = () => {
   };
 
   return (
-        <>
-    <title>ProductDetails - Aloron</title>
+    
     <div className="p-6 max-w-5xl mx-auto">
       {/* Back Button */}
       <button
@@ -158,7 +157,6 @@ const ProductDetails = () => {
         </div>
       </div>
     </div>
-    </>
   );
 };
 

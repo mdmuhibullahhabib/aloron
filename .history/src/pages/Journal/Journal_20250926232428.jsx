@@ -33,9 +33,7 @@ const JournalPage = () => {
   });
 
   return (
-        <>
-    <title>Journal - Aloron</title>
-
+    
     <section className="max-w-7xl mx-auto px-4 py-12">
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10 gap-4">
@@ -159,7 +157,6 @@ const JournalPage = () => {
         </p>
       )}
     </section>
-    </>
   );
 };
 

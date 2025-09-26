@@ -239,7 +239,7 @@ const AddJournal = () => {
         </div>
       )}
     </section>
-    </>
+    </section>
   );
 };
 

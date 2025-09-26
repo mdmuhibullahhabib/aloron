@@ -34,7 +34,7 @@ const JournalPage = () => {
 
   return (
         <>
-    <title>Journal - Aloron</title>
+    <title>Journ - Aloron</title>
 
     <section className="max-w-7xl mx-auto px-4 py-12">
       {/* Page Header */}
@@ -159,7 +159,6 @@ const JournalPage = () => {
         </p>
       )}
     </section>
-    </>
   );
 };
 

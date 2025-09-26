@@ -17,7 +17,9 @@ const QuestionBank = () => {
 
   return (
     <>
-    <title>QuestionBank - Aloron</title>
+    <title>Skincare - Prottaysha</title>
+
+    </>
 
     <div className="flex flex-col lg:flex-row h-screen font-sans">
       {/* --- Sidebar --- */}

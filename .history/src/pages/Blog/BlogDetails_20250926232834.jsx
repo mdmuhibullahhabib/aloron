@@ -31,8 +31,8 @@ const BlogDetails = () => {
 
   return (
         <>
-    <title>BlogDetails - Aloron</title>
-
+    <title>QuestionBank - Aloron</title>
+    
     <section className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Button */}
       <div className="mb-6">
@@ -105,7 +105,6 @@ const BlogDetails = () => {
         </div>
       )}
     </section>
-    </>
   );
 };
 

@@ -30,7 +30,7 @@ const Subscribe = () => {
 
   return (
         <>
-    <title>Subscribe - Aloron</title>
+    <title>QuestionBank - Aloron</title>
     <div className="p-6 min-h-screen bg-gray-50 flex flex-col items-center">
       <h2 className="text-2xl font-bold mb-6 text-green-600">🏆 সাবস্ক্রিপশন প্ল্যান</h2>
 
@@ -52,7 +52,6 @@ const Subscribe = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 

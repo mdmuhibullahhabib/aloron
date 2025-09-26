@@ -57,7 +57,7 @@ const handleBuy = (course) => {
 
   return (
         <>
-    <title>CourseDetails - Aloron</title>
+    <title>Course - Aloron</title>
     <section className="max-w-6xl mx-auto px-4 py-10">
       <div className="rounded-2xl shadow-xl overflow-hidden">
         {/* Thumbnail */}

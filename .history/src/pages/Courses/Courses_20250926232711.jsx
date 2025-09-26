@@ -85,7 +85,7 @@ const Courses = () => {
         ))}
       </div>
     </section>
-    </>
+    </section>
   );
 };
 

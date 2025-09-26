@@ -31,7 +31,7 @@ const BlogDetails = () => {
 
   return (
         <>
-    <title>BlogDetails - Aloron</title>
+    <title>Blog - Aloron</title>
 
     <section className="max-w-5xl mx-auto px-4 py-10">
       {/* Back Button */}
@@ -105,7 +105,6 @@ const BlogDetails = () => {
         </div>
       )}
     </section>
-    </>
   );
 };
 

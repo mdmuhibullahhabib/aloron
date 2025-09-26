@@ -151,7 +151,7 @@ const Exampage = () => {
 
   return (
         <>
-    <title>Live Exam - Aloron</title>
+    <title>QuestionBank - Aloron</title>
 
     <div className="max-w-3xl mx-auto p-6">
       <Dropdowns setSelected={setSelected} />

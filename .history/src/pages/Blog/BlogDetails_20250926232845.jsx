@@ -105,7 +105,7 @@ const BlogDetails = () => {
         </div>
       )}
     </section>
-    </>
+    </section>
   );
 };
 

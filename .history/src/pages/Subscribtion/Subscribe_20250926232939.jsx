@@ -52,7 +52,6 @@ const Subscribe = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 
